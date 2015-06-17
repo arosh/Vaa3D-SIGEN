@@ -1,0 +1,23 @@
+flags = ['-Wall', '-Wextra', '-Wshadow', '-g']
+libs = []
+
+def options(opt):
+    opt.load('compiler_cxx unittest_gtest')
+
+def configure(conf):
+    conf.load('compiler_cxx unittest_gtest')
+    for lib in libs:
+        conf.check_cxx(lib=lib)
+
+def build(bld):
+    bld.program(
+            features='gtest',
+            source='hello_test.cpp',
+            target='hello_test',
+            includes=['.',  '../src'],
+            use='hello',
+            cxxflags=flags,
+            lib=libs,
+            linkflags='-g')
+
+# vim: filetype=python

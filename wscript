@@ -1,12 +1,13 @@
 top = '.'
+subdirs = 'src test'
 
 def options(opt):
-    opt.load('compiler_cxx unittest_gtest')
+    opt.recurse(subdirs)
 
 def configure(conf):
-    conf.load('compiler_cxx unittest_gtest')
+    conf.recurse(subdirs)
 
 def build(bld):
-    pass
+    bld.recurse(subdirs)
 
 # vim: filetype=python

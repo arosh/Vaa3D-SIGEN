@@ -1,0 +1,30 @@
+flags = ['-Wall', '-Wextra', '-Wshadow', '-g']
+libs = []
+
+def options(opt):
+    opt.load('compiler_cxx')
+
+def configure(conf):
+    conf.load('compiler_cxx')
+    for lib in libs:
+        conf.check_cxx(lib=lib)
+
+def build(bld):
+    bld.program(
+            source='main.cpp',
+            target='main',
+            includes='.',
+            use='hello',
+            cxxflags=flags,
+            lib=libs,
+            linkflags='-g')
+
+    bld.stlib(
+            source='hello.cpp',
+            target='hello',
+            includes='.',
+            cxxflags=flags,
+            lib=libs,
+            linkflags='-g')
+
+# vim: filetype=python
