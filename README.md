@@ -8,7 +8,8 @@ TBD...
 
 * Reader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
 * PreProcessor :: ImageSequence -> ImageSequence
-* Extractor :: ImageSequence -> Connection
+* Binarizer :: ImageSequence -> Binary3D
+* Extractor :: Binary3D -> Connection
 * GraphConstructor :: Connection -> Graph
 * PostProcessor :: Graph -> Graph
 * Writer :: Graph -> (SwcFile | Vaa3dMemory)
