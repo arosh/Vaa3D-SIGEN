@@ -4,12 +4,12 @@
 
 ## Architecture
 
-* ImageSequenceLoader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
+* Reader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
 * PreProcessor :: ImageSequence -> ImageSequence
-* Extractor :: ImageSequence -> IntermediateGraph
-* ??? :: IntermediateGraph -> Graph
+* Extractor :: ImageSequence -> Connection
+* GraphConstructor :: Connection -> Graph
 * PostProcessor :: Graph -> Graph
-* SwcWriter :: Graph -> (SwcFile | Vaa3dMemory)
+* Writer :: Graph -> (SwcFile | Vaa3dMemory)
 
 ## References
 
