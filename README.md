@@ -7,22 +7,30 @@ TBD...
 ## Architecture
 
 * Reader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
-* PreProcessor :: ImageSequence -> ImageSequence
 * Binarizer :: ImageSequence -> Binary3D
 * Extractor :: Binary3D -> Connection
 * GraphConstructor :: Connection -> Graph
-* PostProcessor :: Graph -> Graph
 * Writer :: Graph -> (SwcFile | Vaa3dMemory)
 
 - Graph inherits Connection
 
-## Library
+## Requirements
 
+* [Python](https://www.python.org/) >= ?.? (to use Waf)
 * [waf](https://waf.io/) (included in this repository)
 * [waf-unittest](https://github.com/tanakh/waf-unittest) (included in this repository)
-* [google-glog](https://github.com/google/glog) >= ?.?
 * [cmdline.h](https://github.com/tanakh/cmdline) (included in this repository)
+* [google-glog](https://github.com/google/glog) >= ?.?
 * [OpenCV](http://opencv.org/) >= ?.?
+* [Boost](http://www.boost.org/) >= ?.? (using boost::filesystem)
+
+## How to Build
+
+```
+$ ./waf configure
+$ ./waf --checkall # test
+$ ./waf
+```
 
 ## References
 
