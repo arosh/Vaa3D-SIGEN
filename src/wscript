@@ -8,23 +8,28 @@ def configure(conf):
     conf.load('compiler_cxx')
     for lib in libs:
         conf.check_cxx(lib=lib)
+    conf.check_cfg(
+            package='opencv',
+            args='--cflags --libs',
+            uselib_store='opencv')
 
 def build(bld):
     bld.program(
             source='main.cpp',
             target='main',
             includes='.',
-            use='hello',
-            cxxflags=flags,
             lib=libs,
+            use='hello',
+            uselib='opencv',
+            cxxflags=flags,
             linkflags='-g')
 
     bld.stlib(
             source='hello.cpp',
             target='hello',
             includes='.',
-            cxxflags=flags,
             lib=libs,
+            cxxflags=flags,
             linkflags='-g')
 
 # vim: filetype=python

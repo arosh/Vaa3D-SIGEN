@@ -14,7 +14,7 @@ def build(bld):
             features='gtest',
             source='hello_test.cpp',
             target='hello_test',
-            includes=['.',  '../src'],
+            includes='. ../src',
             use='hello',
             cxxflags=flags,
             lib=libs,
