@@ -10,13 +10,13 @@ cv::Mat LoadOne(const std::string &filename) {
 ImageSequence FileReader::Load() {
   namespace fs = boost::filesystem;
   std::vector<std::string> filenames;
-  for (auto &&p : fs::directory_iterator(Path)) {
-    filenames.push_back(p.path().string());
+  for (auto &&entry : fs::directory_iterator(Path)) {
+    filenames.push_back(entry.path().string());
   }
   std::sort(filenames.begin(), filenames.end());
   ImageSequence ret;
-  for (auto &&p : filenames) {
-    ret.push_back(LoadOne(p));
+  for (auto &&entry : filenames) {
+    ret.push_back(LoadOne(entry));
   }
   return ret;
 }

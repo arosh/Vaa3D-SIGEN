@@ -6,7 +6,7 @@ namespace sigen {
 class FileReader {
 public:
   const std::string &Path;
-  FileReader(const std::string &path) : Path(path) { }
+  FileReader(const std::string &path) : Path(path) {}
   ImageSequence Load();
 };
 }
