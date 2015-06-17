@@ -2,6 +2,8 @@
 
 ## About
 
+TBD...
+
 ## Architecture
 
 * Reader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
@@ -12,6 +14,14 @@
 * Writer :: Graph -> (SwcFile | Vaa3dMemory)
 
 - Graph inherits Connection
+
+## Library
+
+* [waf](https://waf.io/) (included in this repository)
+* [waf-unittest](https://github.com/tanakh/waf-unittest) (included in this repository)
+* [google-glog](https://github.com/google/glog) >= ?.?
+* [cmdline.h](https://github.com/tanakh/cmdline) (included in this repository)
+* [OpenCV](http://opencv.org/) >= ?.?
 
 ## References
 
