@@ -1,13 +1,13 @@
-flags = ['-Wall', '-Wextra', '-Wshadow', '-g']
-libs = []
+cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -g'
+libs = ''
 
 def options(opt):
     opt.load('compiler_cxx unittest_gtest')
 
 def configure(conf):
     conf.load('compiler_cxx unittest_gtest')
-    for lib in libs:
-        conf.check_cxx(lib=lib)
+    conf.check_cxx(cxxflags=cxxflags)
+    conf.check_cxx(lib=libs)
 
 def build(bld):
     bld.program(
@@ -16,7 +16,7 @@ def build(bld):
             target='hello_test',
             includes='. ../src',
             use='hello',
-            cxxflags=flags,
+            cxxflags=cxxflags,
             lib=libs,
             linkflags='-g')
 

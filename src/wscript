@@ -1,16 +1,13 @@
 cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -g'
-libs = 'boost_filesystem'
+libs = 'boost_system boost_filesystem'
 
 def options(opt):
     opt.load('compiler_cxx')
 
 def configure(conf):
     conf.load('compiler_cxx')
-
     conf.check_cxx(cxxflags=cxxflags)
-
     conf.check_cxx(lib=libs)
-
     conf.check_cfg(
             package='opencv',
             args='--cflags --libs',
