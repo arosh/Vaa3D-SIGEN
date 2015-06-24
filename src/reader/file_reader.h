@@ -1,6 +1,9 @@
+#pragma once
+
+#include "image_sequence.h"
+
 #include <string>
 #include <vector>
-#include "image_sequence.h"
 
 namespace sigen {
 class file_reader {

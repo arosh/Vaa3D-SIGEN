@@ -1,4 +1,5 @@
-cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -g'
+cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -Wno-reorder -g'
+linkflags = '-g'
 libs = 'boost_system boost_filesystem glog'
 
 def options(opt):
@@ -7,6 +8,7 @@ def options(opt):
 def configure(conf):
     conf.load('compiler_cxx')
     conf.check_cxx(cxxflags=cxxflags)
+    conf.check_cxx(linkflags=linkflags)
     conf.check_cxx(lib=libs)
     conf.check_cfg(
             package='opencv',
@@ -15,21 +17,27 @@ def configure(conf):
 
 def build(bld):
     bld.program(
-            source='main.cpp reader/file_reader.cpp',
+            source='main.cpp reader/file_reader.cpp binarizer/binarizer.cpp',
             target='main',
             includes='.',
-            lib=libs,
-            use='hello',
-            uselib='opencv',
             cxxflags=cxxflags,
-            linkflags='-g')
+            linkflags=linkflags,
+            lib=libs,
+            uselib='opencv')
 
     bld.stlib(
             source='hello.cpp',
             target='hello',
             includes='.',
-            lib=libs,
             cxxflags=cxxflags,
-            linkflags='-g')
+            linkflags=linkflags,
+            lib=libs)
+    bld.stlib(
+            source='binarizer/binary_cube.cpp',
+            target='binary_cube',
+            includes='.',
+            cxxflags=cxxflags,
+            linkflags=linkflags,
+            lib=libs)
 
 # vim: filetype=python

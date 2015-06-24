@@ -2,6 +2,7 @@
 #include <glog/logging.h>
 #include "hello.h"
 #include "reader/file_reader.h"
+#include "binarizer/binarizer.h"
 
 int main() {
   google::InstallFailureSignalHandler();
@@ -10,4 +11,6 @@ int main() {
   for (auto &&entry : is) {
     std::cout << entry.cols << 'x' << entry.rows << std::endl;
   }
+  sigen::binarizer bin;
+  bin.binarize(is);
 }

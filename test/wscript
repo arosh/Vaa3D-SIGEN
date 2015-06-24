@@ -1,4 +1,5 @@
-cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -g'
+cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -Wno-reorder -g'
+linkflags = '-g'
 libs = ''
 
 def options(opt):
@@ -7,6 +8,7 @@ def options(opt):
 def configure(conf):
     conf.load('compiler_cxx unittest_gtest')
     conf.check_cxx(cxxflags=cxxflags)
+    conf.check_cxx(linkflags=linkflags)
     conf.check_cxx(lib=libs)
 
 def build(bld):
@@ -17,7 +19,16 @@ def build(bld):
             includes='. ../src',
             use='hello',
             cxxflags=cxxflags,
-            lib=libs,
-            linkflags='-g')
+            linkflags=linkflags,
+            lib=libs)
+    bld.program(
+            features='gtest',
+            source='binary_cube_test.cpp',
+            target='binary_cube_test',
+            includes='. ../src',
+            use='binary_cube',
+            cxxflags=cxxflags,
+            linkflags=linkflags,
+            lib=libs)
 
 # vim: filetype=python

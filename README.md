@@ -20,7 +20,7 @@ TBD...
 * [waf](https://waf.io/) (included in this repository)
 * [waf-unittest](https://github.com/tanakh/waf-unittest) (included in this repository)
 * [cmdline.h](https://github.com/tanakh/cmdline) (included in this repository)
-* [google-glog](https://github.com/google/glog) >= ?.?
+* [google-glog](https://github.com/google/glog) >= ?.? ([doc](http://google-glog.googlecode.com/svn/trunk/doc/glog.html))
 * [OpenCV](http://opencv.org/) >= ?.?
 * [Boost](http://www.boost.org/) >= ?.? (using boost::filesystem)
 
