@@ -28,7 +28,7 @@ image_sequence file_reader::load() {
     LOG(INFO) << entry;
     // 読めなかったファイル (画像以外のファイル) 以外を読み込む
     cv::Mat im = cv::imread(entry, 0 /* grayscale */);
-    if(im.data) {
+    if (im.data) {
       ret.push_back(im);
     }
   }
