@@ -21,7 +21,7 @@ def build(bld):
                 main.cpp
                 reader/file_reader.cpp
                 binarizer/binarizer.cpp
-                binarizer/binary_cube.cpp''',
+                common/binary_cube.cpp''',
             target='main',
             includes='.',
             cxxflags=cxxflags,
@@ -30,14 +30,7 @@ def build(bld):
             uselib='opencv')
 
     bld.stlib(
-            source='hello.cpp',
-            target='hello',
-            includes='.',
-            cxxflags=cxxflags,
-            linkflags=linkflags,
-            lib=libs)
-    bld.stlib(
-            source='binarizer/binary_cube.cpp',
+            source='common/binary_cube.cpp',
             target='binary_cube',
             includes='.',
             cxxflags=cxxflags,

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "image_sequence.h"
+#include "../common/image_sequence.h"
 
 #include <string>
 #include <vector>

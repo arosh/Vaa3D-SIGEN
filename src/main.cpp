@@ -1,6 +1,5 @@
 #include <iostream>
 #include <glog/logging.h>
-#include "hello.h"
 #include "reader/file_reader.h"
 #include "binarizer/binarizer.h"
 
