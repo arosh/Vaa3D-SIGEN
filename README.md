@@ -6,13 +6,13 @@ TBD...
 
 ## Architecture
 
-* Reader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
-* Binarizer :: ImageSequence -> Binary3D
-* Extractor :: Binary3D -> Connection
-* GraphConstructor :: Connection -> Graph
-* Writer :: Graph -> (SwcFile | Vaa3dMemory)
+* reader :: (image\_files | vaa3d\_memory) -> image\_sequence
+* binarizer :: image\_sequence -> binary\_cube
+* extractor :: binary\_cube -> connection
+* graph\_constructor :: connection -> graph
+* writer :: graph -> (swc\_file | vaa3d\_memory)
 
-- Graph inherits Connection
+- graph inherits Connection
 
 ## Requirements
 
