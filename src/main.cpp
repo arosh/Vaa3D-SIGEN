@@ -1,9 +1,13 @@
 #include <iostream>
+#include <glog/logging.h>
 #include "hello.h"
-#include "reader/ImageSequence.h"
+#include "reader/file_reader.h"
 
 int main() {
-  sigen::ImageSequence is;
-  std::cout << "Hello, world!" << std::endl;
-  std::cout << "add(1, 2) = " << add(1, 2) << std::endl;
+  google::InstallFailureSignalHandler();
+  sigen::file_reader reader("/Users/arosh/ikenolab/sigen-data/ToIizuka/BMP");
+  sigen::image_sequence is = reader.load();
+  for (auto &&entry : is) {
+    std::cout << entry.cols << 'x' << entry.rows << std::endl;
+  }
 }

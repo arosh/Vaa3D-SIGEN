@@ -1,5 +1,5 @@
 cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -g'
-libs = 'boost_system boost_filesystem'
+libs = 'boost_system boost_filesystem glog'
 
 def options(opt):
     opt.load('compiler_cxx')
@@ -15,7 +15,7 @@ def configure(conf):
 
 def build(bld):
     bld.program(
-            source='main.cpp reader/FileReader.cpp',
+            source='main.cpp reader/file_reader.cpp',
             target='main',
             includes='.',
             lib=libs,

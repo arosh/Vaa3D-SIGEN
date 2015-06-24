@@ -2,5 +2,5 @@
 #include <opencv2/core/core.hpp>
 
 namespace sigen {
-typedef std::vector<cv::Mat> ImageSequence;
+typedef std::vector<cv::Mat> image_sequence;
 }
