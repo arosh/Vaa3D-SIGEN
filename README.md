@@ -12,7 +12,7 @@ TBD...
 * graph\_constructor :: connection -> graph
 * writer :: graph -> (swc\_file | vaa3d\_memory)
 
-- graph inherits Connection
+- graph inherits connection
 
 ## Requirements
 
