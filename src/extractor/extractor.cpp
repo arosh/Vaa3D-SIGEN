@@ -1,9 +1,10 @@
 #include "extractor.h"
+#include <map>
 
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
 
 namespace sigen {
-extractor::extractor(const binary_cube &cube) : c(cube) {}
+extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 void clear_frame(binary_cube &c) {
   REP(i, c.x_) REP(j, c.y_) {
     c[i][j][0] = false;
@@ -40,5 +41,8 @@ void remove_isolation_point(binary_cube &c) {
       }
     }
   }
+}
+void extractor::labeling() {
+  clusters_.clear();
 }
 }
