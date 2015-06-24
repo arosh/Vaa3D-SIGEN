@@ -17,11 +17,12 @@ def configure(conf):
 
 def build(bld):
     bld.program(
-            source='''
-                main.cpp
-                reader/file_reader.cpp
-                binarizer/binarizer.cpp
-                common/binary_cube.cpp''',
+            source=[
+                'main.cpp',
+                'reader/file_reader.cpp',
+                'binarizer/binarizer.cpp',
+                'common/binary_cube.cpp',
+                'extractor/extractor.cpp'],
             target='main',
             includes='.',
             cxxflags=cxxflags,

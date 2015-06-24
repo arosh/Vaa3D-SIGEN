@@ -6,6 +6,5 @@ class extractor {
 
 public:
   extractor(const binary_cube &cube);
-  remove_isolation_point();
 };
 }
