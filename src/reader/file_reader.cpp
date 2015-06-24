@@ -1,17 +1,15 @@
 #include "file_reader.h"
 
-#ifdef __GNUC__
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
 
 #include <algorithm>
-#include <opencv2/highgui/highgui.hpp>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
+#include <opencv2/highgui/highgui.hpp>
 
 #pragma GCC diagnostic pop
-#endif // __GNUC__
 
 namespace sigen {
 image_sequence file_reader::load() {
