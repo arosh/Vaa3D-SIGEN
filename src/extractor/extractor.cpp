@@ -44,5 +44,6 @@ void remove_isolation_point(binary_cube &c) {
 }
 void extractor::labeling() {
   clusters_.clear();
+  // map<point, point> っぽいのになりそう。設計失敗した
 }
 }
