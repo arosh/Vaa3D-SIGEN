@@ -13,7 +13,7 @@ TEST(binary_cube,read_write) {
   for(int i = 0; i < 2; ++i) {
     for(int j = 0; j < 3; ++j) {
       for(int k = 0; k < 4; ++k) {
-        EXPECT_EQ(false, cube[i][j][k]);
+        EXPECT_FALSE(cube[i][j][k]);
       }
     }
   }
@@ -22,9 +22,9 @@ TEST(binary_cube,read_write) {
     for(int j = 0; j < 3; ++j) {
       for(int k = 0; k < 4; ++k) {
         if(i == 1 && j == 2 && k == 3)
-          EXPECT_EQ(true, cube[i][j][k]);
+          EXPECT_TRUE(cube[i][j][k]);
         else
-          EXPECT_EQ(false, cube[i][j][k]);
+          EXPECT_FALSE(cube[i][j][k]);
       }
     }
   }
