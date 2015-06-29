@@ -10,17 +10,21 @@
 #include "cmdline/cmdline.h"
 #pragma GCC diagnostic pop
 
-int main(int argc, char *argv[]) {
+void init_glog(const char *program_name) {
   // https://google-glog.googlecode.com/svn/trunk/doc/glog.html
   FLAGS_log_dir = "log";
-  google::InitGoogleLogging(argv[0]);
+  google::InitGoogleLogging(program_name);
   google::InstallFailureSignalHandler();
+}
 
+int main(int argc, char *argv[]) {
+  init_glog(argv[0]);
   cmdline::parser a;
   a.parse_check(argc, argv);
 
-  sigen::file_reader reader("/Users/arosh/ikenolab/sigen-data/ToIizuka/BMP");
-  sigen::image_sequence is = reader.load();
+  const char *path = "/Users/arosh/ikenolab/sigen-data/ToIizuka/BMP";
+  sigen::file_reader reader;
+  sigen::image_sequence is = reader.load(path);
   sigen::binarizer bin;
   sigen::binary_cube cube = bin.binarize(is);
   LOG(INFO) << "x = " << cube.x_;
