@@ -1,8 +1,10 @@
 #include "extractor.h"
+#include <glog/logging.h>
 #include <map>
 #include <tuple>
 #include <algorithm>
 #include <iterator>
+#include <queue>
 
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
 
@@ -45,7 +47,7 @@ void remove_isolation_point(binary_cube &c) {
     }
   }
 }
-void set_label(std::shared_ptr<point> p, const int label) {
+void set_label(Point p, const int label) {
   p->flag_ = true;
   p->label_ = label;
   for(auto next : p->adjacent_) {
@@ -53,7 +55,7 @@ void set_label(std::shared_ptr<point> p, const int label) {
   }
 }
 void extractor::labeling() {
-  std::map<std::tuple<int, int, int>, std::shared_ptr<point>> points;
+  std::map<std::tuple<int, int, int>, Point> points;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
@@ -87,12 +89,54 @@ void extractor::labeling() {
       set_label(p.second, label++);
     }
   }
-  clusters_.assign(label, std::vector<std::shared_ptr<point>>());
+  clusters_.assign(label, std::vector<Point>());
   for(auto p : points) {
     clusters_[p.second->label_].push_back(p.second);
   }
   typedef decltype(clusters_)::value_type V;
   std::sort(std::begin(clusters_), end(clusters_),
       [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
+}
+Point find_single_seed(std::vector<Point> cluster) {
+  CHECK(!cluster.empty());
+  for(auto p : cluster) p->flag_ = false;
+  std::queue<Point> que;
+  cluster[0]->flag_ = true;
+  que.push(cluster[0]);
+  Point last;
+  while(!que.empty()) {
+    last = que.front(); que.pop();
+    for(auto next : last->adjacent_) {
+      if(!next->flag_) {
+        next->flag_ = true;
+        que.push(next);
+      }
+    }
+  }
+  return last;
+}
+void set_distance(std::vector<Point> cluster, Point seed) {
+  for(auto p : cluster) p->flag_ = false;
+  std::queue<Point> que;
+  seed->flag_ = true;
+  seed->label_ = 0;
+  que.push(seed);
+  while(!que.empty()) {
+    Point p = que.front(); que.pop();
+    for(auto next : p->adjacent_) {
+      if(!next->flag_) {
+        next->flag_ = true;
+        next->label_ = p->label_ + 1;
+        que.push(next);
+      }
+    }
+  }
+}
+void extractor::extract() {
+  for(auto cluster : clusters_) {
+    auto seed = find_single_seed(cluster);
+    LOG(INFO) << "seed = (" << seed->x_ << ", " << seed->y_ << ", " << seed->z_ << ")";
+    set_distance(cluster, seed);
+  }
 }
 }

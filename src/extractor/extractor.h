@@ -7,8 +7,9 @@ namespace sigen {
 class extractor {
 public:
   binary_cube cube_;
-  std::vector<std::vector<std::shared_ptr<point>>> clusters_;
+  std::vector<std::vector<Point>> clusters_;
   extractor(const binary_cube &cube);
   void labeling();
+  void extract();
 };
 }
