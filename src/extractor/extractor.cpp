@@ -1,10 +1,10 @@
 #include "extractor.h"
-#include <glog/logging.h>
 #include <map>
 #include <tuple>
 #include <algorithm>
 #include <iterator>
 #include <queue>
+#include <glog/logging.h>
 
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
 
@@ -24,7 +24,7 @@ void clear_frame(binary_cube &c) {
     c[i][c.y_ - 1][k] = false;
   }
 }
-void remove_isolation_point(binary_cube &c) {
+void before_filter(binary_cube &c) {
   clear_frame(c);
   binary_cube cc = c;
   for (int x = 1; x < c.x_ - 1; ++x) {
@@ -56,7 +56,10 @@ void set_label(Point p, const int label) {
   }
 }
 void extractor::labeling() {
-  remove_isolation_point(cube_);
+  LOG(INFO) << "labeling start";
+  LOG(INFO) << "before_filter start";
+  before_filter(cube_);
+  LOG(INFO) << "before_filter end";
   std::map<std::tuple<int, int, int>, Point> points;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
@@ -97,8 +100,11 @@ void extractor::labeling() {
     clusters_[p.second->label_].push_back(p.second);
   }
   typedef decltype(clusters_)::value_type V;
+  LOG(INFO) << "sort by volume start";
   std::sort(std::begin(clusters_), end(clusters_),
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
+  LOG(INFO) << "sort by volume end";
+  LOG(INFO) << "labeling end";
 }
 Point find_single_seed(std::vector<Point> cluster) {
   CHECK(!cluster.empty());
@@ -169,11 +175,8 @@ std::vector<Point> extract_same_distance(Point seed) {
 void extractor::extract() {
   labeling();
   for (auto cluster : clusters_) {
-    LOG(INFO) << "process start (cluster#" << google::COUNTER << ")";
     auto seed = find_single_seed(cluster);
-    LOG(INFO) << "seed = (" << seed->x_ << ", " << seed->y_ << ", " << seed->z_ << ")";
     int max_distance = set_distance(cluster, seed);
-    LOG(INFO) << "max_distance = " << max_distance;
     std::vector<std::vector<Point>> dcluster(max_distance + 1);
     for (auto p : cluster) p->flag_ = false;
     for (auto p : cluster) {
