@@ -115,14 +115,21 @@ Point find_single_seed(std::vector<Point> cluster) {
   }
   return last;
 }
-void set_distance(std::vector<Point> cluster, Point seed) {
+/*
+ * Returns
+ * =======
+ * ret: max_distance of Point from seed
+ */
+int set_distance(std::vector<Point> cluster, Point seed) {
   for(auto p : cluster) p->flag_ = false;
   std::queue<Point> que;
   seed->flag_ = true;
   seed->label_ = 0;
   que.push(seed);
+  int ret = 0;
   while(!que.empty()) {
     Point p = que.front(); que.pop();
+    ret = p->label_;
     for(auto next : p->adjacent_) {
       if(!next->flag_) {
         next->flag_ = true;
@@ -131,12 +138,31 @@ void set_distance(std::vector<Point> cluster, Point seed) {
       }
     }
   }
+  return ret;
+}
+std::vector<Point> extract_same_distance(Point seed) {
+  std::vector<Point> ret;
+  std::queue<Point> que;
+  seed->flag_ = true;
+  ret.push_back(seed);
+  que.push(seed);
+  while(!que.empty()) {
+    Point p = que.front(); que.pop();
+    for(auto next : p->adjacent_) {
+      if(!next->flag_ && next->label_ == seed->label_) {
+        next->flag_ = true;
+        ret.push_back(next);
+        que.push(next);
+      }
+    }
+  }
+  return ret;
 }
 void extractor::extract() {
   for(auto cluster : clusters_) {
     auto seed = find_single_seed(cluster);
     LOG(INFO) << "seed = (" << seed->x_ << ", " << seed->y_ << ", " << seed->z_ << ")";
-    set_distance(cluster, seed);
+    int max_distance = set_distance(cluster, seed);
   }
 }
 }

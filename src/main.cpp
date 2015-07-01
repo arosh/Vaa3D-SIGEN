@@ -2,7 +2,7 @@
 #include <glog/logging.h>
 #include "reader/file_reader.h"
 #include "binarizer/binarizer.h"
-#include "common/binary_cube.h"
+#include "extractor/extractor.h"
 
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push
@@ -30,4 +30,7 @@ int main(int argc, char *argv[]) {
   LOG(INFO) << "x = " << cube.x_;
   LOG(INFO) << "y = " << cube.y_;
   LOG(INFO) << "z = " << cube.z_;
+  sigen::extractor ext(cube);
+  ext.labeling();
+  ext.extract();
 }

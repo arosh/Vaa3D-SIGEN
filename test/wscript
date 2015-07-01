@@ -1,6 +1,6 @@
 cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -Wno-reorder -g'
 linkflags = '-g'
-libs = ''
+libs = 'glog'
 
 def options(opt):
     opt.load('compiler_cxx unittest_gtest')

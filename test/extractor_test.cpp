@@ -12,6 +12,7 @@ TEST(extractor, labeling) {
   EXPECT_EQ(2, (int)ext.clusters_.size());
   EXPECT_EQ(3, (int)ext.clusters_[0].size());
   EXPECT_EQ(2, (int)ext.clusters_[1].size());
+  ext.extract();
 }
 
 TEST(extractor, labeling2) {
@@ -23,4 +24,5 @@ TEST(extractor, labeling2) {
   ext.labeling();
   EXPECT_EQ(1, (int)ext.clusters_.size());
   EXPECT_EQ(5, (int)ext.clusters_[0].size());
+  ext.extract();
 }
