@@ -8,9 +8,9 @@ class point {
 public:
   int x_, y_, z_;
   bool flag_;
-  std::vector<std::shared_ptr<point>> adjacent;
+  int label_;
+  std::vector<std::shared_ptr<point>> adjacent_;
   point(int x, int y, int z);
   void add_connection(std::shared_ptr<point> p);
-  bool operator<(const point &rhs) const;
 };
 }

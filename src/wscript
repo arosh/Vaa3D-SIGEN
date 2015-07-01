@@ -16,28 +16,29 @@ def configure(conf):
             uselib_store='opencv')
 
 def build(bld):
-    bld.program(
+    bld.stlib(
             source=[
-                'main.cpp',
                 'reader/file_reader.cpp',
                 'binarizer/binarizer.cpp',
                 'common/binary_cube.cpp',
                 'extractor/extractor.cpp',
                 'extractor/point.cpp',
                 ],
-            target='main',
-            includes='. ../third_party',
+            target='sigen',
+            includes='.',
             cxxflags=cxxflags,
             linkflags=linkflags,
             lib=libs,
             uselib='opencv')
 
-    bld.stlib(
-            source='common/binary_cube.cpp',
-            target='binary_cube',
-            includes='.',
+    bld.program(
+            source='main.cpp',
+            target='main',
+            includes='. ../third_party',
             cxxflags=cxxflags,
             linkflags=linkflags,
-            lib=libs)
+            lib=libs,
+            use='sigen',
+            uselib='opencv')
 
 # vim: filetype=python

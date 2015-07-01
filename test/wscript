@@ -14,12 +14,16 @@ def configure(conf):
 def build(bld):
     bld.program(
             features='gtest',
-            source='binary_cube_test.cpp',
-            target='binary_cube_test',
+            source=[
+                'binary_cube_test.cpp',
+                'extractor_test.cpp',
+                ],
+            target='test',
             includes='. ../src',
-            use='binary_cube',
+            use='sigen',
             cxxflags=cxxflags,
             linkflags=linkflags,
-            lib=libs)
+            lib=libs,
+            uselib='opencv')
 
 # vim: filetype=python

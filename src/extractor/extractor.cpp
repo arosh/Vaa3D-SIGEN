@@ -1,5 +1,8 @@
 #include "extractor.h"
 #include <map>
+#include <tuple>
+#include <algorithm>
+#include <iterator>
 
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
 
@@ -42,8 +45,54 @@ void remove_isolation_point(binary_cube &c) {
     }
   }
 }
+void set_label(std::shared_ptr<point> p, const int label) {
+  p->flag_ = true;
+  p->label_ = label;
+  for(auto next : p->adjacent_) {
+    if(next->flag_ == false) set_label(next, label);
+  }
+}
 void extractor::labeling() {
-  clusters_.clear();
-  // map<point, point> っぽいのになりそう。設計失敗した
+  std::map<std::tuple<int, int, int>, std::shared_ptr<point>> points;
+  for (int x = 1; x < cube_.x_ - 1; ++x) {
+    for (int y = 1; y < cube_.y_ - 1; ++y) {
+      for (int z = 1; z < cube_.z_ - 1; ++z) {
+        if(cube_[x][y][z]) {
+          points[std::tie(x, y, z)] = std::make_shared<point>(x, y, z);
+        }
+      }
+    }
+  }
+  for(auto p : points) {
+    for(int dx = -1; dx <= 1; ++dx) {
+      for (int dy = -1; dy <= 1; ++dy) {
+        for (int dz = -1; dz <= 1; ++dz) {
+          if (dx == 0 && dy == 0 && dz == 0)
+            continue;
+          int x = std::get<0>(p.first) + dx;
+          int y = std::get<1>(p.first) + dy;
+          int z = std::get<2>(p.first) + dz;
+          auto t = std::tuple<int, int, int>(x, y, z);
+          if(points.count(t)) {
+            p.second->add_connection(points[t]);
+          }
+        }
+      }
+    }
+  }
+  for(auto p : points) p.second->flag_ = false;
+  int label = 0;
+  for(auto p : points) {
+    if(p.second->flag_ == false) {
+      set_label(p.second, label++);
+    }
+  }
+  clusters_.assign(label, std::vector<std::shared_ptr<point>>());
+  for(auto p : points) {
+    clusters_[p.second->label_].push_back(p.second);
+  }
+  typedef decltype(clusters_)::value_type V;
+  std::sort(std::begin(clusters_), end(clusters_),
+      [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
 }
 }
