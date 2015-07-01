@@ -8,11 +8,10 @@ TEST(extractor, labeling) {
   cube[1][1][1] = 1; cube[2][1][1] = 1;
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
   extractor ext(cube);
-  ext.labeling();
+  ext.extract();
   EXPECT_EQ(2, (int)ext.clusters_.size());
   EXPECT_EQ(3, (int)ext.clusters_[0].size());
   EXPECT_EQ(2, (int)ext.clusters_[1].size());
-  ext.extract();
 }
 
 TEST(extractor, labeling2) {
@@ -21,8 +20,7 @@ TEST(extractor, labeling2) {
                                         cube[3][2][1] = 1;
   cube[1][3][1] = 1; cube[2][3][1] = 1;
   extractor ext(cube);
-  ext.labeling();
+  ext.extract();
   EXPECT_EQ(1, (int)ext.clusters_.size());
   EXPECT_EQ(5, (int)ext.clusters_[0].size());
-  ext.extract();
 }

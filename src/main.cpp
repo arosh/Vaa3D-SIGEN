@@ -31,6 +31,5 @@ int main(int argc, char *argv[]) {
   LOG(INFO) << "y = " << cube.y_;
   LOG(INFO) << "z = " << cube.z_;
   sigen::extractor ext(cube);
-  ext.labeling();
   ext.extract();
 }

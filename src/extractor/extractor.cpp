@@ -56,6 +56,7 @@ void set_label(Point p, const int label) {
   }
 }
 void extractor::labeling() {
+  remove_isolation_point(cube_);
   std::map<std::tuple<int, int, int>, Point> points;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
@@ -166,10 +167,22 @@ std::vector<Point> extract_same_distance(Point seed) {
   return ret;
 }
 void extractor::extract() {
+  labeling();
   for (auto cluster : clusters_) {
+    LOG(INFO) << "process start (cluster#" << google::COUNTER << ")";
     auto seed = find_single_seed(cluster);
     LOG(INFO) << "seed = (" << seed->x_ << ", " << seed->y_ << ", " << seed->z_ << ")";
     int max_distance = set_distance(cluster, seed);
+    LOG(INFO) << "max_distance = " << max_distance;
+    std::vector<std::vector<Point>> dcluster(max_distance + 1);
+    for (auto p : cluster) p->flag_ = false;
+    for (auto p : cluster) {
+      if (p->flag_ == false) {
+        auto ret = extract_same_distance(p);
+        // add range
+        dcluster[p->label_].insert(dcluster[p->label_].end(), ret.begin(), ret.end());
+      }
+    }
   }
 }
 }
