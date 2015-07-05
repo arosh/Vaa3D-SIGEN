@@ -4,7 +4,7 @@
 #include <glog/logging.h>
 
 namespace sigen {
-binary_cube binarizer::binarize(image_sequence &is) {
+binary_cube binarizer::binarize(const image_sequence &is) {
   CHECK(!is.empty());
   int width = is[0].cols;
   int height = is[0].rows;

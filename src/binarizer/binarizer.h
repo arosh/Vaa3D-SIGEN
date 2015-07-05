@@ -6,6 +6,6 @@
 namespace sigen {
 class binarizer {
 public:
-  binary_cube binarize(image_sequence &is);
+  binary_cube binarize(const image_sequence &is);
 };
 };

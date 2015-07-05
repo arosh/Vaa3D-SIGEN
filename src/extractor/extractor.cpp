@@ -56,10 +56,10 @@ void set_label(Point p, const int label) {
   }
 }
 void extractor::labeling() {
-  LOG(INFO) << "labeling start";
   LOG(INFO) << "before_filter start";
   before_filter(cube_);
   LOG(INFO) << "before_filter end";
+  LOG(INFO) << "labeling start";
   std::map<std::tuple<int, int, int>, Point> points;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
@@ -71,6 +71,7 @@ void extractor::labeling() {
     }
   }
   for (auto p : points) {
+    // enumerate 26 neighbors
     for (int dx = -1; dx <= 1; ++dx) {
       for (int dy = -1; dy <= 1; ++dy) {
         for (int dz = -1; dz <= 1; ++dz) {
@@ -99,12 +100,12 @@ void extractor::labeling() {
   for (auto p : points) {
     clusters_[p.second->label_].push_back(p.second);
   }
+  LOG(INFO) << "labeling end";
   typedef decltype(clusters_)::value_type V;
   LOG(INFO) << "sort by volume start";
   std::sort(std::begin(clusters_), end(clusters_),
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
   LOG(INFO) << "sort by volume end";
-  LOG(INFO) << "labeling end";
 }
 Point find_single_seed(std::vector<Point> cluster) {
   CHECK(!cluster.empty());
@@ -174,9 +175,11 @@ std::vector<Point> extract_same_distance(Point seed) {
 }
 void extractor::extract() {
   labeling();
-  for (auto cluster : clusters_) {
+  LOG(INFO) << "extract start";
+  for (auto &&cluster : clusters_) {
     auto seed = find_single_seed(cluster);
     int max_distance = set_distance(cluster, seed);
+    // len(0 .. max_distance) = max_distance + 1
     std::vector<std::vector<Point>> dcluster(max_distance + 1);
     for (auto p : cluster) p->flag_ = false;
     for (auto p : cluster) {
@@ -187,5 +190,6 @@ void extractor::extract() {
       }
     }
   }
+  LOG(INFO) << "extract end";
 }
 }

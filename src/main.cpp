@@ -4,6 +4,7 @@
 #include "binarizer/binarizer.h"
 #include "extractor/extractor.h"
 
+// disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wshadow"
@@ -14,7 +15,7 @@ void init_glog(const char *program_name) {
   // https://google-glog.googlecode.com/svn/trunk/doc/glog.html
   FLAGS_log_dir = "log";
   google::InitGoogleLogging(program_name);
-  google::InstallFailureSignalHandler();
+  google::InstallFailureSignalHandler(); // print stack trace
 }
 
 int main(int argc, char *argv[]) {
@@ -25,6 +26,7 @@ int main(int argc, char *argv[]) {
   const char *path = "/Users/arosh/ikenolab/sigen-data/ToIizuka/BMP";
   sigen::file_reader reader;
   sigen::image_sequence is = reader.load(path);
+  LOG(INFO) << "len(image_sequence) = " << is.size();
   sigen::binarizer bin;
   sigen::binary_cube cube = bin.binarize(is);
   LOG(INFO) << "x = " << cube.x_;
