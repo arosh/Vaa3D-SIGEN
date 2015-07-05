@@ -1,4 +1,4 @@
-cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -Wno-reorder -g'
+cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -g'
 linkflags = '-g'
 libs = 'glog'
 
