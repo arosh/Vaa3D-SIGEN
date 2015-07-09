@@ -15,11 +15,12 @@ void init_glog(const char *program_name) {
   // https://google-glog.googlecode.com/svn/trunk/doc/glog.html
   FLAGS_log_dir = "log";
   google::InitGoogleLogging(program_name);
-  google::InstallFailureSignalHandler(); // print stack trace
+  google::InstallFailureSignalHandler(); // print stack trace if program fault
 }
 
 int main(int argc, char *argv[]) {
   init_glog(argv[0]);
+  // https://github.com/tanakh/cmdline
   cmdline::parser a;
   a.parse_check(argc, argv);
 

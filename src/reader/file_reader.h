@@ -7,6 +7,7 @@
 namespace sigen {
 class file_reader {
 public:
-  image_sequence load(const std::string &path);
+  // load image files from specified directory
+  image_sequence load(const std::string &dir_path);
 };
 }

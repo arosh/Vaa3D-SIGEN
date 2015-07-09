@@ -10,20 +10,21 @@
 #pragma GCC diagnostic pop
 
 namespace sigen {
-image_sequence file_reader::load(const std::string &path) {
-  // ディレクトリ内に存在するファイルを列挙する
+image_sequence file_reader::load(const std::string &dir_path) {
   namespace fs = boost::filesystem;
   std::vector<std::string> fnames;
-  for (auto &&entry : fs::directory_iterator(path)) {
+  // enumerate files in specified directory
+  for (auto &&entry : fs::directory_iterator(dir_path)) {
     fnames.push_back(entry.path().string());
   }
-  // ファイル名で昇順に並べる
+  // sort by file name in ascending order
   std::sort(fnames.begin(), fnames.end());
   image_sequence ret;
   for (auto &&entry : fnames) {
     LOG(INFO) << entry;
-    // 読めなかったファイル (画像以外のファイル) 以外を読み込む
     cv::Mat im = cv::imread(entry, 0 /* grayscale */);
+    // ignore file if opencv cannot read it
+    // (it is not image file, e.g. .txt, .DS_Store)
     if (im.data) {
       ret.push_back(im);
     }
