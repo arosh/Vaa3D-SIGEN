@@ -18,7 +18,7 @@ def configure(conf):
 def build(bld):
     bld.stlib(
             source=[
-                'reader/file_reader.cpp',
+                'loader/file_loader.cpp',
                 'binarizer/binarizer.cpp',
                 'common/binary_cube.cpp',
                 'extractor/extractor.cpp',

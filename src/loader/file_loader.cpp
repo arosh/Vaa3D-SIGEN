@@ -1,4 +1,4 @@
-#include "file_reader.h"
+#include "file_loader.h"
 #include <algorithm>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
@@ -10,7 +10,7 @@
 #pragma GCC diagnostic pop
 
 namespace sigen {
-image_sequence file_reader::load(const std::string &dir_path) {
+image_sequence file_loader::load(const std::string &dir_path) {
   namespace fs = boost::filesystem;
   std::vector<std::string> fnames;
   // enumerate files in specified directory

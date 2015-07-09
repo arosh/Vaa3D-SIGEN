@@ -1,6 +1,6 @@
 #include <iostream>
 #include <glog/logging.h>
-#include "reader/file_reader.h"
+#include "loader/file_loader.h"
 #include "binarizer/binarizer.h"
 #include "extractor/extractor.h"
 
@@ -25,8 +25,8 @@ int main(int argc, char *argv[]) {
   a.parse_check(argc, argv);
 
   const char *path = "/Users/arosh/ikenolab/sigen-data/ToIizuka/BMP";
-  sigen::file_reader reader;
-  sigen::image_sequence is = reader.load(path);
+  sigen::file_loader loader;
+  sigen::image_sequence is = loader.load(path);
   LOG(INFO) << "len(image_sequence) = " << is.size();
   sigen::binarizer bin;
   sigen::binary_cube cube = bin.binarize(is);

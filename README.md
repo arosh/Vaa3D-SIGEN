@@ -6,7 +6,7 @@ TBD...
 
 ## Architecture
 
-* reader :: (image\_files | vaa3d\_memory) -> image\_sequence
+* loader :: (image\_files | vaa3d\_memory) -> image\_sequence
 * binarizer :: image\_sequence -> binary\_cube
 * extractor :: binary\_cube -> connection
 * graph\_constructor :: connection -> graph
