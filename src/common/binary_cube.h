@@ -3,6 +3,7 @@
 #include <vector>
 
 namespace sigen {
+// this class presents bool[][][]
 class binary_cube {
 public:
   int x_, y_, z_;
@@ -10,5 +11,6 @@ public:
   std::vector<std::vector<std::vector<bool>>> data_;
   binary_cube(int x, int y, int z);
   std::vector<std::vector<bool>> &operator[](int index);
+  // is const accessor nesessary???
 };
 }
