@@ -2,12 +2,12 @@
 #include "common/variant.h"
 #include <iostream>
 
-//TEST(variant, bool) {
-//  Variant v;
-//  v = true;
-//  ASSERT_EQ(typeid(bool), v.type());
-//  EXPECT_TRUE(boost::get<bool>(v));
-//}
+TEST(variant, bool) {
+  Variant v;
+  v = true;
+  ASSERT_EQ(typeid(bool), v.type());
+  EXPECT_TRUE(boost::get<bool>(v));
+}
 
 TEST(variant, int) {
   Variant v;
