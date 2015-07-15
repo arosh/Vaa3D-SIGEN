@@ -18,6 +18,7 @@ def build(bld):
                 'binary_cube_test.cpp',
                 'extractor_test.cpp',
                 'fileutils_test.cpp',
+                'shared_ptr_test.cpp',
                 ],
             target='test',
             includes='. ../src',

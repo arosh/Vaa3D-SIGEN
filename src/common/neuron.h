@@ -10,8 +10,9 @@ public:
   // 1-based
   int id_; 
   // gravity point
-  double gx, gy, gz;
+  double gx_, gy_, gz_;
   neuron_node_type type_;
+  std::shared_ptr<neuron_node> parent_;
   std::vector<std::shared_ptr<neuron_node>> adjacent_;
   double real_distance_;
   double electrical_distance_;
@@ -20,6 +21,7 @@ public:
 };
 typedef std::shared_ptr<neuron_node> neuron_node_ptr;
 class neuron {
-  neuron_node_ptr root;
+public:
+  neuron_node_ptr root_;
 };
 };
