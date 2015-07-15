@@ -7,7 +7,8 @@ enum class neuron_node_type {
 };
 class neuron_node {
 public:
-  int id_;
+  // 1-based
+  int id_; 
   // gravity point
   double gx, gy, gz;
   neuron_node_type type_;
@@ -17,6 +18,8 @@ public:
   double radius_;
   double degree_;
 };
+typedef std::shared_ptr<neuron_node> neuron_node_ptr;
 class neuron {
+  neuron_node_ptr root;
 };
 };

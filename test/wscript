@@ -1,6 +1,6 @@
 cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -g'
 linkflags = '-g'
-libs = 'glog'
+libs = 'boost_system boost_filesystem glog'
 
 def options(opt):
     opt.load('compiler_cxx unittest_gtest')
@@ -17,6 +17,7 @@ def build(bld):
             source=[
                 'binary_cube_test.cpp',
                 'extractor_test.cpp',
+                'fileutils_test.cpp',
                 ],
             target='test',
             includes='. ../src',

@@ -25,6 +25,7 @@ def build(bld):
                 'extractor/extractor.cpp',
                 'extractor/point.cpp',
                 'writer/swc_writer.cpp',
+                'writer/fileutils.cpp',
                 ],
             target='sigen',
             includes='.',
