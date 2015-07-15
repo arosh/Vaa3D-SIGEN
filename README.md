@@ -9,8 +9,8 @@ TBD...
 * loader :: (image\_files | vaa3d\_memory) -> image\_sequence
 * binarizer :: image\_sequence -> binary\_cube
 * extractor :: binary\_cube -> connection
-* graph\_constructor :: connection -> graph
-* writer :: graph -> (swc\_file | vaa3d\_memory)
+* neuron\_builder :: connection -> neuron
+* writer :: neuron -> (swc\_file | vaa3d\_memory)
 
 - graph inherits connection
 

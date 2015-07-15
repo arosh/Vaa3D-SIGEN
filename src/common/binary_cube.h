@@ -1,7 +1,5 @@
 #pragma once
-
 #include <vector>
-
 namespace sigen {
 // this class presents bool[][][]
 class binary_cube {
