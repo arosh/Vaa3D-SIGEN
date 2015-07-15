@@ -14,12 +14,7 @@ def configure(conf):
 def build(bld):
     bld.program(
             features='gtest',
-            source=[
-                'binary_cube_test.cpp',
-                'extractor_test.cpp',
-                'fileutils_test.cpp',
-                'shared_ptr_test.cpp',
-                ],
+            source=bld.path.ant_glob('*.cpp'),
             target='test',
             includes='. ../src',
             use='sigen',

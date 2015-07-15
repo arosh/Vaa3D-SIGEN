@@ -21,7 +21,6 @@ def build(bld):
                 'loader/file_loader.cpp',
                 'binarizer/binarizer.cpp',
                 'common/binary_cube.cpp',
-                'common/neuron.cpp',
                 'extractor/extractor.cpp',
                 'extractor/point.cpp',
                 'writer/swc_writer.cpp',
