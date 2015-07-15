@@ -4,7 +4,7 @@
 namespace sigen {
 void swc_writer::write_rec(const neuron_node_ptr &node, std::ofstream &ofs) {
   int type_id = -1;
-  switch(node->type_) {
+  switch (node->type_) {
   case neuron_node_type::EDGE:
     type_id = 6;
     break;
@@ -25,7 +25,8 @@ void swc_writer::write_rec(const neuron_node_ptr &node, std::ofstream &ofs) {
       << node->radius_ << ' '
       << parent_id << std::endl;
   for (const auto &next : node->adjacent_) {
-    if (next != node->parent_) write_rec(next, ofs);
+    if (next != node->parent_)
+      write_rec(next, ofs);
   }
 }
 void swc_writer::write(const std::string &fname, const neuron &data) {

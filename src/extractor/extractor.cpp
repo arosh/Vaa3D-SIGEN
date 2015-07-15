@@ -181,7 +181,8 @@ void extractor::extract() {
     int max_distance = set_distance(cluster, seed);
     // len(0 .. max_distance) = max_distance + 1
     std::vector<std::vector<Point>> dcluster(max_distance + 1);
-    for (auto p : cluster) p->flag_ = false;
+    for (auto p : cluster)
+      p->flag_ = false;
     for (auto p : cluster) {
       if (p->flag_ == false) {
         auto ret = extract_same_distance(p);

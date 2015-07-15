@@ -5,12 +5,14 @@
 #include <map>
 namespace sigen {
 enum class neuron_node_type {
-  EDGE, BRANCH, CONNECT
+  EDGE,
+  BRANCH,
+  CONNECT
 };
 class neuron_node {
 public:
   // 1-based
-  int id_; 
+  int id_;
   // gravity point
   double gx_, gy_, gz_;
   neuron_node_type type_;
