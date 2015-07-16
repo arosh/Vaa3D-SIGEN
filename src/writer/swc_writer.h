@@ -4,9 +4,9 @@
 #include <fstream>
 namespace sigen {
 class swc_writer {
-  void write_rec(const neuron_node_ptr &node, std::ofstream &ofs);
+  void write_rec(const Neuron &node, std::ofstream &ofs);
 
 public:
-  void write(const std::string &fname, const neuron &data);
+  void write(const std::string &fname, const Neuron &data);
 };
 };

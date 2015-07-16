@@ -12,8 +12,6 @@ TBD...
 * neuron\_builder :: connection -> neuron
 * writer :: neuron -> (swc\_file | vaa3d\_memory)
 
-- graph inherits connection
-
 ## Requirements
 
 * [Python](https://www.python.org/) >= ?.? (to use Waf)

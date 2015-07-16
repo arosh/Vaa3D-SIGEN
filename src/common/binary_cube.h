@@ -9,6 +9,6 @@ public:
   std::vector<std::vector<std::vector<bool>>> data_;
   binary_cube(int x, int y, int z);
   std::vector<std::vector<bool>> &operator[](int index);
-  // is const accessor nesessary???
+  // is const accessor necessary???
 };
 }
