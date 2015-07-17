@@ -50,9 +50,12 @@ void before_filter(binary_cube &c) {
 void set_label(Point p, const int label) {
   p->flag_ = true;
   p->label_ = label;
-  for (auto next : p->adjacent_) {
-    if (next->flag_ == false)
+  for (auto next__ : p->adjacent_) {
+    auto next = next__.lock();
+    CHECK(next);
+    if (next->flag_ == false) {
       set_label(next, label);
+    }
   }
 }
 void extractor::labeling() {
@@ -60,12 +63,13 @@ void extractor::labeling() {
   before_filter(cube_);
   LOG(INFO) << "before_filter end";
   LOG(INFO) << "labeling start";
+  point_owner_.clear();
   std::map<std::tuple<int, int, int>, Point> points;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
-          points[std::tie(x, y, z)] = std::make_shared<point>(x, y, z);
+          points[std::tie(x, y, z)] = point_owner_.add(std::make_shared<point>(x, y, z));
         }
       }
     }
@@ -118,7 +122,9 @@ Point find_single_seed(std::vector<Point> cluster) {
   while (!que.empty()) {
     last = que.front();
     que.pop();
-    for (auto next : last->adjacent_) {
+    for (auto next__ : last->adjacent_) {
+      auto next = next__.lock();
+      CHECK(next);
       if (!next->flag_) {
         next->flag_ = true;
         que.push(next);
@@ -144,7 +150,9 @@ int set_distance(std::vector<Point> cluster, Point seed) {
     Point p = que.front();
     que.pop();
     ret = p->label_;
-    for (auto next : p->adjacent_) {
+    for (auto next__ : p->adjacent_) {
+      auto next = next__.lock();
+      CHECK(next);
       if (!next->flag_) {
         next->flag_ = true;
         next->label_ = p->label_ + 1;
@@ -163,7 +171,8 @@ std::vector<Point> extract_same_distance(Point seed) {
   while (!que.empty()) {
     Point p = que.front();
     que.pop();
-    for (auto next : p->adjacent_) {
+    for (auto next__ : p->adjacent_) {
+      auto next = next__.lock();
       if (!next->flag_ && next->label_ == seed->label_) {
         next->flag_ = true;
         ret.push_back(next);
