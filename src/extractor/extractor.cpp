@@ -47,12 +47,10 @@ void before_filter(binary_cube &c) {
     }
   }
 }
-void set_label(Point p, const int label) {
+void set_label(point *p, const int label) {
   p->flag_ = true;
   p->label_ = label;
-  for (auto next__ : p->adjacent_) {
-    auto next = next__.lock();
-    CHECK(next);
+  for (auto next : p->adjacent_) {
     if (next->flag_ == false) {
       set_label(next, label);
     }
@@ -64,16 +62,18 @@ void extractor::labeling() {
   LOG(INFO) << "before_filter end";
   LOG(INFO) << "labeling start";
   point_owner_.clear();
-  std::map<std::tuple<int, int, int>, Point> points;
+  std::map<std::tuple<int, int, int>, point *> points;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
-          points[std::tie(x, y, z)] = point_owner_.add(std::make_shared<point>(x, y, z));
+          point_owner_.push_back(std::make_shared<point>(x, y, z));
+          points[std::tie(x, y, z)] = point_owner_.back().get();
         }
       }
     }
   }
+  LOG(INFO) << "connecting begin";
   for (auto p : points) {
     // enumerate 26 neighbors
     for (int dx = -1; dx <= 1; ++dx) {
@@ -92,6 +92,7 @@ void extractor::labeling() {
       }
     }
   }
+  LOG(INFO) << "connecting end";
   for (auto p : points)
     p.second->flag_ = false;
   int label = 0;
@@ -100,7 +101,7 @@ void extractor::labeling() {
       set_label(p.second, label++);
     }
   }
-  clusters_.assign(label, std::vector<Point>());
+  clusters_.assign(label, std::vector<point *>());
   for (auto p : points) {
     clusters_[p.second->label_].push_back(p.second);
   }
@@ -111,20 +112,18 @@ void extractor::labeling() {
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
   LOG(INFO) << "sort by volume end";
 }
-Point find_single_seed(std::vector<Point> cluster) {
+point *find_single_seed(std::vector<point *> cluster) {
   CHECK(!cluster.empty());
   for (auto p : cluster)
     p->flag_ = false;
-  std::queue<Point> que;
+  std::queue<point *> que;
   cluster[0]->flag_ = true;
   que.push(cluster[0]);
-  Point last;
+  point *last;
   while (!que.empty()) {
     last = que.front();
     que.pop();
-    for (auto next__ : last->adjacent_) {
-      auto next = next__.lock();
-      CHECK(next);
+    for (auto next : last->adjacent_) {
       if (!next->flag_) {
         next->flag_ = true;
         que.push(next);
@@ -138,21 +137,19 @@ Point find_single_seed(std::vector<Point> cluster) {
  * =======
  * ret: max_distance of Point from seed
  */
-int set_distance(std::vector<Point> cluster, Point seed) {
+int set_distance(std::vector<point *> cluster, point *seed) {
   for (auto p : cluster)
     p->flag_ = false;
-  std::queue<Point> que;
+  std::queue<point *> que;
   seed->flag_ = true;
   seed->label_ = 0;
   que.push(seed);
   int ret = 0;
   while (!que.empty()) {
-    Point p = que.front();
+    point *p = que.front();
     que.pop();
     ret = p->label_;
-    for (auto next__ : p->adjacent_) {
-      auto next = next__.lock();
-      CHECK(next);
+    for (auto next : p->adjacent_) {
       if (!next->flag_) {
         next->flag_ = true;
         next->label_ = p->label_ + 1;
@@ -162,17 +159,16 @@ int set_distance(std::vector<Point> cluster, Point seed) {
   }
   return ret;
 }
-std::vector<Point> extract_same_distance(Point seed) {
-  std::vector<Point> ret;
-  std::queue<Point> que;
+std::vector<point *> extract_same_distance(point *seed) {
+  std::vector<point *> ret;
+  std::queue<point *> que;
   seed->flag_ = true;
   ret.push_back(seed);
   que.push(seed);
   while (!que.empty()) {
-    Point p = que.front();
+    point *p = que.front();
     que.pop();
-    for (auto next__ : p->adjacent_) {
-      auto next = next__.lock();
+    for (auto next : p->adjacent_) {
       if (!next->flag_ && next->label_ == seed->label_) {
         next->flag_ = true;
         ret.push_back(next);
@@ -189,7 +185,7 @@ void extractor::extract() {
     auto seed = find_single_seed(cluster);
     int max_distance = set_distance(cluster, seed);
     // len(0 .. max_distance) = max_distance + 1
-    std::vector<std::vector<Point>> dcluster(max_distance + 1);
+    std::vector<std::vector<point *>> dcluster(max_distance + 1);
     for (auto p : cluster)
       p->flag_ = false;
     for (auto p : cluster) {
