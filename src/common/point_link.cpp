@@ -1,4 +1,4 @@
-#include "point_link.h"
+#include "./point_link.h"
 #include <cstdlib>
 namespace sigen {
 point_link::point_link(const std::vector<point *> points)

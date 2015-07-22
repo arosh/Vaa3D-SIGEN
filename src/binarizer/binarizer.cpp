@@ -1,4 +1,4 @@
-#include "binarizer.h"
+#include "./binarizer.h"
 #include <cstdint>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <glog/logging.h>

@@ -1,4 +1,4 @@
-#include "neuron_part.h"
+#include "./neuron_part.h"
 #include <glog/logging.h>
 namespace sigen {
 void neuron_part::add_child(neuron_part *child) {

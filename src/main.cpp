@@ -1,14 +1,14 @@
 #include <iostream>
 #include <glog/logging.h>
-#include "loader/file_loader.h"
-#include "binarizer/binarizer.h"
-#include "extractor/extractor.h"
+#include "./loader/file_loader.h"
+#include "./binarizer/binarizer.h"
+#include "./extractor/extractor.h"
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wshadow"
-#include "cmdline/cmdline.h"
+#include <cmdline/cmdline.h>
 #pragma GCC diagnostic pop
 
 void init_glog(const char *program_name) {
