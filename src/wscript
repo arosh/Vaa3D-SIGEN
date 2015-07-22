@@ -25,6 +25,7 @@ def build(bld):
                 'common/point_link.cpp',
                 'extractor/extractor.cpp',
                 'extractor/point.cpp',
+                'builder/builder.cpp',
                 'writer/swc_writer.cpp',
                 'writer/fileutils.cpp',
                 ],

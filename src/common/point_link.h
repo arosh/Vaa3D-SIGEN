@@ -1,9 +1,7 @@
 #pragma once
-
 #include "../extractor/point.h"
 #include <vector>
 #include <memory>
-
 namespace sigen {
 class point_link {
 public:
