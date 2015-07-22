@@ -114,19 +114,21 @@ void extractor::labeling() {
 }
 point *find_single_seed(std::vector<point *> cluster) {
   CHECK(!cluster.empty());
-  for (auto p : cluster)
-    p->flag_ = false;
-  std::queue<point *> que;
-  cluster[0]->flag_ = true;
-  que.push(cluster[0]);
-  point *last;
-  while (!que.empty()) {
-    last = que.front();
-    que.pop();
-    for (auto next : last->adjacent_) {
-      if (!next->flag_) {
-        next->flag_ = true;
-        que.push(next);
+  point *last = cluster[0];
+  for(int i = 0; i < 2; ++i) {
+    for (auto p : cluster)
+      p->flag_ = false;
+    last->flag_ = true;
+    std::queue<point *> que;
+    que.push(last);
+    while (!que.empty()) {
+      last = que.front();
+      que.pop();
+      for (auto next : last->adjacent_) {
+        if (!next->flag_) {
+          next->flag_ = true;
+          que.push(next);
+        }
       }
     }
   }
@@ -137,18 +139,16 @@ point *find_single_seed(std::vector<point *> cluster) {
  * =======
  * ret: max_distance of Point from seed
  */
-int set_distance(std::vector<point *> cluster, point *seed) {
+void set_distance(std::vector<point *> cluster, point *seed) {
   for (auto p : cluster)
     p->flag_ = false;
   std::queue<point *> que;
   seed->flag_ = true;
   seed->label_ = 0;
   que.push(seed);
-  int ret = 0;
   while (!que.empty()) {
     point *p = que.front();
     que.pop();
-    ret = p->label_;
     for (auto next : p->adjacent_) {
       if (!next->flag_) {
         next->flag_ = true;
@@ -157,7 +157,6 @@ int set_distance(std::vector<point *> cluster, point *seed) {
       }
     }
   }
-  return ret;
 }
 std::vector<point *> extract_same_distance(point *seed) {
   std::vector<point *> ret;
@@ -183,16 +182,14 @@ void extractor::extract() {
   LOG(INFO) << "extract start";
   for (auto &&cluster : clusters_) {
     auto seed = find_single_seed(cluster);
-    int max_distance = set_distance(cluster, seed);
-    // len(0 .. max_distance) = max_distance + 1
-    std::vector<std::vector<point *>> dcluster(max_distance + 1);
+    set_distance(cluster, seed);
     for (auto p : cluster)
       p->flag_ = false;
+    std::vector<std::vector<point *>> dcluster;
     for (auto p : cluster) {
       if (p->flag_ == false) {
-        auto ret = extract_same_distance(p);
-        // add range
-        dcluster[p->label_].insert(dcluster[p->label_].end(), ret.begin(), ret.end());
+        auto &&ret = extract_same_distance(p);
+        dcluster.push_back(std::move(ret));
       }
     }
   }
