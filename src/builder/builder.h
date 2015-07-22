@@ -1,6 +1,6 @@
 #pragma once
 #include "../common/point_link.h"
-#include "../common/neuron_part.h"
+#include "../common/neuron.h"
 namespace sigen {
 class builder {
   std::vector<std::shared_ptr<point_link>> data_;
