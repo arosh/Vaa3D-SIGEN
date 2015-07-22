@@ -18,13 +18,13 @@ def configure(conf):
 def build(bld):
     bld.stlib(
             source=[
-                'loader/file_loader.cpp',
-                'binarizer/binarizer.cpp',
                 'common/binary_cube.cpp',
                 'common/neuron.cpp',
+                'common/point.cpp',
                 'common/point_link.cpp',
+                'loader/file_loader.cpp',
+                'binarizer/binarizer.cpp',
                 'extractor/extractor.cpp',
-                'extractor/point.cpp',
                 'builder/builder.cpp',
                 'writer/swc_writer.cpp',
                 'writer/fileutils.cpp',

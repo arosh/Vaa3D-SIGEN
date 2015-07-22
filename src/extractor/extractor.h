@@ -1,6 +1,6 @@
 #include "../common/binary_cube.h"
 #include "../common/point_link.h"
-#include "./point.h"
+#include "../common/point.h"
 #include <vector>
 #include <memory>
 namespace sigen {
