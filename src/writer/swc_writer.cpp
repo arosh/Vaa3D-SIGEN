@@ -2,7 +2,7 @@
 #include "fileutils.h"
 #include <glog/logging.h>
 namespace sigen {
-void swc_writer::write_rec(std::ostream &os, const neuron *node) {
+void swc_writer::write_rec(std::ostream &os, const neuron_part *node) {
   int type_id = -1;
   switch (node->type_) {
   case neuron_type::EDGE:
@@ -29,10 +29,10 @@ void swc_writer::write_rec(std::ostream &os, const neuron *node) {
     write_rec(os, next);
   }
 }
-void swc_writer::write(std::ostream &os, const neuron *root) {
+void swc_writer::write(std::ostream &os, const neuron_part *root) {
   write_rec(os, root);
 }
-void swc_writer::write(const std::string &fname, const neuron *root) {
+void swc_writer::write(const std::string &fname, const neuron_part *root) {
   std::ofstream ofs(fileutils::add_extension(fname, ".swc").c_str());
   write(ofs, root);
 }

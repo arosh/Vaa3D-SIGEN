@@ -8,7 +8,7 @@ enum class neuron_type {
   BRANCH,
   CONNECT
 };
-class neuron {
+class neuron_part {
 public:
   // 1-based
   int id_;
@@ -16,10 +16,10 @@ public:
   double gx_, gy_, gz_;
   double radius_;
   neuron_type type_;
-  neuron *parent_ = nullptr;
-  std::vector<neuron *> childs_;
+  neuron_part *parent_ = nullptr;
+  std::vector<neuron_part *> childs_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   std::map<std::string, Variant> values_;
-  void add_child(neuron *child);
+  void add_child(neuron_part *child);
 };
 };

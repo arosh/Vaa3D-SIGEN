@@ -4,7 +4,7 @@
 #include "writer/swc_writer.h"
 
 TEST(swc_writer, write) {
-  sigen::neuron a, b, c, d, e;
+  sigen::neuron_part a, b, c, d, e;
   a.id_ = 1;
   a.gx_ = 1.1; a.gy_ = 1.2; a.gz_ = 1.3; a.radius_ = 1.4;
   a.type_ = sigen::neuron_type::EDGE;

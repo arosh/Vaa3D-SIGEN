@@ -15,10 +15,10 @@ void builder::connect_neighbor() {
 void builder::connect_interpolate(double dt) {
   // pixel resolution???
 }
-neuron *builder::find_edge() {
+neuron_part *builder::find_edge() {
 }
-std::pair<std::vector<std::shared_ptr<neuron>>, neuron *> builder::build() {
-  std::pair<std::vector<std::shared_ptr<neuron>>, neuron *> ret;
+std::pair<std::vector<std::shared_ptr<neuron_part>>, neuron_part *> builder::build() {
+  std::pair<std::vector<std::shared_ptr<neuron_part>>, neuron_part *> ret;
   return ret;
 }
 };

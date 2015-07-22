@@ -1,13 +1,13 @@
 #pragma once
-#include "../common/neuron.h"
+#include "../common/neuron_part.h"
 #include <string>
 #include <fstream>
 namespace sigen {
 class swc_writer {
-  void write_rec(std::ostream &os, const neuron *node);
+  void write_rec(std::ostream &os, const neuron_part *node);
 
 public:
-  void write(std::ostream &os, const neuron *root);
-  void write(const std::string &fname, const neuron *root);
+  void write(std::ostream &os, const neuron_part *root);
+  void write(const std::string &fname, const neuron_part *root);
 };
 };
