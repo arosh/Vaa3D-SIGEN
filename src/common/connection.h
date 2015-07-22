@@ -4,7 +4,9 @@
 #include <vector>
 #include <memory>
 
+namespace sigen {
 class connection {
 public:
-  std::vector<std::vector<Point>> nodelist;
+  std::vector<std::vector<point *>> nodelist;
 };
+}
