@@ -105,12 +105,10 @@ void extractor::labeling() {
   for (auto p : points) {
     clusters_[p.second->label_].push_back(p.second);
   }
-  LOG(INFO) << "labeling end";
   typedef decltype(clusters_)::value_type V;
-  LOG(INFO) << "sort by volume start";
   std::sort(std::begin(clusters_), end(clusters_),
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
-  LOG(INFO) << "sort by volume end";
+  LOG(INFO) << "labeling end";
 }
 point *find_single_seed(std::vector<point *> cluster) {
   CHECK(!cluster.empty());
@@ -177,22 +175,23 @@ std::vector<point *> extract_same_distance(point *seed) {
   }
   return ret;
 }
-void extractor::extract() {
+std::vector<std::shared_ptr<point_link>> extractor::extract() {
   labeling();
   LOG(INFO) << "extract start";
+  std::vector<std::shared_ptr<point_link>> ret;
   for (auto &&cluster : clusters_) {
     auto seed = find_single_seed(cluster);
     set_distance(cluster, seed);
     for (auto p : cluster)
       p->flag_ = false;
-    std::vector<std::vector<point *>> dcluster;
     for (auto p : cluster) {
       if (p->flag_ == false) {
-        auto &&ret = extract_same_distance(p);
-        dcluster.push_back(std::move(ret));
+        auto &&pp = extract_same_distance(p);
+        ret.push_back(std::make_shared<point_link>(std::move(pp)));
       }
     }
   }
   LOG(INFO) << "extract end";
+  return ret;
 }
 }

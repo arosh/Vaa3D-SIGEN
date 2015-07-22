@@ -1,4 +1,5 @@
 #include "../common/binary_cube.h"
+#include "../common/point_link.h"
 #include "./point.h"
 #include <vector>
 #include <memory>
@@ -11,6 +12,6 @@ public:
   binary_cube cube_;
   std::vector<std::vector<point *>> clusters_;
   extractor(const binary_cube &cube);
-  void extract();
+  std::vector<std::shared_ptr<point_link>> extract();
 };
 }
