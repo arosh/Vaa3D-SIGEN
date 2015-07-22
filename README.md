@@ -8,8 +8,8 @@ TBD...
 
 * loader :: (image\_files | vaa3d\_memory) -> image\_sequence
 * binarizer :: image\_sequence -> binary\_cube
-* extractor :: binary\_cube -> connection
-* neuron\_builder :: connection -> neuron
+* extractor :: binary\_cube -> point\_link
+* neuron\_builder :: point\_link -> neuron
 * writer :: neuron -> (swc\_file | vaa3d\_memory)
 
 ## Requirements
