@@ -1,15 +1,17 @@
 def options(opt):
     opt.load('unittest_gtest')
 
+
 def configure(conf):
     conf.load('unittest_gtest')
 
+
 def build(bld):
     bld.program(
-            features='gtest',
-            source=bld.path.ant_glob('*.cpp'),
-            target='test',
-            includes='. ../src',
-            use='sigen BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
+        features='gtest',
+        source=bld.path.ant_glob('*.cpp'),
+        target='test',
+        includes='. ../src',
+        use='sigen BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
 
 # vim: filetype=python
