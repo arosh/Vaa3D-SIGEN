@@ -16,7 +16,7 @@ public:
   double gx_, gy_, gz_;
   double radius_;
   neuron_type type_;
-  neuron* parent_ = nullptr;
+  neuron *parent_ = nullptr;
   std::vector<neuron *> childs_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   std::map<std::string, Variant> values_;

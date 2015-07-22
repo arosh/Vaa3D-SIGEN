@@ -18,12 +18,12 @@ void swc_writer::write_rec(std::ostream &os, const neuron *node) {
   CHECK(type_id != -1);
   int parent_id = (node->parent_ == nullptr ? -1 : node->parent_->id_);
   os << node->id_ << ' '
-      << type_id   << ' '
-      << node->gx_ << ' '
-      << node->gy_ << ' '
-      << node->gz_ << ' '
-      << node->radius_ << ' '
-      << parent_id << std::endl;
+     << type_id << ' '
+     << node->gx_ << ' '
+     << node->gy_ << ' '
+     << node->gz_ << ' '
+     << node->radius_ << ' '
+     << parent_id << std::endl;
   for (auto next : node->childs_) {
     CHECK(next != node->parent_);
     write_rec(os, next);
