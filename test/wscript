@@ -1,15 +1,8 @@
-cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -g'
-linkflags = '-g'
-libs = 'boost_system boost_filesystem glog'
-
 def options(opt):
-    opt.load('compiler_cxx unittest_gtest')
+    opt.load('unittest_gtest')
 
 def configure(conf):
-    conf.load('compiler_cxx unittest_gtest')
-    conf.check_cxx(cxxflags=cxxflags)
-    conf.check_cxx(linkflags=linkflags)
-    conf.check_cxx(lib=libs)
+    conf.load('unittest_gtest')
 
 def build(bld):
     bld.program(
@@ -17,10 +10,6 @@ def build(bld):
             source=bld.path.ant_glob('*.cpp'),
             target='test',
             includes='. ../src',
-            use='sigen',
-            cxxflags=cxxflags,
-            linkflags=linkflags,
-            lib=libs,
-            uselib='opencv')
+            use='sigen BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
 
 # vim: filetype=python

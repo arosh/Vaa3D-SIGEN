@@ -1,19 +1,8 @@
-cxxflags = '-std=c++11 -Wall -Wextra -Wshadow -Woverloaded-virtual -Wnon-virtual-dtor -g'
-linkflags = '-g'
-libs = 'boost_system boost_filesystem glog'
-
 def options(opt):
-    opt.load('compiler_cxx')
+    pass
 
 def configure(conf):
-    conf.load('compiler_cxx')
-    conf.check_cxx(cxxflags=cxxflags)
-    conf.check_cxx(linkflags=linkflags)
-    conf.check_cxx(lib=libs)
-    conf.check_cfg(
-            package='opencv',
-            args='--cflags --libs',
-            uselib_store='opencv')
+    pass
 
 def build(bld):
     bld.stlib(
@@ -30,20 +19,12 @@ def build(bld):
                 'writer/fileutils.cpp',
                 ],
             target='sigen',
-            includes='.',
-            cxxflags=cxxflags,
-            linkflags=linkflags,
-            lib=libs,
-            uselib='opencv')
+            includes='.')
 
     bld.program(
             source='main.cpp',
             target='main',
             includes='. ../third_party',
-            cxxflags=cxxflags,
-            linkflags=linkflags,
-            lib=libs,
-            use='sigen',
-            uselib='opencv')
+            use='sigen OPENCV BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
 
 # vim: filetype=python
