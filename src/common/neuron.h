@@ -23,5 +23,9 @@ public:
   std::map<std::string, Variant> values_;
   void add_child(neuron_part *child);
 };
-typedef std::vector<std::shared_ptr<neuron_part>> neuron;
+class neuron {
+public:
+  neuron_part *root_;
+  std::vector<std::shared_ptr<neuron_part>> data_;
+};
 };
