@@ -14,10 +14,10 @@ public:
   int id_;
   // gravity point
   double gx_, gy_, gz_;
+  double radius_;
   neuron_type type_;
   neuron* parent_ = nullptr;
   std::vector<neuron *> childs_;
-  double radius_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   std::map<std::string, Variant> values_;
   void add_child(neuron *child);
