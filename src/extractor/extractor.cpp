@@ -24,8 +24,7 @@ void clear_frame(binary_cube &c) {
     c[i][c.y_ - 1][k] = false;
   }
 }
-void before_filter(binary_cube &c) {
-  clear_frame(c);
+void remove_isolation_point(binary_cube &c) {
   binary_cube cc = c;
   for (int x = 1; x < c.x_ - 1; ++x) {
     for (int y = 1; y < c.y_ - 1; ++y) {
@@ -46,6 +45,10 @@ void before_filter(binary_cube &c) {
       }
     }
   }
+}
+void before_filter(binary_cube &c) {
+  clear_frame(c);
+  remove_isolation_point(c);
 }
 void set_label(point *p, const int label) {
   p->flag_ = true;
