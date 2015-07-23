@@ -1,13 +1,11 @@
 #include <gtest/gtest.h>
-#include "common/binary_cube.h"
-
+#include <common/binary_cube.h>
 TEST(binary_cube, init) {
   sigen::binary_cube cube(2, 3, 4);
   EXPECT_EQ(2, cube.x_);
   EXPECT_EQ(3, cube.y_);
   EXPECT_EQ(4, cube.z_);
 }
-
 TEST(binary_cube, read_write) {
   sigen::binary_cube cube(2, 3, 4);
   for (int i = 0; i < 2; ++i) {

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "writer/fileutils.h"
+#include <writer/fileutils.h>
 using namespace sigen::fileutils;
 TEST(fileutils, add_extension) {
   EXPECT_EQ("hello.swc", add_extension("hello", "swc"));

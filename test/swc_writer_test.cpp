@@ -1,8 +1,7 @@
 #include <gtest/gtest.h>
 #include <sstream>
 #include <string>
-#include "writer/swc_writer.h"
-
+#include <writer/swc_writer.h>
 TEST(swc_writer, write) {
   std::shared_ptr<sigen::neuron_part> a, b, c, d, e;
   a = std::make_shared<sigen::neuron_part>();

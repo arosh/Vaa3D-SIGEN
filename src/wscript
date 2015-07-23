@@ -20,13 +20,12 @@ def build(bld):
             'writer/swc_writer.cpp',
             'writer/fileutils.cpp',
         ],
-        target='sigen',
-        includes='.')
+        target='sigen')
 
     bld.program(
         source='main.cpp',
         target='main',
-        includes='. ../third_party',
+        includes='../third_party',
         use='sigen OPENCV BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
 
 # vim: filetype=python
