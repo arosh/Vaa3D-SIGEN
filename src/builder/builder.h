@@ -5,12 +5,15 @@
 #include <utility>
 namespace sigen {
 class builder {
-  std::vector<std::shared_ptr<cluster>> data_;
   void connect_neighbor();
   void connect_interpolate(double dt);
+  void compute_gravity_point();
+  void compute_radius();
 
 public:
-  explicit builder(const std::vector<std::shared_ptr<cluster>> &data);
+  std::vector<std::shared_ptr<cluster>> data_;
+  double scale_xy_, scale_z_;
+  explicit builder(const std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z);
   neuron build();
 };
 } // namespace sigen
