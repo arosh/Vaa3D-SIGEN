@@ -1,10 +1,10 @@
-#include "./point_link.h"
+#include "./cluster.h"
 #include <cstdlib>
 #include <vector>
 namespace sigen {
-point_link::point_link(const std::vector<voxel *> &voxels)
+cluster::cluster(const std::vector<voxel *> &voxels)
     : voxels_(voxels) {}
-bool point_link::check_neighbor(const point_link *pl) {
+bool cluster::check_neighbor(const cluster *pl) {
   for (const voxel *p : voxels_) {
     for (const voxel *q : pl->voxels_) {
       int dx = std::abs(p->x_ - q->x_);
@@ -15,7 +15,7 @@ bool point_link::check_neighbor(const point_link *pl) {
   }
   return false;
 }
-void point_link::add_connection(point_link *pl) {
+void cluster::add_connection(cluster *pl) {
   adjacent_.push_back(pl);
 }
 } // namespace sigen

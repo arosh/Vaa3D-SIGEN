@@ -105,20 +105,20 @@ void extractor::labeling() {
       set_label(p.second, label++);
     }
   }
-  clusters_.assign(label, std::vector<voxel *>());
+  groups_.assign(label, std::vector<voxel *>());
   for (auto p : voxels) {
-    clusters_[p.second->label_].push_back(p.second);
+    groups_[p.second->label_].push_back(p.second);
   }
-  typedef decltype(clusters_)::value_type V;
-  std::sort(std::begin(clusters_), end(clusters_),
+  typedef decltype(groups_)::value_type V;
+  std::sort(std::begin(groups_), end(groups_),
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
   LOG(INFO) << "labeling end";
 }
-voxel *find_single_seed(std::vector<voxel *> cluster) {
-  CHECK(!cluster.empty());
-  voxel *last = cluster[0];
+voxel *find_single_seed(std::vector<voxel *> group) {
+  CHECK(!group.empty());
+  voxel *last = group[0];
   for (int i = 0; i < 2; ++i) {
-    for (auto p : cluster)
+    for (auto p : group)
       p->flag_ = false;
     last->flag_ = true;
     std::queue<voxel *> que;
@@ -141,8 +141,8 @@ voxel *find_single_seed(std::vector<voxel *> cluster) {
  * =======
  * ret: max_distance of voxel from seed
  */
-void set_distance(std::vector<voxel *> cluster, voxel *seed) {
-  for (auto p : cluster)
+void set_distance(std::vector<voxel *> group, voxel *seed) {
+  for (auto p : group)
     p->flag_ = false;
   std::queue<voxel *> que;
   seed->flag_ = true;
@@ -179,19 +179,19 @@ std::vector<voxel *> extract_same_distance(voxel *seed) {
   }
   return ret;
 }
-std::vector<std::shared_ptr<point_link>> extractor::extract() {
+std::vector<std::shared_ptr<cluster>> extractor::extract() {
   labeling();
   LOG(INFO) << "extract start";
-  std::vector<std::shared_ptr<point_link>> ret;
-  for (auto &&cluster : clusters_) {
-    auto seed = find_single_seed(cluster);
-    set_distance(cluster, seed);
-    for (auto p : cluster)
+  std::vector<std::shared_ptr<cluster>> ret;
+  for (auto &&group : groups_) {
+    auto seed = find_single_seed(group);
+    set_distance(group, seed);
+    for (auto p : group)
       p->flag_ = false;
-    for (auto p : cluster) {
+    for (auto p : group) {
       if (p->flag_ == false) {
         auto &&pp = extract_same_distance(p);
-        ret.push_back(std::make_shared<point_link>(std::move(pp)));
+        ret.push_back(std::make_shared<cluster>(std::move(pp)));
       }
     }
   }

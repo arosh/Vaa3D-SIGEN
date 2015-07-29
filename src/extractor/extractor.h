@@ -1,5 +1,5 @@
 #include "../common/binary_cube.h"
-#include "../common/point_link.h"
+#include "../common/cluster.h"
 #include "../common/voxel.h"
 #include <vector>
 #include <memory>
@@ -10,8 +10,8 @@ class extractor {
 
 public:
   binary_cube cube_;
-  std::vector<std::vector<voxel *>> clusters_;
+  std::vector<std::vector<voxel *>> groups_;
   explicit extractor(const binary_cube &cube);
-  std::vector<std::shared_ptr<point_link>> extract();
+  std::vector<std::shared_ptr<cluster>> extract();
 };
 } // namespace sigen

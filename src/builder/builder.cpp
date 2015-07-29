@@ -2,7 +2,7 @@
 #include <utility>
 #include <vector>
 namespace sigen {
-builder::builder(const std::vector<std::shared_ptr<point_link>> &data)
+builder::builder(const std::vector<std::shared_ptr<cluster>> &data)
     : data_(data) {}
 void builder::connect_neighbor() {
   for (int i = 0; i < (int)data_.size(); ++i) {
