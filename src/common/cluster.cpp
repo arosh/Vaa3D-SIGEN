@@ -4,9 +4,9 @@
 namespace sigen {
 cluster::cluster(const std::vector<voxel *> &voxels)
     : voxels_(voxels) {}
-bool cluster::check_neighbor(const cluster *pl) {
+bool cluster::check_neighbor(const cluster *cs) {
   for (const voxel *p : voxels_) {
-    for (const voxel *q : pl->voxels_) {
+    for (const voxel *q : cs->voxels_) {
       int dx = std::abs(p->x_ - q->x_);
       int dy = std::abs(p->y_ - q->y_);
       int dz = std::abs(p->z_ - q->z_);

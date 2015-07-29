@@ -9,7 +9,7 @@
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
-void clear_frame(binary_cube &c) {
+static void clear_frame(binary_cube &c) {
   REP(i, c.x_) REP(j, c.y_) {
     c[i][j][0] = false;
     c[i][j][c.z_ - 1] = false;
@@ -23,7 +23,7 @@ void clear_frame(binary_cube &c) {
     c[i][c.y_ - 1][k] = false;
   }
 }
-void remove_isolation_point(binary_cube &c) {
+static void remove_isolation_point(binary_cube &c) {
   binary_cube cc = c;
   for (int x = 1; x < c.x_ - 1; ++x) {
     for (int y = 1; y < c.y_ - 1; ++y) {
@@ -45,11 +45,11 @@ void remove_isolation_point(binary_cube &c) {
     }
   }
 }
-void before_filter(binary_cube &c) {
+static void before_filter(binary_cube &c) {
   clear_frame(c);
   remove_isolation_point(c);
 }
-void set_label(voxel *p, const int label) {
+static void set_label(voxel *p, const int label) {
   p->flag_ = true;
   p->label_ = label;
   for (auto next : p->adjacent_) {
@@ -112,7 +112,7 @@ void extractor::labeling() {
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
   LOG(INFO) << "labeling end";
 }
-voxel *find_single_seed(std::vector<voxel *> group) {
+static voxel *find_single_seed(std::vector<voxel *> group) {
   CHECK(!group.empty());
   voxel *last = group[0];
   for (int i = 0; i < 2; ++i) {
@@ -139,7 +139,7 @@ voxel *find_single_seed(std::vector<voxel *> group) {
  * =======
  * ret: max_distance of voxel from seed
  */
-void set_distance(std::vector<voxel *> group, voxel *seed) {
+static void set_distance(std::vector<voxel *> group, voxel *seed) {
   for (auto p : group)
     p->flag_ = false;
   std::queue<voxel *> que;
@@ -158,7 +158,7 @@ void set_distance(std::vector<voxel *> group, voxel *seed) {
     }
   }
 }
-std::vector<voxel *> extract_same_distance(voxel *seed) {
+static std::vector<voxel *> extract_same_distance(voxel *seed) {
   std::vector<voxel *> ret;
   std::queue<voxel *> que;
   seed->flag_ = true;

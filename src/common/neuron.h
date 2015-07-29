@@ -26,6 +26,7 @@ public:
 };
 class neuron {
 public:
+  bool finalize_tag = false;
   neuron_node *root_;
   std::vector<std::shared_ptr<neuron_node>> data_;
 };
