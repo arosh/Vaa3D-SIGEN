@@ -3,7 +3,7 @@
 #include <glog/logging.h>
 #include <string>
 namespace sigen {
-void swc_writer::write_rec(std::ostream &os, const neuron_part *node) {
+void swc_writer::write_rec(std::ostream &os, const neuron_node *node) {
   int type_id = -1;
   switch (node->type_) {
   case neuron_type::EDGE:

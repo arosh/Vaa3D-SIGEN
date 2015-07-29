@@ -18,10 +18,10 @@ void builder::connect_interpolate(double dt) {
   // 重くなりそうなので，重心の距離で
   // pixel resolution???
 }
-neuron_part *builder::find_edge() {
+neuron_node *builder::find_edge() {
 }
-std::pair<std::vector<std::shared_ptr<neuron_part>>, neuron_part *> builder::build() {
-  std::pair<std::vector<std::shared_ptr<neuron_part>>, neuron_part *> ret;
+std::pair<std::vector<std::shared_ptr<neuron_node>>, neuron_node *> builder::build() {
+  std::pair<std::vector<std::shared_ptr<neuron_node>>, neuron_node *> ret;
   return ret;
 }
 } // namespace sigen
