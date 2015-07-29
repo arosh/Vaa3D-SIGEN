@@ -6,9 +6,7 @@
 #include <queue>
 #include <vector>
 #include <glog/logging.h>
-
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
-
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 void clear_frame(binary_cube &c) {

@@ -4,13 +4,11 @@
 #include <string>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
-
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
 #include <opencv2/highgui/highgui.hpp>
 #pragma GCC diagnostic pop
-
 namespace sigen {
 image_sequence file_loader::load(const std::string &dir_path) {
   namespace fs = boost::filesystem;

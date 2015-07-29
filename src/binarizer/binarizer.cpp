@@ -2,7 +2,6 @@
 #include <cstdint>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <glog/logging.h>
-
 namespace sigen {
 binary_cube binarizer::binarize(const image_sequence &is) {
   CHECK(!is.empty());
