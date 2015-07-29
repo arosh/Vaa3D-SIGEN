@@ -19,10 +19,10 @@ public:
   double radius_;
   neuron_type type_;
   neuron_node *parent_ = nullptr;
-  std::vector<neuron_node *> childs_;
+  std::vector<neuron_node *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   std::map<std::string, Variant> values_;
-  void add_child(neuron_node *child);
+  void add_child(neuron_node *node);
 };
 class neuron {
 public:

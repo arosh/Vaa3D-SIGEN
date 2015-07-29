@@ -25,9 +25,10 @@ void swc_writer::write_rec(std::ostream &os, const neuron_node *node) {
      << node->gz_ << ' '
      << node->radius_ << ' '
      << parent_id << std::endl;
-  for (auto next : node->childs_) {
-    CHECK_NE(node->parent_, next);
-    write_rec(os, next);
+  for (auto next : node->adjacent_) {
+    if(next != node->parent_) {
+      write_rec(os, next);
+    }
   }
 }
 void swc_writer::write(std::ostream &os, const neuron &neuron__) {

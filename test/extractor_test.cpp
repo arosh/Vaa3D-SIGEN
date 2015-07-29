@@ -21,3 +21,13 @@ TEST(extractor, labeling2) {
   EXPECT_EQ(1, (int)ext.groups_.size());
   EXPECT_EQ(5, (int)ext.groups_[0].size());
 }
+TEST(extractor, labeling_with_loops) {
+  binary_cube cube(5, 5, 3);
+                     cube[2][1][1] = 1;
+  cube[1][2][1] = 1;                    cube[3][2][1] = 1;
+                     cube[2][3][1] = 1;
+  extractor ext(cube);
+  ext.extract();
+  EXPECT_EQ(1, (int)ext.groups_.size());
+  EXPECT_EQ(4, (int)ext.groups_[0].size());
+}

@@ -2,6 +2,7 @@
 #include <utility>
 #include <vector>
 #include <queue>
+#include <set>
 namespace sigen {
 builder::builder(const std::vector<std::shared_ptr<cluster>> &data)
     : data_(data) {}
@@ -23,11 +24,17 @@ static neuron_node *find_edge(neuron_node *node) {
   std::queue<neuron_node *> que;
   neuron_node *last = node;
   for (int i = 0; i < 2; ++i) {
+    std::set<neuron_node *> used;
     que.push(last);
+    used.insert(last);
     while (!que.empty()) {
       neuron_node *cur = que.front();
       que.pop();
-
+      for(neuron_node *next : node->adjacent_) {
+        if(used.count(next)) continue;
+        que.push(next);
+        used.insert(next);
+      }
     }
   }
   return last;
