@@ -51,7 +51,7 @@ void before_filter(binary_cube &c) {
   clear_frame(c);
   remove_isolation_point(c);
 }
-void set_label(point *p, const int label) {
+void set_label(voxel *p, const int label) {
   p->flag_ = true;
   p->label_ = label;
   for (auto next : p->adjacent_) {
@@ -65,20 +65,20 @@ void extractor::labeling() {
   before_filter(cube_);
   LOG(INFO) << "before_filter end";
   LOG(INFO) << "labeling start";
-  point_owner_.clear();
-  std::map<std::tuple<int, int, int>, point *> points;
+  voxel_owner_.clear();
+  std::map<std::tuple<int, int, int>, voxel *> voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
-          point_owner_.push_back(std::make_shared<point>(x, y, z));
-          points[std::tie(x, y, z)] = point_owner_.back().get();
+          voxel_owner_.push_back(std::make_shared<voxel>(x, y, z));
+          voxels[std::tie(x, y, z)] = voxel_owner_.back().get();
         }
       }
     }
   }
   LOG(INFO) << "connecting begin";
-  for (auto p : points) {
+  for (auto p : voxels) {
     // enumerate 26 neighbors
     for (int dx = -1; dx <= 1; ++dx) {
       for (int dy = -1; dy <= 1; ++dy) {
@@ -89,24 +89,24 @@ void extractor::labeling() {
           int y = std::get<1>(p.first) + dy;
           int z = std::get<2>(p.first) + dz;
           auto t = std::tuple<int, int, int>(x, y, z);
-          if (points.count(t)) {
-            p.second->add_connection(points[t]);
+          if (voxels.count(t)) {
+            p.second->add_connection(voxels[t]);
           }
         }
       }
     }
   }
   LOG(INFO) << "connecting end";
-  for (auto p : points)
+  for (auto p : voxels)
     p.second->flag_ = false;
   int label = 0;
-  for (auto p : points) {
+  for (auto p : voxels) {
     if (p.second->flag_ == false) {
       set_label(p.second, label++);
     }
   }
-  clusters_.assign(label, std::vector<point *>());
-  for (auto p : points) {
+  clusters_.assign(label, std::vector<voxel *>());
+  for (auto p : voxels) {
     clusters_[p.second->label_].push_back(p.second);
   }
   typedef decltype(clusters_)::value_type V;
@@ -114,14 +114,14 @@ void extractor::labeling() {
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
   LOG(INFO) << "labeling end";
 }
-point *find_single_seed(std::vector<point *> cluster) {
+voxel *find_single_seed(std::vector<voxel *> cluster) {
   CHECK(!cluster.empty());
-  point *last = cluster[0];
+  voxel *last = cluster[0];
   for (int i = 0; i < 2; ++i) {
     for (auto p : cluster)
       p->flag_ = false;
     last->flag_ = true;
-    std::queue<point *> que;
+    std::queue<voxel *> que;
     que.push(last);
     while (!que.empty()) {
       last = que.front();
@@ -139,17 +139,17 @@ point *find_single_seed(std::vector<point *> cluster) {
 /*
  * Returns
  * =======
- * ret: max_distance of Point from seed
+ * ret: max_distance of voxel from seed
  */
-void set_distance(std::vector<point *> cluster, point *seed) {
+void set_distance(std::vector<voxel *> cluster, voxel *seed) {
   for (auto p : cluster)
     p->flag_ = false;
-  std::queue<point *> que;
+  std::queue<voxel *> que;
   seed->flag_ = true;
   seed->label_ = 0;
   que.push(seed);
   while (!que.empty()) {
-    point *p = que.front();
+    voxel *p = que.front();
     que.pop();
     for (auto next : p->adjacent_) {
       if (!next->flag_) {
@@ -160,14 +160,14 @@ void set_distance(std::vector<point *> cluster, point *seed) {
     }
   }
 }
-std::vector<point *> extract_same_distance(point *seed) {
-  std::vector<point *> ret;
-  std::queue<point *> que;
+std::vector<voxel *> extract_same_distance(voxel *seed) {
+  std::vector<voxel *> ret;
+  std::queue<voxel *> que;
   seed->flag_ = true;
   ret.push_back(seed);
   que.push(seed);
   while (!que.empty()) {
-    point *p = que.front();
+    voxel *p = que.front();
     que.pop();
     for (auto next : p->adjacent_) {
       if (!next->flag_ && next->label_ == seed->label_) {

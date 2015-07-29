@@ -11,7 +11,7 @@ def build(bld):
         source=[
             'common/binary_cube.cpp',
             'common/neuron.cpp',
-            'common/point.cpp',
+            'common/voxel.cpp',
             'common/point_link.cpp',
             'loader/file_loader.cpp',
             'binarizer/binarizer.cpp',
