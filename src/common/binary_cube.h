@@ -11,4 +11,4 @@ public:
   std::vector<std::vector<bool>> &operator[](int index);
   // is const accessor necessary???
 };
-}
+} // namespace sigen

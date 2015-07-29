@@ -11,7 +11,7 @@ class extractor {
 public:
   binary_cube cube_;
   std::vector<std::vector<point *>> clusters_;
-  extractor(const binary_cube &cube);
+  explicit extractor(const binary_cube &cube);
   std::vector<std::shared_ptr<point_link>> extract();
 };
-}
+} // namespace sigen

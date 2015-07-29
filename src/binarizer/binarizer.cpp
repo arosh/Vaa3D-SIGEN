@@ -26,4 +26,4 @@ binary_cube binarizer::binarize(const image_sequence &is) {
   }
   return cube;
 }
-}
+} // namespace sigen

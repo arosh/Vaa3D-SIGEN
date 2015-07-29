@@ -10,4 +10,4 @@ public:
   point(int x, int y, int z);
   void add_connection(point *p);
 };
-}
+} // namespace sigen

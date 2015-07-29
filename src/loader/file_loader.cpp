@@ -1,5 +1,7 @@
 #include "./file_loader.h"
 #include <algorithm>
+#include <vector>
+#include <string>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
 
@@ -31,4 +33,4 @@ image_sequence file_loader::load(const std::string &dir_path) {
   }
   return ret;
 }
-};
+} // namespace sigen

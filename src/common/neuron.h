@@ -1,5 +1,6 @@
 #pragma once
 #include "./variant.h"
+#include <string>
 #include <vector>
 #include <map>
 #include <memory>
@@ -28,4 +29,4 @@ public:
   neuron_part *root_;
   std::vector<std::shared_ptr<neuron_part>> data_;
 };
-};
+} // namespace sigen

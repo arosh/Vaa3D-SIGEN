@@ -1,6 +1,7 @@
 #include "./swc_writer.h"
 #include "./fileutils.h"
 #include <glog/logging.h>
+#include <string>
 namespace sigen {
 void swc_writer::write_rec(std::ostream &os, const neuron_part *node) {
   int type_id = -1;
@@ -15,7 +16,7 @@ void swc_writer::write_rec(std::ostream &os, const neuron_part *node) {
     type_id = 3;
     break;
   }
-  CHECK(type_id != -1);
+  CHECK_NE(-1, type_id);
   int parent_id = (node->parent_ == nullptr ? -1 : node->parent_->id_);
   os << node->id_ << ' '
      << type_id << ' '
@@ -25,7 +26,7 @@ void swc_writer::write_rec(std::ostream &os, const neuron_part *node) {
      << node->radius_ << ' '
      << parent_id << std::endl;
   for (auto next : node->childs_) {
-    CHECK(next != node->parent_);
+    CHECK_NE(node->parent_, next);
     write_rec(os, next);
   }
 }
@@ -36,4 +37,4 @@ void swc_writer::write(const std::string &fname, const neuron &neuron__) {
   std::ofstream ofs(fileutils::add_extension(fname, ".swc").c_str());
   write(ofs, neuron__);
 }
-}
+} // namespace sigen

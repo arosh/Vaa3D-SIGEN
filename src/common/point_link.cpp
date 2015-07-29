@@ -1,7 +1,8 @@
 #include "./point_link.h"
 #include <cstdlib>
+#include <vector>
 namespace sigen {
-point_link::point_link(const std::vector<point *> points)
+point_link::point_link(const std::vector<point *> &points)
     : points_(points) {}
 bool point_link::check_neighbor(const point_link *pl) {
   for (const point *p : points_) {
@@ -17,4 +18,4 @@ bool point_link::check_neighbor(const point_link *pl) {
 void point_link::add_connection(point_link *pl) {
   adjacent_.push_back(pl);
 }
-};
+} // namespace sigen

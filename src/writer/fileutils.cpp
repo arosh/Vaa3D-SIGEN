@@ -1,4 +1,5 @@
 #include "./fileutils.h"
+#include <string>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
 namespace sigen {
@@ -12,5 +13,5 @@ std::string add_extension(const std::string &fname, const std::string &extension
     return path.string();
   return fname + ex;
 }
-};
-};
+} // namespace fileutils
+} // namespace sigen

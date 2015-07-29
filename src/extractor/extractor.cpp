@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include <queue>
+#include <vector>
 #include <glog/logging.h>
 
 #define REP(i, n) for (int i = 0; i < (int)(n); ++i)
@@ -197,4 +198,4 @@ std::vector<std::shared_ptr<point_link>> extractor::extract() {
   LOG(INFO) << "extract end";
   return ret;
 }
-}
+} // namespace sigen
