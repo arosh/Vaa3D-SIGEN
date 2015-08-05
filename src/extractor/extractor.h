@@ -6,6 +6,7 @@
 namespace sigen {
 class extractor {
   void labeling();
+  // groups_をshared_ptrにしたら消せるのでは？
   std::vector<std::shared_ptr<voxel>> voxel_owner_;
 
 public:

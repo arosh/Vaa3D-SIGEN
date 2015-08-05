@@ -10,15 +10,18 @@
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 static void clear_frame(binary_cube &c) {
-  REP(i, c.x_) REP(j, c.y_) {
+  REP(i, c.x_)
+  REP(j, c.y_) {
     c[i][j][0] = false;
     c[i][j][c.z_ - 1] = false;
   }
-  REP(j, c.y_) REP(k, c.z_) {
+  REP(j, c.y_)
+  REP(k, c.z_) {
     c[0][j][k] = false;
     c[c.x_ - 1][j][k] = false;
   }
-  REP(k, c.z_) REP(i, c.x_) {
+  REP(k, c.z_)
+  REP(i, c.x_) {
     c[i][0][k] = false;
     c[i][c.y_ - 1][k] = false;
   }

@@ -2,6 +2,10 @@
 #include <sstream>
 #include <string>
 #include <writer/swc_writer.h>
+void conn(std::shared_ptr<sigen::neuron_node> a, std::shared_ptr<sigen::neuron_node> b) {
+  a->add_connection(b.get());
+  b->add_connection(a.get());
+}
 TEST(swc_writer, write) {
   std::shared_ptr<sigen::neuron_node> a, b, c, d, e;
   a = std::make_shared<sigen::neuron_node>();
@@ -24,10 +28,10 @@ TEST(swc_writer, write) {
   e->id_ = 5;
   e->gx_ = 5.1; e->gy_ = 5.2; e->gz_ = 5.3; e->radius_ = 5.4;
   e->type_ = sigen::neuron_type::EDGE;
-  a->add_child(b.get());
-  b->add_child(c.get());
-  c->add_child(d.get());
-  b->add_child(e.get());
+  conn(a, b);
+  conn(b, c);
+  conn(c, d);
+  conn(b, e);
   sigen::neuron n;
   n.data_.push_back(a);
   n.data_.push_back(b);

@@ -14,6 +14,9 @@ public:
   std::vector<std::shared_ptr<cluster>> data_;
   double scale_xy_, scale_z_;
   explicit builder(const std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z);
-  neuron build();
+  std::vector<neuron> build();
+  static std::vector<neuron> convert_to_neuron(std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z);
+  static void compute_node_type(std::vector<neuron> &neu);
+  static void compute_id(std::vector<neuron> &neu);
 };
 } // namespace sigen

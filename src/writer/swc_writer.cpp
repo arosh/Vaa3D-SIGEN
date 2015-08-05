@@ -3,7 +3,7 @@
 #include <glog/logging.h>
 #include <string>
 namespace sigen {
-void swc_writer::write_rec(std::ostream &os, const neuron_node *node) {
+static void write_rec(std::ostream &os, const neuron_node *node, const int parent_id) {
   int type_id = -1;
   switch (node->type_) {
   case neuron_type::EDGE:
@@ -17,7 +17,6 @@ void swc_writer::write_rec(std::ostream &os, const neuron_node *node) {
     break;
   }
   CHECK_NE(-1, type_id);
-  int parent_id = (node->parent_ == nullptr ? -1 : node->parent_->id_);
   os << node->id_ << ' '
      << type_id << ' '
      << node->gx_ << ' '
@@ -26,16 +25,16 @@ void swc_writer::write_rec(std::ostream &os, const neuron_node *node) {
      << node->radius_ << ' '
      << parent_id << std::endl;
   for (auto next : node->adjacent_) {
-    if (next != node->parent_) {
-      write_rec(os, next);
+    if (next->id_ != parent_id) {
+      write_rec(os, next, node->id_);
     }
   }
 }
-void swc_writer::write(std::ostream &os, const neuron &neuron__) {
-  write_rec(os, neuron__.root_);
+void swc_writer::write(std::ostream &os, const neuron &neu) {
+  write_rec(os, neu.root_, -1);
 }
-void swc_writer::write(const std::string &fname, const neuron &neuron__) {
+void swc_writer::write(const std::string &fname, const neuron &neu) {
   std::ofstream ofs(fileutils::add_extension(fname, ".swc").c_str());
-  write(ofs, neuron__);
+  write_rec(ofs, neu.root_, -1);
 }
 } // namespace sigen
