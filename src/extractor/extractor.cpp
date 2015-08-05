@@ -112,12 +112,15 @@ void extractor::labeling() {
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
   LOG(INFO) << "labeling end";
 }
-static voxel *find_single_seed(std::vector<voxel *> group) {
+static void reset_flag(std::vector<voxel *> &voxels) {
+  for (auto p : voxels)
+    p->flag_ = false;
+}
+static voxel *find_single_seed(std::vector<voxel *> &group) {
   CHECK(!group.empty());
   voxel *last = group[0];
   for (int i = 0; i < 2; ++i) {
-    for (auto p : group)
-      p->flag_ = false;
+    reset_flag(group);
     last->flag_ = true;
     std::queue<voxel *> que;
     que.push(last);
@@ -134,14 +137,8 @@ static voxel *find_single_seed(std::vector<voxel *> group) {
   }
   return last;
 }
-/*
- * Returns
- * =======
- * ret: max_distance of voxel from seed
- */
-static void set_distance(std::vector<voxel *> group, voxel *seed) {
-  for (auto p : group)
-    p->flag_ = false;
+static void set_distance(std::vector<voxel *> &group, voxel *seed) {
+  reset_flag(group);
   std::queue<voxel *> que;
   seed->flag_ = true;
   seed->label_ = 0;
@@ -184,8 +181,7 @@ std::vector<std::shared_ptr<cluster>> extractor::extract() {
   for (auto &&group : groups_) {
     auto seed = find_single_seed(group);
     set_distance(group, seed);
-    for (auto p : group)
-      p->flag_ = false;
+    reset_flag(group);
     for (auto p : group) {
       if (p->flag_ == false) {
         auto &&pp = extract_same_distance(p);

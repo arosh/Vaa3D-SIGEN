@@ -21,7 +21,6 @@ def build(bld):
             'writer/fileutils.cpp',
         ],
         target='sigen')
-
     bld.program(
         source='main.cpp',
         target='main',
