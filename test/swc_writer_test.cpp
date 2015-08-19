@@ -33,10 +33,10 @@ TEST(swc_writer, write) {
   conn(c, d);
   conn(b, e);
   sigen::neuron n;
-  n.data_.push_back(a);
-  n.data_.push_back(b);
-  n.data_.push_back(c);
-  n.data_.push_back(d);
+  n.storage_.push_back(a);
+  n.storage_.push_back(b);
+  n.storage_.push_back(c);
+  n.storage_.push_back(d);
   n.root_ = a.get();
 
   std::stringstream ss;

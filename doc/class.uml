@@ -29,7 +29,7 @@ class voxel {
 class cluster {
   gx_, gy_, gz_: double
   radius_: double
-  voxels_: vector<voxel *>
+  points_: vector<point>
   adjacent_: vector<cluster *>
   +constructor(vector<voxel *>)
   +check_neighbor(cluster *): bool
@@ -53,6 +53,9 @@ class neuron {
   root_: neuron_node *
   data_: vector<shared_ptr<neuron_node>>
 }
+class "point<T>" {
+  x_, y_, z_: T
+}
 image_sequence <-- file_loader
 image_sequence <-- binarizer
 binary_cube <-- binarizer
@@ -63,4 +66,5 @@ voxel <-- cluster
 neuron_node <-- neuron
 neuron <-- builder
 cluster <-- builder
+"point<T>" <-- cluster
 @enduml

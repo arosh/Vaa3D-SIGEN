@@ -46,25 +46,25 @@ static neuron_node *find_edge(neuron_node *node) {
 }
 void builder::compute_gravity_point() {
   for (std::shared_ptr<cluster> cls : data_) {
-    CHECK(!cls->voxels_.empty());
+    CHECK(!cls->points_.empty());
     double sx = 0, sy = 0, sz = 0;
-    for (voxel *v : cls->voxels_) {
-      sx += v->x_;
-      sy += v->y_;
-      sz += v->z_;
+    for (const point<int> &p : cls->points_) {
+      sx += p.x_;
+      sy += p.y_;
+      sz += p.z_;
     }
-    cls->gx_ = sx / cls->voxels_.size();
-    cls->gy_ = sy / cls->voxels_.size();
-    cls->gz_ = sz / cls->voxels_.size();
+    cls->gx_ = sx / cls->points_.size();
+    cls->gy_ = sy / cls->points_.size();
+    cls->gz_ = sz / cls->points_.size();
   }
 }
 void builder::compute_radius() {
   for (std::shared_ptr<cluster> cls : data_) {
     double mdx = 0, mdy = 0, mdz = 0;
-    for (voxel *v : cls->voxels_) {
-      mdx = std::max(mdx, scale_xy_ * std::abs(v->x_ - cls->gx_));
-      mdy = std::max(mdy, scale_xy_ * std::abs(v->y_ - cls->gy_));
-      mdz = std::max(mdz, scale_z_ * std::abs(v->z_ - cls->gz_));
+    for (const point<int> &p : cls->points_) {
+      mdx = std::max(mdx, scale_xy_ * std::abs(p.x_ - cls->gx_));
+      mdy = std::max(mdy, scale_xy_ * std::abs(p.y_ - cls->gy_));
+      mdz = std::max(mdz, scale_z_ * std::abs(p.z_ - cls->gz_));
     }
     cls->radius_ = std::sqrt(mdx * mdx + mdy * mdy + mdz * mdz);
   }

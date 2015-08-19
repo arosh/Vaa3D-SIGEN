@@ -2,14 +2,17 @@
 #include <cstdlib>
 #include <vector>
 namespace sigen {
-cluster::cluster(const std::vector<voxel *> &voxels)
-    : voxels_(voxels) {}
+cluster::cluster(const std::vector<voxel *> &voxels) {
+  for (const voxel *p : voxels) {
+    points_.emplace_back(p->x_, p->y_, p->z_);
+  }
+}
 bool cluster::check_neighbor(const cluster *other) {
-  for (const voxel *p : voxels_) {
-    for (const voxel *q : other->voxels_) {
-      int dx = std::abs(p->x_ - q->x_);
-      int dy = std::abs(p->y_ - q->y_);
-      int dz = std::abs(p->z_ - q->z_);
+  for (const point<int> &p : points_) {
+    for (const point<int> &q : other->points_) {
+      int dx = std::abs(p.x_ - q.x_);
+      int dy = std::abs(p.y_ - q.y_);
+      int dz = std::abs(p.z_ - q.z_);
       if (dx <= 1 && dy <= 1 && dz <= 1)
         return true;
     }

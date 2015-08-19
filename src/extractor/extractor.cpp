@@ -187,8 +187,7 @@ std::vector<std::shared_ptr<cluster>> extractor::extract() {
     reset_flag(group);
     for (auto p : group) {
       if (p->flag_ == false) {
-        auto &&pp = extract_same_distance(p);
-        ret.push_back(std::make_shared<cluster>(std::move(pp)));
+        ret.push_back(std::make_shared<cluster>(extract_same_distance(p)));
       }
     }
   }
