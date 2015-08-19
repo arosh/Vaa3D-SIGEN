@@ -27,6 +27,6 @@ class neuron {
 public:
   bool is_finalized_ = false;
   neuron_node *root_;
-  std::vector<std::shared_ptr<neuron_node>> data_; // <- storage??
+  std::vector<std::shared_ptr<neuron_node>> storage_; // <- storage??
 };
 } // namespace sigen

@@ -98,7 +98,7 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
     neuron n;
     n.root_ = find_edge(node.get());
     std::queue<neuron_node *> que;
-    n.data_.push_back(node);
+    n.storage_.push_back(node);
     used.insert(node.get());
     que.push(node.get());
     while (!que.empty()) {
@@ -109,7 +109,7 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
           continue;
         for (std::shared_ptr<neuron_node> ptr : neuron_nodes) {
           if (ptr.get() == next)
-            n.data_.push_back(ptr);
+            n.storage_.push_back(ptr);
         }
         used.insert(next);
         que.push(next);
