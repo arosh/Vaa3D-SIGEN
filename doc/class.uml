@@ -1,0 +1,66 @@
+@startuml class.png
+class image_sequence {
+  value: vector<Mat>
+}
+class file_loader {
+  +load(dir_path: string): image_sequence
+}
+class binary_cube {
+  value: bool[,,]
+}
+class binarizer {
+  +binarize(image_sequence): binary_cube
+}
+class extractor {
+  cube_: binary_cube
+  groups_: vector<vector<voxel *>>
+  voxel_owner_: vector<shared_ptr<voxel>>
+  +constructor(binary_cube)
+  +extract(): vector<shared_ptr<cluster>>
+}
+class voxel {
+  x_, y_, z_: int
+  flag_: bool
+  label_: int
+  adjacent_: vector<voxel *>
+  +constructor(x: int, y: int, z: int)
+  +add_connection(voxel *): void
+}
+class cluster {
+  gx_, gy_, gz_: double
+  radius_: double
+  voxels_: vector<voxel *>
+  adjacent_: vector<cluster *>
+  +constructor(vector<voxel *>)
+  +check_neighbor(cluster *): bool
+  +add_connection(cluster *): void
+}
+class builder {
+  +constructor(data: vector<shared_ptr<cluster>>, scale_xy: double, scale_z: double)
+  +build(): vector<neuron>
+}
+class neuron_node {
+  id_: int
+  gx_, gy_, gz_: double
+  radius_: double
+  type_: neuron_type
+  adjacent_: vector<neuron_node *>
+  values_: map<string, variant>
+  + add_connection(neuron_node *): void
+}
+class neuron {
+  is_finalized_: bool
+  root_: neuron_node *
+  data_: vector<shared_ptr<neuron_node>>
+}
+image_sequence <-- file_loader
+image_sequence <-- binarizer
+binary_cube <-- binarizer
+binary_cube <-- extractor
+voxel <-- extractor
+cluster <-- extractor
+voxel <-- cluster
+neuron_node <-- neuron
+neuron <-- builder
+cluster <-- builder
+@enduml

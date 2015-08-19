@@ -25,7 +25,7 @@ public:
 };
 class neuron {
 public:
-  bool is_finalized = false;
+  bool is_finalized_ = false;
   neuron_node *root_;
   std::vector<std::shared_ptr<neuron_node>> data_; // <- storage??
 };
