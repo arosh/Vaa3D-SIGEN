@@ -21,7 +21,7 @@ image_sequence file_loader::load(const std::string &dir_path) {
   std::sort(fnames.begin(), fnames.end());
   image_sequence ret;
   for (auto &&entry : fnames) {
-    LOG(INFO) << entry;
+    // LOG(INFO) << entry;
     cv::Mat im = cv::imread(entry, 0 /* grayscale */);
     // ignore file if opencv cannot read it
     // (it is not image file, e.g. .txt, .DS_Store)

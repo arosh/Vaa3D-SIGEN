@@ -41,9 +41,11 @@ int main(int argc, char *argv[]) {
   sigen::extractor ext(cube);
   std::vector<std::shared_ptr<sigen::cluster>> clusters = ext.extract();
   LOG(INFO) << "extract (done)";
+  LOG(INFO) << "clusters.size() = " << clusters.size();
   sigen::builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
   std::vector<sigen::neuron> ns = builder.build();
   LOG(INFO) << "build (done)";
+  LOG(INFO) << "ns.size() = " << ns.size();
   sigen::swc_writer writer;
   for(int i = 0; i < (int)ns.size(); ++i) {
     std::string filename = "sample_output/" + boost::lexical_cast<std::string>(i) + ".swc";

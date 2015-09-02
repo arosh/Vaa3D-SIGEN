@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 #include <queue>
+#include <stack>
 #include <set>
 #include <glog/logging.h>
 namespace sigen {
@@ -73,6 +74,7 @@ static bool check_adjacent(const cluster *a, const cluster *b) {
   return std::find(a->adjacent_.begin(), a->adjacent_.end(), b) != a->adjacent_.end();
 }
 std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z) {
+  LOG(INFO) << "data.size() = " << data.size();
   std::vector<std::shared_ptr<neuron_node>> neuron_nodes;
   std::vector<std::pair<int, int>> conn;
   for (int i = 0; i < (int)data.size(); ++i) {
@@ -99,24 +101,24 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
   for (std::shared_ptr<neuron_node> node : neuron_nodes) {
     if (used.count(node.get()))
       continue;
-    neuron n;
+    neurons.emplace_back();
+    neuron &n = neurons.back();
     n.root_ = find_edge(node.get());
-    std::queue<neuron_node *> que;
     n.storage_.push_back(node);
+    std::stack<neuron_node *> stk;
+    stk.push(node.get());
     used.insert(node.get());
-    que.push(node.get());
-    while (!que.empty()) {
-      neuron_node *cur = que.front();
-      que.pop();
+    while (!stk.empty()) {
+      neuron_node *cur = stk.top();
+      stk.pop();
       for (neuron_node *next : cur->adjacent_) {
-        if (used.count(next))
-          continue;
+        CHECK(!used.count(next));
         for (std::shared_ptr<neuron_node> ptr : neuron_nodes) {
           if (ptr.get() == next)
             n.storage_.push_back(ptr);
         }
+        stk.push(next);
         used.insert(next);
-        que.push(next);
       }
     }
   }
@@ -125,18 +127,20 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
 static void compute_id_inner(neuron_node *cur, neuron_node *prev, int &id) {
   cur->id_ = id++;
   for (neuron_node *next : cur->adjacent_) {
-    if (next == prev)
-      continue;
-    compute_id_inner(next, cur, id);
+    if(next != prev) {
+      compute_id_inner(next, cur, id);
+    }
   }
 }
-void builder::compute_id(std::vector<neuron> &neu) {
+void builder::compute_id(std::vector<neuron> &ns) {
+  LOG(INFO) << __PRETTY_FUNCTION__;
   int id = 1;
-  for (int i = 0; i < (int)neu.size(); ++i) {
-    compute_id_inner(neu[i].root_, nullptr, id);
+  for (int i = 0; i < (int)ns.size(); ++i) {
+    compute_id_inner(ns[i].root_, nullptr, id);
   }
 }
 static void compute_node_type_inner(neuron_node *cur, neuron_node *prev) {
+  LOG(INFO) << __PRETTY_FUNCTION__;
   neuron_type type;
   if (cur->adjacent_.size() >= 3)
     type = neuron_type::BRANCH;
@@ -146,9 +150,9 @@ static void compute_node_type_inner(neuron_node *cur, neuron_node *prev) {
     type = neuron_type::EDGE;
   cur->type_ = type;
   for (neuron_node *next : cur->adjacent_) {
-    if (next == prev)
-      continue;
-    compute_node_type_inner(next, cur);
+    if (next != prev) {
+      compute_node_type_inner(next, cur);
+    }
   }
 }
 void builder::compute_node_type(std::vector<neuron> &neu) {
@@ -161,6 +165,7 @@ std::vector<neuron> builder::build() {
   compute_gravity_point();
   compute_radius();
   std::vector<neuron> neu = convert_to_neuron(data_, scale_xy_, scale_z_);
+  LOG(INFO) << "neu.size() = " << neu.size();
   compute_id(neu);
   compute_node_type(neu);
   return neu;
