@@ -1,8 +1,11 @@
 #include <iostream>
 #include <glog/logging.h>
+#include <boost/lexical_cast.hpp>
 #include "./loader/file_loader.h"
 #include "./binarizer/binarizer.h"
 #include "./extractor/extractor.h"
+#include "./builder/builder.h"
+#include "./writer/swc_writer.h"
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
@@ -13,26 +16,38 @@
 
 void init_glog(const char *program_name) {
   // https://google-glog.googlecode.com/svn/trunk/doc/glog.html
-  FLAGS_log_dir = "log";
+  // FLAGS_log_dir = "log";
+  FLAGS_logtostderr = true;
   google::InitGoogleLogging(program_name);
   google::InstallFailureSignalHandler(); // print stack trace if program fault
 }
 
 int main(int argc, char *argv[]) {
   init_glog(argv[0]);
-  // https://github.com/tanakh/cmdline
+
   cmdline::parser a;
+  a.add<std::string>("input", 'i', "input image directory");
+  a.add<std::string>("output", 'o', "output filename");
+  a.add<double>("scale-xy", '\0', "", false, 1.0);
+  a.add<double>("scale-z", '\0', "", false, 1.0);
   a.parse_check(argc, argv);
 
-  const char *path = "/Users/arosh/ikenolab/sigen-data/ToIizuka/BMP";
   sigen::file_loader loader;
-  sigen::image_sequence is = loader.load(path);
-  LOG(INFO) << "len(image_sequence) = " << is.size();
+  sigen::image_sequence is = loader.load(a.get<std::string>("input"));
+  LOG(INFO) << "load (done)";
   sigen::binarizer bin;
   sigen::binary_cube cube = bin.binarize(is);
-  LOG(INFO) << "x = " << cube.x_;
-  LOG(INFO) << "y = " << cube.y_;
-  LOG(INFO) << "z = " << cube.z_;
+  LOG(INFO) << "binarize (done)";
   sigen::extractor ext(cube);
-  ext.extract();
+  std::vector<std::shared_ptr<sigen::cluster>> clusters = ext.extract();
+  LOG(INFO) << "extract (done)";
+  sigen::builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
+  std::vector<sigen::neuron> ns = builder.build();
+  LOG(INFO) << "build (done)";
+  sigen::swc_writer writer;
+  for(int i = 0; i < (int)ns.size(); ++i) {
+    std::string filename = "sample_output/" + boost::lexical_cast<std::string>(i) + ".swc";
+    writer.write(filename, ns[i]);
+  }
+  LOG(INFO) << "write (done)";
 }

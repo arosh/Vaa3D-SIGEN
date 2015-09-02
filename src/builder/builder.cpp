@@ -69,6 +69,9 @@ void builder::compute_radius() {
     cls->radius_ = std::sqrt(mdx * mdx + mdy * mdy + mdz * mdz);
   }
 }
+static bool check_adjacent(const cluster *a, const cluster *b) {
+  return std::find(a->adjacent_.begin(), a->adjacent_.end(), b) != a->adjacent_.end();
+}
 std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z) {
   std::vector<std::shared_ptr<neuron_node>> neuron_nodes;
   std::vector<std::pair<int, int>> conn;
@@ -80,7 +83,7 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
     n->radius_ = data[i]->radius_;
     neuron_nodes.push_back(n);
     for (int j = i + 1; j < (int)data.size(); ++j) {
-      if (std::find(data[i]->adjacent_.begin(), data[i]->adjacent_.end(), data[j].get()) != data[i]->adjacent_.end()) {
+      if (check_adjacent(data[i].get(), data[j].get())) {
         conn.emplace_back(i, j);
       }
     }
@@ -90,6 +93,7 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
     neuron_nodes[a]->add_connection(neuron_nodes[b].get());
     neuron_nodes[b]->add_connection(neuron_nodes[a].get());
   }
+  // split into some neurons
   std::set<neuron_node *> used;
   std::vector<neuron> neurons;
   for (std::shared_ptr<neuron_node> node : neuron_nodes) {
