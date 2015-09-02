@@ -31,7 +31,7 @@ class cluster {
   radius_: double
   points_: vector<point>
   adjacent_: vector<cluster *>
-  +constructor(vector<voxel *>)
+  +constructor(vector<point<int>>)
   +check_neighbor(cluster *): bool
   +add_connection(cluster *): void
 }
@@ -62,7 +62,6 @@ binary_cube <-- binarizer
 binary_cube <-- extractor
 voxel <-- extractor
 cluster <-- extractor
-voxel <-- cluster
 neuron_node <-- neuron
 neuron <-- builder
 cluster <-- builder

@@ -9,7 +9,7 @@ binary_cube binarizer::binarize(const image_sequence &is) {
   int height = is[0].rows;
   binary_cube cube(width, height, is.size());
   for (int z = 0; z < (int)is.size(); ++z) {
-    auto &&image = is[z];
+    const auto &image = is[z];
     CHECK_EQ(2, image.dims);
     CHECK_EQ(1, image.channels());
     CHECK_EQ(width, image.cols);

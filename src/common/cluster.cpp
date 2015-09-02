@@ -2,11 +2,7 @@
 #include <cstdlib>
 #include <vector>
 namespace sigen {
-cluster::cluster(const std::vector<voxel *> &voxels) {
-  for (const voxel *p : voxels) {
-    points_.emplace_back(p->x_, p->y_, p->z_);
-  }
-}
+cluster::cluster(const std::vector<point<int>> &ps) : points_(ps) {}
 bool cluster::check_neighbor(const cluster *other) {
   for (const point<int> &p : points_) {
     for (const point<int> &q : other->points_) {

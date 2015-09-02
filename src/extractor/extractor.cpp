@@ -1,6 +1,6 @@
 #include "./extractor.h"
+#include "../common/point.h"
 #include <map>
-#include <tuple>
 #include <algorithm>
 #include <iterator>
 #include <queue>
@@ -67,13 +67,13 @@ void extractor::labeling() {
   LOG(INFO) << "before_filter end";
   LOG(INFO) << "labeling start";
   voxel_owner_.clear();
-  std::map<std::tuple<int, int, int>, voxel *> voxels;
+  std::map<point<int>, voxel *> voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
           voxel_owner_.push_back(std::make_shared<voxel>(x, y, z));
-          voxels[std::tie(x, y, z)] = voxel_owner_.back().get();
+          voxels[point<int>(x, y, z)] = voxel_owner_.back().get();
         }
       }
     }
@@ -86,10 +86,10 @@ void extractor::labeling() {
         for (int dz = -1; dz <= 1; ++dz) {
           if (dx == 0 && dy == 0 && dz == 0)
             continue;
-          int x = std::get<0>(p.first) + dx;
-          int y = std::get<1>(p.first) + dy;
-          int z = std::get<2>(p.first) + dz;
-          auto t = std::tuple<int, int, int>(x, y, z);
+          int x = p.first.x_ + dx;
+          int y = p.first.y_ + dy;
+          int z = p.first.z_ + dz;
+          point<int> t(x, y, z);
           if (voxels.count(t)) {
             p.second->add_connection(voxels[t]);
           }
@@ -177,6 +177,13 @@ static std::vector<voxel *> extract_same_distance(voxel *seed) {
   }
   return ret;
 }
+static std::vector<point<int>> voxels_to_points(const std::vector<voxel *> vs) {
+  std::vector<point<int>> ps;
+  for (const voxel *v : vs) {
+    ps.emplace_back(v->x_, v->y_, v->z_);
+  }
+  return ps;
+}
 std::vector<std::shared_ptr<cluster>> extractor::extract() {
   labeling();
   LOG(INFO) << "extract start";
@@ -187,7 +194,9 @@ std::vector<std::shared_ptr<cluster>> extractor::extract() {
     reset_flag(group);
     for (auto p : group) {
       if (p->flag_ == false) {
-        ret.push_back(std::make_shared<cluster>(extract_same_distance(p)));
+        std::vector<voxel *> vs = extract_same_distance(p);
+        std::vector<point<int>> ps = voxels_to_points(vs);
+        ret.push_back(std::make_shared<cluster>(ps));
       }
     }
   }
