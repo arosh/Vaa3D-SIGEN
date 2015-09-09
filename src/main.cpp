@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
   LOG(INFO) << "build (done)";
   LOG(INFO) << "ns.size() = " << ns.size();
   sigen::swc_writer writer;
-  for(int i = 0; i < (int)ns.size(); ++i) {
+  for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename = "sample_output/" + boost::lexical_cast<std::string>(i) + ".swc";
     writer.write(filename, ns[i]);
   }

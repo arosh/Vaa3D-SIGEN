@@ -61,8 +61,8 @@ TEST(extractor, same_distance) {
     // point(1,2,1)
     // point(2,2,1)
     // point(2,1,1)
-    //for(auto p : c->points_) {
-    //  cout << "point(" << p.x_ << ',' << p.y_ << "," << p.z_ << ")" << endl;
-    //}
+    // for(auto p : c->points_) {
+    //   cout << "point(" << p.x_ << ',' << p.y_ << "," << p.z_ << ")" << endl;
+    // }
   }
 }

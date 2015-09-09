@@ -8,7 +8,10 @@
 #include <set>
 #include <glog/logging.h>
 namespace sigen {
-builder::builder(const std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z)
+builder::builder(
+    const std::vector<std::shared_ptr<cluster>> &data,
+    const double scale_xy,
+    const double scale_z)
     : data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
 void builder::connect_neighbor() {
   for (int i = 0; i < (int)data_.size(); ++i) {
@@ -71,12 +74,16 @@ void builder::compute_radius() {
   }
 }
 static bool check_adjacent(const cluster *a, const cluster *b) {
-  return std::find(a->adjacent_.begin(), a->adjacent_.end(), b) != a->adjacent_.end();
+  auto iter = std::find(a->adjacent_.begin(), a->adjacent_.end(), b);
+  return iter != a->adjacent_.end();
 }
-std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<cluster>> &data, const double scale_xy, const double scale_z) {
-  LOG(INFO) << "data.size() = " << data.size();
+std::vector<std::shared_ptr<neuron_node>>
+builder::convert_to_neuron_node(
+    std::vector<std::shared_ptr<cluster>> &data,
+    const double scale_xy,
+    const double scale_z) {
   std::vector<std::shared_ptr<neuron_node>> neuron_nodes;
-  std::vector<std::pair<int, int>> conn;
+  std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < (int)data.size(); ++i) {
     auto n = std::make_shared<neuron_node>();
     n->gx_ = data[i]->gx_ * scale_xy;
@@ -86,15 +93,24 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
     neuron_nodes.push_back(n);
     for (int j = i + 1; j < (int)data.size(); ++j) {
       if (check_adjacent(data[i].get(), data[j].get())) {
-        conn.emplace_back(i, j);
+        edges.emplace_back(i, j);
       }
     }
   }
-  for (std::pair<int, int> item : conn) {
+  for (std::pair<int, int> item : edges) {
     int a = item.first, b = item.second;
     neuron_nodes[a]->add_connection(neuron_nodes[b].get());
     neuron_nodes[b]->add_connection(neuron_nodes[a].get());
   }
+  return neuron_nodes;
+}
+std::vector<neuron> builder::convert_to_neuron(
+    std::vector<std::shared_ptr<cluster>> &data,
+    const double scale_xy,
+    const double scale_z) {
+  LOG(INFO) << "data.size() = " << data.size();
+  std::vector<std::shared_ptr<neuron_node>> neuron_nodes
+    = convert_to_neuron_node(data, scale_xy, scale_z);
   // split into some neurons
   std::set<neuron_node *> used;
   std::vector<neuron> neurons;
@@ -127,7 +143,7 @@ std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<clust
 static void compute_id_inner(neuron_node *cur, neuron_node *prev, int &id) {
   cur->id_ = id++;
   for (neuron_node *next : cur->adjacent_) {
-    if(next != prev) {
+    if (next != prev) {
       compute_id_inner(next, cur, id);
     }
   }

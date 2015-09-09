@@ -1,4 +1,5 @@
 #include "./voxel.h"
+#include <algorithm>
 #include <glog/logging.h>
 namespace sigen {
 voxel::voxel(int x, int y, int z) : x_(x), y_(y), z_(z), flag_(false), label_(-1) {}
