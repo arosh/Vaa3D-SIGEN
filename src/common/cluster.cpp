@@ -15,7 +15,5 @@ bool cluster::check_neighbor(const cluster *other) {
   }
   return false;
 }
-void cluster::add_connection(cluster *other) {
-  adjacent_.push_back(other);
-}
+void cluster::add_connection(cluster *other) { adjacent_.push_back(other); }
 } // namespace sigen

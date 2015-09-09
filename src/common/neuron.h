@@ -5,11 +5,7 @@
 #include <map>
 #include <memory>
 namespace sigen {
-enum class neuron_type {
-  EDGE,
-  BRANCH,
-  CONNECT
-};
+enum class neuron_type { EDGE, BRANCH, CONNECT };
 class neuron_node {
 public:
   // 1-based

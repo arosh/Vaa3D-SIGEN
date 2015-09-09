@@ -8,10 +8,8 @@
 #include <set>
 #include <glog/logging.h>
 namespace sigen {
-builder::builder(
-    const std::vector<std::shared_ptr<cluster>> &data,
-    const double scale_xy,
-    const double scale_z)
+builder::builder(const std::vector<std::shared_ptr<cluster>> &data, const double scale_xy,
+                 const double scale_z)
     : data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
 void builder::connect_neighbor() {
   for (int i = 0; i < (int)data_.size(); ++i) {
@@ -24,18 +22,17 @@ void builder::connect_neighbor() {
   }
 }
 void cut_loops_inner(cluster *cur, cluster *prev, std::set<cluster *> &used) {
-  for(cluster *next : cur->adjacent_) {
-    if(used.count(next)) {
+  for (cluster *next : cur->adjacent_) {
+    if (used.count(next)) {
       // find loop
-      if(next != prev) {
+      if (next != prev) {
         std::vector<cluster *>::iterator iter;
         iter = std::remove(cur->adjacent_.begin(), cur->adjacent_.end(), next);
         cur->adjacent_.erase(iter, cur->adjacent_.end());
         iter = std::remove(next->adjacent_.begin(), next->adjacent_.end(), cur);
         next->adjacent_.erase(iter, next->adjacent_.end());
       }
-    }
-    else {
+    } else {
       used.insert(next);
       cut_loops_inner(next, cur, used);
     }
@@ -43,8 +40,9 @@ void cut_loops_inner(cluster *cur, cluster *prev, std::set<cluster *> &used) {
 }
 void builder::cut_loops() {
   std::set<cluster *> used;
-  for(std::shared_ptr<cluster> cls : data_) {
-    if(used.count(cls.get())) continue;
+  for (std::shared_ptr<cluster> cls : data_) {
+    if (used.count(cls.get()))
+      continue;
     used.insert(cls.get());
     cut_loops_inner(cls.get(), nullptr, used);
   }
@@ -104,10 +102,8 @@ static bool check_adjacent(const cluster *a, const cluster *b) {
   return iter != a->adjacent_.end();
 }
 std::vector<std::shared_ptr<neuron_node>>
-builder::convert_to_neuron_node(
-    std::vector<std::shared_ptr<cluster>> &data,
-    const double scale_xy,
-    const double scale_z) {
+builder::convert_to_neuron_node(std::vector<std::shared_ptr<cluster>> &data, const double scale_xy,
+                                const double scale_z) {
   std::vector<std::shared_ptr<neuron_node>> neuron_nodes;
   std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < (int)data.size(); ++i) {
@@ -130,12 +126,10 @@ builder::convert_to_neuron_node(
   }
   return neuron_nodes;
 }
-std::vector<neuron> builder::convert_to_neuron(
-    std::vector<std::shared_ptr<cluster>> &data,
-    const double scale_xy,
-    const double scale_z) {
-  std::vector<std::shared_ptr<neuron_node>> neuron_nodes
-    = convert_to_neuron_node(data, scale_xy, scale_z);
+std::vector<neuron> builder::convert_to_neuron(std::vector<std::shared_ptr<cluster>> &data,
+                                               const double scale_xy, const double scale_z) {
+  std::vector<std::shared_ptr<neuron_node>> neuron_nodes =
+      convert_to_neuron_node(data, scale_xy, scale_z);
   // split into some neurons
   std::set<neuron_node *> used;
   std::vector<neuron> neurons;
@@ -153,7 +147,7 @@ std::vector<neuron> builder::convert_to_neuron(
       neuron_node *cur = stk.top();
       stk.pop();
       for (neuron_node *next : cur->adjacent_) {
-        if(!used.count(next)) {
+        if (!used.count(next)) {
           for (std::shared_ptr<neuron_node> inst : neuron_nodes) {
             if (inst.get() == next)
               n.storage_.push_back(inst);
@@ -175,7 +169,6 @@ static void compute_id_inner(neuron_node *cur, neuron_node *prev, int &id) {
   }
 }
 void builder::compute_id(std::vector<neuron> &ns) {
-  LOG(INFO) << __PRETTY_FUNCTION__;
   int id = 1;
   for (int i = 0; i < (int)ns.size(); ++i) {
     compute_id_inner(ns[i].root_, nullptr, id);
@@ -207,7 +200,6 @@ std::vector<neuron> builder::build() {
   compute_gravity_point();
   compute_radius();
   std::vector<neuron> neu = convert_to_neuron(data_, scale_xy_, scale_z_);
-  LOG(INFO) << __LINE__;
   compute_id(neu);
   compute_node_type(neu);
   return neu;

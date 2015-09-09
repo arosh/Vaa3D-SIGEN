@@ -37,4 +37,3 @@ $ ./waf
 ## TODO
 
 * extractor.group\_いらなくね？ もしくはclusterじゃなくてgroupで返すべきじゃね？
-* `CHECK(!used.count(next));`で落ちるのを直す
