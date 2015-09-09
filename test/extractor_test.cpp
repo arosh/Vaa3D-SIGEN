@@ -41,9 +41,18 @@ TEST(extractor, labeling_with_loops) {
   cube[1][2][1] = 1;                    cube[3][2][1] = 1;
                      cube[2][3][1] = 1;
   extractor ext(cube);
-  ext.extract();
+  auto ret = ext.extract();
   EXPECT_EQ(1, (int)ext.groups_.size());
   EXPECT_EQ(4, (int)ext.groups_[0].size());
+  for(auto c : ret) {
+    // point(1,2,1)
+    // point(2,1,1)
+    // point(2,3,1)
+    // point(3,2,1)
+    for(auto p : c->points_) {
+    //   cout << "point(" << p.x_ << ',' << p.y_ << "," << p.z_ << ")" << endl;
+    }
+  }
 }
 TEST(extractor, same_distance) {
   binary_cube cube(4, 4, 3);
@@ -61,8 +70,8 @@ TEST(extractor, same_distance) {
     // point(1,2,1)
     // point(2,2,1)
     // point(2,1,1)
-    // for(auto p : c->points_) {
+    for(auto p : c->points_) {
     //   cout << "point(" << p.x_ << ',' << p.y_ << "," << p.z_ << ")" << endl;
-    // }
+    }
   }
 }

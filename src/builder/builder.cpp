@@ -23,6 +23,32 @@ void builder::connect_neighbor() {
     }
   }
 }
+void cut_loops_inner(cluster *cur, cluster *prev, std::set<cluster *> &used) {
+  for(cluster *next : cur->adjacent_) {
+    if(used.count(next)) {
+      // find loop
+      if(next != prev) {
+        std::vector<cluster *>::iterator iter;
+        iter = std::remove(cur->adjacent_.begin(), cur->adjacent_.end(), next);
+        cur->adjacent_.erase(iter, cur->adjacent_.end());
+        iter = std::remove(next->adjacent_.begin(), next->adjacent_.end(), cur);
+        next->adjacent_.erase(iter, next->adjacent_.end());
+      }
+    }
+    else {
+      used.insert(next);
+      cut_loops_inner(next, cur, used);
+    }
+  }
+}
+void builder::cut_loops() {
+  std::set<cluster *> used;
+  for(std::shared_ptr<cluster> cls : data_) {
+    if(used.count(cls.get())) continue;
+    used.insert(cls.get());
+    cut_loops_inner(cls.get(), nullptr, used);
+  }
+}
 void builder::connect_interpolate(double dt) {
   // 重くなりそうなので，重心の距離で
   // pixel resolution???
@@ -108,7 +134,6 @@ std::vector<neuron> builder::convert_to_neuron(
     std::vector<std::shared_ptr<cluster>> &data,
     const double scale_xy,
     const double scale_z) {
-  LOG(INFO) << "data.size() = " << data.size();
   std::vector<std::shared_ptr<neuron_node>> neuron_nodes
     = convert_to_neuron_node(data, scale_xy, scale_z);
   // split into some neurons
@@ -128,13 +153,14 @@ std::vector<neuron> builder::convert_to_neuron(
       neuron_node *cur = stk.top();
       stk.pop();
       for (neuron_node *next : cur->adjacent_) {
-        CHECK(!used.count(next));
-        for (std::shared_ptr<neuron_node> ptr : neuron_nodes) {
-          if (ptr.get() == next)
-            n.storage_.push_back(ptr);
+        if(!used.count(next)) {
+          for (std::shared_ptr<neuron_node> inst : neuron_nodes) {
+            if (inst.get() == next)
+              n.storage_.push_back(inst);
+          }
+          stk.push(next);
+          used.insert(next);
         }
-        stk.push(next);
-        used.insert(next);
       }
     }
   }
@@ -156,7 +182,6 @@ void builder::compute_id(std::vector<neuron> &ns) {
   }
 }
 static void compute_node_type_inner(neuron_node *cur, neuron_node *prev) {
-  LOG(INFO) << __PRETTY_FUNCTION__;
   neuron_type type;
   if (cur->adjacent_.size() >= 3)
     type = neuron_type::BRANCH;
@@ -178,10 +203,11 @@ void builder::compute_node_type(std::vector<neuron> &neu) {
 }
 std::vector<neuron> builder::build() {
   connect_neighbor();
+  cut_loops();
   compute_gravity_point();
   compute_radius();
   std::vector<neuron> neu = convert_to_neuron(data_, scale_xy_, scale_z_);
-  LOG(INFO) << "neu.size() = " << neu.size();
+  LOG(INFO) << __LINE__;
   compute_id(neu);
   compute_node_type(neu);
   return neu;

@@ -24,6 +24,7 @@ public:
   static void compute_node_type(std::vector<neuron> &neu);
   static void compute_id(std::vector<neuron> &neu);
   void connect_neighbor();
+  void cut_loops();
   void connect_interpolate(double dt);
   void compute_gravity_point();
   void compute_radius();
