@@ -27,6 +27,7 @@ def configure(conf):
                 conf.env.append_unique('CXXFLAGS', sanitize)
                 conf.env.append_unique('LINKFLAGS', sanitize)
     else:
+        conf.define('NDEBUG', 1)
         conf.env.append_unique('CXXFLAGS', '-O2')
 
     # libraries

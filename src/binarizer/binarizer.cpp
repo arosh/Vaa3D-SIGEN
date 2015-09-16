@@ -16,7 +16,8 @@ binary_cube binarizer::binarize(const image_sequence &is) {
     CHECK_EQ(height, image.rows);
     cv::Mat bin;
     // newval = maxval if val > thresh else 0
-    cv::threshold(image, bin, /* thresh = */ 127, /* maxval = */ 255, cv::THRESH_BINARY);
+    cv::threshold(image, bin, /* thresh = */ 127, /* maxval = */ 255,
+                  cv::THRESH_BINARY);
     for (int x = 0; x < width; ++x) {
       for (int y = 0; y < height; ++y) {
         cube[x][y][z] = bin.at<uint8_t>(y, x);

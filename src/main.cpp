@@ -43,12 +43,14 @@ int main(int argc, char *argv[]) {
   std::vector<std::shared_ptr<sigen::cluster>> clusters = ext.extract();
   LOG(INFO) << "extract (done)";
   cube.clear();
-  sigen::builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
+  sigen::builder builder(clusters, a.get<double>("scale-xy"),
+                         a.get<double>("scale-z"));
   std::vector<sigen::neuron> ns = builder.build();
   LOG(INFO) << "build (done)";
   sigen::swc_writer writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
-    std::string filename = "sample_output/" + boost::lexical_cast<std::string>(i) + ".swc";
+    std::string filename =
+        "sample_output/" + boost::lexical_cast<std::string>(i) + ".swc";
     writer.write(filename, ns[i]);
   }
   LOG(INFO) << "write (done)";
