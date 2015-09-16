@@ -2,9 +2,9 @@
 #include "../common/cluster.h"
 #include "../common/neuron.h"
 #include <vector>
-#include <utility>
+#include <boost/utility.hpp>
 namespace sigen {
-class builder {
+class builder : boost::noncopyable {
   bool is_radius_computed_ = false;
 
 public:

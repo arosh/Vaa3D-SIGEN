@@ -1,6 +1,6 @@
-class.png can build from class.uml using [PlantUML](http://plantuml.com/).
+class.png can be built from class.uml using [PlantUML](http://plantuml.com/).
 
-To build class.png, you can use command below.
+To build class.png, you can use commands as follows.
 
 ```
 cd /path/to/vaa3d_sigen

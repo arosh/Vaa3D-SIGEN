@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <boost/utility.hpp>
 #include <glog/logging.h>
 namespace sigen {
 class disjoint_set_internal {
@@ -15,7 +16,7 @@ public:
   bool same(int x, int y);
   void merge(int x, int y);
 };
-template <class T> class disjoint_set {
+template <class T> class disjoint_set : boost::noncopyable {
   std::map<T, int> forward;
   std::shared_ptr<disjoint_set_internal> U;
 

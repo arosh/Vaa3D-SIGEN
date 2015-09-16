@@ -3,8 +3,9 @@
 #include "../common/voxel.h"
 #include <vector>
 #include <memory>
+#include <boost/utility.hpp>
 namespace sigen {
-class extractor {
+class extractor : boost::noncopyable {
   void labeling();
 
 public:

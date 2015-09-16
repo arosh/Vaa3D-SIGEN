@@ -13,8 +13,7 @@ class binarizer {
 }
 class extractor {
   cube_: binary_cube
-  groups_: vector<vector<voxel *>>
-  voxel_owner_: vector<shared_ptr<voxel>>
+  components_: vector<vector<shared_ptr<voxel>>>
   +constructor(binary_cube)
   +extract(): vector<shared_ptr<cluster>>
 }
