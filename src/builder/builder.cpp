@@ -1,4 +1,4 @@
-#include "./builder.h"
+#include "builder.h"
 #include <cmath>
 #include <algorithm>
 #include <utility>

@@ -1,4 +1,4 @@
-#include "./file_loader.h"
+#include "file_loader.h"
 #include <algorithm>
 #include <vector>
 #include <string>

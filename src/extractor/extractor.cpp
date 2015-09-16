@@ -1,4 +1,4 @@
-#include "./extractor.h"
+#include "extractor.h"
 #include "../common/point.h"
 #include <map>
 #include <algorithm>

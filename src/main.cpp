@@ -1,11 +1,11 @@
 #include <iostream>
 #include <glog/logging.h>
 #include <boost/lexical_cast.hpp>
-#include "./loader/file_loader.h"
-#include "./binarizer/binarizer.h"
-#include "./extractor/extractor.h"
-#include "./builder/builder.h"
-#include "./writer/swc_writer.h"
+#include "loader/file_loader.h"
+#include "binarizer/binarizer.h"
+#include "extractor/extractor.h"
+#include "builder/builder.h"
+#include "writer/swc_writer.h"
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas

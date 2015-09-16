@@ -1,5 +1,5 @@
-#include "./swc_writer.h"
-#include "./fileutils.h"
+#include "swc_writer.h"
+#include "fileutils.h"
 #include <glog/logging.h>
 #include <string>
 namespace sigen {

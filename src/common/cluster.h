@@ -1,6 +1,6 @@
 #pragma once
-#include "./voxel.h"
-#include "./point.h"
+#include "voxel.h"
+#include "point.h"
 #include <vector>
 #include <memory>
 #include <boost/utility.hpp>

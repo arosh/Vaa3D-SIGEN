@@ -1,4 +1,4 @@
-#include "./binary_cube.h"
+#include "binary_cube.h"
 #include <vector>
 namespace sigen {
 binary_cube::binary_cube(int x, int y, int z)

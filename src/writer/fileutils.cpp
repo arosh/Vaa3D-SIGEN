@@ -1,4 +1,4 @@
-#include "./fileutils.h"
+#include "fileutils.h"
 #include <string>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>

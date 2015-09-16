@@ -1,4 +1,4 @@
-#include "./voxel.h"
+#include "voxel.h"
 #include <algorithm>
 #include <glog/logging.h>
 namespace sigen {

@@ -1,4 +1,4 @@
-#include "./neuron.h"
+#include "neuron.h"
 #include <algorithm>
 #include <glog/logging.h>
 namespace sigen {

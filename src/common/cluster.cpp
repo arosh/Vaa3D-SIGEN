@@ -1,4 +1,4 @@
-#include "./cluster.h"
+#include "cluster.h"
 #include <cstdlib>
 #include <vector>
 namespace sigen {
