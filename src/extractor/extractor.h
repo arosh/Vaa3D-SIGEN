@@ -6,6 +6,7 @@
 namespace sigen {
 class extractor {
   void labeling();
+
 public:
   binary_cube cube_;
   std::vector<std::vector<std::shared_ptr<voxel>>> components_;

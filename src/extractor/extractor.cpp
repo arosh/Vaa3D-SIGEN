@@ -136,7 +136,8 @@ static voxel *find_single_seed(std::vector<std::shared_ptr<voxel>> &group) {
   }
   return last;
 }
-static void set_distance(std::vector<std::shared_ptr<voxel>> &group, voxel *seed) {
+static void set_distance(std::vector<std::shared_ptr<voxel>> &group,
+                         voxel *seed) {
   reset_flag(group);
   std::queue<voxel *> que;
   seed->flag_ = true;
