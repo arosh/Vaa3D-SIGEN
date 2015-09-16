@@ -6,12 +6,9 @@
 namespace sigen {
 class extractor {
   void labeling();
-  // groups_をshared_ptrにしたら消せるのでは？
-  std::vector<std::shared_ptr<voxel>> voxel_owner_;
-
 public:
   binary_cube cube_;
-  std::vector<std::vector<voxel *>> groups_;
+  std::vector<std::vector<std::shared_ptr<voxel>>> components_;
   explicit extractor(const binary_cube &cube);
   std::vector<std::shared_ptr<cluster>> extract();
 };

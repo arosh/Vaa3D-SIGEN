@@ -10,9 +10,9 @@ TEST(extractor, labeling) {
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
   extractor ext(cube);
   auto ret = ext.extract();
-  EXPECT_EQ(2, (int)ext.groups_.size());
-  EXPECT_EQ(3, (int)ext.groups_[0].size());
-  EXPECT_EQ(2, (int)ext.groups_[1].size());
+  EXPECT_EQ(2, (int)ext.components_.size());
+  EXPECT_EQ(3, (int)ext.components_[0].size());
+  EXPECT_EQ(2, (int)ext.components_[1].size());
   EXPECT_EQ(5, (int)ret.size());
   for(auto c : ret) {
     EXPECT_EQ(1, (int)c->points_.size());
@@ -31,8 +31,8 @@ TEST(extractor, labeling2) {
   cube[1][3][1] = 1; cube[2][3][1] = 1;
   extractor ext(cube);
   auto ret = ext.extract();
-  EXPECT_EQ(1, (int)ext.groups_.size());
-  EXPECT_EQ(5, (int)ext.groups_[0].size());
+  EXPECT_EQ(1, (int)ext.components_.size());
+  EXPECT_EQ(5, (int)ext.components_[0].size());
   EXPECT_EQ(5, (int)ret.size());
 }
 TEST(extractor, labeling_with_loops) {
@@ -42,8 +42,8 @@ TEST(extractor, labeling_with_loops) {
                      cube[2][3][1] = 1;
   extractor ext(cube);
   auto ret = ext.extract();
-  EXPECT_EQ(1, (int)ext.groups_.size());
-  EXPECT_EQ(4, (int)ext.groups_[0].size());
+  EXPECT_EQ(1, (int)ext.components_.size());
+  EXPECT_EQ(4, (int)ext.components_[0].size());
   for(auto c : ret) {
     // point(1,2,1)
     // point(2,1,1)
@@ -60,8 +60,8 @@ TEST(extractor, same_distance) {
   cube[1][2][1] = 1; cube[2][2][1] = 1;
   extractor ext(cube);
   auto ret = ext.extract();
-  EXPECT_EQ(1, (int)ext.groups_.size());
-  EXPECT_EQ(4, (int)ext.groups_[0].size());
+  EXPECT_EQ(1, (int)ext.components_.size());
+  EXPECT_EQ(4, (int)ext.components_[0].size());
   EXPECT_EQ(2, (int)ret.size());
   EXPECT_EQ(3, (int)ret[0]->points_.size());
   EXPECT_EQ(1, (int)ret[1]->points_.size());
