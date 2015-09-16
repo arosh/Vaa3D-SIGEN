@@ -10,6 +10,7 @@ def build(bld):
     bld.stlib(
         source=[
             'common/binary_cube.cpp',
+            'common/disjoint_set.cpp',
             'common/neuron.cpp',
             'common/voxel.cpp',
             'common/cluster.cpp',
