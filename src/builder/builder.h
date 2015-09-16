@@ -5,6 +5,8 @@
 #include <utility>
 namespace sigen {
 class builder {
+  bool is_radius_computed_ = false;
+
 public:
   std::vector<std::shared_ptr<cluster>> data_;
   double scale_xy_, scale_z_;

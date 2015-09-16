@@ -1,4 +1,5 @@
 #include "builder.h"
+#include "../common/disjoint_set.h"
 #include <cmath>
 #include <algorithm>
 #include <utility>
@@ -21,30 +22,34 @@ void builder::connect_neighbor() {
     }
   }
 }
-void cut_loops_inner(cluster *cur, cluster *prev, std::set<cluster *> &used) {
-  for (cluster *next : cur->adjacent_) {
-    if (used.count(next)) {
-      // find loop
-      if (next != prev) {
-        std::vector<cluster *>::iterator iter;
-        iter = std::remove(cur->adjacent_.begin(), cur->adjacent_.end(), next);
-        cur->adjacent_.erase(iter, cur->adjacent_.end());
-        iter = std::remove(next->adjacent_.begin(), next->adjacent_.end(), cur);
-        next->adjacent_.erase(iter, next->adjacent_.end());
-      }
-    } else {
-      used.insert(next);
-      cut_loops_inner(next, cur, used);
+void builder::cut_loops() {
+  CHECK(is_radius_computed_);
+  // use kruskal like algorithm
+  disjoint_set<cluster *> U;
+  std::vector<std::pair<double, std::pair<cluster *, cluster *>>> E;
+  for (std::shared_ptr<cluster> cls : data_) {
+    U.add(cls.get());
+    for (cluster *adj : cls->adjacent_) {
+      double strength = (cls->radius_ + adj->radius_) / 2.0;
+      cluster *a = cls.get(), *b = adj;
+      if (a < b)
+        E.push_back(std::make_pair(strength, std::make_pair(cls.get(), adj)));
     }
   }
-}
-void builder::cut_loops() {
-  std::set<cluster *> used;
-  for (std::shared_ptr<cluster> cls : data_) {
-    if (used.count(cls.get()))
-      continue;
-    used.insert(cls.get());
-    cut_loops_inner(cls.get(), nullptr, used);
+  U.setup();
+  std::sort(E.begin(), E.end(), std::greater<decltype(E)::value_type>());
+  for (auto &&it : E) {
+    cluster *a = it.second.first;
+    cluster *b = it.second.second;
+    if (U.same(a, b)) {
+      std::vector<cluster *>::iterator iter;
+      iter = std::remove(a->adjacent_.begin(), a->adjacent_.end(), b);
+      a->adjacent_.erase(iter, a->adjacent_.end());
+      iter = std::remove(b->adjacent_.begin(), b->adjacent_.end(), a);
+      b->adjacent_.erase(iter, b->adjacent_.end());
+    } else {
+      U.merge(a, b);
+    }
   }
 }
 void builder::connect_interpolate(double dt) {
@@ -96,6 +101,7 @@ void builder::compute_radius() {
     }
     cls->radius_ = std::sqrt(mdx * mdx + mdy * mdy + mdz * mdz);
   }
+  is_radius_computed_ = true;
 }
 static bool check_adjacent(const cluster *a, const cluster *b) {
   auto iter = std::find(a->adjacent_.begin(), a->adjacent_.end(), b);
@@ -196,10 +202,10 @@ void builder::compute_node_type(std::vector<neuron> &neu) {
   }
 }
 std::vector<neuron> builder::build() {
-  connect_neighbor();
-  cut_loops();
   compute_gravity_point();
   compute_radius();
+  connect_neighbor();
+  cut_loops();
   std::vector<neuron> neu = convert_to_neuron(data_, scale_xy_, scale_z_);
   compute_id(neu);
   compute_node_type(neu);
