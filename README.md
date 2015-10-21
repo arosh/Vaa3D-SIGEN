@@ -26,7 +26,7 @@ TBD...
 
 ```
 $ ./waf configure
-$ ./waf --checkall # test
+$ ./waf --checkall # run test
 $ ./waf
 ```
 
@@ -36,4 +36,7 @@ $ ./waf
 
 ## TODO
 
-* `vaa3d_tools/bigneuron_ported/neuronAssembler/neutube`をパクる
+* 設定メニューっぽいもののサンプル `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
+* https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
+* `/basic_c_fun/basic_4dimage.h`に`p4dImage = callback.getImage(curwin);`で手に入る`Image4DSimple`の定義が書いてある
+* Image4DProxyを使うとImage4DSimpleに簡単にアクセスできると書いてある

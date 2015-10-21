@@ -7,6 +7,7 @@ subdirs = 'src test'
 
 def options(opt):
     opt.load('compiler_cxx')
+    # If you specify `./waf configure --debug`, debug build will be enabled.
     opt.add_option('--debug', action='store_true')
     opt.recurse(subdirs)
 
