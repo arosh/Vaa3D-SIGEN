@@ -12,34 +12,33 @@ struct input_PARA {
   V3DLONG channel;
 };
 
-void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool bmenu);
+void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool via_gui);
 
 QStringList SigenPlugin::menulist() const {
   return QStringList()
-         << tr("tracing_menu")
-         << tr("about");
+         << tr("Trace")
+         << tr("About");
 }
 
 QStringList SigenPlugin::funclist() const {
   return QStringList()
-         << tr("tracing_func")
+         << tr("trace")
          << tr("help");
 }
 
 void SigenPlugin::domenu(const QString &menu_name, V3DPluginCallback2 &callback, QWidget *parent) {
-  if (menu_name == tr("tracing_menu")) {
-    bool bmenu = true;
+  if (menu_name == tr("Trace")) {
     input_PARA PARA;
-    reconstruction_func(callback, parent, PARA, bmenu);
+    reconstruction_func(callback, parent, PARA, /* via_gui = */ true);
+  } else if (menu_name == tr("About")) {
+    v3d_msg(tr("This plugin is porting of SIGEN (https://sites.google.com/site/sigenproject/) for Vaa3D."));
   } else {
-    v3d_msg(tr("This plugin is porting of SIGEN (https://sites.google.com/site/sigenproject/) for Vaa3D.. "
-               "Developed by Sho Iizuka, 2015-10-21"));
+    assert(false);
   }
 }
 
 bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input, V3DPluginArgList &output, V3DPluginCallback2 &callback, QWidget *parent) {
-  if (func_name == tr("tracing_func")) {
-    bool bmenu = false;
+  if (func_name == tr("trace")) {
     input_PARA PARA;
     vector<char *> *pinfiles = (input.size() >= 1) ? (vector<char *> *)input[0].p : 0;
     vector<char *> *pparas = (input.size() >= 2) ? (vector<char *> *)input[1].p : 0;
@@ -54,7 +53,7 @@ bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input
     int k = 0;
     PARA.channel = (paras.size() >= k + 1) ? atoi(paras[k]) : 1;
     k++;
-    reconstruction_func(callback, parent, PARA, bmenu);
+    reconstruction_func(callback, parent, PARA, /* via_gui = */ false);
   } else if (func_name == tr("help")) {
     ////HERE IS WHERE THE DEVELOPERS SHOULD UPDATE THE USAGE OF THE PLUGIN
     printf("**** Usage of SIGEN tracing **** \n");
@@ -67,11 +66,11 @@ bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input
   }
   return true;
 }
-void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool bmenu) {
+void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool via_gui) {
   unsigned char *data1d = 0;
   V3DLONG N, M, P, sc, c;
   V3DLONG in_sz[4];
-  if (bmenu) {
+  if (via_gui) {
     v3dhandle curwin = callback.currentImageWindow();
     if (!curwin) {
       QMessageBox::information(0, "", "You don't have any image open in the main window.");
@@ -125,11 +124,11 @@ void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PA
   QString swc_name = PARA.inimg_file + "_SIGEN.swc";
   nt.name = "SIGEN";
   writeSWC_file(swc_name.toStdString().c_str(), nt);
-  if (!bmenu) {
+  if (!via_gui) {
     if (data1d) {
       delete[] data1d;
       data1d = 0;
     }
   }
-  v3d_msg(QString("Now you can drag and drop the generated swc fle [%1] into Vaa3D.").arg(swc_name.toStdString().c_str()), bmenu);
+  v3d_msg(QString("Now you can drag and drop the generated swc fle [%1] into Vaa3D.").arg(swc_name.toStdString().c_str()), via_gui);
 }
