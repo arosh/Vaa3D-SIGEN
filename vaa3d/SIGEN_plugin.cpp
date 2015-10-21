@@ -57,7 +57,7 @@ bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input
   } else if (func_name == tr("help")) {
     ////HERE IS WHERE THE DEVELOPERS SHOULD UPDATE THE USAGE OF THE PLUGIN
     printf("**** Usage of SIGEN tracing **** \n");
-    printf("vaa3d -x SIGEN -f tracing_func -i <inimg_file> -p <channel> <other parameters>\n");
+    printf("vaa3d -x SIGEN -f trace -i <inimg_file> -p <channel> <other parameters>\n");
     printf("inimg_file       The input image\n");
     printf("channel          Data channel for tracing. Start from 1 (default 1).\n");
     printf("outswc_file      Will be named automatically based on the input image file name, so you don't have to specify it.\n\n");
@@ -66,6 +66,7 @@ bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input
   }
   return true;
 }
+
 void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool via_gui) {
   unsigned char *data1d = 0;
   V3DLONG N, M, P, sc, c;

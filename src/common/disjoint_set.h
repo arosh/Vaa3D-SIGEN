@@ -16,7 +16,8 @@ public:
   bool same(int x, int y);
   void merge(int x, int y);
 };
-template <class T> class disjoint_set : boost::noncopyable {
+template <class T>
+class disjoint_set : boost::noncopyable {
   std::map<T, int> forward;
   std::shared_ptr<disjoint_set_internal> U;
 

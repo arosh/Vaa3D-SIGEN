@@ -6,7 +6,9 @@
 #include <memory>
 #include <boost/utility.hpp>
 namespace sigen {
-enum class neuron_type { EDGE, BRANCH, CONNECT };
+enum class neuron_type { EDGE,
+                         BRANCH,
+                         CONNECT };
 class neuron_node : boost::noncopyable {
 public:
   // 1-based
