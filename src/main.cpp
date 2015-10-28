@@ -1,6 +1,5 @@
 #include <iostream>
 #include <glog/logging.h>
-#include <boost/lexical_cast.hpp>
 #include "loader/file_loader.h"
 #include "binarizer/binarizer.h"
 #include "extractor/extractor.h"
@@ -50,7 +49,7 @@ int main(int argc, char *argv[]) {
   sigen::swc_writer writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =
-        "sample_output/" + boost::lexical_cast<std::string>(i) + ".swc";
+        "sample_output/" + std::to_string(i) + ".swc";
     writer.write(filename, ns[i]);
   }
   LOG(INFO) << "write (done)";
