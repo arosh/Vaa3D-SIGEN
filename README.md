@@ -36,11 +36,11 @@ $ ./waf
 
 ## How to use `NeuronTree`
 
-1. `NeuronTree nt`
+1. declare `NeuronTree nt`
 2. set `nt.name` and `nt.comment`
 3. describe `infostring` as needed
-4. `NeuronSWC pt`
-5. `pt.n`, `pt.type`, `pt.x`, `pt.y`, `pt.z`, `pt.r`, `pt.pn`
+4. declare `NeuronSWC pt`
+5. set `pt.n`, `pt.type`, `pt.x`, `pt.y`, `pt.z`, `pt.r`, `pt.pn`
 6. append `pt` to `nt.listNeuron`
 
 types
@@ -85,4 +85,3 @@ references
 
 * 設定メニューっぽいもののサンプル `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
 * https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
-

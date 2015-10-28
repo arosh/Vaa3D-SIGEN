@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'SIGEN_plugin.h'
 **
-** Created: Wed Oct 28 18:16:22 2015
+** Created: Wed Oct 28 19:40:51 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.1)
 **
 ** WARNING! All changes made in this file will be lost!
