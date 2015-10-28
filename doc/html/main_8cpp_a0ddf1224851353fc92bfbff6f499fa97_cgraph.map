@@ -1,0 +1,22 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$main_8cpp.html#a76eecb5e71fb12e7b676035992ca3904" title="init_glog" alt="" coords="151,5,222,31"/>
+<area shape="rect" id="node3" href="$classsigen_1_1file__loader.html#a400dd4d0a321f6c31bfed518d2af686d" title="sigen::file_loader\l::load" alt="" coords="125,55,248,93"/>
+<area shape="rect" id="node4" href="$classsigen_1_1binarizer.html#ab2d1fb621e94d5c9ef7dc3590562f612" title="sigen::binarizer::binarize" alt="" coords="104,117,269,143"/>
+<area shape="rect" id="node5" href="$classsigen_1_1binary__cube.html#a8c7934e9e5feb2f54fb8966eaa0fd6d2" title="sigen::binary_cube\l::clear" alt="" coords="120,167,253,205"/>
+<area shape="rect" id="node6" href="$classsigen_1_1extractor.html#a33dce239bd2054adb83419782b59f6f8" title="sigen::extractor::extract" alt="" coords="107,229,266,255"/>
+<area shape="rect" id="node7" href="$classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27" title="sigen::builder::build" alt="" coords="118,279,255,304"/>
+<area shape="rect" id="node21" href="$classsigen_1_1swc__writer.html#a037a711b98b879e8c79931939aa7829a" title="sigen::swc_writer::\lwrite" alt="" coords="121,328,252,367"/>
+<area shape="rect" id="node8" href="$classsigen_1_1builder.html#a4d6f1915811ad7a335213869e6c46220" title="sigen::builder::compute\l_gravity_point" alt="" coords="326,84,486,123"/>
+<area shape="rect" id="node9" href="$classsigen_1_1builder.html#a408ae1678b58dad69a45d8817b588bf5" title="sigen::builder::compute\l_radius" alt="" coords="326,147,486,185"/>
+<area shape="rect" id="node10" href="$classsigen_1_1builder.html#af7f3e5c5fd0dbdc4313413a208bab899" title="sigen::builder::connect\l_neighbor" alt="" coords="329,209,483,248"/>
+<area shape="rect" id="node11" href="$classsigen_1_1builder.html#ad3796a2f588f6ab0b780c99616d5130c" title="sigen::builder::cut\l_loops" alt="" coords="343,272,469,311"/>
+<area shape="rect" id="node16" href="$classsigen_1_1builder.html#adc18b8145dcbb86ac880a9e459ced029" title="sigen::builder::convert\l_to_neuron" alt="" coords="330,335,482,373"/>
+<area shape="rect" id="node19" href="$classsigen_1_1builder.html#abd5bfacd9e2538aefb4ac9e3f2cd8b3f" title="sigen::builder::compute_id" alt="" coords="317,397,494,423"/>
+<area shape="rect" id="node20" href="$classsigen_1_1builder.html#a2b702215ed0dcfd416c4689c2f8a2f83" title="sigen::builder::compute\l_node_type" alt="" coords="326,447,486,485"/>
+<area shape="rect" id="node12" href="$classsigen_1_1disjoint__set.html#a2ee74709447a1e8040e1fcc5ee73a865" title="sigen::disjoint_set::add" alt="" coords="542,160,699,185"/>
+<area shape="rect" id="node13" href="$classsigen_1_1disjoint__set.html#adc589db8f6e250ed96bc4d2c7d1aaf79" title="sigen::disjoint_set\l::setup" alt="" coords="557,209,685,248"/>
+<area shape="rect" id="node14" href="$classsigen_1_1disjoint__set.html#a48abbd1ff28b82d43a0ef06e0dce6cb2" title="sigen::disjoint_set\l::same" alt="" coords="557,272,685,311"/>
+<area shape="rect" id="node15" href="$classsigen_1_1disjoint__set.html#a24a7aeade87dd127616434dc480effff" title="sigen::disjoint_set\l::merge" alt="" coords="557,335,685,373"/>
+<area shape="rect" id="node17" href="$classsigen_1_1builder.html#a40e31dcb32d69a2087fcf1d4558b7598" title="sigen::builder::convert\l_to_neuron_node" alt="" coords="545,397,697,436"/>
+<area shape="rect" id="node18" href="$classsigen_1_1cluster.html#a16a37a3b8460fddb8acf0385d69390dd" title="sigen::cluster::add\l_connection" alt="" coords="747,397,877,436"/>
+</map>

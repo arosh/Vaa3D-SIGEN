@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classsigen_1_1builder.html" title="sigen::builder" alt="" coords="179,5,280,31"/>
+<area shape="rect" id="node3" href="$classsigen_1_1cluster.html" title="sigen::cluster" alt="" coords="179,55,279,80"/>
+<area shape="rect" id="node4" href="$classsigen_1_1disjoint__set.html" title="sigen::disjoint_set\&lt; T \&gt;" alt="" coords="150,104,308,129"/>
+<area shape="rect" id="node5" href="$classsigen_1_1extractor.html" title="sigen::extractor" alt="" coords="173,153,286,179"/>
+<area shape="rect" id="node6" href="$classsigen_1_1neuron__node.html" title="sigen::neuron_node" alt="" coords="160,203,299,228"/>
+<area shape="rect" id="node7" href="$classsigen_1_1voxel.html" title="sigen::voxel" alt="" coords="183,252,275,277"/>
+</map>
