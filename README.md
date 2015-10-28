@@ -40,3 +40,4 @@ $ ./waf
 * https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
 * `/basic_c_fun/basic_4dimage.h`に`p4dImage = callback.getImage(curwin);`で手に入る`Image4DSimple`の定義が書いてある
 * Image4DProxyを使うとImage4DSimpleに簡単にアクセスできると書いてある
+* `v3d_main/basic_c_fun/basic_surf_objs.cpp`にある`readSWC_file`や`writeSWC_file`を参考にするとNeuronTreeの使い方が分かるかも

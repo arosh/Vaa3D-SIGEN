@@ -98,7 +98,7 @@ void reconstruction_func(
     QWidget *parent,
     input_PARA &PARA,
     bool via_gui) {
-  unsigned char *data1d = nullptr;
+  unsigned char *data1d = NULL;
   V3DLONG N, M, P, sc, c;
   V3DLONG in_sz[4];
   if (via_gui) {
@@ -158,7 +158,7 @@ void reconstruction_func(
   if (!via_gui) {
     if (data1d) {
       delete[] data1d;
-      data1d = nullptr;
+      data1d = NULL;
     }
   }
   v3d_msg(QString("Now you can drag and drop the generated swc fle [%1] into Vaa3D.").arg(swc_name.toStdString().c_str()), via_gui);
