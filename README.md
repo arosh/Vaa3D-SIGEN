@@ -40,7 +40,6 @@ $ ./waf
 * https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
 * `/basic_c_fun/basic_4dimage.h`に`p4dImage = callback.getImage(curwin);`で手に入る`Image4DSimple`の定義が書いてある
 * Image4DProxyを使うとImage4DSimpleに簡単にアクセスできると書いてある
-* `v3d_main/basic_c_fun/basic_surf_objs.cpp`にある`readSWC_file`や`writeSWC_file`を参考にするとNeuronTreeの使い方が分かるかも
 
 ## How to use `NeuronTree`
 
@@ -64,5 +63,27 @@ types
 
 references
 
-* `NeuronSWC` in `v3d_main/basic_c_fun/basic_surf_objs.h`
-* `writeSWC_file` in `v3d_main/basic_c_fun/basic_surf_objs.cpp`
+* `NeuronSWC` at `v3d_main/basic_c_fun/basic_surf_objs.h`
+* `writeSWC_file` at `v3d_main/basic_c_fun/basic_surf_objs.cpp`
+
+# How to handle `Image4DSimple` from `callback.getImage(curwin)`
+
+```
+V3DLONG su = img->getUnitBytes();
+V3DLONG sx = img->getXDim();
+V3DLONG sy = img->getYDim();
+V3DLONG sz = img->getZDim();
+V3DLONG sc = img->getCDim();
+
+V3DLONG stride_x = su;
+V3DLONG stride_y = su*sx;
+V3DLONG stride_z = su*sx*sy;
+V3DLONG stride_c = su*sx*sy*sz;
+
+v3d_uint8 ptr = img->getRawData()
+return ptr[stride_x*x + stride_y*y + stride_z*z + stride_c*c]
+```
+
+references
+
+* `Image4DProxy#at` at `v3d_main/basic_c_fun/basic_4dimage.h`
