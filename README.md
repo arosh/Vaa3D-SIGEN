@@ -34,13 +34,6 @@ $ ./waf
 
 * T.Yamasaki, T.Isokawa, N.Matsui, H.Ikeno and R.Kanzaki, "Reconstruction and simulation for three-dimensional morphological structure of insect neurons," Neurocomputing, Jun. 2006. \[[link](http://dx.doi.org/10.1016/j.neucom.2005.12.042)\]
 
-## TODO
-
-* 設定メニューっぽいもののサンプル `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
-* https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
-* `/basic_c_fun/basic_4dimage.h`に`p4dImage = callback.getImage(curwin);`で手に入る`Image4DSimple`の定義が書いてある
-* Image4DProxyを使うとImage4DSimpleに簡単にアクセスできると書いてある
-
 ## How to use `NeuronTree`
 
 1. `NeuronTree nt`
@@ -66,7 +59,7 @@ references
 * `NeuronSWC` at `v3d_main/basic_c_fun/basic_surf_objs.h`
 * `writeSWC_file` at `v3d_main/basic_c_fun/basic_surf_objs.cpp`
 
-# How to handle `Image4DSimple` from `callback.getImage(curwin)`
+## How to handle `Image4DSimple` from `callback.getImage(curwin)`
 
 ```
 V3DLONG su = img->getUnitBytes();
@@ -87,3 +80,9 @@ return ptr[stride_x*x + stride_y*y + stride_z*z + stride_c*c]
 references
 
 * `Image4DProxy#at` at `v3d_main/basic_c_fun/basic_4dimage.h`
+
+## TODO
+
+* 設定メニューっぽいもののサンプル `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
+* https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
+
