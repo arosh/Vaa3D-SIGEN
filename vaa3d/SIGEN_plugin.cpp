@@ -12,7 +12,11 @@ struct input_PARA {
   V3DLONG channel;
 };
 
-void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool via_gui);
+void reconstruction_func(
+    V3DPluginCallback2 &callback,
+    QWidget *parent,
+    input_PARA &PARA,
+    bool via_gui);
 
 QStringList SigenPlugin::menulist() const {
   return QStringList()
@@ -26,7 +30,10 @@ QStringList SigenPlugin::funclist() const {
          << tr("help");
 }
 
-void SigenPlugin::domenu(const QString &menu_name, V3DPluginCallback2 &callback, QWidget *parent) {
+void SigenPlugin::domenu(
+    const QString &menu_name,
+    V3DPluginCallback2 &callback,
+    QWidget *parent) {
   if (menu_name == tr("Trace")) {
     input_PARA PARA;
     reconstruction_func(callback, parent, PARA, /* via_gui = */ true);
@@ -37,7 +44,12 @@ void SigenPlugin::domenu(const QString &menu_name, V3DPluginCallback2 &callback,
   }
 }
 
-bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input, V3DPluginArgList &output, V3DPluginCallback2 &callback, QWidget *parent) {
+bool SigenPlugin::dofunc(
+    const QString &func_name,
+    const V3DPluginArgList &input,
+    V3DPluginArgList &output,
+    V3DPluginCallback2 &callback,
+    QWidget *parent) {
   if (func_name == tr("trace")) {
     input_PARA PARA;
     vector<char *> *pinfiles = (input.size() >= 1) ? (vector<char *> *)input[0].p : 0;
@@ -67,7 +79,11 @@ bool SigenPlugin::dofunc(const QString &func_name, const V3DPluginArgList &input
   return true;
 }
 
-void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool via_gui) {
+void reconstruction_func(
+    V3DPluginCallback2 &callback,
+    QWidget *parent,
+    input_PARA &PARA,
+    bool via_gui) {
   unsigned char *data1d = 0;
   V3DLONG N, M, P, sc, c;
   V3DLONG in_sz[4];
