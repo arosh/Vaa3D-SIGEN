@@ -1,11 +1,16 @@
 #include "v3d_message.h"
 #include <vector>
+#include <string>
+#include <cassert>
 #include "basic_surf_objs.h"
 
 #include "SIGEN_plugin.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
 using namespace std;
+
+// v3d_main/basic_c_fun/v3d_interface.h
+// typedef QList<V3DPluginArgItem> V3DPluginArgList;
 
 struct input_PARA {
   QString inimg_file;
@@ -42,6 +47,15 @@ void SigenPlugin::domenu(
   } else {
     assert(false);
   }
+}
+
+static std::string GetArgString(const V3DPluginArgList &input, int index, int index2) {
+  if (index >= input.size())
+    return "";
+  const std::vector<char *> &vchar = *(vector<char *> *)input[index].p;
+  if (index2 >= vchar.size())
+    return "";
+  return vchar[index];
 }
 
 bool SigenPlugin::dofunc(
@@ -84,7 +98,7 @@ void reconstruction_func(
     QWidget *parent,
     input_PARA &PARA,
     bool via_gui) {
-  unsigned char *data1d = 0;
+  unsigned char *data1d = nullptr;
   V3DLONG N, M, P, sc, c;
   V3DLONG in_sz[4];
   if (via_gui) {
@@ -144,7 +158,7 @@ void reconstruction_func(
   if (!via_gui) {
     if (data1d) {
       delete[] data1d;
-      data1d = 0;
+      data1d = nullptr;
     }
   }
   v3d_msg(QString("Now you can drag and drop the generated swc fle [%1] into Vaa3D.").arg(swc_name.toStdString().c_str()), via_gui);
