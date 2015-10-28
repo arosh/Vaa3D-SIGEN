@@ -41,3 +41,28 @@ $ ./waf
 * `/basic_c_fun/basic_4dimage.h`に`p4dImage = callback.getImage(curwin);`で手に入る`Image4DSimple`の定義が書いてある
 * Image4DProxyを使うとImage4DSimpleに簡単にアクセスできると書いてある
 * `v3d_main/basic_c_fun/basic_surf_objs.cpp`にある`readSWC_file`や`writeSWC_file`を参考にするとNeuronTreeの使い方が分かるかも
+
+## How to use `NeuronTree`
+
+1. `NeuronTree nt`
+2. set `nt.name` and `nt.comment`
+3. describe `infostring` as needed
+4. `NeuronSWC pt`
+5. `pt.n`, `pt.type`, `pt.x`, `pt.y`, `pt.z`, `pt.r`, `pt.pn`
+6. append `pt` to `nt.listNeuron`
+
+types
+
+* 0-Undefined
+* 1-Soma
+* 2-Axon
+* 3-Dendrite
+* 4-Apical Dendrite
+* 5-Fork Point
+* 6-End Point
+* 7-Custom
+
+references
+
+* `NeuronSWC` in `v3d_main/basic_c_fun/basic_surf_objs.h`
+* `writeSWC_file` in `v3d_main/basic_c_fun/basic_surf_objs.cpp`

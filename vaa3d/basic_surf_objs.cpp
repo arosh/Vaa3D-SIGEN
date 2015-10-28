@@ -313,12 +313,15 @@ NeuronTree readSWC_file(const QString &filename) {
     for (buf = _buf; (*buf && *buf == ' '); buf++)
       ; //skip space
 
-    //  add #name, #comment
     if (buf[0] == '\0')
       continue;
+
+    //  add #name, #comment
     if (buf[0] == '#') {
+      // StartWith("name ")
       if (buf[1] == 'n' && buf[2] == 'a' && buf[3] == 'm' && buf[4] == 'e' && buf[5] == ' ')
         name = buf + 6;
+      // StartWith("comment ")
       if (buf[1] == 'c' && buf[2] == 'o' && buf[3] == 'm' && buf[4] == 'm' && buf[5] == 'e' && buf[6] == 'n' && buf[7] == 't' && buf[8] == ' ')
         comment = buf + 9;
 
@@ -333,6 +336,7 @@ NeuronTree readSWC_file(const QString &filename) {
       continue;
 
     for (int i = 0; i < qsl.size(); i++) {
+      // why?
       qsl[i].truncate(99);
       if (i == 0)
         S.n = qsl[i].toInt();
