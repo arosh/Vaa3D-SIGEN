@@ -7,16 +7,21 @@ def configure(conf):
 
 
 def build(bld):
-    bld.program(
+    bld.stlib(
         source=[
             'loader/file_loader.cpp',
             'writer/swc_writer.cpp',
             'writer/fileutils.cpp',
             'binarizer/binarizer.cpp',
+        ],
+        target='sigen_io',
+        includes='../sigen_core')
+    bld.program(
+        source=[
             'main.cpp'
         ],
-        target='sigen_main',
+        target='main',
         includes='../third_party ../sigen_core',
-        use='sigen_core OPENCV BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
+        use='sigen sigen_io OPENCV BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
 
 # vim: filetype=python

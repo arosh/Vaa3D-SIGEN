@@ -17,6 +17,6 @@ def build(bld):
             'extractor/extractor.cpp',
             'builder/builder.cpp',
         ],
-        target='sigen_core')
+        target='sigen')
 
 # vim: filetype=python
