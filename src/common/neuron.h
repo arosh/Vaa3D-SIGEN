@@ -1,15 +1,15 @@
 #pragma once
 #include "variant.h"
+#include "noncopyable.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <memory>
-#include <boost/utility.hpp>
 namespace sigen {
 enum class neuron_type { EDGE,
                          BRANCH,
                          CONNECT };
-class neuron_node : boost::noncopyable {
+class neuron_node : noncopyable {
 public:
   // 1-based
   int id_;
@@ -22,7 +22,7 @@ public:
   std::map<std::string, Variant> values_;
   void add_connection(neuron_node *node);
 };
-class neuron /* : boost::noncopyable */ {
+class neuron /* : noncopyable */ {
 public:
   bool is_finalized_ = false;
   neuron_node *root_;

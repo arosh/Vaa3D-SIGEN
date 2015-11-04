@@ -1,10 +1,10 @@
 #pragma once
 #include "../common/cluster.h"
 #include "../common/neuron.h"
+#include "../common/noncopyable.h"
 #include <vector>
-#include <boost/utility.hpp>
 namespace sigen {
-class builder : boost::noncopyable {
+class builder : noncopyable {
   bool is_radius_computed_ = false;
 
 public:

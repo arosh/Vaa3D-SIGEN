@@ -1,9 +1,9 @@
 // https://www.topcoder.com/community/data-science/data-science-tutorials/disjoint-set-data-structures/
 #pragma once
+#include "noncopyable.h"
 #include <vector>
 #include <map>
 #include <memory>
-#include <boost/utility.hpp>
 #include <glog/logging.h>
 namespace sigen {
 class disjoint_set_internal {
@@ -17,7 +17,7 @@ public:
   void merge(int x, int y);
 };
 template <class T>
-class disjoint_set : boost::noncopyable {
+class disjoint_set : noncopyable {
   std::map<T, int> forward;
   std::shared_ptr<disjoint_set_internal> U;
 

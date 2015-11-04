@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include <boost/utility.hpp>
+#include "noncopyable.h"
 namespace sigen {
-class voxel : boost::noncopyable {
+class voxel : noncopyable {
 public:
   int x_, y_, z_;
   bool flag_; // any functions can use this variable
