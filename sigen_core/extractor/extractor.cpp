@@ -1,29 +1,31 @@
 #include "extractor.h"
 #include "../common/point.h"
+#include <cassert>
 #include <map>
 #include <algorithm>
 #include <iterator>
 #include <queue>
 #include <vector>
-#include <glog/logging.h>
-#define REP(i, n) for (int i = 0; i < (int)(n); ++i)
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 static void clear_frame(binary_cube &c) {
-  REP(i, c.x_)
-  REP(j, c.y_) {
-    c[i][j][0] = false;
-    c[i][j][c.z_ - 1] = false;
+  for(int i = 0; i < c.x_; ++i) {
+    for(int j = 0; j < c.y_; ++j) {
+      c[i][j][0] = false;
+      c[i][j][c.z_ - 1] = false;
+    }
   }
-  REP(j, c.y_)
-  REP(k, c.z_) {
-    c[0][j][k] = false;
-    c[c.x_ - 1][j][k] = false;
+  for(int j = 0; j < c.y_; ++j) {
+    for(int k = 0; k < c.z_; ++k) {
+      c[0][j][k] = false;
+      c[c.x_ - 1][j][k] = false;
+    }
   }
-  REP(k, c.z_)
-  REP(i, c.x_) {
-    c[i][0][k] = false;
-    c[i][c.y_ - 1][k] = false;
+  for(int k = 0; k < c.z_; ++k) {
+    for(int i = 0; i < c.x_; ++i) {
+      c[i][0][k] = false;
+      c[i][c.y_ - 1][k] = false;
+    }
   }
 }
 static void remove_isolation_point(binary_cube &c) {
@@ -62,9 +64,7 @@ static void set_label(voxel *p, const int label) {
   }
 }
 void extractor::labeling() {
-  LOG(INFO) << "before_filter start";
   before_filter(cube_);
-  LOG(INFO) << "before_filter end";
   std::map<point<int>, std::shared_ptr<voxel> > voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
@@ -116,7 +116,7 @@ static void reset_flag(std::vector<std::shared_ptr<voxel> > &voxels) {
     p->flag_ = false;
 }
 static voxel *find_single_seed(std::vector<std::shared_ptr<voxel> > &group) {
-  CHECK(!group.empty());
+  assert(!group.empty());
   voxel *last = group[0].get();
   for (int i = 0; i < 2; ++i) {
     reset_flag(group);
@@ -183,7 +183,6 @@ static std::vector<point<int> > voxels_to_points(const std::vector<voxel *> vs) 
 }
 std::vector<std::shared_ptr<cluster> > extractor::extract() {
   labeling();
-  LOG(INFO) << "extract start";
   std::vector<std::shared_ptr<cluster> > ret;
   for (auto &&group : components_) {
     auto seed = find_single_seed(group);
@@ -197,7 +196,6 @@ std::vector<std::shared_ptr<cluster> > extractor::extract() {
       }
     }
   }
-  LOG(INFO) << "extract end";
   return ret;
 }
 } // namespace sigen

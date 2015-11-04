@@ -1,5 +1,6 @@
 #include "builder.h"
 #include "../common/disjoint_set.h"
+#include <cassert>
 #include <cmath>
 #include <algorithm>
 #include <utility>
@@ -7,7 +8,6 @@
 #include <queue>
 #include <stack>
 #include <set>
-#include <glog/logging.h>
 namespace sigen {
 builder::builder(const std::vector<std::shared_ptr<cluster> > &data,
                  const double scale_xy, const double scale_z)
@@ -23,7 +23,7 @@ void builder::connect_neighbor() {
   }
 }
 void builder::cut_loops() {
-  CHECK(is_radius_computed_);
+  assert(is_radius_computed_);
   // use kruskal like algorithm
   disjoint_set<cluster *> U;
   std::vector<std::pair<double, std::pair<cluster *, cluster *> > > E;
@@ -79,7 +79,7 @@ static neuron_node *find_edge(neuron_node *node) {
 }
 void builder::compute_gravity_point() {
   for (std::shared_ptr<cluster> cls : data_) {
-    CHECK(!cls->points_.empty());
+    assert(!cls->points_.empty());
     double sx = 0, sy = 0, sz = 0;
     for (const point<int> &p : cls->points_) {
       sx += p.x_;

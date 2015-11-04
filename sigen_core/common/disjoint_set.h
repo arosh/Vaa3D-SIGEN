@@ -1,10 +1,10 @@
 // https://www.topcoder.com/community/data-science/data-science-tutorials/disjoint-set-data-structures/
 #pragma once
 #include "noncopyable.h"
+#include <cassert>
 #include <vector>
 #include <map>
 #include <memory>
-#include <glog/logging.h>
 namespace sigen {
 class disjoint_set_internal {
   std::vector<int> data;
@@ -16,6 +16,7 @@ public:
   bool same(int x, int y);
   void merge(int x, int y);
 };
+
 template <class T>
 class disjoint_set : noncopyable {
   std::map<T, int> forward;
@@ -30,15 +31,15 @@ public:
     U = std::make_shared<disjoint_set_internal>(forward.size());
   }
   int size(T x) {
-    DCHECK((bool)U);
+    assert((bool)U);
     return U->size(forward[x]);
   }
   bool same(T x, T y) {
-    DCHECK((bool)U);
+    assert((bool)U);
     return U->same(forward[x], forward[y]);
   }
   void merge(T x, T y) {
-    DCHECK((bool)U);
+    assert((bool)U);
     U->merge(forward[x], forward[y]);
   }
 };
