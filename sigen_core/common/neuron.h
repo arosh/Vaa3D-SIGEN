@@ -19,7 +19,7 @@ public:
   neuron_type type_;
   std::vector<neuron_node *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
-  std::map<std::string, Variant> values_;
+  /* std::map<std::string, Variant> values_; */
   void add_connection(neuron_node *node);
 };
 class neuron /* : noncopyable */ {
