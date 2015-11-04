@@ -9,7 +9,7 @@
 #include <set>
 #include <glog/logging.h>
 namespace sigen {
-builder::builder(const std::vector<std::shared_ptr<cluster>> &data,
+builder::builder(const std::vector<std::shared_ptr<cluster> > &data,
                  const double scale_xy, const double scale_z)
     : data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
 void builder::connect_neighbor() {
@@ -26,7 +26,7 @@ void builder::cut_loops() {
   CHECK(is_radius_computed_);
   // use kruskal like algorithm
   disjoint_set<cluster *> U;
-  std::vector<std::pair<double, std::pair<cluster *, cluster *>>> E;
+  std::vector<std::pair<double, std::pair<cluster *, cluster *> > > E;
   for (std::shared_ptr<cluster> cls : data_) {
     U.add(cls.get());
     for (cluster *adj : cls->adjacent_) {
@@ -107,11 +107,11 @@ static bool check_adjacent(const cluster *a, const cluster *b) {
   auto iter = std::find(a->adjacent_.begin(), a->adjacent_.end(), b);
   return iter != a->adjacent_.end();
 }
-std::vector<std::shared_ptr<neuron_node>>
-builder::convert_to_neuron_node(std::vector<std::shared_ptr<cluster>> &data,
+std::vector<std::shared_ptr<neuron_node> >
+builder::convert_to_neuron_node(std::vector<std::shared_ptr<cluster> > &data,
                                 const double scale_xy, const double scale_z) {
-  std::vector<std::shared_ptr<neuron_node>> neuron_nodes;
-  std::vector<std::pair<int, int>> edges;
+  std::vector<std::shared_ptr<neuron_node> > neuron_nodes;
+  std::vector<std::pair<int, int> > edges;
   for (int i = 0; i < (int)data.size(); ++i) {
     auto n = std::make_shared<neuron_node>();
     n->gx_ = data[i]->gx_ * scale_xy;
@@ -133,9 +133,9 @@ builder::convert_to_neuron_node(std::vector<std::shared_ptr<cluster>> &data,
   return neuron_nodes;
 }
 std::vector<neuron>
-builder::convert_to_neuron(std::vector<std::shared_ptr<cluster>> &data,
+builder::convert_to_neuron(std::vector<std::shared_ptr<cluster> > &data,
                            const double scale_xy, const double scale_z) {
-  std::vector<std::shared_ptr<neuron_node>> neuron_nodes =
+  std::vector<std::shared_ptr<neuron_node> > neuron_nodes =
       convert_to_neuron_node(data, scale_xy, scale_z);
   // split into some neurons
   std::set<neuron_node *> used;

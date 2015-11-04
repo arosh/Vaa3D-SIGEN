@@ -127,13 +127,14 @@ Image3d CvtImage3d(
 // dump cube object to csv files.
 // csv file can be visualized using tools/image_csv.py
 void dump(const Image3d &cube) {
-  for(int z = 0; z < cube.z_; ++z) {
+  for (int z = 0; z < cube.z_; ++z) {
     char file_name[1024];
     sprintf(file_name, "/tmp/SIGEN/%04d.csv", z);
     ofstream ofs(file_name);
-    for(int y = 0; y < cube.y_; ++y) {
-      for(int x = 0; x < cube.x_; ++x) {
-        if(x > 0) ofs << " ";
+    for (int y = 0; y < cube.y_; ++y) {
+      for (int x = 0; x < cube.x_; ++x) {
+        if (x > 0)
+          ofs << " ";
         ofs << cube[x][y][z];
       }
       ofs << endl;

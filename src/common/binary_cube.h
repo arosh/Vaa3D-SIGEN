@@ -6,9 +6,9 @@ class binary_cube {
 public:
   int x_, y_, z_;
   // bool[][][]
-  std::vector<std::vector<std::vector<bool>>> data_;
+  std::vector<std::vector<std::vector<bool> > > data_;
   binary_cube(int x, int y, int z);
-  std::vector<std::vector<bool>> &operator[](int index);
+  std::vector<std::vector<bool> > &operator[](int index);
   void clear();
 };
 } // namespace sigen

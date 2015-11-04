@@ -10,8 +10,8 @@ class extractor : noncopyable {
 
 public:
   binary_cube cube_;
-  std::vector<std::vector<std::shared_ptr<voxel>>> components_;
+  std::vector<std::vector<std::shared_ptr<voxel> > > components_;
   explicit extractor(const binary_cube &cube);
-  std::vector<std::shared_ptr<cluster>> extract();
+  std::vector<std::shared_ptr<cluster> > extract();
 };
 } // namespace sigen

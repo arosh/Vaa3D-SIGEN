@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
   LOG(INFO) << "binarize (done)";
   is.clear();
   sigen::extractor ext(cube);
-  std::vector<std::shared_ptr<sigen::cluster>> clusters = ext.extract();
+  std::vector<std::shared_ptr<sigen::cluster> > clusters = ext.extract();
   LOG(INFO) << "extract (done)";
   cube.clear();
   sigen::builder builder(clusters, a.get<double>("scale-xy"),

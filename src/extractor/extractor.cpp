@@ -65,7 +65,7 @@ void extractor::labeling() {
   LOG(INFO) << "before_filter start";
   before_filter(cube_);
   LOG(INFO) << "before_filter end";
-  std::map<point<int>, std::shared_ptr<voxel>> voxels;
+  std::map<point<int>, std::shared_ptr<voxel> > voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
@@ -103,7 +103,7 @@ void extractor::labeling() {
       set_label(p.second.get(), label++);
     }
   }
-  components_.assign(label, std::vector<std::shared_ptr<voxel>>());
+  components_.assign(label, std::vector<std::shared_ptr<voxel> >());
   for (auto p : voxels) {
     components_[p.second->label_].push_back(p.second);
   }
@@ -111,11 +111,11 @@ void extractor::labeling() {
   std::sort(std::begin(components_), end(components_),
             [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
 }
-static void reset_flag(std::vector<std::shared_ptr<voxel>> &voxels) {
+static void reset_flag(std::vector<std::shared_ptr<voxel> > &voxels) {
   for (auto p : voxels)
     p->flag_ = false;
 }
-static voxel *find_single_seed(std::vector<std::shared_ptr<voxel>> &group) {
+static voxel *find_single_seed(std::vector<std::shared_ptr<voxel> > &group) {
   CHECK(!group.empty());
   voxel *last = group[0].get();
   for (int i = 0; i < 2; ++i) {
@@ -136,7 +136,7 @@ static voxel *find_single_seed(std::vector<std::shared_ptr<voxel>> &group) {
   }
   return last;
 }
-static void set_distance(std::vector<std::shared_ptr<voxel>> &group,
+static void set_distance(std::vector<std::shared_ptr<voxel> > &group,
                          voxel *seed) {
   reset_flag(group);
   std::queue<voxel *> que;
@@ -174,17 +174,17 @@ static std::vector<voxel *> extract_same_distance(voxel *seed) {
   }
   return ret;
 }
-static std::vector<point<int>> voxels_to_points(const std::vector<voxel *> vs) {
-  std::vector<point<int>> ps;
+static std::vector<point<int> > voxels_to_points(const std::vector<voxel *> vs) {
+  std::vector<point<int> > ps;
   for (const auto v : vs) {
     ps.emplace_back(v->x_, v->y_, v->z_);
   }
   return ps;
 }
-std::vector<std::shared_ptr<cluster>> extractor::extract() {
+std::vector<std::shared_ptr<cluster> > extractor::extract() {
   labeling();
   LOG(INFO) << "extract start";
-  std::vector<std::shared_ptr<cluster>> ret;
+  std::vector<std::shared_ptr<cluster> > ret;
   for (auto &&group : components_) {
     auto seed = find_single_seed(group);
     set_distance(group, seed);
@@ -192,7 +192,7 @@ std::vector<std::shared_ptr<cluster>> extractor::extract() {
     for (auto p : group) {
       if (p->flag_ == false) {
         std::vector<voxel *> vs = extract_same_distance(p.get());
-        std::vector<point<int>> ps = voxels_to_points(vs);
+        std::vector<point<int> > ps = voxels_to_points(vs);
         ret.push_back(std::make_shared<cluster>(ps));
       }
     }
