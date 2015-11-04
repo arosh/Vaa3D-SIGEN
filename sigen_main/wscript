@@ -12,6 +12,7 @@ def build(bld):
             'loader/file_loader.cpp',
             'writer/swc_writer.cpp',
             'writer/fileutils.cpp',
+            'binarizer/binarizer.cpp',
             'main.cpp'
         ],
         target='sigen_main',
