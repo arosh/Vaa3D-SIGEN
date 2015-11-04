@@ -2,7 +2,7 @@ from waflib import Options
 
 APPNAME = 'vaa3d_sigen'
 top = '.'
-subdirs = 'src test'
+subdirs = 'sigen_core sigen_main test'
 
 
 def options(opt):
