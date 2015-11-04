@@ -1,10 +1,14 @@
-#include "v3d_message.h"
+#include <cstdio>
+#include <cassert>
+#include <fstream>
 #include <vector>
 #include <string>
-#include <cassert>
+
 #include "basic_surf_objs.h"
+#include "v3d_message.h"
 
 #include "SIGEN_plugin.h"
+#include "image3d.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
 using namespace std;
@@ -93,6 +97,50 @@ bool SigenPlugin::dofunc(
   return true;
 }
 
+Image3d CvtImage3d(
+    const unsigned char *p,
+    const int unit_byte,
+    const int xdim,
+    const int ydim,
+    const int zdim,
+    const int channel_dim,
+    const int channel) {
+  const int stride_x = unit_byte;
+  const int stride_y = unit_byte * xdim;
+  const int stride_z = unit_byte * xdim * ydim;
+  const int stride_c = unit_byte * xdim * ydim * zdim;
+  Image3d cube(xdim, ydim, zdim);
+  for (int x = 0; x < xdim; ++x) {
+    for (int y = 0; y < ydim; ++y) {
+      for (int z = 0; z < zdim; ++z) {
+        if (p[stride_x * x + stride_y * y + stride_z * z + stride_c * channel] >= 128) {
+          cube[x][y][z] = true;
+        } else {
+          cube[x][y][z] = false;
+        }
+      }
+    }
+  }
+  return cube;
+}
+
+// dump cube object to csv files.
+// csv file can be visualized using tools/image_csv.py
+void dump(const Image3d &cube) {
+  for(int z = 0; z < cube.z_; ++z) {
+    char file_name[1024];
+    sprintf(file_name, "/tmp/SIGEN/%04d.csv", z);
+    ofstream ofs(file_name);
+    for(int y = 0; y < cube.y_; ++y) {
+      for(int x = 0; x < cube.x_; ++x) {
+        if(x > 0) ofs << " ";
+        ofs << cube[x][y][z];
+      }
+      ofs << endl;
+    }
+  }
+}
+
 void reconstruction_func(
     V3DPluginCallback2 &callback,
     QWidget *parent,
@@ -151,6 +199,8 @@ void reconstruction_func(
   //main neuron reconstruction code
   //// THIS IS WHERE THE DEVELOPERS SHOULD ADD THEIR OWN NEURON TRACING CODE
   //Output
+  Image3d cube = CvtImage3d(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
+  // dump(cube);
   NeuronTree nt;
   QString swc_name = PARA.inimg_file + "_SIGEN.swc";
   nt.name = "SIGEN";
