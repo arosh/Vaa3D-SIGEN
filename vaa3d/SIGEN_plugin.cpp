@@ -114,9 +114,9 @@ image3d cvt_to_image3d(
     for (int y = 0; y < ydim; ++y) {
       for (int z = 0; z < zdim; ++z) {
         if (p[stride_x * x + stride_y * y + stride_z * z + stride_c * channel] >= 128) {
-          cube(x,y,z) = true;
+          cube(x, y, z) = true;
         } else {
-          cube(x,y,z) = false;
+          cube(x, y, z) = false;
         }
       }
     }
@@ -135,7 +135,7 @@ void dump(const image3d &cube) {
       for (int x = 0; x < cube.x_; ++x) {
         if (x > 0)
           ofs << " ";
-        ofs << cube(x,y,z);
+        ofs << cube(x, y, z);
       }
       ofs << endl;
     }

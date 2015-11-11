@@ -9,20 +9,20 @@
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 static void clear_frame(binary_cube &c) {
-  for(int i = 0; i < c.x_; ++i) {
-    for(int j = 0; j < c.y_; ++j) {
+  for (int i = 0; i < c.x_; ++i) {
+    for (int j = 0; j < c.y_; ++j) {
       c[i][j][0] = false;
       c[i][j][c.z_ - 1] = false;
     }
   }
-  for(int j = 0; j < c.y_; ++j) {
-    for(int k = 0; k < c.z_; ++k) {
+  for (int j = 0; j < c.y_; ++j) {
+    for (int k = 0; k < c.z_; ++k) {
       c[0][j][k] = false;
       c[c.x_ - 1][j][k] = false;
     }
   }
-  for(int k = 0; k < c.z_; ++k) {
-    for(int i = 0; i < c.x_; ++i) {
+  for (int k = 0; k < c.z_; ++k) {
+    for (int i = 0; i < c.x_; ++i) {
       c[i][0][k] = false;
       c[i][c.y_ - 1][k] = false;
     }

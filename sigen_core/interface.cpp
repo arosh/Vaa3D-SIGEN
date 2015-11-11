@@ -35,7 +35,7 @@ static void write(
   out_pn[row] = parent_id;
   ++row;
 
-  for(const neuron_node *next : cur->adjacent_) {
+  for (const neuron_node *next : cur->adjacent_) {
     if (next->id_ != parent_id) {
       write(next, cur->id_, row, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
     }
@@ -52,9 +52,9 @@ void run(
   const int sx = 1;
   const int sy = x;
   const int sz = x * y;
-  for(int i = 0; i < x; ++i) {
-    for(int j = 0; j < y; ++j) {
-      for(int k = 0; k < z; ++k) {
+  for (int i = 0; i < x; ++i) {
+    for (int j = 0; j < y; ++j) {
+      for (int k = 0; k < z; ++k) {
         cube[i][j][k] = data_[sx * i + sy * j + sz * k];
       }
     }
@@ -66,7 +66,7 @@ void run(
   std::vector<sigen::neuron> neurons = bld.build();
 
   int count = 0;
-  for(int i = 0; i < (int)neurons.size(); ++i) {
+  for (int i = 0; i < (int)neurons.size(); ++i) {
     count += neurons[i].storage_.size();
   }
   *out_size = count;
@@ -79,7 +79,7 @@ void run(
   out_pn = new int[count];
 
   int row = 0;
-  for(int i = 0; i < (int)neurons.size(); ++i) {
+  for (int i = 0; i < (int)neurons.size(); ++i) {
     write(neurons[i].root_, -1, row, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
   }
 }
