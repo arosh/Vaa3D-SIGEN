@@ -97,7 +97,7 @@ bool SigenPlugin::dofunc(
   return true;
 }
 
-Image3d CvtImage3d(
+image3d cvt_to_image3d(
     const unsigned char *p,
     const int unit_byte,
     const int xdim,
@@ -109,14 +109,14 @@ Image3d CvtImage3d(
   const int stride_y = unit_byte * xdim;
   const int stride_z = unit_byte * xdim * ydim;
   const int stride_c = unit_byte * xdim * ydim * zdim;
-  Image3d cube(xdim, ydim, zdim);
+  image3d cube(xdim, ydim, zdim);
   for (int x = 0; x < xdim; ++x) {
     for (int y = 0; y < ydim; ++y) {
       for (int z = 0; z < zdim; ++z) {
         if (p[stride_x * x + stride_y * y + stride_z * z + stride_c * channel] >= 128) {
-          cube[x][y][z] = true;
+          cube(x,y,z) = true;
         } else {
-          cube[x][y][z] = false;
+          cube(x,y,z) = false;
         }
       }
     }
@@ -126,7 +126,7 @@ Image3d CvtImage3d(
 
 // dump cube object to csv files.
 // csv file can be visualized using tools/image_csv.py
-void dump(const Image3d &cube) {
+void dump(const image3d &cube) {
   for (int z = 0; z < cube.z_; ++z) {
     char file_name[1024];
     sprintf(file_name, "/tmp/SIGEN/%04d.csv", z);
@@ -135,11 +135,22 @@ void dump(const Image3d &cube) {
       for (int x = 0; x < cube.x_; ++x) {
         if (x > 0)
           ofs << " ";
-        ofs << cube[x][y][z];
+        ofs << cube(x,y,z);
       }
       ofs << endl;
     }
   }
+}
+
+bool sigen_config(QWidget *parent) {
+  QHBoxLayout *layout = new QHBoxLayout;
+  layout->addWidget(new QLabel(QObject::tr("foo")));
+  layout->addWidget(new QLabel(QObject::tr("bar")));
+
+  QDialog *dialog = new QDialog(parent);
+  dialog->setLayout(layout);
+  dialog->exec();
+  return true;
 }
 
 void reconstruction_func(
@@ -199,8 +210,8 @@ void reconstruction_func(
   }
   //main neuron reconstruction code
   //// THIS IS WHERE THE DEVELOPERS SHOULD ADD THEIR OWN NEURON TRACING CODE
-  //Output
-  Image3d cube = CvtImage3d(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
+  sigen_config(parent);
+  image3d cube = cvt_to_image3d(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
   // dump(cube);
   NeuronTree nt;
   QString swc_name = PARA.inimg_file + "_SIGEN.swc";

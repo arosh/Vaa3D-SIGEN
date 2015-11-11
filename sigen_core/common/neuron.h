@@ -24,7 +24,6 @@ public:
 };
 class neuron /* : noncopyable */ {
 public:
-  bool is_finalized_ = false;
   neuron_node *root_;
   std::vector<std::shared_ptr<neuron_node> > storage_;
 };

@@ -9,7 +9,9 @@ HEADERS += SIGEN_plugin.h image3d.h
 SOURCES += basic_surf_objs.cpp v3d_message.cpp
 SOURCES += SIGEN_plugin.cpp image3d.cpp
 
-LIBS += -L../build/sigen_core -lsigen_core
+# QMAKE_CXXFLAGS += -std=c++11 -Wno-reserved-user-defined-literal
+LIBS += -L../build/sigen_core -lsigen
 INCLUDEPATH += ../sigen_core
+# QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
 
 TARGET = $$qtLibraryTarget(SIGEN)

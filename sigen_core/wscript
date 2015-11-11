@@ -16,6 +16,7 @@ def build(bld):
             'common/cluster.cpp',
             'extractor/extractor.cpp',
             'builder/builder.cpp',
+            'interface.cpp'
         ],
         target='sigen')
 

@@ -22,6 +22,7 @@ void builder::connect_neighbor() {
     }
   }
 }
+
 void builder::cut_loops() {
   assert(is_radius_computed_);
   // use kruskal like algorithm
@@ -52,10 +53,12 @@ void builder::cut_loops() {
     }
   }
 }
+
 void builder::connect_interpolate(double dt) {
   // 重くなりそうなので，重心の距離で
   // pixel resolution???
 }
+
 static neuron_node *find_edge(neuron_node *node) {
   std::queue<neuron_node *> que;
   neuron_node *last = node;
@@ -77,6 +80,7 @@ static neuron_node *find_edge(neuron_node *node) {
   }
   return last;
 }
+
 void builder::compute_gravity_point() {
   for (std::shared_ptr<cluster> cls : data_) {
     assert(!cls->points_.empty());
@@ -91,6 +95,7 @@ void builder::compute_gravity_point() {
     cls->gz_ = sz / cls->points_.size();
   }
 }
+
 void builder::compute_radius() {
   for (std::shared_ptr<cluster> cls : data_) {
     double mdx = 0, mdy = 0, mdz = 0;
@@ -103,10 +108,12 @@ void builder::compute_radius() {
   }
   is_radius_computed_ = true;
 }
+
 static bool check_adjacent(const cluster *a, const cluster *b) {
   auto iter = std::find(a->adjacent_.begin(), a->adjacent_.end(), b);
   return iter != a->adjacent_.end();
 }
+
 std::vector<std::shared_ptr<neuron_node> >
 builder::convert_to_neuron_node(std::vector<std::shared_ptr<cluster> > &data,
                                 const double scale_xy, const double scale_z) {
@@ -132,6 +139,7 @@ builder::convert_to_neuron_node(std::vector<std::shared_ptr<cluster> > &data,
   }
   return neuron_nodes;
 }
+
 std::vector<neuron>
 builder::convert_to_neuron(std::vector<std::shared_ptr<cluster> > &data,
                            const double scale_xy, const double scale_z) {
@@ -167,6 +175,7 @@ builder::convert_to_neuron(std::vector<std::shared_ptr<cluster> > &data,
   }
   return neurons;
 }
+
 static void compute_id_inner(neuron_node *cur, neuron_node *prev, int &id) {
   cur->id_ = id++;
   for (neuron_node *next : cur->adjacent_) {
@@ -175,12 +184,14 @@ static void compute_id_inner(neuron_node *cur, neuron_node *prev, int &id) {
     }
   }
 }
+
 void builder::compute_id(std::vector<neuron> &ns) {
   int id = 1;
   for (int i = 0; i < (int)ns.size(); ++i) {
     compute_id_inner(ns[i].root_, nullptr, id);
   }
 }
+
 static void compute_node_type_inner(neuron_node *cur, neuron_node *prev) {
   neuron_type type;
   if (cur->adjacent_.size() >= 3)
@@ -196,11 +207,13 @@ static void compute_node_type_inner(neuron_node *cur, neuron_node *prev) {
     }
   }
 }
+
 void builder::compute_node_type(std::vector<neuron> &neu) {
   for (int i = 0; i < (int)neu.size(); ++i) {
     compute_node_type_inner(neu[i].root_, nullptr);
   }
 }
+
 std::vector<neuron> builder::build() {
   compute_gravity_point();
   compute_radius();

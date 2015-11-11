@@ -1,17 +1,23 @@
 #include "image3d.h"
 
-Image3d::Image3d(int x, int y, int z)
-    : x_(x), y_(y), z_(z),
-      data_(x, std::vector<std::vector<bool> >(y, std::vector<bool>(z))) {}
+image3d::image3d(int x, int y, int z)
+    : x_(x), y_(y), z_(z), data_(new bool[x*y*z])
+       {}
 
-std::vector<std::vector<bool> > &Image3d::operator[](int index) {
-  return data_[index];
+bool &image3d::operator()(int i, int j, int k) {
+  int sx = 1;
+  int sy = x_;
+  int sz = x_ * y_;
+  return data_[sx * i + sy * j + sz * k];
 }
 
-const std::vector<std::vector<bool> > &Image3d::operator[](int index) const {
-  return data_[index];
+const bool &image3d::operator()(int i, int j, int k) const {
+  int sx = 1;
+  int sy = x_;
+  int sz = x_ * y_;
+  return data_[sx * i + sy * j + sz * k];
 }
 
-void Image3d::clear() {
-  data_.clear();
+image3d::~image3d() {
+  delete[] data_;
 }
