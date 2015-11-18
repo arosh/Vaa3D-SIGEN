@@ -1,15 +1,17 @@
 #pragma once
 #include "variant.h"
-#include "noncopyable.h"
 #include <string>
 #include <vector>
 #include <map>
-#include <memory>
+#include <boost/utility.hpp>
+#include <boost/shared_ptr.hpp>
 namespace sigen {
-enum class neuron_type { EDGE,
-                         BRANCH,
-                         CONNECT };
-class neuron_node : noncopyable {
+enum neuron_type {
+  EDGE,
+  BRANCH,
+  CONNECT
+};
+class neuron_node : boost::noncopyable {
 public:
   // 1-based
   int id_;
@@ -25,6 +27,6 @@ public:
 class neuron /* : noncopyable */ {
 public:
   neuron_node *root_;
-  std::vector<std::shared_ptr<neuron_node> > storage_;
+  std::vector<boost::shared_ptr<neuron_node> > storage_;
 };
 } // namespace sigen

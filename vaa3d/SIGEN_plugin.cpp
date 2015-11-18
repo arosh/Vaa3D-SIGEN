@@ -9,6 +9,8 @@
 
 #include "SIGEN_plugin.h"
 #include "image3d.h"
+
+#include "interface.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
 using namespace std;
@@ -212,6 +214,15 @@ void reconstruction_func(
   //// THIS IS WHERE THE DEVELOPERS SHOULD ADD THEIR OWN NEURON TRACING CODE
   sigen_config(parent);
   image3d cube = cvt_to_image3d(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
+  int out_size;
+  int *out_n, *out_type, *out_pn;
+  double *out_x, *out_y, *out_z, *out_r;
+  sigen::interface::run(
+      cube.x_, cube.y_, cube.z_, cube.data_,
+      /* scale_xy = */ 1.0, /* scale_z = */ 1.0,
+      &out_size, &out_n, &out_type,
+      &out_x, &out_y, &out_z,
+      &out_r, &out_pn);
   // dump(cube);
   NeuronTree nt;
   QString swc_name = PARA.inimg_file + "_SIGEN.swc";

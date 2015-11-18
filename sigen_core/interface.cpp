@@ -3,6 +3,7 @@
 #include "common/binary_cube.h"
 #include "extractor/extractor.h"
 #include "builder/builder.h"
+#include <boost/shared_ptr.hpp>
 
 namespace sigen {
 namespace interface {
@@ -45,9 +46,9 @@ static void write(
 void run(
     const int x, const int y, const int z, const bool *data_,
     const double scale_xy, const double scale_z,
-    int *out_size, int *out_n, int *out_type,
-    double *out_x, double *out_y, double *out_z,
-    double *out_r, int *out_pn) {
+    int *out_size, int **out_n, int **out_type,
+    double **out_x, double **out_y, double **out_z,
+    double **out_r, int **out_pn) {
   binary_cube cube(x, y, z);
   const int sx = 1;
   const int sy = x;
@@ -61,7 +62,7 @@ void run(
   }
 
   sigen::extractor ext(cube);
-  std::vector<std::shared_ptr<sigen::cluster> > clusters = ext.extract();
+  std::vector<boost::shared_ptr<sigen::cluster> > clusters = ext.extract();
   sigen::builder bld(clusters, scale_xy, scale_z);
   std::vector<sigen::neuron> neurons = bld.build();
 
@@ -70,17 +71,17 @@ void run(
     count += neurons[i].storage_.size();
   }
   *out_size = count;
-  out_n = new int[count];
-  out_type = new int[count];
-  out_x = new double[count];
-  out_y = new double[count];
-  out_z = new double[count];
-  out_r = new double[count];
-  out_pn = new int[count];
+  *out_n = new int[count];
+  *out_type = new int[count];
+  *out_x = new double[count];
+  *out_y = new double[count];
+  *out_z = new double[count];
+  *out_r = new double[count];
+  *out_pn = new int[count];
 
   int row = 0;
   for (int i = 0; i < (int)neurons.size(); ++i) {
-    write(neurons[i].root_, -1, row, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
+    write(neurons[i].root_, -1, row, *out_n, *out_type, *out_x, *out_y, *out_z, *out_r, *out_pn);
   }
 }
 };

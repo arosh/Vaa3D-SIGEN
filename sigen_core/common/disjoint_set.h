@@ -1,10 +1,11 @@
 // https://www.topcoder.com/community/data-science/data-science-tutorials/disjoint-set-data-structures/
 #pragma once
-#include "noncopyable.h"
 #include <cassert>
 #include <vector>
 #include <map>
-#include <memory>
+#include <boost/utility.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 namespace sigen {
 class disjoint_set_internal {
   std::vector<int> data;
@@ -18,9 +19,9 @@ public:
 };
 
 template <class T>
-class disjoint_set : noncopyable {
+class disjoint_set : boost::noncopyable {
   std::map<T, int> forward;
-  std::shared_ptr<disjoint_set_internal> U;
+  boost::shared_ptr<disjoint_set_internal> U;
 
 public:
   void add(T x) {
@@ -28,7 +29,7 @@ public:
     forward[x] = next_id;
   }
   void setup() {
-    U = std::make_shared<disjoint_set_internal>(forward.size());
+    U = boost::make_shared<disjoint_set_internal>(forward.size());
   }
   int size(T x) {
     assert((bool)U);

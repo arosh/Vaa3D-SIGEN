@@ -1,11 +1,10 @@
 #pragma once
 #include "voxel.h"
 #include "point.h"
-#include "noncopyable.h"
+#include <boost/utility.hpp>
 #include <vector>
-#include <memory>
 namespace sigen {
-class cluster : noncopyable {
+class cluster : boost::noncopyable {
 public:
   double gx_, gy_, gz_;
   double radius_;

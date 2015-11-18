@@ -6,6 +6,7 @@
 #include <iterator>
 #include <queue>
 #include <vector>
+#include <boost/foreach.hpp>
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 static void clear_frame(binary_cube &c) {
@@ -63,14 +64,17 @@ static void set_label(voxel *p, const int label) {
     }
   }
 }
+template <class T> bool compare_size(const T &lhs, const T &rhs) {
+  return lhs.size() < rhs.size();
+}
 void extractor::labeling() {
   before_filter(cube_);
-  std::map<point<int>, std::shared_ptr<voxel> > voxels;
+  std::map<point<int>, boost::shared_ptr<voxel> > voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
-          voxels[point<int>(x, y, z)] = std::make_shared<voxel>(x, y, z);
+          voxels[point<int>(x, y, z)] = boost::make_shared<voxel>(x, y, z);
         }
       }
     }
@@ -103,19 +107,18 @@ void extractor::labeling() {
       set_label(p.second.get(), label++);
     }
   }
-  components_.assign(label, std::vector<std::shared_ptr<voxel> >());
+  components_.assign(label, std::vector<boost::shared_ptr<voxel> >());
   for (auto p : voxels) {
     components_[p.second->label_].push_back(p.second);
   }
-  typedef decltype(components_)::value_type V;
-  std::sort(std::begin(components_), end(components_),
-            [](V lhs, V rhs) -> bool { return lhs.size() > rhs.size(); });
+  std::sort(components_.begin(), components_.end(), &compare_size<std::vector<boost::shared_ptr<voxel> > >);
+  std::reverse(components_.begin(), components_.end());
 }
-static void reset_flag(std::vector<std::shared_ptr<voxel> > &voxels) {
+static void reset_flag(std::vector<boost::shared_ptr<voxel> > &voxels) {
   for (auto p : voxels)
     p->flag_ = false;
 }
-static voxel *find_single_seed(std::vector<std::shared_ptr<voxel> > &group) {
+static voxel *find_single_seed(std::vector<boost::shared_ptr<voxel> > &group) {
   assert(!group.empty());
   voxel *last = group[0].get();
   for (int i = 0; i < 2; ++i) {
@@ -136,7 +139,7 @@ static voxel *find_single_seed(std::vector<std::shared_ptr<voxel> > &group) {
   }
   return last;
 }
-static void set_distance(std::vector<std::shared_ptr<voxel> > &group,
+static void set_distance(std::vector<boost::shared_ptr<voxel> > &group,
                          voxel *seed) {
   reset_flag(group);
   std::queue<voxel *> que;
@@ -177,13 +180,13 @@ static std::vector<voxel *> extract_same_distance(voxel *seed) {
 static std::vector<point<int> > voxels_to_points(const std::vector<voxel *> vs) {
   std::vector<point<int> > ps;
   for (const auto v : vs) {
-    ps.emplace_back(v->x_, v->y_, v->z_);
+    ps.push_back(point<int>(v->x_, v->y_, v->z_));
   }
   return ps;
 }
-std::vector<std::shared_ptr<cluster> > extractor::extract() {
+std::vector<boost::shared_ptr<cluster> > extractor::extract() {
   labeling();
-  std::vector<std::shared_ptr<cluster> > ret;
+  std::vector<boost::shared_ptr<cluster> > ret;
   for (auto &&group : components_) {
     auto seed = find_single_seed(group);
     set_distance(group, seed);
@@ -192,7 +195,7 @@ std::vector<std::shared_ptr<cluster> > extractor::extract() {
       if (p->flag_ == false) {
         std::vector<voxel *> vs = extract_same_distance(p.get());
         std::vector<point<int> > ps = voxels_to_points(vs);
-        ret.push_back(std::make_shared<cluster>(ps));
+        ret.push_back(boost::make_shared<cluster>(ps));
       }
     }
   }

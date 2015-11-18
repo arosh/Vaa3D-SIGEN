@@ -16,7 +16,7 @@ def configure(conf):
     conf.load('compiler_cxx')
 
     # compiler options
-    conf.env.append_unique('CXXFLAGS', ['-std=c++11', '-Wall', '-Wextra', '-Wshadow',
+    conf.env.append_unique('CXXFLAGS', ['-std=c++03', '-Wall', '-Wextra', '-Wshadow',
                                         '-Woverloaded-virtual', '-Wnon-virtual-dtor', '-g'])
     conf.env.append_unique('LINKFLAGS', ['-g'])
 
