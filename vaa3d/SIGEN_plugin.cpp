@@ -212,7 +212,7 @@ void reconstruction_func(
   }
   //main neuron reconstruction code
   //// THIS IS WHERE THE DEVELOPERS SHOULD ADD THEIR OWN NEURON TRACING CODE
-  sigen_config(parent);
+  // sigen_config(parent);
   image3d cube = cvt_to_image3d(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
   int out_size;
   int *out_n, *out_type, *out_pn;
@@ -225,8 +225,21 @@ void reconstruction_func(
       &out_r, &out_pn);
   // dump(cube);
   NeuronTree nt;
+  nt.name = "test_name";
+  nt.comment = "test_comment";
+  printf("out_n = %d\n", *out_n);
+  for(int i = 0; i < *out_n; ++i) {
+    NeuronSWC pt;
+    pt.n = out_n[i];
+    pt.type = out_type[i];
+    pt.x = out_x[i];
+    pt.y = out_y[i];
+    pt.z = out_z[i];
+    pt.r = out_r[i];
+    pt.pn = out_pn[i];
+    nt.listNeuron.push_back(pt);
+  }
   QString swc_name = PARA.inimg_file + "_SIGEN.swc";
-  nt.name = "SIGEN";
   writeSWC_file(swc_name.toStdString().c_str(), nt);
   if (!via_gui) {
     if (data1d) {
