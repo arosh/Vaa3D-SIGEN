@@ -1,3 +1,7 @@
+## Note
+
+Before push, please run `./tools/cppformat.sh` and `./tools/lint.sh`.
+
 ## Architecture
 
 * loader :: (image\_files | vaa3d\_memory) -> image\_sequence
