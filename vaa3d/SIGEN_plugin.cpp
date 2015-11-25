@@ -13,8 +13,6 @@
 #include "common/binary_cube.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
-using namespace std;
-
 // v3d_main/basic_c_fun/v3d_interface.h
 // typedef QList<V3DPluginArgItem> V3DPluginArgList;
 
@@ -58,7 +56,7 @@ void SigenPlugin::domenu(
 static std::string GetArgString(const V3DPluginArgList &input, int index, int index2) {
   if (index >= input.size())
     return "";
-  const std::vector<char *> &vchar = *(vector<char *> *)input[index].p;
+  const std::vector<char *> &vchar = *(std::vector<char *> *)input[index].p;
   if (index2 >= vchar.size())
     return "";
   return vchar[index];
@@ -70,6 +68,7 @@ bool SigenPlugin::dofunc(
     V3DPluginArgList &output,
     V3DPluginCallback2 &callback,
     QWidget *parent) {
+  using std::vector;
   if (func_name == tr("trace")) {
     input_PARA PARA;
     vector<char *> *pinfiles = (input.size() >= 1) ? (vector<char *> *)input[0].p : 0;
@@ -131,15 +130,15 @@ sigen::binary_cube cvt_to_binary_cube(
 void dump(const sigen::binary_cube &cube) {
   for (int z = 0; z < cube.z_; ++z) {
     char file_name[1024];
-    sprintf(file_name, "/tmp/SIGEN/%04d.csv", z);
-    ofstream ofs(file_name);
+    snprintf(file_name, sizeof(file_name), "/tmp/SIGEN/%04d.csv", z);
+    std::ofstream ofs(file_name);
     for (int y = 0; y < cube.y_; ++y) {
       for (int x = 0; x < cube.x_; ++x) {
         if (x > 0)
           ofs << " ";
         ofs << cube[x][y][z];
       }
-      ofs << endl;
+      ofs << std::endl;
     }
   }
 }
@@ -225,7 +224,7 @@ void reconstruction_func(
   NeuronTree nt;
   nt.name = "test_name";
   nt.comment = "test_comment";
-  for(int i = 0; i < (int)out_n.size(); ++i) {
+  for (int i = 0; i < (int)out_n.size(); ++i) {
     NeuronSWC pt;
     pt.n = out_n[i];
     pt.type = out_type[i];

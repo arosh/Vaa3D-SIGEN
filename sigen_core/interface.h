@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "common/binary_cube.h"
 namespace sigen {
 namespace interface {

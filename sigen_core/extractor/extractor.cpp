@@ -1,5 +1,3 @@
-#include "extractor.h"
-#include "../common/point.h"
 #include <cassert>
 #include <map>
 #include <algorithm>
@@ -7,6 +5,8 @@
 #include <queue>
 #include <vector>
 #include <boost/foreach.hpp>
+#include "extractor/extractor.h"
+#include "common/point.h"
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 static void clear_frame(binary_cube &c) {
@@ -64,7 +64,8 @@ static void set_label(voxel *p, const int label) {
     }
   }
 }
-template <class T> bool compare_size(const T &lhs, const T &rhs) {
+template <class T>
+bool compare_size(const T &lhs, const T &rhs) {
   return lhs.size() < rhs.size();
 }
 void extractor::labeling() {
@@ -187,7 +188,8 @@ static std::vector<point<int> > voxels_to_points(const std::vector<voxel *> vs) 
 std::vector<boost::shared_ptr<cluster> > extractor::extract() {
   labeling();
   std::vector<boost::shared_ptr<cluster> > ret;
-  for (auto &&group : components_) {
+  // NOT const
+  for (std::vector<boost::shared_ptr<voxel> > &group : components_) {
     auto seed = find_single_seed(group);
     set_distance(group, seed);
     reset_flag(group);

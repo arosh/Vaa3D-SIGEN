@@ -1,8 +1,8 @@
 #pragma once
-#include "voxel.h"
-#include "point.h"
-#include <boost/utility.hpp>
 #include <vector>
+#include <boost/utility.hpp>
+#include "common/voxel.h"
+#include "common/point.h"
 namespace sigen {
 class cluster : boost::noncopyable {
 public:

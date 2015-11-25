@@ -1,8 +1,7 @@
 #include <cassert>
 #include <iostream>
-
+#include <vector>
 #include <boost/shared_ptr.hpp>
-
 #include "interface.h"
 #include "common/binary_cube.h"
 #include "extractor/extractor.h"
@@ -62,5 +61,5 @@ void run(
     write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
   }
 }
-};
-};
+}; // namespace interface
+}; // namespace sigen

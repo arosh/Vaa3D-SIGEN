@@ -9,5 +9,5 @@ namespace fileutils {
 // hello.swc -> hello.swc
 std::string add_extension(const std::string &fname,
                           const std::string &extention);
-};
-};
+}; // namespace fileutils
+}; // namespace sigen

@@ -1,10 +1,10 @@
 #pragma once
-#include "variant.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
+#include "common/variant.h"
 namespace sigen {
 enum neuron_type {
   EDGE,

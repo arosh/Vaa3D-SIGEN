@@ -6,13 +6,15 @@
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+
 namespace sigen {
+
 class disjoint_set_internal {
   std::vector<int> data;
   int root(int x);
 
 public:
-  disjoint_set_internal(int size);
+  explicit disjoint_set_internal(int size);
   int size(int x);
   bool same(int x, int y);
   void merge(int x, int y);
@@ -28,20 +30,25 @@ public:
     int next_id = forward.size();
     forward[x] = next_id;
   }
+
   void setup() {
     U = boost::make_shared<disjoint_set_internal>(forward.size());
   }
+
   int size(T x) {
     assert((bool)U);
     return U->size(forward[x]);
   }
+
   bool same(T x, T y) {
     assert((bool)U);
     return U->same(forward[x], forward[y]);
   }
+
   void merge(T x, T y) {
     assert((bool)U);
     U->merge(forward[x], forward[y]);
   }
 };
-}
+
+} // namespace sigen

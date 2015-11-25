@@ -1,7 +1,7 @@
-#include "swc_writer.h"
-#include "fileutils.h"
-#include <glog/logging.h>
 #include <string>
+#include <glog/logging.h>
+#include "writer/swc_writer.h"
+#include "writer/fileutils.h"
 namespace sigen {
 static void write_rec(std::ostream &os, const neuron_node *node,
                       const int parent_id) {

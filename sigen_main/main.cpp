@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include <glog/logging.h>
 #include "loader/file_loader.h"
 #include "binarizer/binarizer.h"

@@ -15,7 +15,7 @@ def build(bld):
             'binarizer/binarizer.cpp',
         ],
         target='sigen_io',
-        includes='../sigen_core')
+        includes='. ../sigen_core')
     bld.program(
         source=[
             'main.cpp'

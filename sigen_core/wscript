@@ -18,6 +18,7 @@ def build(bld):
             'builder/builder.cpp',
             'interface.cpp'
         ],
+        includes='.',
         target='sigen')
 
 # vim: filetype=python

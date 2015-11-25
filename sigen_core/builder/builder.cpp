@@ -1,5 +1,5 @@
-#include "builder.h"
-#include "../common/disjoint_set.h"
+#include "builder/builder.h"
+#include "common/disjoint_set.h"
 #include <cassert>
 #include <cmath>
 #include <algorithm>
@@ -41,7 +41,7 @@ void builder::cut_loops() {
   U.setup();
   std::sort(E.begin(), E.end());
   std::reverse(E.begin(), E.end());
-  for (auto &&it : E) {
+  for (const std::pair<double, std::pair<cluster *, cluster *> > &it : E) {
     cluster *a = it.second.first;
     cluster *b = it.second.second;
     if (U.same(a, b)) {
