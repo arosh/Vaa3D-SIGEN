@@ -4,7 +4,7 @@
 #include <map>
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
-#include "common/variant.h"
+// #include "common/variant.h"
 namespace sigen {
 enum neuron_type {
   EDGE,
@@ -21,7 +21,7 @@ public:
   neuron_type type_;
   std::vector<neuron_node *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
-  /* std::map<std::string, Variant> values_; */
+  // std::map<std::string, Variant> values_;
   void add_connection(neuron_node *node);
 };
 class neuron /* : noncopyable */ {
