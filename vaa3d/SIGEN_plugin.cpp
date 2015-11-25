@@ -8,9 +8,9 @@
 #include "v3d_message.h"
 
 #include "SIGEN_plugin.h"
-#include "image3d.h"
 
 #include "interface.h"
+#include "common/binary_cube.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
 using namespace std;
@@ -99,7 +99,7 @@ bool SigenPlugin::dofunc(
   return true;
 }
 
-image3d cvt_to_image3d(
+sigen::binary_cube cvt_to_binary_cube(
     const unsigned char *p,
     const int unit_byte,
     const int xdim,
@@ -111,14 +111,14 @@ image3d cvt_to_image3d(
   const int stride_y = unit_byte * xdim;
   const int stride_z = unit_byte * xdim * ydim;
   const int stride_c = unit_byte * xdim * ydim * zdim;
-  image3d cube(xdim, ydim, zdim);
+  sigen::binary_cube cube(xdim, ydim, zdim);
   for (int x = 0; x < xdim; ++x) {
     for (int y = 0; y < ydim; ++y) {
       for (int z = 0; z < zdim; ++z) {
         if (p[stride_x * x + stride_y * y + stride_z * z + stride_c * channel] >= 128) {
-          cube(x, y, z) = true;
+          cube[x][y][z] = true;
         } else {
-          cube(x, y, z) = false;
+          cube[x][y][z] = false;
         }
       }
     }
@@ -128,7 +128,7 @@ image3d cvt_to_image3d(
 
 // dump cube object to csv files.
 // csv file can be visualized using tools/image_csv.py
-void dump(const image3d &cube) {
+void dump(const sigen::binary_cube &cube) {
   for (int z = 0; z < cube.z_; ++z) {
     char file_name[1024];
     sprintf(file_name, "/tmp/SIGEN/%04d.csv", z);
@@ -137,7 +137,7 @@ void dump(const image3d &cube) {
       for (int x = 0; x < cube.x_; ++x) {
         if (x > 0)
           ofs << " ";
-        ofs << cube(x, y, z);
+        ofs << cube[x][y][z];
       }
       ofs << endl;
     }
@@ -213,22 +213,19 @@ void reconstruction_func(
   //main neuron reconstruction code
   //// THIS IS WHERE THE DEVELOPERS SHOULD ADD THEIR OWN NEURON TRACING CODE
   // sigen_config(parent);
-  image3d cube = cvt_to_image3d(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
-  int out_size;
-  int *out_n, *out_type, *out_pn;
-  double *out_x, *out_y, *out_z, *out_r;
+  sigen::binary_cube cube = cvt_to_binary_cube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
+  std::vector<int> out_n, out_type, out_pn;
+  std::vector<double> out_x, out_y, out_z, out_r;
   sigen::interface::run(
-      cube.x_, cube.y_, cube.z_, cube.data_,
-      /* scale_xy = */ 1.0, /* scale_z = */ 1.0,
-      &out_size, &out_n, &out_type,
-      &out_x, &out_y, &out_z,
-      &out_r, &out_pn);
+      cube, /* scale_xy = */ 1.0, /* scale_z = */ 1.0,
+      out_n, out_type,
+      out_x, out_y, out_z,
+      out_r, out_pn);
   // dump(cube);
   NeuronTree nt;
   nt.name = "test_name";
   nt.comment = "test_comment";
-  printf("out_n = %d\n", *out_n);
-  for(int i = 0; i < *out_n; ++i) {
+  for(int i = 0; i < (int)out_n.size(); ++i) {
     NeuronSWC pt;
     pt.n = out_n[i];
     pt.type = out_type[i];

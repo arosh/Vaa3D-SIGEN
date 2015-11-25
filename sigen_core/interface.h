@@ -1,10 +1,11 @@
 #pragma once
+#include "common/binary_cube.h"
 namespace sigen {
 namespace interface {
-void run(const int x, const int y, const int z, const bool *data_,
+void run(const binary_cube &cube,
          const double scale_xy, const double scale_z,
-         int *out_size, int **out_n, int **out_type,
-         double **out_x, double **out_y, double **out_z,
-         double **out_r, int **out_pn);
+         std::vector<int> &out_n, std::vector<int> &out_type,
+         std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
+         std::vector<double> &out_r, std::vector<int> &out_pn);
 };
 };

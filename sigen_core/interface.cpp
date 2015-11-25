@@ -1,17 +1,22 @@
 #include <cassert>
+#include <iostream>
+
+#include <boost/shared_ptr.hpp>
+
 #include "interface.h"
 #include "common/binary_cube.h"
 #include "extractor/extractor.h"
 #include "builder/builder.h"
-#include <boost/shared_ptr.hpp>
+
+#define DEBUG(x) std::cerr << #x << " = " << x << std::endl
 
 namespace sigen {
 namespace interface {
 static void write(
     const neuron_node *cur, const int parent_id,
-    int &row, int *out_n, int *out_type,
-    double *out_x, double *out_y, double *out_z,
-    double *out_r, int *out_pn) {
+    std::vector<int> &out_n, std::vector<int> &out_type,
+    std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
+    std::vector<double> &out_r, std::vector<int> &out_pn) {
   int type_id = -1;
   switch (cur->type_) {
   case neuron_type::EDGE:
@@ -27,61 +32,34 @@ static void write(
 
   assert(type_id != -1);
 
-  out_n[row] = cur->id_;
-  out_type[row] = type_id;
-  out_x[row] = cur->gx_;
-  out_y[row] = cur->gy_;
-  out_z[row] = cur->gz_;
-  out_r[row] = cur->radius_;
-  out_pn[row] = parent_id;
-  ++row;
+  out_n.push_back(cur->id_);
+  out_type.push_back(type_id);
+  out_x.push_back(cur->gx_);
+  out_y.push_back(cur->gy_);
+  out_z.push_back(cur->gz_);
+  out_r.push_back(cur->radius_);
+  out_pn.push_back(parent_id);
 
   for (const neuron_node *next : cur->adjacent_) {
     if (next->id_ != parent_id) {
-      write(next, cur->id_, row, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
+      write(next, cur->id_, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
     }
   }
 }
 
 void run(
-    const int x, const int y, const int z, const bool *data_,
+    const binary_cube &cube,
     const double scale_xy, const double scale_z,
-    int *out_size, int **out_n, int **out_type,
-    double **out_x, double **out_y, double **out_z,
-    double **out_r, int **out_pn) {
-  binary_cube cube(x, y, z);
-  const int sx = 1;
-  const int sy = x;
-  const int sz = x * y;
-  for (int i = 0; i < x; ++i) {
-    for (int j = 0; j < y; ++j) {
-      for (int k = 0; k < z; ++k) {
-        cube[i][j][k] = data_[sx * i + sy * j + sz * k];
-      }
-    }
-  }
-
+    std::vector<int> &out_n, std::vector<int> &out_type,
+    std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
+    std::vector<double> &out_r, std::vector<int> &out_pn) {
   sigen::extractor ext(cube);
   std::vector<boost::shared_ptr<sigen::cluster> > clusters = ext.extract();
   sigen::builder bld(clusters, scale_xy, scale_z);
   std::vector<sigen::neuron> neurons = bld.build();
 
-  int count = 0;
   for (int i = 0; i < (int)neurons.size(); ++i) {
-    count += neurons[i].storage_.size();
-  }
-  *out_size = count;
-  *out_n = new int[count];
-  *out_type = new int[count];
-  *out_x = new double[count];
-  *out_y = new double[count];
-  *out_z = new double[count];
-  *out_r = new double[count];
-  *out_pn = new int[count];
-
-  int row = 0;
-  for (int i = 0; i < (int)neurons.size(); ++i) {
-    write(neurons[i].root_, -1, row, *out_n, *out_type, *out_x, *out_y, *out_z, *out_r, *out_pn);
+    write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
   }
 }
 };

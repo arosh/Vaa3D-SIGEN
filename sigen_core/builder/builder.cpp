@@ -190,7 +190,7 @@ static void compute_id_inner(neuron_node *cur, neuron_node *prev, int &id) {
 void builder::compute_id(std::vector<neuron> &ns) {
   int id = 1;
   for (int i = 0; i < (int)ns.size(); ++i) {
-    compute_id_inner(ns[i].root_, nullptr, id);
+    compute_id_inner(ns[i].root_, NULL, id);
   }
 }
 
@@ -212,7 +212,7 @@ static void compute_node_type_inner(neuron_node *cur, neuron_node *prev) {
 
 void builder::compute_node_type(std::vector<neuron> &neu) {
   for (int i = 0; i < (int)neu.size(); ++i) {
-    compute_node_type_inner(neu[i].root_, nullptr);
+    compute_node_type_inner(neu[i].root_, NULL);
   }
 }
 
