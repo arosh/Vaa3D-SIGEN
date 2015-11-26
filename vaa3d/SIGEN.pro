@@ -2,6 +2,14 @@ VAA3DPATH = /Users/arosh/git/vaa3d
 
 TEMPLATE = lib
 CONFIG += qt plugin release
+
+TARGET = $$qtLibraryTarget(SIGEN)
+
+# http://stackoverflow.com/questions/2580934
+DESTDIR = build
+OBJECTS_DIR = build
+MOC_DIR = build
+
 QMAKE_CXXFLAGS += -Wno-c++11-extensions
 
 INCLUDEPATH += $$VAA3DPATH/v3d_main/basic_c_fun
@@ -13,13 +21,11 @@ HEADERS += SIGEN_plugin.h
 SOURCES += SIGEN_plugin.cpp
 
 INCLUDEPATH += ../sigen_core
+SOURCES += ../sigen_core/interface.cpp
+SOURCES += ../sigen_core/builder/builder.cpp
 SOURCES += ../sigen_core/common/binary_cube.cpp
+SOURCES += ../sigen_core/common/cluster.cpp
 SOURCES += ../sigen_core/common/disjoint_set.cpp
 SOURCES += ../sigen_core/common/neuron.cpp
 SOURCES += ../sigen_core/common/voxel.cpp
-SOURCES += ../sigen_core/common/cluster.cpp
 SOURCES += ../sigen_core/extractor/extractor.cpp
-SOURCES += ../sigen_core/builder/builder.cpp
-SOURCES += ../sigen_core/interface.cpp
-
-TARGET = $$qtLibraryTarget(SIGEN)

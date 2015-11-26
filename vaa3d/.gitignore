@@ -1,4 +1,2 @@
-*.o
-*.dylib
 Makefile
-moc_*.cpp
+build
