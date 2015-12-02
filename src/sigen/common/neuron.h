@@ -28,5 +28,6 @@ class neuron /* : noncopyable */ {
 public:
   neuron_node *root_;
   std::vector<boost::shared_ptr<neuron_node> > storage_;
+  neuron clone() const;
 };
 } // namespace sigen

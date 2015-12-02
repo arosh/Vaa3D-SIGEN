@@ -27,6 +27,7 @@ void builder::connect_neighbor() {
 void builder::cut_loops() {
   assert(is_radius_computed_);
   // use kruskal like algorithm
+  // see https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
   disjoint_set<cluster *> U;
   std::vector<std::pair<double, std::pair<cluster *, cluster *> > > E;
   for (boost::shared_ptr<cluster> cls : data_) {

@@ -31,6 +31,10 @@ int main(int argc, char *argv[]) {
   a.add<std::string>("output", 'o', "output filename");
   a.add<double>("scale-xy", '\0', "", false, 1.0);
   a.add<double>("scale-z", '\0', "", false, 1.0);
+  a.add<double>("vt", '\0', "volume threshold", false, 0.0);
+  a.add<double>("dt", '\0', "distance threshold", false, 0.0);
+  a.add<int>("clipping", '\0', "clipping level", false, 0);
+  a.add<int>("smoothing", '\0', "smoothing level", false, 0);
   a.parse_check(argc, argv);
 
   sigen::file_loader loader;
@@ -44,8 +48,7 @@ int main(int argc, char *argv[]) {
   std::vector<boost::shared_ptr<sigen::cluster> > clusters = ext.extract();
   LOG(INFO) << "extract (done)";
   cube.clear();
-  sigen::builder builder(clusters, a.get<double>("scale-xy"),
-                         a.get<double>("scale-z"));
+  sigen::builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
   std::vector<sigen::neuron> ns = builder.build();
   LOG(INFO) << "build (done)";
   sigen::swc_writer writer;
