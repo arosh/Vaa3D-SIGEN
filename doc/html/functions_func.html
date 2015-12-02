@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -83,6 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_m"><span>m</span></a></li>
+      <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
@@ -91,6 +100,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions_func.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -131,7 +154,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27">sigen::builder</a>
 </li>
 <li>builder()
-: <a class="el" href="classsigen_1_1builder.html#ac0e860e6bc526883aabc43f8fbd804e9">sigen::builder</a>
+: <a class="el" href="classsigen_1_1builder.html#aaad03426d33043d0ab04dd3660c15ac7">sigen::builder</a>
 </li>
 </ul>
 
@@ -144,7 +167,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classsigen_1_1binary__cube.html#a8c7934e9e5feb2f54fb8966eaa0fd6d2">sigen::binary_cube</a>
 </li>
 <li>cluster()
-: <a class="el" href="classsigen_1_1cluster.html#af522a253fea53444dfc60c6e44facbaa">sigen::cluster</a>
+: <a class="el" href="classsigen_1_1cluster.html#ac302b93d9bfb280dacf2524078c42244">sigen::cluster</a>
 </li>
 <li>compute_gravity_point()
 : <a class="el" href="classsigen_1_1builder.html#a4d6f1915811ad7a335213869e6c46220">sigen::builder</a>
@@ -165,10 +188,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classsigen_1_1builder.html#af7f3e5c5fd0dbdc4313413a208bab899">sigen::builder</a>
 </li>
 <li>convert_to_neuron()
-: <a class="el" href="classsigen_1_1builder.html#adc18b8145dcbb86ac880a9e459ced029">sigen::builder</a>
+: <a class="el" href="classsigen_1_1builder.html#a9a6a70972f77577e4f68fb4aecd6e121">sigen::builder</a>
 </li>
 <li>convert_to_neuron_node()
-: <a class="el" href="classsigen_1_1builder.html#a40e31dcb32d69a2087fcf1d4558b7598">sigen::builder</a>
+: <a class="el" href="classsigen_1_1builder.html#a7ce0343a2b5f495bd94f533d794926ef">sigen::builder</a>
 </li>
 <li>cut_loops()
 : <a class="el" href="classsigen_1_1builder.html#ad3796a2f588f6ab0b780c99616d5130c">sigen::builder</a>
@@ -185,7 +208,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
 <li>extract()
-: <a class="el" href="classsigen_1_1extractor.html#a33dce239bd2054adb83419782b59f6f8">sigen::extractor</a>
+: <a class="el" href="classsigen_1_1extractor.html#a3b77d2ee40cb586061bceb8d7695023a">sigen::extractor</a>
 </li>
 <li>extractor()
 : <a class="el" href="classsigen_1_1extractor.html#adf7d80d0bb02ad56c1c35b1622886a7f">sigen::extractor</a>
@@ -208,9 +231,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 
 
+<h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
+<li>noncopyable()
+: <a class="el" href="structsigen_1_1noncopyable.html#a60a0eb520cf30078c399069cb03f8a35">sigen::noncopyable</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
 <li>operator&lt;()
 : <a class="el" href="classsigen_1_1point.html#a1aee2298e7470cc27c92aaa4298a3269">sigen::point&lt; T &gt;</a>
+</li>
+<li>operator=()
+: <a class="el" href="structsigen_1_1noncopyable.html#a055fec99da6f6d8cffb5078e30fadfd0">sigen::noncopyable</a>
 </li>
 <li>operator[]()
 : <a class="el" href="classsigen_1_1binary__cube.html#a6216a2090038d134025f6f026bdd4331">sigen::binary_cube</a>
@@ -253,11 +286,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.10
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
+  </ul>
+</div>
 </body>
 </html>

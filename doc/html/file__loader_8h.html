@@ -4,10 +4,18 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>Vaa3D-SIGEN: src/loader/file_loader.h File Reference</title>
+<title>Vaa3D-SIGEN: src/sigen/loader/file_loader.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -65,6 +73,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('file__loader_8h.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -79,11 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1f6e0c4656fa8537bb95d4658659e347.html">loader</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
@@ -92,24 +110,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">file_loader.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="image__sequence_8h_source.html">../common/image_sequence.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="image__sequence_8h_source.html">sigen/common/image_sequence.h</a>&quot;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for file_loader.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="file__loader_8h__incl.png" border="0" usemap="#src_2loader_2file__loader_8h" alt=""/></div>
-<map name="src_2loader_2file__loader_8h" id="src_2loader_2file__loader_8h">
-<area shape="rect" id="node2" href="image__sequence_8h.html" title="../common/image_sequence.h" alt="" coords="68,79,267,104"/>
+<div class="center"><img src="file__loader_8h__incl.png" border="0" usemap="#src_2sigen_2loader_2file__loader_8h" alt=""/></div>
+<map name="src_2sigen_2loader_2file__loader_8h" id="src_2sigen_2loader_2file__loader_8h">
+<area shape="rect" id="node2" href="image__sequence_8h.html" title="sigen/common/image\l_sequence.h" alt="" coords="72,92,220,131"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="file__loader_8h__dep__incl.png" border="0" usemap="#src_2loader_2file__loader_8hdep" alt=""/></div>
-<map name="src_2loader_2file__loader_8hdep" id="src_2loader_2file__loader_8hdep">
-<area shape="rect" id="node2" href="file__loader_8cpp.html" title="src/loader/file_loader.cpp" alt="" coords="5,79,175,104"/>
-<area shape="rect" id="node3" href="main_8cpp.html" title="src/main.cpp" alt="" coords="199,79,296,104"/>
+<div class="center"><img src="file__loader_8h__dep__incl.png" border="0" usemap="#src_2sigen_2loader_2file__loader_8hdep" alt=""/></div>
+<map name="src_2sigen_2loader_2file__loader_8hdep" id="src_2sigen_2loader_2file__loader_8hdep">
+<area shape="rect" id="node2" href="file__loader_8cpp.html" title="src/sigen/loader/file\l_loader.cpp" alt="" coords="5,92,142,131"/>
+<area shape="rect" id="node3" href="main_8cpp.html" title="src/sigen/main.cpp" alt="" coords="166,99,298,124"/>
 </map>
 </div>
 </div>
@@ -126,11 +144,15 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.10
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_90fd0057698d1764b7415c4968ce4dff.html">sigen</a></li><li class="navelem"><a class="el" href="dir_b9791408a29821c8848b022090da18f9.html">loader</a></li><li class="navelem"><a class="el" href="file__loader_8h.html">file_loader.h</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
+  </ul>
+</div>
 </body>
 </html>

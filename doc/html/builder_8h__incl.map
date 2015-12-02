@@ -1,7 +1,6 @@
-<map id="src/builder/builder.h" name="src/builder/builder.h">
-<area shape="rect" id="node2" href="$cluster_8h.html" title="../common/cluster.h" alt="" coords="128,79,265,104"/>
-<area shape="rect" id="node9" href="$neuron_8h.html" title="../common/neuron.h" alt="" coords="435,79,575,104"/>
-<area shape="rect" id="node3" href="$voxel_8h.html" title="voxel.h" alt="" coords="158,152,222,177"/>
-<area shape="rect" id="node6" href="$point_8h.html" title="point.h" alt="" coords="22,152,83,177"/>
-<area shape="rect" id="node10" href="$variant_8h.html" title="variant.h" alt="" coords="592,152,665,177"/>
+<map id="src/sigen/builder/builder.h" name="src/sigen/builder/builder.h">
+<area shape="rect" id="node2" href="$cluster_8h.html" title="../common/cluster.h" alt="" coords="465,79,602,104"/>
+<area shape="rect" id="node9" href="$neuron_8h.html" title="../common/neuron.h" alt="" coords="736,152,876,177"/>
+<area shape="rect" id="node5" href="$voxel_8h.html" title="sigen/common/voxel.h" alt="" coords="457,152,611,177"/>
+<area shape="rect" id="node6" href="$point_8h.html" title="sigen/common/point.h" alt="" coords="179,152,331,177"/>
 </map>

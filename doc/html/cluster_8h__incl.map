@@ -1,4 +1,4 @@
-<map id="src/common/cluster.h" name="src/common/cluster.h">
-<area shape="rect" id="node2" href="$voxel_8h.html" title="voxel.h" alt="" coords="72,79,135,104"/>
-<area shape="rect" id="node5" href="$point_8h.html" title="point.h" alt="" coords="210,79,272,104"/>
+<map id="src/sigen/common/cluster.h" name="src/sigen/common/cluster.h">
+<area shape="rect" id="node4" href="$voxel_8h.html" title="sigen/common/voxel.h" alt="" coords="50,79,204,104"/>
+<area shape="rect" id="node5" href="$point_8h.html" title="sigen/common/point.h" alt="" coords="280,79,431,104"/>
 </map>

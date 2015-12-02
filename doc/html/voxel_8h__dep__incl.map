@@ -1,10 +1,11 @@
-<map id="src/common/voxel.h" name="src/common/voxel.h">
-<area shape="rect" id="node2" href="$cluster_8h.html" title="src/common/cluster.h" alt="" coords="199,79,347,104"/>
-<area shape="rect" id="node7" href="$extractor_8h.html" title="src/extractor/extractor.h" alt="" coords="359,152,520,177"/>
-<area shape="rect" id="node9" href="$voxel_8cpp.html" title="src/common/voxel.cpp" alt="" coords="459,79,613,104"/>
-<area shape="rect" id="node3" href="$builder_8h.html" title="src/builder/builder.h" alt="" coords="12,152,149,177"/>
-<area shape="rect" id="node6" href="$cluster_8cpp.html" title="src/common/cluster.cpp" alt="" coords="173,152,335,177"/>
-<area shape="rect" id="node4" href="$builder_8cpp.html" title="src/builder/builder.cpp" alt="" coords="5,225,156,251"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="206,225,303,251"/>
-<area shape="rect" id="node8" href="$extractor_8cpp.html" title="src/extractor/extractor.cpp" alt="" coords="352,225,527,251"/>
+<map id="src/sigen/common/voxel.h" name="src/sigen/common/voxel.h">
+<area shape="rect" id="node2" href="$cluster_8h.html" title="src/sigen/common/cluster.h" alt="" coords="234,79,417,104"/>
+<area shape="rect" id="node8" href="$extractor_8h.html" title="src/sigen/extractor\l/extractor.h" alt="" coords="424,152,554,191"/>
+<area shape="rect" id="node10" href="$voxel_8cpp.html" title="src/sigen/common/voxel.cpp" alt="" coords="514,79,704,104"/>
+<area shape="rect" id="node3" href="$builder_8h.html" title="src/sigen/builder/builder.h" alt="" coords="227,159,399,184"/>
+<area shape="rect" id="node7" href="$cluster_8cpp.html" title="src/sigen/common/cluster.cpp" alt="" coords="5,159,202,184"/>
+<area shape="rect" id="node4" href="$builder_8cpp.html" title="src/sigen/builder/builder.cpp" alt="" coords="29,245,216,271"/>
+<area shape="rect" id="node5" href="$interface_8cpp.html" title="src/sigen/interface.cpp" alt="" coords="240,245,395,271"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title="src/sigen/main.cpp" alt="" coords="419,245,551,271"/>
+<area shape="rect" id="node9" href="$extractor_8cpp.html" title="src/sigen/extractor\l/extractor.cpp" alt="" coords="576,239,706,277"/>
 </map>

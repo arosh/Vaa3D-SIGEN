@@ -1,6 +1,7 @@
 <map id="sigen::cluster::add_connection" name="sigen::cluster::add_connection">
-<area shape="rect" id="node2" href="$classsigen_1_1builder.html#a40e31dcb32d69a2087fcf1d4558b7598" title="sigen::builder::convert\l_to_neuron_node" alt="" coords="183,5,335,44"/>
-<area shape="rect" id="node3" href="$classsigen_1_1builder.html#adc18b8145dcbb86ac880a9e459ced029" title="sigen::builder::convert\l_to_neuron" alt="" coords="383,5,534,44"/>
-<area shape="rect" id="node4" href="$classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27" title="sigen::builder::build" alt="" coords="582,12,719,37"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="767,12,817,37"/>
+<area shape="rect" id="node2" href="$classsigen_1_1builder.html#a7ce0343a2b5f495bd94f533d794926ef" title="sigen::builder::convert\l_to_neuron_node" alt="" coords="183,24,335,63"/>
+<area shape="rect" id="node3" href="$classsigen_1_1builder.html#a9a6a70972f77577e4f68fb4aecd6e121" title="sigen::builder::convert\l_to_neuron" alt="" coords="383,24,534,63"/>
+<area shape="rect" id="node4" href="$classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27" title="sigen::builder::build" alt="" coords="582,31,719,56"/>
+<area shape="rect" id="node5" href="$namespacesigen_1_1interface.html#a303e935672e87c59a3441c36ed39339e" title="sigen::interface::run" alt="" coords="767,5,905,31"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="811,55,861,80"/>
 </map>

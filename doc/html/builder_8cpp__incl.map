@@ -1,9 +1,8 @@
-<map id="src/builder/builder.cpp" name="src/builder/builder.cpp">
-<area shape="rect" id="node2" href="$builder_8h.html" title="builder.h" alt="" coords="539,79,611,104"/>
-<area shape="rect" id="node15" href="$disjoint__set_8h.html" title="../common/disjoint\l_set.h" alt="" coords="713,152,842,191"/>
-<area shape="rect" id="node3" href="$cluster_8h.html" title="../common/cluster.h" alt="" coords="216,159,352,184"/>
-<area shape="rect" id="node10" href="$neuron_8h.html" title="../common/neuron.h" alt="" coords="505,159,645,184"/>
-<area shape="rect" id="node4" href="$voxel_8h.html" title="voxel.h" alt="" coords="192,239,256,264"/>
-<area shape="rect" id="node7" href="$point_8h.html" title="point.h" alt="" coords="5,239,67,264"/>
-<area shape="rect" id="node11" href="$variant_8h.html" title="variant.h" alt="" coords="576,239,648,264"/>
+<map id="src/sigen/builder/builder.cpp" name="src/sigen/builder/builder.cpp">
+<area shape="rect" id="node2" href="$builder_8h.html" title="sigen/builder/builder.h" alt="" coords="666,79,817,104"/>
+<area shape="rect" id="node14" href="$disjoint__set_8h.html" title="sigen/common/disjoint\l_set.h" alt="" coords="943,225,1096,264"/>
+<area shape="rect" id="node3" href="$cluster_8h.html" title="../common/cluster.h" alt="" coords="508,152,645,177"/>
+<area shape="rect" id="node10" href="$neuron_8h.html" title="../common/neuron.h" alt="" coords="779,232,919,257"/>
+<area shape="rect" id="node6" href="$voxel_8h.html" title="sigen/common/voxel.h" alt="" coords="500,232,654,257"/>
+<area shape="rect" id="node7" href="$point_8h.html" title="sigen/common/point.h" alt="" coords="171,232,323,257"/>
 </map>

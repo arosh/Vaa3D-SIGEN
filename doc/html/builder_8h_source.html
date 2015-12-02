@@ -4,10 +4,18 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>Vaa3D-SIGEN: src/builder/builder.h Source File</title>
+<title>Vaa3D-SIGEN: src/sigen/builder/builder.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -65,6 +73,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('builder_8h_source.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -79,11 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_3614a4769bf2e5108078b7811e118005.html">builder</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">builder.h</div>  </div>
@@ -92,23 +110,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="builder_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;../common/cluster.h&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;../common/neuron.h&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;boost/utility.hpp&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;boost/utility.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigen.html">sigen</a> {</div>
 <div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classsigen_1_1builder.html">    7</a></span>&#160;<span class="keyword">class </span><a class="code" href="classsigen_1_1builder.html">builder</a> : boost::noncopyable {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">bool</span> is_radius_computed_ = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">bool</span> is_radius_computed_;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classsigen_1_1builder.html#a153a4709d256ad8cabddba053441349c">   11</a></span>&#160;  std::vector&lt;std::shared_ptr&lt;cluster&gt;&gt; <a class="code" href="classsigen_1_1builder.html#a153a4709d256ad8cabddba053441349c">data_</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classsigen_1_1builder.html#ac2f7540cca962c867496891f7ba94bf6">   11</a></span>&#160;  std::vector&lt;boost::shared_ptr&lt;cluster&gt; &gt; <a class="code" href="classsigen_1_1builder.html#ac2f7540cca962c867496891f7ba94bf6">data_</a>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classsigen_1_1builder.html#a2d83132edfb3cfa811aa2ae164b85b6b">   12</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="classsigen_1_1builder.html#a50807f6113d74e70aff737516c24fdb9">scale_xy_</a>, <a class="code" href="classsigen_1_1builder.html#a2d83132edfb3cfa811aa2ae164b85b6b">scale_z_</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classsigen_1_1builder.html#ac0e860e6bc526883aabc43f8fbd804e9">builder</a>(<span class="keyword">const</span> std::vector&lt;std::shared_ptr&lt;cluster&gt;&gt; &amp;data,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classsigen_1_1builder.html#aaad03426d33043d0ab04dd3660c15ac7">builder</a>(<span class="keyword">const</span> std::vector&lt;boost::shared_ptr&lt;cluster&gt; &gt; &amp;data,</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                   <span class="keyword">const</span> <span class="keywordtype">double</span> scale_xy, <span class="keyword">const</span> <span class="keywordtype">double</span> scale_z);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  std::vector&lt;neuron&gt; <a class="code" href="classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27">build</a>();</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">static</span> std::vector&lt;neuron&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <a class="code" href="classsigen_1_1builder.html#adc18b8145dcbb86ac880a9e459ced029">convert_to_neuron</a>(std::vector&lt;std::shared_ptr&lt;cluster&gt;&gt; &amp;data,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <a class="code" href="classsigen_1_1builder.html#a9a6a70972f77577e4f68fb4aecd6e121">convert_to_neuron</a>(std::vector&lt;boost::shared_ptr&lt;cluster&gt; &gt; &amp;data,</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">double</span> scale_xy, <span class="keyword">const</span> <span class="keywordtype">double</span> scale_z);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">static</span> std::vector&lt;std::shared_ptr&lt;neuron_node&gt;&gt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="classsigen_1_1builder.html#a40e31dcb32d69a2087fcf1d4558b7598">convert_to_neuron_node</a>(std::vector&lt;std::shared_ptr&lt;cluster&gt;&gt; &amp;data,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">static</span> std::vector&lt;boost::shared_ptr&lt;neuron_node&gt; &gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <a class="code" href="classsigen_1_1builder.html#a7ce0343a2b5f495bd94f533d794926ef">convert_to_neuron_node</a>(std::vector&lt;boost::shared_ptr&lt;cluster&gt; &gt; &amp;data,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">double</span> scale_xy, <span class="keyword">const</span> <span class="keywordtype">double</span> scale_z);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classsigen_1_1builder.html#a2b702215ed0dcfd416c4689c2f8a2f83">compute_node_type</a>(std::vector&lt;neuron&gt; &amp;neu);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classsigen_1_1builder.html#abd5bfacd9e2538aefb4ac9e3f2cd8b3f">compute_id</a>(std::vector&lt;neuron&gt; &amp;neu);</div>
@@ -119,28 +137,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classsigen_1_1builder.html#a408ae1678b58dad69a45d8817b588bf5">compute_radius</a>();</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace sigen</span></div>
-<div class="ttc" id="classsigen_1_1builder_html_a79c3d331f1e5c4090b17c83374f0dc27"><div class="ttname"><a href="classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27">sigen::builder::build</a></div><div class="ttdeci">std::vector&lt; neuron &gt; build()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00204">builder.cpp:204</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a7ce0343a2b5f495bd94f533d794926ef"><div class="ttname"><a href="classsigen_1_1builder.html#a7ce0343a2b5f495bd94f533d794926ef">sigen::builder::convert_to_neuron_node</a></div><div class="ttdeci">static std::vector&lt; boost::shared_ptr&lt; neuron_node &gt; &gt; convert_to_neuron_node(std::vector&lt; boost::shared_ptr&lt; cluster &gt; &gt; &amp;data, const double scale_xy, const double scale_z)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00120">builder.cpp:120</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a79c3d331f1e5c4090b17c83374f0dc27"><div class="ttname"><a href="classsigen_1_1builder.html#a79c3d331f1e5c4090b17c83374f0dc27">sigen::builder::build</a></div><div class="ttdeci">std::vector&lt; neuron &gt; build()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00219">builder.cpp:219</a></div></div>
 <div class="ttc" id="classsigen_1_1builder_html_a2d83132edfb3cfa811aa2ae164b85b6b"><div class="ttname"><a href="classsigen_1_1builder.html#a2d83132edfb3cfa811aa2ae164b85b6b">sigen::builder::scale_z_</a></div><div class="ttdeci">double scale_z_</div><div class="ttdef"><b>Definition:</b> <a href="builder_8h_source.html#l00012">builder.h:12</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_adc18b8145dcbb86ac880a9e459ced029"><div class="ttname"><a href="classsigen_1_1builder.html#adc18b8145dcbb86ac880a9e459ced029">sigen::builder::convert_to_neuron</a></div><div class="ttdeci">static std::vector&lt; neuron &gt; convert_to_neuron(std::vector&lt; std::shared_ptr&lt; cluster &gt;&gt; &amp;data, const double scale_xy, const double scale_z)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00136">builder.cpp:136</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a9a6a70972f77577e4f68fb4aecd6e121"><div class="ttname"><a href="classsigen_1_1builder.html#a9a6a70972f77577e4f68fb4aecd6e121">sigen::builder::convert_to_neuron</a></div><div class="ttdeci">static std::vector&lt; neuron &gt; convert_to_neuron(std::vector&lt; boost::shared_ptr&lt; cluster &gt; &gt; &amp;data, const double scale_xy, const double scale_z)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00146">builder.cpp:146</a></div></div>
 <div class="ttc" id="namespacesigen_html"><div class="ttname"><a href="namespacesigen.html">sigen</a></div><div class="ttdef"><b>Definition:</b> <a href="binarizer_8cpp_source.html#l00005">binarizer.cpp:5</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_a40e31dcb32d69a2087fcf1d4558b7598"><div class="ttname"><a href="classsigen_1_1builder.html#a40e31dcb32d69a2087fcf1d4558b7598">sigen::builder::convert_to_neuron_node</a></div><div class="ttdeci">static std::vector&lt; std::shared_ptr&lt; neuron_node &gt; &gt; convert_to_neuron_node(std::vector&lt; std::shared_ptr&lt; cluster &gt;&gt; &amp;data, const double scale_xy, const double scale_z)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00111">builder.cpp:111</a></div></div>
 <div class="ttc" id="classsigen_1_1builder_html_a50807f6113d74e70aff737516c24fdb9"><div class="ttname"><a href="classsigen_1_1builder.html#a50807f6113d74e70aff737516c24fdb9">sigen::builder::scale_xy_</a></div><div class="ttdeci">double scale_xy_</div><div class="ttdef"><b>Definition:</b> <a href="builder_8h_source.html#l00012">builder.h:12</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_a153a4709d256ad8cabddba053441349c"><div class="ttname"><a href="classsigen_1_1builder.html#a153a4709d256ad8cabddba053441349c">sigen::builder::data_</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; cluster &gt; &gt; data_</div><div class="ttdef"><b>Definition:</b> <a href="builder_8h_source.html#l00011">builder.h:11</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_ac0e860e6bc526883aabc43f8fbd804e9"><div class="ttname"><a href="classsigen_1_1builder.html#ac0e860e6bc526883aabc43f8fbd804e9">sigen::builder::builder</a></div><div class="ttdeci">builder(const std::vector&lt; std::shared_ptr&lt; cluster &gt;&gt; &amp;data, const double scale_xy, const double scale_z)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00012">builder.cpp:12</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_a4d6f1915811ad7a335213869e6c46220"><div class="ttname"><a href="classsigen_1_1builder.html#a4d6f1915811ad7a335213869e6c46220">sigen::builder::compute_gravity_point</a></div><div class="ttdeci">void compute_gravity_point()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00080">builder.cpp:80</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_abd5bfacd9e2538aefb4ac9e3f2cd8b3f"><div class="ttname"><a href="classsigen_1_1builder.html#abd5bfacd9e2538aefb4ac9e3f2cd8b3f">sigen::builder::compute_id</a></div><div class="ttdeci">static void compute_id(std::vector&lt; neuron &gt; &amp;neu)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00178">builder.cpp:178</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_a2b702215ed0dcfd416c4689c2f8a2f83"><div class="ttname"><a href="classsigen_1_1builder.html#a2b702215ed0dcfd416c4689c2f8a2f83">sigen::builder::compute_node_type</a></div><div class="ttdeci">static void compute_node_type(std::vector&lt; neuron &gt; &amp;neu)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00199">builder.cpp:199</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_a0ab60412443d4faa6682034efcabe066"><div class="ttname"><a href="classsigen_1_1builder.html#a0ab60412443d4faa6682034efcabe066">sigen::builder::connect_interpolate</a></div><div class="ttdeci">void connect_interpolate(double dt)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00055">builder.cpp:55</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_af7f3e5c5fd0dbdc4313413a208bab899"><div class="ttname"><a href="classsigen_1_1builder.html#af7f3e5c5fd0dbdc4313413a208bab899">sigen::builder::connect_neighbor</a></div><div class="ttdeci">void connect_neighbor()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00015">builder.cpp:15</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_a408ae1678b58dad69a45d8817b588bf5"><div class="ttname"><a href="classsigen_1_1builder.html#a408ae1678b58dad69a45d8817b588bf5">sigen::builder::compute_radius</a></div><div class="ttdeci">void compute_radius()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00094">builder.cpp:94</a></div></div>
-<div class="ttc" id="classsigen_1_1builder_html_ad3796a2f588f6ab0b780c99616d5130c"><div class="ttname"><a href="classsigen_1_1builder.html#ad3796a2f588f6ab0b780c99616d5130c">sigen::builder::cut_loops</a></div><div class="ttdeci">void cut_loops()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00025">builder.cpp:25</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_aaad03426d33043d0ab04dd3660c15ac7"><div class="ttname"><a href="classsigen_1_1builder.html#aaad03426d33043d0ab04dd3660c15ac7">sigen::builder::builder</a></div><div class="ttdeci">builder(const std::vector&lt; boost::shared_ptr&lt; cluster &gt; &gt; &amp;data, const double scale_xy, const double scale_z)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00013">builder.cpp:13</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_ac2f7540cca962c867496891f7ba94bf6"><div class="ttname"><a href="classsigen_1_1builder.html#ac2f7540cca962c867496891f7ba94bf6">sigen::builder::data_</a></div><div class="ttdeci">std::vector&lt; boost::shared_ptr&lt; cluster &gt; &gt; data_</div><div class="ttdef"><b>Definition:</b> <a href="builder_8h_source.html#l00011">builder.h:11</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a4d6f1915811ad7a335213869e6c46220"><div class="ttname"><a href="classsigen_1_1builder.html#a4d6f1915811ad7a335213869e6c46220">sigen::builder::compute_gravity_point</a></div><div class="ttdeci">void compute_gravity_point()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00086">builder.cpp:86</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_abd5bfacd9e2538aefb4ac9e3f2cd8b3f"><div class="ttname"><a href="classsigen_1_1builder.html#abd5bfacd9e2538aefb4ac9e3f2cd8b3f">sigen::builder::compute_id</a></div><div class="ttdeci">static void compute_id(std::vector&lt; neuron &gt; &amp;neu)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00190">builder.cpp:190</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a2b702215ed0dcfd416c4689c2f8a2f83"><div class="ttname"><a href="classsigen_1_1builder.html#a2b702215ed0dcfd416c4689c2f8a2f83">sigen::builder::compute_node_type</a></div><div class="ttdeci">static void compute_node_type(std::vector&lt; neuron &gt; &amp;neu)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00213">builder.cpp:213</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a0ab60412443d4faa6682034efcabe066"><div class="ttname"><a href="classsigen_1_1builder.html#a0ab60412443d4faa6682034efcabe066">sigen::builder::connect_interpolate</a></div><div class="ttdeci">void connect_interpolate(double dt)</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00059">builder.cpp:59</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_af7f3e5c5fd0dbdc4313413a208bab899"><div class="ttname"><a href="classsigen_1_1builder.html#af7f3e5c5fd0dbdc4313413a208bab899">sigen::builder::connect_neighbor</a></div><div class="ttdeci">void connect_neighbor()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00016">builder.cpp:16</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_a408ae1678b58dad69a45d8817b588bf5"><div class="ttname"><a href="classsigen_1_1builder.html#a408ae1678b58dad69a45d8817b588bf5">sigen::builder::compute_radius</a></div><div class="ttdeci">void compute_radius()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00101">builder.cpp:101</a></div></div>
+<div class="ttc" id="classsigen_1_1builder_html_ad3796a2f588f6ab0b780c99616d5130c"><div class="ttname"><a href="classsigen_1_1builder.html#ad3796a2f588f6ab0b780c99616d5130c">sigen::builder::cut_loops</a></div><div class="ttdeci">void cut_loops()</div><div class="ttdef"><b>Definition:</b> <a href="builder_8cpp_source.html#l00027">builder.cpp:27</a></div></div>
 <div class="ttc" id="classsigen_1_1builder_html"><div class="ttname"><a href="classsigen_1_1builder.html">sigen::builder</a></div><div class="ttdef"><b>Definition:</b> <a href="builder_8h_source.html#l00007">builder.h:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.10
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_90fd0057698d1764b7415c4968ce4dff.html">sigen</a></li><li class="navelem"><a class="el" href="dir_a05a8c6af9692238b8a48d570e00dda8.html">builder</a></li><li class="navelem"><a class="el" href="builder_8h.html">builder.h</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
+  </ul>
+</div>
 </body>
 </html>

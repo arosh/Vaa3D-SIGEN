@@ -4,10 +4,18 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>Vaa3D-SIGEN: src/builder/builder.cpp File Reference</title>
+<title>Vaa3D-SIGEN: src/sigen/builder/builder.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -65,6 +73,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('builder_8cpp.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -79,11 +102,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_3614a4769bf2e5108078b7811e118005.html">builder</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a>  </div>
@@ -91,8 +109,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">builder.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="builder_8h_source.html">builder.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="disjoint__set_8h_source.html">../common/disjoint_set.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="builder_8h_source.html">sigen/builder/builder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="disjoint__set_8h_source.html">sigen/common/disjoint_set.h</a>&quot;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
@@ -100,19 +119,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;queue&gt;</code><br />
 <code>#include &lt;stack&gt;</code><br />
 <code>#include &lt;set&gt;</code><br />
-<code>#include &lt;glog/logging.h&gt;</code><br />
+<code>#include &lt;boost/foreach.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for builder.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="builder_8cpp__incl.png" border="0" usemap="#src_2builder_2builder_8cpp" alt=""/></div>
-<map name="src_2builder_2builder_8cpp" id="src_2builder_2builder_8cpp">
-<area shape="rect" id="node2" href="builder_8h.html" title="builder.h" alt="" coords="539,79,611,104"/>
-<area shape="rect" id="node15" href="disjoint__set_8h.html" title="../common/disjoint\l_set.h" alt="" coords="713,152,842,191"/>
-<area shape="rect" id="node3" href="cluster_8h.html" title="../common/cluster.h" alt="" coords="216,159,352,184"/>
-<area shape="rect" id="node10" href="neuron_8h.html" title="../common/neuron.h" alt="" coords="505,159,645,184"/>
-<area shape="rect" id="node4" href="voxel_8h.html" title="voxel.h" alt="" coords="192,239,256,264"/>
-<area shape="rect" id="node7" href="point_8h.html" title="point.h" alt="" coords="5,239,67,264"/>
-<area shape="rect" id="node11" href="variant_8h.html" title="variant.h" alt="" coords="576,239,648,264"/>
+<div class="center"><img src="builder_8cpp__incl.png" border="0" usemap="#src_2sigen_2builder_2builder_8cpp" alt=""/></div>
+<map name="src_2sigen_2builder_2builder_8cpp" id="src_2sigen_2builder_2builder_8cpp">
+<area shape="rect" id="node2" href="builder_8h.html" title="sigen/builder/builder.h" alt="" coords="666,79,817,104"/>
+<area shape="rect" id="node14" href="disjoint__set_8h.html" title="sigen/common/disjoint\l_set.h" alt="" coords="943,225,1096,264"/>
+<area shape="rect" id="node3" href="cluster_8h.html" title="../common/cluster.h" alt="" coords="508,152,645,177"/>
+<area shape="rect" id="node10" href="neuron_8h.html" title="../common/neuron.h" alt="" coords="779,232,919,257"/>
+<area shape="rect" id="node6" href="voxel_8h.html" title="sigen/common/voxel.h" alt="" coords="500,232,654,257"/>
+<area shape="rect" id="node7" href="point_8h.html" title="sigen/common/point.h" alt="" coords="171,232,323,257"/>
 </map>
 </div>
 </div>
@@ -124,11 +142,15 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.10
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_90fd0057698d1764b7415c4968ce4dff.html">sigen</a></li><li class="navelem"><a class="el" href="dir_a05a8c6af9692238b8a48d570e00dda8.html">builder</a></li><li class="navelem"><a class="el" href="builder_8cpp.html">builder.cpp</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>
+  </ul>
+</div>
 </body>
 </html>

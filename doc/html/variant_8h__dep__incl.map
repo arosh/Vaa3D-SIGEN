@@ -1,9 +1,0 @@
-<map id="src/common/variant.h" name="src/common/variant.h">
-<area shape="rect" id="node2" href="$neuron_8h.html" title="src/common/neuron.h" alt="" coords="180,79,331,104"/>
-<area shape="rect" id="node3" href="$builder_8h.html" title="src/builder/builder.h" alt="" coords="12,152,149,177"/>
-<area shape="rect" id="node6" href="$neuron_8cpp.html" title="src/common/neuron.cpp" alt="" coords="173,152,338,177"/>
-<area shape="rect" id="node7" href="$swc__writer_8h.html" title="src/writer/swc_writer.h" alt="" coords="362,152,514,177"/>
-<area shape="rect" id="node4" href="$builder_8cpp.html" title="src/builder/builder.cpp" alt="" coords="5,225,156,251"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="207,225,304,251"/>
-<area shape="rect" id="node8" href="$swc__writer_8cpp.html" title="src/writer/swc_writer.cpp" alt="" coords="355,225,521,251"/>
-</map>
