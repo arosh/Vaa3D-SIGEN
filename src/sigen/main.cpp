@@ -2,11 +2,11 @@
 #include <vector>
 #include <string>
 #include <glog/logging.h>
-#include "loader/file_loader.h"
-#include "binarizer/binarizer.h"
-#include "extractor/extractor.h"
-#include "builder/builder.h"
-#include "writer/swc_writer.h"
+#include "sigen/loader/file_loader.h"
+#include "sigen/binarizer/binarizer.h"
+#include "sigen/extractor/extractor.h"
+#include "sigen/builder/builder.h"
+#include "sigen/writer/swc_writer.h"
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas

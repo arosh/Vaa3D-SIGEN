@@ -5,8 +5,8 @@
 #include <queue>
 #include <vector>
 #include <boost/foreach.hpp>
-#include "extractor/extractor.h"
-#include "common/point.h"
+#include "sigen/extractor/extractor.h"
+#include "sigen/common/point.h"
 namespace sigen {
 extractor::extractor(const binary_cube &cube) : cube_(cube) {}
 static void clear_frame(binary_cube &c) {

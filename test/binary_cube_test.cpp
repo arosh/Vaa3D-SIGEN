@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <common/binary_cube.h>
+#include "sigen/common/binary_cube.h"
 TEST(binary_cube, init) {
   sigen::binary_cube cube(2, 3, 4);
   EXPECT_EQ(2, cube.x_);

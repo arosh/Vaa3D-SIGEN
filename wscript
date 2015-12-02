@@ -2,12 +2,12 @@ from waflib import Options
 
 APPNAME = 'vaa3d_sigen'
 top = '.'
-subdirs = 'sigen_core sigen_main test'
+subdirs = 'src test'
 
 
 def options(opt):
     opt.load('compiler_cxx')
-    # If you specify `./waf configure --debug`, debug build will be enabled.
+    # If you run `./waf configure --debug`, debug options will be enabled.
     opt.add_option('--debug', action='store_true')
     opt.recurse(subdirs)
 
@@ -33,10 +33,10 @@ def configure(conf):
         conf.env.append_unique('CXXFLAGS', '-O2')
 
     # libraries
-    conf.check_cxx(lib='boost_system')
-    conf.check_cxx(lib='boost_filesystem')
-    conf.check_cxx(lib='glog')
-    conf.check_cfg(package='opencv', args='--cflags --libs')
+    conf.check_cxx(lib='boost_system', mandatory=True)
+    conf.check_cxx(lib='boost_filesystem', mandatory=True)
+    conf.check_cxx(lib='glog', mandatory=False)
+    conf.check_cfg(package='opencv', args='--cflags --libs', mandatory=False)
 
     conf.recurse(subdirs)
 

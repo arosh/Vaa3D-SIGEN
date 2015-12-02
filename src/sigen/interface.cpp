@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 #include <boost/shared_ptr.hpp>
-#include "interface.h"
-#include "common/binary_cube.h"
-#include "extractor/extractor.h"
-#include "builder/builder.h"
+#include "sigen/interface.h"
+#include "sigen/common/binary_cube.h"
+#include "sigen/extractor/extractor.h"
+#include "sigen/builder/builder.h"
 
 #define DEBUG(x) std::cerr << #x << " = " << x << std::endl
 

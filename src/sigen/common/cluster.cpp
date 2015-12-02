@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <vector>
 #include <boost/foreach.hpp>
-#include "common/cluster.h"
+#include "sigen/common/cluster.h"
 namespace sigen {
 cluster::cluster(const std::vector<point<int> > &ps) : points_(ps) {}
 bool cluster::check_neighbor(const cluster *other) {

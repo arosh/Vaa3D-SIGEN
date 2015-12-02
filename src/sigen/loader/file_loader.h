@@ -1,5 +1,5 @@
 #pragma once
-#include "../common/image_sequence.h"
+#include "sigen/common/image_sequence.h"
 #include <string>
 #include <vector>
 namespace sigen {

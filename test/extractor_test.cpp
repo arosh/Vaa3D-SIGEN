@@ -1,6 +1,6 @@
 #include <iostream>
 #include <gtest/gtest.h>
-#include <extractor/extractor.h>
+#include "sigen/extractor/extractor.h"
 using namespace std;
 using namespace sigen;
 TEST(extractor, labeling) {

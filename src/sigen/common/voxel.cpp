@@ -1,6 +1,6 @@
 #include <cassert>
 #include <algorithm>
-#include "common/voxel.h"
+#include "sigen/common/voxel.h"
 namespace sigen {
 voxel::voxel(int x, int y, int z)
     : x_(x), y_(y), z_(z), flag_(false), label_(-1) {}

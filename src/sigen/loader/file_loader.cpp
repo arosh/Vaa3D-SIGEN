@@ -3,7 +3,7 @@
 #include <string>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
-#include "loader/file_loader.h"
+#include "sigen/loader/file_loader.h"
 
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push

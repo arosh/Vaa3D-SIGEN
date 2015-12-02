@@ -9,8 +9,8 @@
 
 #include "SIGEN_plugin.h"
 
-#include "interface.h"
-#include "common/binary_cube.h"
+#include "sigen/interface.h"
+#include "sigen/common/binary_cube.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
 // v3d_main/basic_c_fun/v3d_interface.h

@@ -11,7 +11,7 @@ def build(bld):
         features='gtest',
         source=bld.path.ant_glob('*.cpp'),
         target='test',
-        includes='../sigen_core ../sigen_main',
+        includes='../src',
         use='sigen sigen_io BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
 
 # vim: filetype=python

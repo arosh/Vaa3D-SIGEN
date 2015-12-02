@@ -1,0 +1,42 @@
+def options(opt):
+    pass
+
+
+def configure(conf):
+    pass
+
+
+def build(bld):
+    bld.stlib(
+        source=[
+            'sigen/common/binary_cube.cpp',
+            'sigen/common/disjoint_set.cpp',
+            'sigen/common/neuron.cpp',
+            'sigen/common/voxel.cpp',
+            'sigen/common/cluster.cpp',
+            'sigen/extractor/extractor.cpp',
+            'sigen/builder/builder.cpp',
+            'sigen/interface.cpp',
+        ],
+        includes='.',
+        target='sigen')
+
+    bld.stlib(
+        source=[
+            'sigen/loader/file_loader.cpp',
+            'sigen/writer/swc_writer.cpp',
+            'sigen/writer/fileutils.cpp',
+            'sigen/binarizer/binarizer.cpp',
+        ],
+        includes='.',
+        target='sigen_io')
+
+    bld.program(
+        source=[
+            'sigen/main.cpp',
+        ],
+        target='main',
+        includes='. ../third_party',
+        use='sigen sigen_io OPENCV BOOST_SYSTEM BOOST_FILESYSTEM GLOG')
+
+# vim: filetype=python

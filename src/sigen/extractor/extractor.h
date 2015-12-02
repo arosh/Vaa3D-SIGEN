@@ -1,6 +1,6 @@
-#include "../common/binary_cube.h"
-#include "../common/cluster.h"
-#include "../common/voxel.h"
+#include "sigen/common/binary_cube.h"
+#include "sigen/common/cluster.h"
+#include "sigen/common/voxel.h"
 #include <vector>
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>

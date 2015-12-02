@@ -1,5 +1,5 @@
 #pragma once
-#include "common/neuron.h"
+#include "sigen/common/neuron.h"
 #include <string>
 #include <fstream>
 namespace sigen {

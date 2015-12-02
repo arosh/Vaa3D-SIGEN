@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include <builder/builder.h>
-#include <extractor/extractor.h>
+#include "sigen/builder/builder.h"
+#include "sigen/extractor/extractor.h"
 using namespace sigen;
 TEST(builder, connect_neighbor) {
   binary_cube cube(5, 5, 3);

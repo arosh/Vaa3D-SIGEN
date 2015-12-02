@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "common/binary_cube.h"
+#include "sigen/common/binary_cube.h"
 namespace sigen {
 namespace interface {
 void run(const binary_cube &cube,

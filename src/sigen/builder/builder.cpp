@@ -1,5 +1,5 @@
-#include "builder/builder.h"
-#include "common/disjoint_set.h"
+#include "sigen/builder/builder.h"
+#include "sigen/common/disjoint_set.h"
 #include <cassert>
 #include <cmath>
 #include <algorithm>
