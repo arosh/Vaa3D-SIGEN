@@ -1,5 +1,4 @@
-#ifndef __SIGEN_PLUGIN_H__
-#define __SIGEN_PLUGIN_H__
+#pragma once
 
 #include <QtGui>
 #include <v3d_interface.h>
@@ -25,5 +24,3 @@ public:
       V3DPluginCallback2 &callback,
       QWidget *parent);
 };
-
-#endif
