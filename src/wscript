@@ -16,6 +16,7 @@ def build(bld):
             'sigen/common/cluster.cpp',
             'sigen/extractor/extractor.cpp',
             'sigen/builder/builder.cpp',
+            'sigen/neuronprocess/neuronprocess.cpp',
             'sigen/interface.cpp',
         ],
         includes='.',
