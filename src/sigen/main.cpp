@@ -7,6 +7,7 @@
 #include "sigen/extractor/extractor.h"
 #include "sigen/builder/builder.h"
 #include "sigen/writer/swc_writer.h"
+#include "sigen/neuronprocess/neuronprocess.h"
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
@@ -31,8 +32,8 @@ int main(int argc, char *argv[]) {
   a.add<std::string>("output", 'o', "output filename");
   a.add<double>("scale-xy", '\0', "", false, 1.0);
   a.add<double>("scale-z", '\0', "", false, 1.0);
-  a.add<double>("vt", '\0', "volume threshold", false, 0.0);
   a.add<double>("dt", '\0', "distance threshold", false, 0.0);
+  a.add<int>("vt", '\0', "volume threshold", false, 0);
   a.add<int>("clipping", '\0', "clipping level", false, 0);
   a.add<int>("smoothing", '\0', "smoothing level", false, 0);
   a.parse_check(argc, argv);
@@ -51,6 +52,8 @@ int main(int argc, char *argv[]) {
   sigen::builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
   std::vector<sigen::neuron> ns = builder.build();
   LOG(INFO) << "build (done)";
+  ns = sigen::interpolate(ns, a.get<double>("dt"), a.get<int>("vt"));
+  LOG(INFO) << "interpolate (done)";
   sigen::swc_writer writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =

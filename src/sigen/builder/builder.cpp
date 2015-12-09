@@ -57,11 +57,6 @@ void builder::cut_loops() {
   }
 }
 
-void builder::connect_interpolate(double dt) {
-  // 重くなりそうなので，重心の距離で
-  // pixel resolution???
-}
-
 static neuron_node *find_edge(neuron_node *node) {
   std::queue<neuron_node *> que;
   neuron_node *last = node;

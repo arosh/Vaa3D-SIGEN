@@ -37,16 +37,21 @@ public:
 
   int size(T x) {
     assert((bool)U);
+    assert((bool)forward.count(x));
     return U->size(forward[x]);
   }
 
   bool same(T x, T y) {
     assert((bool)U);
+    assert((bool)forward.count(x));
+    assert((bool)forward.count(y));
     return U->same(forward[x], forward[y]);
   }
 
   void merge(T x, T y) {
     assert((bool)U);
+    assert((bool)forward.count(x));
+    assert((bool)forward.count(y));
     U->merge(forward[x], forward[y]);
   }
 };
