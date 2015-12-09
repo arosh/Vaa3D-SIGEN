@@ -11,7 +11,7 @@ void neuron_node::add_connection(neuron_node *node) {
 neuron neuron::clone() const {
   neuron ret;
   std::map<neuron_node *, int> ptr_to_int;
-  for(int i = 0; i < (int)this->storage_.size(); ++i) {
+  for (int i = 0; i < (int)this->storage_.size(); ++i) {
     boost::shared_ptr<neuron_node> ptr = this->storage_[i];
     ptr_to_int[ptr.get()] = i;
 
@@ -25,8 +25,8 @@ neuron neuron::clone() const {
     ret.storage_.push_back(node);
   }
 
-  for(int i = 0; i < (int)this->storage_.size(); ++i) {
-    for(neuron_node *adj : this->storage_[i].get()->adjacent_) {
+  for (int i = 0; i < (int)this->storage_.size(); ++i) {
+    for (neuron_node *adj : this->storage_[i].get()->adjacent_) {
       neuron_node *p = ret.storage_[ptr_to_int[adj]].get();
       ret.storage_[i]->add_connection(p);
     }

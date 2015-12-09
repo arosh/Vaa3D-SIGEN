@@ -8,9 +8,13 @@ public:
   std::vector<std::vector<std::vector<bool> > > data_;
   binary_cube(int x, int y, int z);
   // setter
-  std::vector<std::vector<bool> > &operator[](int index);
+  inline std::vector<std::vector<bool> > &operator[](int index) {
+    return data_[index];
+  }
   // getter
-  const std::vector<std::vector<bool> > &operator[](int index) const;
+  inline const std::vector<std::vector<bool> > &operator[](int index) const {
+    return data_[index];
+  }
   void clear();
 };
 } // namespace sigen

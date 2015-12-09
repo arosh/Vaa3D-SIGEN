@@ -4,6 +4,9 @@
 #include "sigen/common/cluster.h"
 namespace sigen {
 cluster::cluster(const std::vector<point<int> > &ps) : points_(ps) {}
+// This functions is HOT SPOT.
+// This functions is called too many.
+// This is worth to tune.
 bool cluster::check_neighbor(const cluster *other) {
   for (const point<int> &p : points_) {
     for (const point<int> &q : other->points_) {

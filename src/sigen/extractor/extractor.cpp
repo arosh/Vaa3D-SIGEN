@@ -68,6 +68,8 @@ template <class T>
 bool compare_size(const T &lhs, const T &rhs) {
   return lhs.size() < rhs.size();
 }
+// This functions is HOT SPOT.
+// This is worth to tune.
 void extractor::labeling() {
   before_filter(cube_);
   std::map<point<int>, boost::shared_ptr<voxel> > voxels;
