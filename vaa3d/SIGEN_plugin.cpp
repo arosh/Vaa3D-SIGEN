@@ -143,15 +143,75 @@ void dump(const sigen::binary_cube &cube) {
   }
 }
 
-bool sigen_config(QWidget *parent) {
-  QHBoxLayout *layout = new QHBoxLayout;
-  layout->addWidget(new QLabel(QObject::tr("foo")));
-  layout->addWidget(new QLabel(QObject::tr("bar")));
+bool sigen_config(QWidget *parent, sigen::interface::Options *options) {
+  // http://vivi.dyndns.org/vivi/docs/Qt/layout.html
+  QFormLayout *fLayout = new QFormLayout(parent);
+  fLayout->setLabelAlignment(Qt::AlignRight);
+
+  // http://doc.qt.io/qt-4.8/qlineedit.html
+
+  QIntValidator *vt_validator = new QIntValidator(parent);
+  vt_validator->setBottom(0);
+  QLineEdit *vt_lineEdit = new QLineEdit(parent);
+  vt_lineEdit->setValidator(vt_validator);
+  fLayout->addRow(QObject::tr("Interpolation VT"), vt_lineEdit);
+
+  QDoubleValidator *dt_validator = new QDoubleValidator(parent);
+  dt_validator->setBottom(0.0);
+  QLineEdit *dt_lineEdit = new QLineEdit(parent);
+  dt_lineEdit->setValidator(dt_validator);
+  fLayout->addRow(QObject::tr("Interpolation DT"), dt_lineEdit);
+
+  QIntValidator *sm_validator = new QIntValidator(parent);
+  sm_validator->setBottom(0);
+  QLineEdit *sm_lineEdit = new QLineEdit(parent);
+  sm_lineEdit->setValidator(sm_validator);
+  fLayout->addRow(QObject::tr("Smoothing Level"), sm_lineEdit);
+
+  QIntValidator *cl_validator = new QIntValidator(parent);
+  cl_validator->setBottom(0);
+  QLineEdit *cl_lineEdit = new QLineEdit(parent);
+  cl_lineEdit->setValidator(cl_validator);
+  fLayout->addRow(QObject::tr("Clipping Level"), cl_lineEdit);
+
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(
+                                      QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+                                      Qt::Horizontal,
+                                      parent);
+
+  QVBoxLayout *vLayout = new QVBoxLayout(parent);
+  vLayout->addLayout(fLayout);
+  vLayout->addWidget(buttonBox);
 
   QDialog *dialog = new QDialog(parent);
-  dialog->setLayout(layout);
-  dialog->exec();
-  return true;
+  dialog->setLayout(vLayout);
+
+  QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
+  QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
+
+  bool retval;
+  switch(dialog->exec()) {
+    case QDialog::Accepted:
+      retval = true;
+      break;
+    case QDialog::Rejected:
+      retval = false;
+      break;
+    default:
+      assert(false);
+      break;
+  }
+
+  // v3d_msg(vt_lineEdit->text() + "/" + dt_lineEdit->text() + "/" + sm_lineEdit->text() + "/" + cl_lineEdit->text(), true);
+
+  if (retval) {
+    options->volume_threshold = vt_lineEdit->text().toInt();
+    options->distance_threshold = dt_lineEdit->text().toDouble();
+    options->smoothing_level = sm_lineEdit->text().toInt();
+    options->clipping_level = cl_lineEdit->text().toInt();
+  }
+
+  return retval;
 }
 
 void reconstruction_func(
@@ -211,7 +271,18 @@ void reconstruction_func(
   }
   //main neuron reconstruction code
   //// THIS IS WHERE THE DEVELOPERS SHOULD ADD THEIR OWN NEURON TRACING CODE
-  // sigen_config(parent);
+
+  // show configure GUI window
+  sigen::interface::Options options;
+  bool retval = sigen_config(parent, &options);
+  if(!retval) {
+    return;
+  }
+  // to debug configure dialog
+  // v3d_msg((retval ? QString("OK") : QString("Cancel")), via_gui);
+  // v3d_msg(QString("VT = %1\nDT = %2\nSM = %3\nCL = %4").arg(options.volume_threshold).arg(options.distance_threshold).arg(options.smoothing_level).arg(options.clipping_level), via_gui);
+  // return;
+
   sigen::binary_cube cube = cvt_to_binary_cube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
   std::vector<int> out_n, out_type, out_pn;
   std::vector<double> out_x, out_y, out_z, out_r;
@@ -219,8 +290,9 @@ void reconstruction_func(
       cube, /* scale_xy = */ 1.0, /* scale_z = */ 1.0,
       out_n, out_type,
       out_x, out_y, out_z,
-      out_r, out_pn);
-  // dump(cube);
+      out_r, out_pn, options);
+
+  // construct NeuronTree
   NeuronTree nt;
   nt.name = "test_name";
   nt.comment = "test_comment";
@@ -235,6 +307,7 @@ void reconstruction_func(
     pt.pn = out_pn[i];
     nt.listNeuron.push_back(pt);
   }
+
   QString swc_name = PARA.inimg_file + "_SIGEN.swc";
   writeSWC_file(swc_name.toStdString().c_str(), nt);
   if (!via_gui) {

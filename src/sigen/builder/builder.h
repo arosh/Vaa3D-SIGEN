@@ -23,7 +23,6 @@ public:
   static void compute_id(std::vector<neuron> &neu);
   void connect_neighbor();
   void cut_loops();
-  void connect_interpolate(double dt);
   void compute_gravity_point();
   void compute_radius();
 };

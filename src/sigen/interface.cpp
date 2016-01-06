@@ -6,6 +6,7 @@
 #include "sigen/common/binary_cube.h"
 #include "sigen/extractor/extractor.h"
 #include "sigen/builder/builder.h"
+#include "sigen/neuronprocess/neuronprocess.h"
 
 #define DEBUG(x) std::cerr << #x << " = " << x << std::endl
 
@@ -51,11 +52,18 @@ void run(
     const double scale_xy, const double scale_z,
     std::vector<int> &out_n, std::vector<int> &out_type,
     std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
-    std::vector<double> &out_r, std::vector<int> &out_pn) {
+    std::vector<double> &out_r, std::vector<int> &out_pn, Options options) {
   sigen::extractor ext(cube);
   std::vector<boost::shared_ptr<sigen::cluster> > clusters = ext.extract();
   sigen::builder bld(clusters, scale_xy, scale_z);
   std::vector<sigen::neuron> neurons = bld.build();
+  // std::cerr << "build finished" << std::endl;
+  neurons = interpolate(neurons, options.distance_threshold, options.volume_threshold);
+  // std::cerr << "interpolate finished" << std::endl;
+  neurons = smoothing(neurons, options.smoothing_level);
+  // std::cerr << "smoothing finished" << std::endl;
+  // neurons = clipping(neurons, options.clipping_level);
+  // std::cerr << "clipping finished" << std::endl;
 
   for (int i = 0; i < (int)neurons.size(); ++i) {
     write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);

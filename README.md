@@ -27,7 +27,6 @@ $ ./waf
 * Interpolation (VT, DT)
 * Clipping (level)
 * Smoothing (level)
-* Output sub dendrites
 
 ## References
 
