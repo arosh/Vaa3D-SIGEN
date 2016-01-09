@@ -66,3 +66,4 @@ references
   * http://snipsnipsnip.tumblr.com/post/376010984/boehm-gc
 * XYZスケールの設定
 * ２値化されていない画像を読み込むと落ちた。空のボクセルを渡してみる？
+* 問題のあるSWCが生成されている可能性が高い
