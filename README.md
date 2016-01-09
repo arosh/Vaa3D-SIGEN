@@ -17,10 +17,12 @@ TBD...
 ## How to Build
 
 ```
-$ ./waf configure
-$ ./waf --checkall # run test
-$ ./waf
+$ mkdir build
+$ cd build
+$ cmake ..
 ```
+
+If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `cmake_install.cmake`, `Makefile` will be located in undesirable directories.
 
 ## Setting
 
