@@ -3,13 +3,13 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "sigen/binarizer/binarizer.h"
 namespace sigen {
-BinaryCube Binarizer::binarize(const image_sequence &is) {
+BinaryCube Binarizer::binarize(const ImageSequence &is) {
   CHECK(!is.empty());
   int width = is[0].cols;
   int height = is[0].rows;
   BinaryCube cube(width, height, is.size());
   for (int z = 0; z < (int)is.size(); ++z) {
-    const auto &image = is[z];
+    const cv::Mat &image = is[z];
     CHECK_EQ(2, image.dims);
     CHECK_EQ(1, image.channels());
     CHECK_EQ(width, image.cols);

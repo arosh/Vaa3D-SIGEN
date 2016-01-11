@@ -6,6 +6,6 @@ namespace sigen {
 class FileLoader {
 public:
   // load image files from specified directory
-  image_sequence load(const std::string &dir_path);
+  ImageSequence load(const std::string &dir_path);
 };
 }

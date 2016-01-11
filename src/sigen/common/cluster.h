@@ -8,9 +8,9 @@ class Cluster : boost::noncopyable {
 public:
   double gx_, gy_, gz_;
   double radius_;
-  std::vector<point<int> > points_;
+  std::vector<Point<int> > points_;
   std::vector<Cluster *> adjacent_;
-  explicit Cluster(const std::vector<point<int> > &points);
+  explicit Cluster(const std::vector<Point<int> > &points);
   bool check_neighbor(const Cluster *p);
   void add_connection(Cluster *p);
 };
