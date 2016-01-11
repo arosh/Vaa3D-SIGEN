@@ -112,13 +112,13 @@ $(document).ready(function(){initNavTree('binarizer_8cpp_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;opencv2/imgproc/imgproc.hpp&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="binarizer_8h.html">sigen/binarizer/binarizer.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="namespacesigen.html">    5</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigen.html">sigen</a> {</div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classsigen_1_1binarizer.html#ab2d1fb621e94d5c9ef7dc3590562f612">    6</a></span>&#160;<a class="code" href="classsigen_1_1binary__cube.html">binary_cube</a> <a class="code" href="classsigen_1_1binarizer.html#ab2d1fb621e94d5c9ef7dc3590562f612">binarizer::binarize</a>(<span class="keyword">const</span> <a class="code" href="namespacesigen.html#a24477165b634eddb2d3c3c4fc0cdcfbb">image_sequence</a> &amp;is) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classsigen_1_1_binarizer.html#af8cc70657e4d0b89c36f8912f7a889c8">    6</a></span>&#160;<a class="code" href="classsigen_1_1_binary_cube.html">BinaryCube</a> <a class="code" href="classsigen_1_1_binarizer.html#af8cc70657e4d0b89c36f8912f7a889c8">Binarizer::binarize</a>(<span class="keyword">const</span> <a class="code" href="namespacesigen.html#a44e93b4efc659a04b29540fee90beaef">ImageSequence</a> &amp;is) {</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  CHECK(!is.empty());</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <span class="keywordtype">int</span> width = is[0].cols;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keywordtype">int</span> height = is[0].rows;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <a class="code" href="classsigen_1_1binary__cube.html">binary_cube</a> cube(width, height, is.size());</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  <a class="code" href="classsigen_1_1_binary_cube.html">BinaryCube</a> cube(width, height, is.size());</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> z = 0; z &lt; (int)is.size(); ++z) {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> &amp;image = is[z];</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">const</span> cv::Mat &amp;image = is[z];</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    CHECK_EQ(2, image.dims);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    CHECK_EQ(1, image.channels());</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    CHECK_EQ(width, image.cols);</div>
@@ -136,11 +136,11 @@ $(document).ready(function(){initNavTree('binarizer_8cpp_source.html','');});
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keywordflow">return</span> cube;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <span class="comment">// namespace sigen</span></div>
-<div class="ttc" id="classsigen_1_1binarizer_html_ab2d1fb621e94d5c9ef7dc3590562f612"><div class="ttname"><a href="classsigen_1_1binarizer.html#ab2d1fb621e94d5c9ef7dc3590562f612">sigen::binarizer::binarize</a></div><div class="ttdeci">binary_cube binarize(const image_sequence &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="binarizer_8cpp_source.html#l00006">binarizer.cpp:6</a></div></div>
-<div class="ttc" id="classsigen_1_1binary__cube_html"><div class="ttname"><a href="classsigen_1_1binary__cube.html">sigen::binary_cube</a></div><div class="ttdef"><b>Definition:</b> <a href="binary__cube_8h_source.html#l00005">binary_cube.h:5</a></div></div>
 <div class="ttc" id="namespacesigen_html"><div class="ttname"><a href="namespacesigen.html">sigen</a></div><div class="ttdef"><b>Definition:</b> <a href="binarizer_8cpp_source.html#l00005">binarizer.cpp:5</a></div></div>
-<div class="ttc" id="namespacesigen_html_a24477165b634eddb2d3c3c4fc0cdcfbb"><div class="ttname"><a href="namespacesigen.html#a24477165b634eddb2d3c3c4fc0cdcfbb">sigen::image_sequence</a></div><div class="ttdeci">std::vector&lt; cv::Mat &gt; image_sequence</div><div class="ttdef"><b>Definition:</b> <a href="image__sequence_8h_source.html#l00012">image_sequence.h:12</a></div></div>
+<div class="ttc" id="namespacesigen_html_a44e93b4efc659a04b29540fee90beaef"><div class="ttname"><a href="namespacesigen.html#a44e93b4efc659a04b29540fee90beaef">sigen::ImageSequence</a></div><div class="ttdeci">std::vector&lt; cv::Mat &gt; ImageSequence</div><div class="ttdef"><b>Definition:</b> <a href="image__sequence_8h_source.html#l00012">image_sequence.h:12</a></div></div>
 <div class="ttc" id="binarizer_8h_html"><div class="ttname"><a href="binarizer_8h.html">binarizer.h</a></div></div>
+<div class="ttc" id="classsigen_1_1_binary_cube_html"><div class="ttname"><a href="classsigen_1_1_binary_cube.html">sigen::BinaryCube</a></div><div class="ttdef"><b>Definition:</b> <a href="binary__cube_8h_source.html#l00005">binary_cube.h:5</a></div></div>
+<div class="ttc" id="classsigen_1_1_binarizer_html_af8cc70657e4d0b89c36f8912f7a889c8"><div class="ttname"><a href="classsigen_1_1_binarizer.html#af8cc70657e4d0b89c36f8912f7a889c8">sigen::Binarizer::binarize</a></div><div class="ttdeci">BinaryCube binarize(const ImageSequence &amp;is)</div><div class="ttdef"><b>Definition:</b> <a href="binarizer_8cpp_source.html#l00006">binarizer.cpp:6</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

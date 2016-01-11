@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['label_5f',['label_',['../classsigen_1_1voxel.html#adddb9b856d37212e8e8deacd63ab0bdf',1,'sigen::voxel']]]
+  ['label_5f',['label_',['../classsigen_1_1_voxel.html#aabde79b86fbc956997e3ba2cc5fee33f',1,'sigen::Voxel']]]
 ];

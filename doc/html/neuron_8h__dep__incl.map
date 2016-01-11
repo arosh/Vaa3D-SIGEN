@@ -1,9 +1,11 @@
 <map id="src/sigen/common/neuron.h" name="src/sigen/common/neuron.h">
-<area shape="rect" id="node2" href="$builder_8h.html" title="src/sigen/builder/builder.h" alt="" coords="187,85,360,111"/>
-<area shape="rect" id="node6" href="$neuron_8cpp.html" title="src/sigen/common/neuron.cpp" alt="" coords="384,85,584,111"/>
-<area shape="rect" id="node7" href="$swc__writer_8h.html" title="src/sigen/writer/swc\l_writer.h" alt="" coords="608,79,746,117"/>
+<area shape="rect" id="node2" href="$builder_8h.html" title="src/sigen/builder/builder.h" alt="" coords="202,85,374,111"/>
+<area shape="rect" id="node6" href="$neuron_8cpp.html" title="src/sigen/common/neuron.cpp" alt="" coords="751,85,951,111"/>
+<area shape="rect" id="node7" href="$neuronprocess_8h.html" title="src/sigen/neuronprocess\l/neuronprocess.h" alt="" coords="398,79,565,117"/>
+<area shape="rect" id="node9" href="$swc__writer_8h.html" title="src/sigen/writer/swc\l_writer.h" alt="" coords="588,79,726,117"/>
 <area shape="rect" id="node3" href="$builder_8cpp.html" title="src/sigen/builder/builder.cpp" alt="" coords="5,172,192,197"/>
 <area shape="rect" id="node4" href="$interface_8cpp.html" title="src/sigen/interface.cpp" alt="" coords="216,172,371,197"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="src/sigen/main.cpp" alt="" coords="434,172,566,197"/>
-<area shape="rect" id="node8" href="$swc__writer_8cpp.html" title="src/sigen/writer/swc\l_writer.cpp" alt="" coords="608,165,746,204"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="src/sigen/main.cpp" alt="" coords="584,172,717,197"/>
+<area shape="rect" id="node8" href="$neuronprocess_8cpp.html" title="src/sigen/neuronprocess\l/neuronprocess.cpp" alt="" coords="394,165,561,204"/>
+<area shape="rect" id="node10" href="$swc__writer_8cpp.html" title="src/sigen/writer/swc\l_writer.cpp" alt="" coords="740,165,878,204"/>
 </map>

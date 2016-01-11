@@ -7,6 +7,6 @@ var dir_6c798c6aef43dce89756326c76b64ab8 =
     [ "fileutils.h", "fileutils_8h.html", "fileutils_8h" ],
     [ "swc_writer.cpp", "swc__writer_8cpp.html", null ],
     [ "swc_writer.h", "swc__writer_8h.html", [
-      [ "swc_writer", "classsigen_1_1swc__writer.html", "classsigen_1_1swc__writer" ]
+      [ "SwcWriter", "classsigen_1_1_swc_writer.html", "classsigen_1_1_swc_writer" ]
     ] ]
 ];

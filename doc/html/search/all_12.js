@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_5f',['x_',['../classsigen_1_1binary__cube.html#a981967ed796b2da4feb0212fc05a16b3',1,'sigen::binary_cube::x_()'],['../classsigen_1_1point.html#a30eeeb4f92b107344bba8228ca2a55cf',1,'sigen::point::x_()'],['../classsigen_1_1voxel.html#a3a318ff1d8dc8081a63af26f27f4e090',1,'sigen::voxel::x_()']]]
+  ['x_5f',['x_',['../classsigen_1_1_binary_cube.html#ad5dc61d7401f0f7ffe21113fd66663ad',1,'sigen::BinaryCube::x_()'],['../classsigen_1_1_point.html#ae6dc3fd7880b49d210b48e7feeaf3916',1,'sigen::Point::x_()'],['../classsigen_1_1_voxel.html#a727de6afe37215d4129db17488fbbff7',1,'sigen::Voxel::x_()']]]
 ];

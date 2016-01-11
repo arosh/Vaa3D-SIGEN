@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('file__loader_8cpp_source.html','');});
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#pragma GCC diagnostic pop</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacesigen.html">sigen</a> {</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classsigen_1_1file__loader.html#a400dd4d0a321f6c31bfed518d2af686d">   15</a></span>&#160;<a class="code" href="namespacesigen.html#a24477165b634eddb2d3c3c4fc0cdcfbb">image_sequence</a> <a class="code" href="classsigen_1_1file__loader.html#a400dd4d0a321f6c31bfed518d2af686d">file_loader::load</a>(<span class="keyword">const</span> std::string &amp;dir_path) {</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classsigen_1_1_file_loader.html#a8f624046a7cd9f3b986dbff7f52bfffe">   15</a></span>&#160;<a class="code" href="namespacesigen.html#a44e93b4efc659a04b29540fee90beaef">ImageSequence</a> <a class="code" href="classsigen_1_1_file_loader.html#a8f624046a7cd9f3b986dbff7f52bfffe">FileLoader::load</a>(<span class="keyword">const</span> std::string &amp;dir_path) {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">namespace </span>fs = boost::filesystem;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  std::vector&lt;std::string&gt; fnames;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="comment">// enumerate files in specified directory</span></div>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('file__loader_8cpp_source.html','');});
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  }</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="comment">// sort by file name in ascending order</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  std::sort(fnames.begin(), fnames.end());</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="namespacesigen.html#a24477165b634eddb2d3c3c4fc0cdcfbb">image_sequence</a> ret;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="namespacesigen.html#a44e93b4efc659a04b29540fee90beaef">ImageSequence</a> ret;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">const</span> std::string &amp;entry : fnames) {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// LOG(INFO) &lt;&lt; entry;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    cv::Mat im = cv::imread(entry, 0 <span class="comment">/* grayscale */</span>);</div>
@@ -144,8 +144,8 @@ $(document).ready(function(){initNavTree('file__loader_8cpp_source.html','');});
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace sigen</span></div>
 <div class="ttc" id="namespacesigen_html"><div class="ttname"><a href="namespacesigen.html">sigen</a></div><div class="ttdef"><b>Definition:</b> <a href="binarizer_8cpp_source.html#l00005">binarizer.cpp:5</a></div></div>
-<div class="ttc" id="namespacesigen_html_a24477165b634eddb2d3c3c4fc0cdcfbb"><div class="ttname"><a href="namespacesigen.html#a24477165b634eddb2d3c3c4fc0cdcfbb">sigen::image_sequence</a></div><div class="ttdeci">std::vector&lt; cv::Mat &gt; image_sequence</div><div class="ttdef"><b>Definition:</b> <a href="image__sequence_8h_source.html#l00012">image_sequence.h:12</a></div></div>
-<div class="ttc" id="classsigen_1_1file__loader_html_a400dd4d0a321f6c31bfed518d2af686d"><div class="ttname"><a href="classsigen_1_1file__loader.html#a400dd4d0a321f6c31bfed518d2af686d">sigen::file_loader::load</a></div><div class="ttdeci">image_sequence load(const std::string &amp;dir_path)</div><div class="ttdef"><b>Definition:</b> <a href="file__loader_8cpp_source.html#l00015">file_loader.cpp:15</a></div></div>
+<div class="ttc" id="namespacesigen_html_a44e93b4efc659a04b29540fee90beaef"><div class="ttname"><a href="namespacesigen.html#a44e93b4efc659a04b29540fee90beaef">sigen::ImageSequence</a></div><div class="ttdeci">std::vector&lt; cv::Mat &gt; ImageSequence</div><div class="ttdef"><b>Definition:</b> <a href="image__sequence_8h_source.html#l00012">image_sequence.h:12</a></div></div>
+<div class="ttc" id="classsigen_1_1_file_loader_html_a8f624046a7cd9f3b986dbff7f52bfffe"><div class="ttname"><a href="classsigen_1_1_file_loader.html#a8f624046a7cd9f3b986dbff7f52bfffe">sigen::FileLoader::load</a></div><div class="ttdeci">ImageSequence load(const std::string &amp;dir_path)</div><div class="ttdef"><b>Definition:</b> <a href="file__loader_8cpp_source.html#l00015">file_loader.cpp:15</a></div></div>
 <div class="ttc" id="file__loader_8h_html"><div class="ttname"><a href="file__loader_8h.html">file_loader.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

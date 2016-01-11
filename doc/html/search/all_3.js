@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['data_5f',['data_',['../classsigen_1_1builder.html#ac2f7540cca962c867496891f7ba94bf6',1,'sigen::builder::data_()'],['../classsigen_1_1binary__cube.html#a7f02710e37fc2e6f3e6be6912c37023b',1,'sigen::binary_cube::data_()']]],
+  ['data_5f',['data_',['../classsigen_1_1_builder.html#aabdb2e9a0f4f1395481fce29b64d0513',1,'sigen::Builder::data_()'],['../classsigen_1_1_binary_cube.html#a6855bdef0e37d6f52f3fbb1a0c5b2469',1,'sigen::BinaryCube::data_()']]],
   ['debug',['DEBUG',['../interface_8cpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d',1,'interface.cpp']]],
-  ['disjoint_5fset',['disjoint_set',['../classsigen_1_1disjoint__set.html',1,'sigen']]],
   ['disjoint_5fset_2ecpp',['disjoint_set.cpp',['../disjoint__set_8cpp.html',1,'']]],
   ['disjoint_5fset_2eh',['disjoint_set.h',['../disjoint__set_8h.html',1,'']]],
-  ['disjoint_5fset_5finternal',['disjoint_set_internal',['../classsigen_1_1disjoint__set__internal.html#ad6c6a2042b49e36c5646c7e72736a2d1',1,'sigen::disjoint_set_internal']]],
-  ['disjoint_5fset_5finternal',['disjoint_set_internal',['../classsigen_1_1disjoint__set__internal.html',1,'sigen']]]
+  ['disjointset',['DisjointSet',['../classsigen_1_1_disjoint_set.html',1,'sigen']]],
+  ['disjointsetinternal',['DisjointSetInternal',['../classsigen_1_1_disjoint_set_internal.html',1,'sigen']]],
+  ['disjointsetinternal',['DisjointSetInternal',['../classsigen_1_1_disjoint_set_internal.html#a559615be106a83384a25bd30fc7d79d8',1,'sigen::DisjointSetInternal']]],
+  ['distance_5fthreshold',['distance_threshold',['../structsigen_1_1interface_1_1_options.html#a1d756cca639a7979e58b0bc369108b5c',1,'sigen::interface::Options']]]
 ];

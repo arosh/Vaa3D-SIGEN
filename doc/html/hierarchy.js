@@ -1,20 +1,22 @@
 var hierarchy =
 [
-    [ "sigen::binarizer", "classsigen_1_1binarizer.html", null ],
-    [ "sigen::binary_cube", "classsigen_1_1binary__cube.html", null ],
-    [ "sigen::disjoint_set_internal", "classsigen_1_1disjoint__set__internal.html", null ],
+    [ "sigen::Binarizer", "classsigen_1_1_binarizer.html", null ],
+    [ "sigen::BinaryCube", "classsigen_1_1_binary_cube.html", null ],
+    [ "sigen::DisjointSetInternal", "classsigen_1_1_disjoint_set_internal.html", null ],
     [ "sigen::extraction_info_writer", "classsigen_1_1extraction__info__writer.html", null ],
-    [ "sigen::file_loader", "classsigen_1_1file__loader.html", null ],
-    [ "sigen::neuron", "classsigen_1_1neuron.html", null ],
-    [ "noncopyable", null, [
-      [ "sigen::builder", "classsigen_1_1builder.html", null ],
-      [ "sigen::cluster", "classsigen_1_1cluster.html", null ],
-      [ "sigen::disjoint_set< T >", "classsigen_1_1disjoint__set.html", null ],
-      [ "sigen::extractor", "classsigen_1_1extractor.html", null ],
-      [ "sigen::neuron_node", "classsigen_1_1neuron__node.html", null ],
-      [ "sigen::voxel", "classsigen_1_1voxel.html", null ]
-    ] ],
+    [ "sigen::FileLoader", "classsigen_1_1_file_loader.html", null ],
+    [ "sigen::Neuron", "classsigen_1_1_neuron.html", null ],
     [ "sigen::noncopyable", "structsigen_1_1noncopyable.html", null ],
-    [ "sigen::point< T >", "classsigen_1_1point.html", null ],
-    [ "sigen::swc_writer", "classsigen_1_1swc__writer.html", null ]
+    [ "noncopyable", null, [
+      [ "sigen::Builder", "classsigen_1_1_builder.html", null ],
+      [ "sigen::Cluster", "classsigen_1_1_cluster.html", null ],
+      [ "sigen::DisjointSet< T >", "classsigen_1_1_disjoint_set.html", null ],
+      [ "sigen::Extractor", "classsigen_1_1_extractor.html", null ],
+      [ "sigen::NeuronNode", "classsigen_1_1_neuron_node.html", null ],
+      [ "sigen::Voxel", "classsigen_1_1_voxel.html", null ]
+    ] ],
+    [ "sigen::interface::Options", "structsigen_1_1interface_1_1_options.html", null ],
+    [ "sigen::Point< T >", "classsigen_1_1_point.html", null ],
+    [ "sigen::point_and_radius", "structsigen_1_1point__and__radius.html", null ],
+    [ "sigen::SwcWriter", "classsigen_1_1_swc_writer.html", null ]
 ];
