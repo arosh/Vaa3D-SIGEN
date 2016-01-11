@@ -3,12 +3,12 @@
 #include "sigen/extractor/extractor.h"
 using namespace std;
 using namespace sigen;
-TEST(extractor, labeling) {
-  binary_cube cube(5, 5, 3);
+TEST(Extractor, labeling) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
 
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
-  extractor ext(cube);
+  Extractor ext(cube);
   auto ret = ext.extract();
   EXPECT_EQ(2, (int)ext.components_.size());
   EXPECT_EQ(3, (int)ext.components_[0].size());
@@ -24,23 +24,23 @@ TEST(extractor, labeling) {
     // cout << "point(" << c->points_[0].x_ << ',' << c->points_[0].y_ << "," << c->points_[0].z_ << ")" << endl;
   }
 }
-TEST(extractor, labeling2) {
-  binary_cube cube(5, 5, 3);
+TEST(Extractor, labeling2) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
                                         cube[3][2][1] = 1;
   cube[1][3][1] = 1; cube[2][3][1] = 1;
-  extractor ext(cube);
+  Extractor ext(cube);
   auto ret = ext.extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(5, (int)ext.components_[0].size());
   EXPECT_EQ(5, (int)ret.size());
 }
-TEST(extractor, labeling_with_loops) {
-  binary_cube cube(5, 5, 3);
+TEST(Extractor, labeling_with_loops) {
+  BinaryCube cube(5, 5, 3);
                      cube[2][1][1] = 1;
   cube[1][2][1] = 1;                    cube[3][2][1] = 1;
                      cube[2][3][1] = 1;
-  extractor ext(cube);
+  Extractor ext(cube);
   auto ret = ext.extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(4, (int)ext.components_[0].size());
@@ -54,11 +54,11 @@ TEST(extractor, labeling_with_loops) {
     }
   }
 }
-TEST(extractor, same_distance) {
-  binary_cube cube(4, 4, 3);
+TEST(Extractor, same_distance) {
+  BinaryCube cube(4, 4, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
   cube[1][2][1] = 1; cube[2][2][1] = 1;
-  extractor ext(cube);
+  Extractor ext(cube);
   auto ret = ext.extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(4, (int)ext.components_[0].size());

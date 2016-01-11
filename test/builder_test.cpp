@@ -2,14 +2,14 @@
 #include "sigen/builder/builder.h"
 #include "sigen/extractor/extractor.h"
 using namespace sigen;
-TEST(builder, connect_neighbor) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, connect_neighbor) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
 
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   EXPECT_EQ(5, (int)bld.data_.size());
   EXPECT_EQ(1, (int)bld.data_[0]->adjacent_.size());
@@ -18,14 +18,14 @@ TEST(builder, connect_neighbor) {
   EXPECT_EQ(1, (int)bld.data_[3]->adjacent_.size());
   EXPECT_EQ(1, (int)bld.data_[4]->adjacent_.size());
 }
-TEST(builder, compute_gravity_point) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, compute_gravity_point) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
 
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   EXPECT_DOUBLE_EQ(1.0, bld.data_[0]->gx_);
@@ -35,19 +35,19 @@ TEST(builder, compute_gravity_point) {
   EXPECT_DOUBLE_EQ(1.0, bld.data_[4]->gy_);
   EXPECT_DOUBLE_EQ(1.0, bld.data_[4]->gz_);
 }
-TEST(builder, convert_to_neuron_node) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, convert_to_neuron_node) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
 
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   bld.compute_radius();
   bld.cut_loops();
-  std::vector<boost::shared_ptr<neuron_node> > nn = bld.convert_to_neuron_node(bld.data_, bld.scale_xy_, bld.scale_z_);
+  std::vector<boost::shared_ptr<NeuronNode> > nn = bld.convert_to_neuron_node(bld.data_, bld.scale_xy_, bld.scale_z_);
   EXPECT_EQ(5, (int)nn.size());
   EXPECT_EQ(1.0, nn[0]->gx_);
   EXPECT_EQ(3.0, nn[0]->gy_);
@@ -67,36 +67,36 @@ TEST(builder, convert_to_neuron_node) {
   EXPECT_EQ(nn[4].get(), nn[3]->adjacent_[0]);
   EXPECT_EQ(nn[3].get(), nn[4]->adjacent_[0]);
 }
-TEST(builder, convert_to_neuron) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, convert_to_neuron) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
 
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   bld.compute_radius();
   bld.cut_loops();
-  std::vector<neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
+  std::vector<Neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
   EXPECT_EQ(2, (int)ns.size());
   EXPECT_EQ(3, (int)ns[0].storage_.size());
   EXPECT_EQ(2, (int)ns[1].storage_.size());
 }
-TEST(builder, compute_id) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, compute_id) {
+  BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
 
   cube[1][3][1] = 1; cube[2][3][1] = 1; cube[3][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   bld.compute_radius();
   bld.cut_loops();
-  std::vector<neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
+  std::vector<Neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
   bld.compute_id(ns);
   EXPECT_EQ(1, ns[0].storage_[0]->id_);
   EXPECT_EQ(2, ns[0].storage_[1]->id_);
@@ -104,19 +104,19 @@ TEST(builder, compute_id) {
   EXPECT_EQ(4, ns[1].storage_[0]->id_);
   EXPECT_EQ(5, ns[1].storage_[1]->id_);
 }
-TEST(builder, convert_to_neuron_node_loops) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, convert_to_neuron_node_loops) {
+  BinaryCube cube(5, 5, 3);
                      cube[2][1][1] = 1;
   cube[1][2][1] = 1;                    cube[3][2][1] = 1;
                      cube[2][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   bld.compute_radius();
   bld.cut_loops();
-  std::vector<boost::shared_ptr<neuron_node> > nn = bld.convert_to_neuron_node(bld.data_, bld.scale_xy_, bld.scale_z_);
+  std::vector<boost::shared_ptr<NeuronNode> > nn = bld.convert_to_neuron_node(bld.data_, bld.scale_xy_, bld.scale_z_);
   EXPECT_EQ(4, (int)nn.size());
   EXPECT_EQ(1.0, nn[0]->gx_);
   EXPECT_EQ(2.0, nn[0]->gy_);
@@ -135,34 +135,34 @@ TEST(builder, convert_to_neuron_node_loops) {
   EXPECT_EQ(nn[1].get(), nn[3]->adjacent_[0]);
   EXPECT_EQ(nn[2].get(), nn[3]->adjacent_[1]);
 }
-TEST(builder, convert_to_neuron_loops) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, convert_to_neuron_loops) {
+  BinaryCube cube(5, 5, 3);
                      cube[2][1][1] = 1;
   cube[1][2][1] = 1;                    cube[3][2][1] = 1;
                      cube[2][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   bld.compute_radius();
   bld.cut_loops();
-  std::vector<neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
+  std::vector<Neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
   EXPECT_EQ(1, (int)ns.size());
   EXPECT_EQ(4, (int)ns[0].storage_.size());
 }
-TEST(builder, compute_id_with_loops) {
-  binary_cube cube(5, 5, 3);
+TEST(Builder, compute_id_with_loops) {
+  BinaryCube cube(5, 5, 3);
                      cube[2][1][1] = 1;
   cube[1][2][1] = 1;                    cube[3][2][1] = 1;
                      cube[2][3][1] = 1;
-  extractor ext(cube);
-  std::vector<boost::shared_ptr<cluster> > data = ext.extract();
-  builder bld(data, 1.0, 1.0);
+  Extractor ext(cube);
+  std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+  Builder bld(data, 1.0, 1.0);
   bld.connect_neighbor();
   bld.compute_gravity_point();
   bld.compute_radius();
   bld.cut_loops();
-  std::vector<neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
+  std::vector<Neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
   bld.compute_id(ns);
 }

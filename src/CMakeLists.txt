@@ -30,4 +30,4 @@ if(BUILD_MAIN)
   )
 
   target_link_libraries(main sigen sigen_io boost_system boost_filesystem glog ${OPENCV_LIBRARIES})
-endif()
+endif(BUILD_MAIN)
