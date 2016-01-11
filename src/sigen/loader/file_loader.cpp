@@ -12,7 +12,7 @@
 #pragma GCC diagnostic pop
 
 namespace sigen {
-image_sequence file_loader::load(const std::string &dir_path) {
+image_sequence FileLoader::load(const std::string &dir_path) {
   namespace fs = boost::filesystem;
   std::vector<std::string> fnames;
   // enumerate files in specified directory

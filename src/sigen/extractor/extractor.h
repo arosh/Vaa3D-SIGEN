@@ -6,13 +6,13 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 namespace sigen {
-class extractor : boost::noncopyable {
+class Extractor : boost::noncopyable {
   void labeling();
 
 public:
-  binary_cube cube_;
-  std::vector<std::vector<boost::shared_ptr<voxel> > > components_;
-  explicit extractor(const binary_cube &cube);
-  std::vector<boost::shared_ptr<cluster> > extract();
+  BinaryCube cube_;
+  std::vector<std::vector<boost::shared_ptr<Voxel> > > components_;
+  explicit Extractor(const BinaryCube &cube);
+  std::vector<boost::shared_ptr<Cluster> > extract();
 };
 } // namespace sigen

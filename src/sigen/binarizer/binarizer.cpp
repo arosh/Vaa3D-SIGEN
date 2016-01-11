@@ -3,11 +3,11 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "sigen/binarizer/binarizer.h"
 namespace sigen {
-binary_cube binarizer::binarize(const image_sequence &is) {
+BinaryCube Binarizer::binarize(const image_sequence &is) {
   CHECK(!is.empty());
   int width = is[0].cols;
   int height = is[0].rows;
-  binary_cube cube(width, height, is.size());
+  BinaryCube cube(width, height, is.size());
   for (int z = 0; z < (int)is.size(); ++z) {
     const auto &image = is[z];
     CHECK_EQ(2, image.dims);

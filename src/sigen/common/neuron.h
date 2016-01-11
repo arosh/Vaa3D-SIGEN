@@ -11,7 +11,7 @@ enum neuron_type {
   BRANCH,
   CONNECT
 };
-class neuron_node : boost::noncopyable {
+class NeuronNode : boost::noncopyable {
 public:
   // 1-based
   int id_;
@@ -19,15 +19,15 @@ public:
   double gx_, gy_, gz_;
   double radius_;
   neuron_type type_;
-  std::vector<neuron_node *> adjacent_;
+  std::vector<NeuronNode *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   // std::map<std::string, Variant> values_;
-  void add_connection(neuron_node *node);
+  void add_connection(NeuronNode *node);
 };
-class neuron /* : noncopyable */ {
+class Neuron /* : noncopyable */ {
 public:
-  neuron_node *root_;
-  std::vector<boost::shared_ptr<neuron_node> > storage_;
-  neuron clone() const;
+  NeuronNode *root_;
+  std::vector<boost::shared_ptr<NeuronNode> > storage_;
+  Neuron clone() const;
 };
 } // namespace sigen

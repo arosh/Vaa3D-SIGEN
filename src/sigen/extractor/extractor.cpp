@@ -8,8 +8,8 @@
 #include "sigen/extractor/extractor.h"
 #include "sigen/common/point.h"
 namespace sigen {
-extractor::extractor(const binary_cube &cube) : cube_(cube) {}
-static void clear_frame(binary_cube &c) {
+Extractor::Extractor(const BinaryCube &cube) : cube_(cube) {}
+static void clear_frame(BinaryCube &c) {
   for (int i = 0; i < c.x_; ++i) {
     for (int j = 0; j < c.y_; ++j) {
       c[i][j][0] = false;
@@ -29,8 +29,8 @@ static void clear_frame(binary_cube &c) {
     }
   }
 }
-static void remove_isolation_point(binary_cube &c) {
-  binary_cube cc = c;
+static void remove_isolation_point(BinaryCube &c) {
+  BinaryCube cc = c;
   for (int x = 1; x < c.x_ - 1; ++x) {
     for (int y = 1; y < c.y_ - 1; ++y) {
       for (int z = 1; z < c.z_ - 1; ++z) {
@@ -51,11 +51,11 @@ static void remove_isolation_point(binary_cube &c) {
     }
   }
 }
-static void before_filter(binary_cube &c) {
+static void before_filter(BinaryCube &c) {
   clear_frame(c);
   remove_isolation_point(c);
 }
-static void set_label(voxel *p, const int label) {
+static void set_label(Voxel *p, const int label) {
   p->flag_ = true;
   p->label_ = label;
   for (auto next : p->adjacent_) {
@@ -70,14 +70,14 @@ bool compare_size(const T &lhs, const T &rhs) {
 }
 // This functions is HOT SPOT.
 // This is worth to tune.
-void extractor::labeling() {
+void Extractor::labeling() {
   before_filter(cube_);
-  std::map<point<int>, boost::shared_ptr<voxel> > voxels;
+  std::map<point<int>, boost::shared_ptr<Voxel> > voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
-          voxels[point<int>(x, y, z)] = boost::make_shared<voxel>(x, y, z);
+          voxels[point<int>(x, y, z)] = boost::make_shared<Voxel>(x, y, z);
         }
       }
     }
@@ -110,24 +110,24 @@ void extractor::labeling() {
       set_label(p.second.get(), label++);
     }
   }
-  components_.assign(label, std::vector<boost::shared_ptr<voxel> >());
+  components_.assign(label, std::vector<boost::shared_ptr<Voxel> >());
   for (auto p : voxels) {
     components_[p.second->label_].push_back(p.second);
   }
-  std::sort(components_.begin(), components_.end(), &compare_size<std::vector<boost::shared_ptr<voxel> > >);
+  std::sort(components_.begin(), components_.end(), &compare_size<std::vector<boost::shared_ptr<Voxel> > >);
   std::reverse(components_.begin(), components_.end());
 }
-static void reset_flag(std::vector<boost::shared_ptr<voxel> > &voxels) {
+static void reset_flag(std::vector<boost::shared_ptr<Voxel> > &voxels) {
   for (auto p : voxels)
     p->flag_ = false;
 }
-static voxel *find_single_seed(std::vector<boost::shared_ptr<voxel> > &group) {
+static Voxel *find_single_seed(std::vector<boost::shared_ptr<Voxel> > &group) {
   assert(!group.empty());
-  voxel *last = group[0].get();
+  Voxel *last = group[0].get();
   for (int i = 0; i < 2; ++i) {
     reset_flag(group);
     last->flag_ = true;
-    std::queue<voxel *> que;
+    std::queue<Voxel *> que;
     que.push(last);
     while (!que.empty()) {
       last = que.front();
@@ -142,15 +142,15 @@ static voxel *find_single_seed(std::vector<boost::shared_ptr<voxel> > &group) {
   }
   return last;
 }
-static void set_distance(std::vector<boost::shared_ptr<voxel> > &group,
-                         voxel *seed) {
+static void set_distance(std::vector<boost::shared_ptr<Voxel> > &group,
+                         Voxel *seed) {
   reset_flag(group);
-  std::queue<voxel *> que;
+  std::queue<Voxel *> que;
   seed->flag_ = true;
   seed->label_ = 0;
   que.push(seed);
   while (!que.empty()) {
-    voxel *p = que.front();
+    Voxel *p = que.front();
     que.pop();
     for (auto next : p->adjacent_) {
       if (!next->flag_) {
@@ -161,14 +161,14 @@ static void set_distance(std::vector<boost::shared_ptr<voxel> > &group,
     }
   }
 }
-static std::vector<voxel *> extract_same_distance(voxel *seed) {
-  std::vector<voxel *> ret;
-  std::queue<voxel *> que;
+static std::vector<Voxel *> extract_same_distance(Voxel *seed) {
+  std::vector<Voxel *> ret;
+  std::queue<Voxel *> que;
   seed->flag_ = true;
   ret.push_back(seed);
   que.push(seed);
   while (!que.empty()) {
-    voxel *p = que.front();
+    Voxel *p = que.front();
     que.pop();
     for (auto next : p->adjacent_) {
       if (!next->flag_ && next->label_ == seed->label_) {
@@ -180,26 +180,26 @@ static std::vector<voxel *> extract_same_distance(voxel *seed) {
   }
   return ret;
 }
-static std::vector<point<int> > voxels_to_points(const std::vector<voxel *> vs) {
+static std::vector<point<int> > voxels_to_points(const std::vector<Voxel *> vs) {
   std::vector<point<int> > ps;
   for (const auto v : vs) {
     ps.push_back(point<int>(v->x_, v->y_, v->z_));
   }
   return ps;
 }
-std::vector<boost::shared_ptr<cluster> > extractor::extract() {
+std::vector<boost::shared_ptr<Cluster> > Extractor::extract() {
   labeling();
-  std::vector<boost::shared_ptr<cluster> > ret;
+  std::vector<boost::shared_ptr<Cluster> > ret;
   // NOT const
-  for (std::vector<boost::shared_ptr<voxel> > &group : components_) {
+  for (std::vector<boost::shared_ptr<Voxel> > &group : components_) {
     auto seed = find_single_seed(group);
     set_distance(group, seed);
     reset_flag(group);
     for (auto p : group) {
       if (p->flag_ == false) {
-        std::vector<voxel *> vs = extract_same_distance(p.get());
+        std::vector<Voxel *> vs = extract_same_distance(p.get());
         std::vector<point<int> > ps = voxels_to_points(vs);
-        ret.push_back(boost::make_shared<cluster>(ps));
+        ret.push_back(boost::make_shared<Cluster>(ps));
       }
     }
   }

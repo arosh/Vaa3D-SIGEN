@@ -9,8 +9,8 @@
 #include "sigen/common/math.h"
 namespace sigen {
 double norm_l2(
-    const boost::shared_ptr<neuron_node> &lhs,
-    const boost::shared_ptr<neuron_node> &rhs) {
+    const boost::shared_ptr<NeuronNode> &lhs,
+    const boost::shared_ptr<NeuronNode> &rhs) {
   const double dx = std::abs(lhs->gx_ - rhs->gx_);
   const double dy = std::abs(lhs->gy_ - rhs->gy_);
   const double dz = std::abs(lhs->gz_ - rhs->gz_);
@@ -19,7 +19,7 @@ double norm_l2(
 // This functions is HOT SPOT.
 // This functions is called too many.
 // This is worth to tune.
-std::pair<double, std::pair<int, int> > norm_neuron(const neuron &lhs, const neuron &rhs) {
+std::pair<double, std::pair<int, int> > norm_neuron(const Neuron &lhs, const Neuron &rhs) {
   assert(lhs.storage_.size() > 0);
   assert(rhs.storage_.size() > 0);
   int l = 0;
@@ -37,13 +37,13 @@ std::pair<double, std::pair<int, int> > norm_neuron(const neuron &lhs, const neu
   }
   return std::make_pair(minimum, std::make_pair(l, r));
 }
-std::vector<neuron> interpolate(const std::vector<neuron> &input, const double dt, const int vt) {
+std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double dt, const int vt) {
   const int N = input.size();
-  std::vector<neuron> forest;
+  std::vector<Neuron> forest;
   for (int i = 0; i < N; ++i) {
     forest.push_back(input[i].clone());
   }
-  disjoint_set<int> set;
+  DisjointSet<int> set;
   std::vector<bool> is_not_small(forest.size(), false);
   for (int i = 0; i < N; ++i) {
     if ((int)forest[i].storage_.size() >= vt) {
@@ -114,21 +114,21 @@ std::vector<neuron> interpolate(const std::vector<neuron> &input, const double d
 struct point_and_radius {
   double gx_, gy_, gz_, radius_;
 };
-std::vector<neuron> smoothing(const std::vector<neuron> &input, const int n_iter) {
-  std::vector<neuron> forest;
+std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter) {
+  std::vector<Neuron> forest;
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].clone());
   }
   for(int iter = 0; iter < n_iter; ++iter) {
     std::map<int, point_and_radius> next_value;
     for(int i = 0; i < (int)forest.size(); ++i) {
-      for(boost::shared_ptr<neuron_node> node : forest[i].storage_) {
+      for(boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
         std::vector<double> gx, gy, gz, radius;
         gx.push_back(node->gx_);
         gy.push_back(node->gy_);
         gz.push_back(node->gz_);
         radius.push_back(node->radius_);
-        for(neuron_node *adj : node->adjacent_) {
+        for(NeuronNode *adj : node->adjacent_) {
           gx.push_back(adj->gx_);
           gy.push_back(adj->gy_);
           gz.push_back(adj->gz_);
@@ -143,7 +143,7 @@ std::vector<neuron> smoothing(const std::vector<neuron> &input, const int n_iter
       }
     }
     for(int i = 0; i < (int)forest.size(); ++i) {
-      for(boost::shared_ptr<neuron_node> node : forest[i].storage_) {
+      for(boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
         point_and_radius next_node = next_value[node->id_];
         node->gx_ = next_node.gx_;
         node->gy_ = next_node.gy_;
@@ -155,13 +155,13 @@ std::vector<neuron> smoothing(const std::vector<neuron> &input, const int n_iter
   return forest;
 }
 int clipping_dfs(
-    neuron_node *node,
-    neuron_node *parent,
+    NeuronNode *node,
+    NeuronNode *parent,
     const int level,
     std::set<int> &will_remove) {
   int mindepth = std::numeric_limits<int>::max();
   int longpath = 0;
-  for(neuron_node *next : node->adjacent_) {
+  for(NeuronNode *next : node->adjacent_) {
     if(next != parent) {
       int dep = clipping_dfs(next, node, level, will_remove);
       if(dep > level) longpath++;
@@ -169,7 +169,7 @@ int clipping_dfs(
     }
   }
   if(longpath > 0) {
-    for(neuron_node *next : node->adjacent_) {
+    for(NeuronNode *next : node->adjacent_) {
       if(next != parent) {
         int dep = clipping_dfs(next, node, level, will_remove);
         if(dep <= level) {
@@ -180,8 +180,8 @@ int clipping_dfs(
   }
   else {
     int longest_depth = 0;
-    neuron_node *longest_child = NULL;
-    for(neuron_node *next : node->adjacent_) {
+    NeuronNode *longest_child = NULL;
+    for(NeuronNode *next : node->adjacent_) {
       if(next != parent) {
         int dep = clipping_dfs(next, node, level, will_remove);
         if(longest_depth < dep) {
@@ -191,7 +191,7 @@ int clipping_dfs(
       }
     }
     if(longest_depth > 0) {
-      for(neuron_node *next : node->adjacent_) {
+      for(NeuronNode *next : node->adjacent_) {
         if(next != parent) {
           if (next != longest_child) {
             will_remove.insert(next->id_);
@@ -205,9 +205,9 @@ int clipping_dfs(
   }
   return mindepth + 1;
 }
-std::vector<neuron> clipping(const std::vector<neuron> &input, const int level) {
+std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) {
   std::set<int> will_remove;
-  std::vector<neuron> forest;
+  std::vector<Neuron> forest;
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].clone());
     clipping_dfs(forest[i].root_, NULL, level, will_remove);

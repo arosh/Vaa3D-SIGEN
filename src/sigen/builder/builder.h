@@ -4,23 +4,23 @@
 #include <boost/utility.hpp>
 #include <vector>
 namespace sigen {
-class builder : boost::noncopyable {
+class Builder : boost::noncopyable {
   bool is_radius_computed_;
 
 public:
-  std::vector<boost::shared_ptr<cluster> > data_;
+  std::vector<boost::shared_ptr<Cluster> > data_;
   double scale_xy_, scale_z_;
-  explicit builder(const std::vector<boost::shared_ptr<cluster> > &data,
+  explicit Builder(const std::vector<boost::shared_ptr<Cluster> > &data,
                    const double scale_xy, const double scale_z);
-  std::vector<neuron> build();
-  static std::vector<neuron>
-  convert_to_neuron(std::vector<boost::shared_ptr<cluster> > &data,
+  std::vector<Neuron> build();
+  static std::vector<Neuron>
+  convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
                     const double scale_xy, const double scale_z);
-  static std::vector<boost::shared_ptr<neuron_node> >
-  convert_to_neuron_node(std::vector<boost::shared_ptr<cluster> > &data,
+  static std::vector<boost::shared_ptr<NeuronNode> >
+  convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
                          const double scale_xy, const double scale_z);
-  static void compute_node_type(std::vector<neuron> &neu);
-  static void compute_id(std::vector<neuron> &neu);
+  static void compute_node_type(std::vector<Neuron> &neu);
+  static void compute_id(std::vector<Neuron> &neu);
   void connect_neighbor();
   void cut_loops();
   void compute_gravity_point();

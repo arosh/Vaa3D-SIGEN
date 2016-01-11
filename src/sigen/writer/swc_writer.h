@@ -3,9 +3,9 @@
 #include <string>
 #include <fstream>
 namespace sigen {
-class swc_writer {
+class SwcWriter {
 public:
-  void write(std::ostream &os, const neuron &neuron__);
-  void write(const std::string &fname, const neuron &neuron__);
+  void write(std::ostream &os, const Neuron &neuron__);
+  void write(const std::string &fname, const Neuron &neuron__);
 };
 };

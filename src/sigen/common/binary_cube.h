@@ -2,11 +2,11 @@
 #include <vector>
 namespace sigen {
 // this class represents bool[][][]
-class binary_cube {
+class BinaryCube {
 public:
   int x_, y_, z_;
   std::vector<std::vector<std::vector<bool> > > data_;
-  binary_cube(int x, int y, int z);
+  BinaryCube(int x, int y, int z);
   // setter
   inline std::vector<std::vector<bool> > &operator[](int index) {
     return data_[index];

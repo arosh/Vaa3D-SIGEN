@@ -9,21 +9,21 @@
 
 namespace sigen {
 
-class disjoint_set_internal {
+class DisjointSetInternal {
   std::vector<int> data;
   int root(int x);
 
 public:
-  explicit disjoint_set_internal(int size);
+  explicit DisjointSetInternal(int size);
   int size(int x);
   bool same(int x, int y);
   void merge(int x, int y);
 };
 
 template <class T>
-class disjoint_set : boost::noncopyable {
+class DisjointSet : boost::noncopyable {
   std::map<T, int> forward;
-  boost::shared_ptr<disjoint_set_internal> U;
+  boost::shared_ptr<DisjointSetInternal> U;
 
 public:
   void add(T x) {
@@ -32,26 +32,26 @@ public:
   }
 
   void setup() {
-    U = boost::make_shared<disjoint_set_internal>(forward.size());
+    U = boost::make_shared<DisjointSetInternal>(forward.size());
   }
 
   int size(T x) {
     assert((bool)U);
-    assert((bool)forward.count(x));
+    assert(forward.count(x) > 0);
     return U->size(forward[x]);
   }
 
   bool same(T x, T y) {
     assert((bool)U);
-    assert((bool)forward.count(x));
-    assert((bool)forward.count(y));
+    assert(forward.count(x) > 0);
+    assert(forward.count(y) > 0);
     return U->same(forward[x], forward[y]);
   }
 
   void merge(T x, T y) {
     assert((bool)U);
-    assert((bool)forward.count(x));
-    assert((bool)forward.count(y));
+    assert(forward.count(x) > 0);
+    assert(forward.count(y) > 0);
     U->merge(forward[x], forward[y]);
   }
 };

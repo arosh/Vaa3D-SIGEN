@@ -2,9 +2,9 @@
 #include <algorithm>
 #include "sigen/common/voxel.h"
 namespace sigen {
-voxel::voxel(int x, int y, int z)
+Voxel::Voxel(int x, int y, int z)
     : x_(x), y_(y), z_(z), flag_(false), label_(-1) {}
-void voxel::add_connection(voxel *p) {
+void Voxel::add_connection(Voxel *p) {
   assert(std::find(adjacent_.begin(), adjacent_.end(), p) == adjacent_.end());
   adjacent_.push_back(p);
 }

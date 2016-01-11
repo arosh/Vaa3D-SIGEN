@@ -23,7 +23,7 @@ add_library(sigen STATIC
 #   ${THIRD_PARTY}/cmdline/cmdline.h
 # )
 include_directories(. ../third_party ${OPENCV_INCLUDE_DIRS})
-add_executable(main
-  sigen/main.cpp
-)
-target_link_libraries(main sigen sigen_io boost_system boost_filesystem glog ${OPENCV_LIBRARIES})
+# add_executable(main
+#   sigen/main.cpp
+# )
+# target_link_libraries(main sigen sigen_io boost_system boost_filesystem glog ${OPENCV_LIBRARIES})

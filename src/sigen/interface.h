@@ -9,7 +9,7 @@ struct Options {
   int smoothing_level;
   int clipping_level;
 };
-void run(const binary_cube &cube,
+void run(const BinaryCube &cube,
          const double scale_xy, const double scale_z,
          std::vector<int> &out_n, std::vector<int> &out_type,
          std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
