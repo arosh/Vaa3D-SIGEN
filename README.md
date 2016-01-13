@@ -4,25 +4,45 @@
 
 TBD...
 
-## Requirements
+## Requirements for Plugin
 
-* [Python](https://www.python.org/) >= ?.? (to use Waf)
-* [waf](https://waf.io/) (included in this repository)
-* [waf-unittest](https://github.com/tanakh/waf-unittest) (included in this repository)
-* [cmdline.h](https://github.com/tanakh/cmdline) (included in this repository)
+* [CMake](https://cmake.org/) >= 2.8
+
+## Requirements for Runner
+
+* [CMake](https://cmake.org/) >= 2.8
 * [google-glog](https://github.com/google/glog) >= ?.? ([documentation](http://google-glog.googlecode.com/svn/trunk/doc/glog.html))
 * [OpenCV](http://opencv.org/) >= ?.?
 * [Boost](http://www.boost.org/) >= ?.? (using boost::filesystem)
 
-## How to Build
+## How to Build Plugin
 
 ```
 $ mkdir build
 $ cd build
 $ cmake ..
+$ make
 ```
 
 If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `cmake_install.cmake`, `Makefile` will be located in undesirable directories.
+
+## How to Build Runner
+
+```
+$ mkdir build
+$ cd build
+$ cmake -DBUILD_MAIN=ON ..
+$ make
+```
+
+## How to Test
+
+```
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make test
+```
 
 ## Setting
 

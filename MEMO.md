@@ -57,6 +57,12 @@ references
 
 * `Image4DProxy#at` at `v3d_main/basic_c_fun/basic_4dimage.h`
 
+## CMake options
+
+```
+-DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON
+```
+
 ## TODO
 
 * sample of configure window? `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
