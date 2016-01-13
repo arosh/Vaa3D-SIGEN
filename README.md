@@ -20,7 +20,7 @@ TBD...
 ```
 $ mkdir build
 $ cd build
-$ cmake ..
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
 $ make
 ```
 
@@ -31,7 +31,7 @@ If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `
 ```
 $ mkdir build
 $ cd build
-$ cmake -DBUILD_MAIN=ON ..
+$ cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_MAIN=ON ..
 $ make
 ```
 
@@ -40,7 +40,7 @@ $ make
 ```
 $ mkdir build
 $ cd build
-$ cmake ..
+$ cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON ..
 $ make test
 ```
 

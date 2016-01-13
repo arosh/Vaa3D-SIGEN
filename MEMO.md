@@ -63,6 +63,12 @@ references
 -DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON
 ```
 
+## Coverage
+
+```
+gcovr --html --html-detail -r .. -o coverage.html
+```
+
 ## TODO
 
 * sample of configure window? `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`

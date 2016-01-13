@@ -135,10 +135,10 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
           radius.push_back(adj->radius_);
         }
         point_and_radius next_node;
-        next_node.gx_ = mean<double>(gx);
-        next_node.gy_ = mean<double>(gy);
-        next_node.gz_ = mean<double>(gz);
-        next_node.radius_ = mean<double>(radius);
+        next_node.gx_ = Mean(gx);
+        next_node.gy_ = Mean(gy);
+        next_node.gz_ = Mean(gz);
+        next_node.radius_ = Mean(radius);
         next_value[node->id_] = next_node;
       }
     }

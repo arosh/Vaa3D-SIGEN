@@ -1,7 +1,25 @@
+#include <cassert>
+#include <vector>
+#include <string>
 #include <gtest/gtest.h>
 #include "sigen/builder/builder.h"
 #include "sigen/extractor/extractor.h"
 using namespace sigen;
+static BinaryCube vectorStringToBinaryCube(const std::vector<std::string> &vs) {
+  const int zdepth = 3;
+  const int size_x = vs[0].size();
+  const int size_y = vs.size();
+  for(int i = 0; i < (int)size_y; ++i) {
+    assert(size_x == (int)vs[i].size());
+  }
+  BinaryCube cube(size_x+2, size_y+2, zdepth);
+  for(int y = 0; y < size_y; ++y) {
+    for(int x = 0; x < size_x; ++x) {
+      cube[x + 1][y + 1][1] = (vs[y][x] == '#');
+    }
+  }
+  return cube;
+}
 TEST(Builder, connect_neighbor) {
   BinaryCube cube(5, 5, 3);
   cube[1][1][1] = 1; cube[2][1][1] = 1;
@@ -118,22 +136,27 @@ TEST(Builder, convert_to_neuron_node_loops) {
   bld.cut_loops();
   std::vector<boost::shared_ptr<NeuronNode> > nn = bld.convert_to_neuron_node(bld.data_, bld.scale_xy_, bld.scale_z_);
   EXPECT_EQ(4, (int)nn.size());
-  EXPECT_EQ(1.0, nn[0]->gx_);
-  EXPECT_EQ(2.0, nn[0]->gy_);
-  EXPECT_EQ(1.0, nn[0]->gz_);
-  EXPECT_EQ(3.0, nn[3]->gx_);
-  EXPECT_EQ(2.0, nn[3]->gy_);
-  EXPECT_EQ(1.0, nn[3]->gz_);
-  EXPECT_EQ(1, (int)nn[0]->adjacent_.size());
-  EXPECT_EQ(1, (int)nn[1]->adjacent_.size());
-  EXPECT_EQ(2, (int)nn[2]->adjacent_.size());
-  EXPECT_EQ(2, (int)nn[3]->adjacent_.size());
-  EXPECT_EQ(nn[2].get(), nn[0]->adjacent_[0]);
-  EXPECT_EQ(nn[3].get(), nn[1]->adjacent_[0]);
+  EXPECT_DOUBLE_EQ(1.0, nn[0]->gx_);
+  EXPECT_DOUBLE_EQ(2.0, nn[0]->gy_);
+
+  EXPECT_DOUBLE_EQ(2.0, nn[1]->gx_);
+  EXPECT_DOUBLE_EQ(1.0, nn[1]->gy_);
+
+  EXPECT_DOUBLE_EQ(2.0, nn[2]->gx_);
+  EXPECT_DOUBLE_EQ(3.0, nn[2]->gy_);
+
+  EXPECT_DOUBLE_EQ(3.0, nn[3]->gx_);
+  EXPECT_DOUBLE_EQ(2.0, nn[3]->gy_);
+  ASSERT_EQ(2, (int)nn[0]->adjacent_.size());
+  ASSERT_EQ(2, (int)nn[1]->adjacent_.size());
+  ASSERT_EQ(1, (int)nn[2]->adjacent_.size());
+  ASSERT_EQ(1, (int)nn[3]->adjacent_.size());
+  EXPECT_EQ(nn[1].get(), nn[0]->adjacent_[0]);
+  EXPECT_EQ(nn[2].get(), nn[0]->adjacent_[1]);
+  EXPECT_EQ(nn[0].get(), nn[1]->adjacent_[0]);
+  EXPECT_EQ(nn[3].get(), nn[1]->adjacent_[1]);
   EXPECT_EQ(nn[0].get(), nn[2]->adjacent_[0]);
-  EXPECT_EQ(nn[3].get(), nn[2]->adjacent_[1]);
   EXPECT_EQ(nn[1].get(), nn[3]->adjacent_[0]);
-  EXPECT_EQ(nn[2].get(), nn[3]->adjacent_[1]);
 }
 TEST(Builder, convert_to_neuron_loops) {
   BinaryCube cube(5, 5, 3);
@@ -165,4 +188,6 @@ TEST(Builder, compute_id_with_loops) {
   bld.cut_loops();
   std::vector<Neuron> ns = bld.convert_to_neuron(bld.data_, bld.scale_xy_, bld.scale_z_);
   bld.compute_id(ns);
+}
+TEST(Builder, compute_node_type) {
 }
