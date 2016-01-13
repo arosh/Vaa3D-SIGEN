@@ -13,7 +13,7 @@
 namespace sigen {
 namespace interface {
 static void write(
-    const neuron_node *cur, const int parent_id,
+    const NeuronNode *cur, const int parent_id,
     std::vector<int> &out_n, std::vector<int> &out_type,
     std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
     std::vector<double> &out_r, std::vector<int> &out_pn) {
@@ -40,7 +40,7 @@ static void write(
   out_r.push_back(cur->radius_);
   out_pn.push_back(parent_id);
 
-  for (const neuron_node *next : cur->adjacent_) {
+  for (const NeuronNode *next : cur->adjacent_) {
     if (next->id_ != parent_id) {
       write(next, cur->id_, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
     }
@@ -48,15 +48,15 @@ static void write(
 }
 
 void run(
-    const binary_cube &cube,
-    const double scale_xy, const double scale_z,
+    const BinaryCube &cube,
     std::vector<int> &out_n, std::vector<int> &out_type,
     std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
-    std::vector<double> &out_r, std::vector<int> &out_pn, Options options) {
-  sigen::extractor ext(cube);
-  std::vector<boost::shared_ptr<sigen::cluster> > clusters = ext.extract();
-  sigen::builder bld(clusters, scale_xy, scale_z);
-  std::vector<sigen::neuron> neurons = bld.build();
+    std::vector<double> &out_r, std::vector<int> &out_pn,
+    const Options &options) {
+  sigen::Extractor ext(cube);
+  std::vector<boost::shared_ptr<sigen::Cluster> > clusters = ext.extract();
+  sigen::Builder bld(clusters, options.scale_xy, options.scale_z);
+  std::vector<sigen::Neuron> neurons = bld.build();
   // std::cerr << "build finished" << std::endl;
   neurons = interpolate(neurons, options.distance_threshold, options.volume_threshold);
   // std::cerr << "interpolate finished" << std::endl;

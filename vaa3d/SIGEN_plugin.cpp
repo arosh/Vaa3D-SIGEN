@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 
-#include "basic_surf_objs.h"
-#include "v3d_message.h"
+#include <v3d_message.h>
+#include <basic_surf_objs.h>
 
 #include "SIGEN_plugin.h"
 
@@ -53,19 +53,19 @@ void SigenPlugin::domenu(
   }
 }
 
-static std::string GetArgString(const V3DPluginArgList &input, int index, int index2) {
-  if (index >= input.size())
-    return "";
-  const std::vector<char *> &vchar = *(std::vector<char *> *)input[index].p;
-  if (index2 >= vchar.size())
-    return "";
-  return vchar[index];
-}
+// static std::string GetArgString(const V3DPluginArgList &input, int index, int index2) {
+//   if (index >= (int)input.size())
+//     return "";
+//   const std::vector<char *> &vchar = *(std::vector<char *> *)input[index].p;
+//   if (index2 >= (int)vchar.size())
+//     return "";
+//   return vchar[index];
+// }
 
 bool SigenPlugin::dofunc(
     const QString &func_name,
     const V3DPluginArgList &input,
-    V3DPluginArgList &output,
+    V3DPluginArgList & /* output */,
     V3DPluginCallback2 &callback,
     QWidget *parent) {
   using std::vector;
@@ -82,7 +82,7 @@ bool SigenPlugin::dofunc(
       PARA.inimg_file = infiles[0];
     }
     int k = 0;
-    PARA.channel = (paras.size() >= k + 1) ? atoi(paras[k]) : 1;
+    PARA.channel = ((int)paras.size() >= k + 1) ? atoi(paras[k]) : 1;
     k++;
     reconstruction_func(callback, parent, PARA, /* via_gui = */ false);
   } else if (func_name == tr("help")) {
@@ -98,19 +98,19 @@ bool SigenPlugin::dofunc(
   return true;
 }
 
-sigen::binary_cube cvt_to_binary_cube(
+sigen::BinaryCube cvt_to_binary_cube(
     const unsigned char *p,
     const int unit_byte,
     const int xdim,
     const int ydim,
     const int zdim,
-    const int channel_dim,
+    const int /* channel_dim */,
     const int channel) {
   const int stride_x = unit_byte;
   const int stride_y = unit_byte * xdim;
   const int stride_z = unit_byte * xdim * ydim;
   const int stride_c = unit_byte * xdim * ydim * zdim;
-  sigen::binary_cube cube(xdim, ydim, zdim);
+  sigen::BinaryCube cube(xdim, ydim, zdim);
   for (int x = 0; x < xdim; ++x) {
     for (int y = 0; y < ydim; ++y) {
       for (int z = 0; z < zdim; ++z) {
@@ -127,7 +127,7 @@ sigen::binary_cube cvt_to_binary_cube(
 
 // dump cube object to csv files.
 // csv file can be visualized using tools/image_csv.py
-void dump(const sigen::binary_cube &cube) {
+void dump(const sigen::BinaryCube &cube) {
   for (int z = 0; z < cube.z_; ++z) {
     char file_name[1024];
     snprintf(file_name, sizeof(file_name), "/tmp/SIGEN/%04d.csv", z);
@@ -143,6 +143,22 @@ void dump(const sigen::binary_cube &cube) {
   }
 }
 
+QLineEdit *addIntEdit(const QString &default_value, QWidget *parent) {
+  QIntValidator *v = new QIntValidator(parent);
+  v->setBottom(0);
+  QLineEdit *e = new QLineEdit(default_value, parent);
+  e->setValidator(v);
+  return e;
+}
+
+QLineEdit *addDoubleEdit(const QString &default_value, QWidget *parent) {
+  QDoubleValidator *v = new QDoubleValidator(parent);
+  v->setBottom(0.0);
+  QLineEdit *e = new QLineEdit(default_value, parent);
+  e->setValidator(v);
+  return e;
+}
+
 bool sigen_config(QWidget *parent, sigen::interface::Options *options) {
   // http://vivi.dyndns.org/vivi/docs/Qt/layout.html
   QFormLayout *fLayout = new QFormLayout(parent);
@@ -150,34 +166,28 @@ bool sigen_config(QWidget *parent, sigen::interface::Options *options) {
 
   // http://doc.qt.io/qt-4.8/qlineedit.html
 
-  QIntValidator *vt_validator = new QIntValidator(parent);
-  vt_validator->setBottom(0);
-  QLineEdit *vt_lineEdit = new QLineEdit(parent);
-  vt_lineEdit->setValidator(vt_validator);
+  QLineEdit *sxy_lineEdit = addDoubleEdit("1.0", parent);
+  fLayout->addRow(QObject::tr("Scale XY"), sxy_lineEdit);
+
+  QLineEdit *sz_lineEdit = addDoubleEdit("1.0", parent);
+  fLayout->addRow(QObject::tr("Scale Z"), sz_lineEdit);
+
+  QLineEdit *vt_lineEdit = addIntEdit("0", parent);
   fLayout->addRow(QObject::tr("Interpolation VT"), vt_lineEdit);
 
-  QDoubleValidator *dt_validator = new QDoubleValidator(parent);
-  dt_validator->setBottom(0.0);
-  QLineEdit *dt_lineEdit = new QLineEdit(parent);
-  dt_lineEdit->setValidator(dt_validator);
+  QLineEdit *dt_lineEdit = addDoubleEdit("0.0", parent);
   fLayout->addRow(QObject::tr("Interpolation DT"), dt_lineEdit);
 
-  QIntValidator *sm_validator = new QIntValidator(parent);
-  sm_validator->setBottom(0);
-  QLineEdit *sm_lineEdit = new QLineEdit(parent);
-  sm_lineEdit->setValidator(sm_validator);
+  QLineEdit *sm_lineEdit = addIntEdit("0", parent);
   fLayout->addRow(QObject::tr("Smoothing Level"), sm_lineEdit);
 
-  QIntValidator *cl_validator = new QIntValidator(parent);
-  cl_validator->setBottom(0);
-  QLineEdit *cl_lineEdit = new QLineEdit(parent);
-  cl_lineEdit->setValidator(cl_validator);
+  QLineEdit *cl_lineEdit = addIntEdit("0", parent);
   fLayout->addRow(QObject::tr("Clipping Level"), cl_lineEdit);
 
   QDialogButtonBox *buttonBox = new QDialogButtonBox(
-                                      QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                                      Qt::Horizontal,
-                                      parent);
+      QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+      Qt::Horizontal,
+      parent);
 
   QVBoxLayout *vLayout = new QVBoxLayout(parent);
   vLayout->addLayout(fLayout);
@@ -190,21 +200,23 @@ bool sigen_config(QWidget *parent, sigen::interface::Options *options) {
   QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
   bool retval;
-  switch(dialog->exec()) {
-    case QDialog::Accepted:
-      retval = true;
-      break;
-    case QDialog::Rejected:
-      retval = false;
-      break;
-    default:
-      assert(false);
-      break;
+  switch (dialog->exec()) {
+  case QDialog::Accepted:
+    retval = true;
+    break;
+  case QDialog::Rejected:
+    retval = false;
+    break;
+  default:
+    assert(false);
+    break;
   }
 
   // v3d_msg(vt_lineEdit->text() + "/" + dt_lineEdit->text() + "/" + sm_lineEdit->text() + "/" + cl_lineEdit->text(), true);
 
   if (retval) {
+    options->scale_xy = sxy_lineEdit->text().toDouble();
+    options->scale_z = sz_lineEdit->text().toDouble();
     options->volume_threshold = vt_lineEdit->text().toInt();
     options->distance_threshold = dt_lineEdit->text().toDouble();
     options->smoothing_level = sm_lineEdit->text().toInt();
@@ -275,7 +287,7 @@ void reconstruction_func(
   // show configure GUI window
   sigen::interface::Options options;
   bool retval = sigen_config(parent, &options);
-  if(!retval) {
+  if (!retval) {
     return;
   }
   // to debug configure dialog
@@ -283,19 +295,18 @@ void reconstruction_func(
   // v3d_msg(QString("VT = %1\nDT = %2\nSM = %3\nCL = %4").arg(options.volume_threshold).arg(options.distance_threshold).arg(options.smoothing_level).arg(options.clipping_level), via_gui);
   // return;
 
-  sigen::binary_cube cube = cvt_to_binary_cube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
+  sigen::BinaryCube cube = cvt_to_binary_cube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
   std::vector<int> out_n, out_type, out_pn;
   std::vector<double> out_x, out_y, out_z, out_r;
   sigen::interface::run(
-      cube, /* scale_xy = */ 1.0, /* scale_z = */ 1.0,
-      out_n, out_type,
+      cube, out_n, out_type,
       out_x, out_y, out_z,
       out_r, out_pn, options);
 
   // construct NeuronTree
   NeuronTree nt;
-  nt.name = "test_name";
-  nt.comment = "test_comment";
+  nt.name = "SIGEN";
+  nt.comment = "SIGEN";
   for (int i = 0; i < (int)out_n.size(); ++i) {
     NeuronSWC pt;
     pt.n = out_n[i];

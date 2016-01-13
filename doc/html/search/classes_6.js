@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['point',['point',['../classsigen_1_1point.html',1,'sigen']]]
+  ['options',['Options',['../structsigen_1_1interface_1_1_options.html',1,'sigen::interface']]]
 ];

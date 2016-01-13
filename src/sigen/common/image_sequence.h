@@ -9,5 +9,5 @@
 #pragma GCC diagnostic pop
 
 namespace sigen {
-typedef std::vector<cv::Mat> image_sequence;
+typedef std::vector<cv::Mat> ImageSequence;
 }

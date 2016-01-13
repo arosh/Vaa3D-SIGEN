@@ -2,8 +2,8 @@
 #include "sigen/common/image_sequence.h"
 #include "sigen/common/binary_cube.h"
 namespace sigen {
-class binarizer {
+class Binarizer {
 public:
-  binary_cube binarize(const image_sequence &is);
+  BinaryCube binarize(const ImageSequence &is);
 };
 };

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['data_5f',['data_',['../classsigen_1_1builder.html#ac2f7540cca962c867496891f7ba94bf6',1,'sigen::builder::data_()'],['../classsigen_1_1binary__cube.html#a7f02710e37fc2e6f3e6be6912c37023b',1,'sigen::binary_cube::data_()']]]
+  ['data_5f',['data_',['../classsigen_1_1_builder.html#aabdb2e9a0f4f1395481fce29b64d0513',1,'sigen::Builder::data_()'],['../classsigen_1_1_binary_cube.html#a6855bdef0e37d6f52f3fbb1a0c5b2469',1,'sigen::BinaryCube::data_()']]],
+  ['distance_5fthreshold',['distance_threshold',['../structsigen_1_1interface_1_1_options.html#a1d756cca639a7979e58b0bc369108b5c',1,'sigen::interface::Options']]]
 ];

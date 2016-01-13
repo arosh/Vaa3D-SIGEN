@@ -1,21 +1,22 @@
 #include <cassert>
 #include <algorithm>
+#include <map>
 #include "sigen/common/neuron.h"
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 namespace sigen {
-void neuron_node::add_connection(neuron_node *node) {
+void NeuronNode::add_connection(NeuronNode *node) {
   assert(std::find(adjacent_.begin(), adjacent_.end(), node) == adjacent_.end());
   adjacent_.push_back(node);
 }
-neuron neuron::clone() const {
-  neuron ret;
-  std::map<neuron_node *, int> ptr_to_int;
+Neuron Neuron::clone() const {
+  Neuron ret;
+  std::map<NeuronNode *, int> ptr_to_int;
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
-    boost::shared_ptr<neuron_node> ptr = this->storage_[i];
+    boost::shared_ptr<NeuronNode> ptr = this->storage_[i];
     ptr_to_int[ptr.get()] = i;
 
-    boost::shared_ptr<neuron_node> node = boost::make_shared<neuron_node>();
+    boost::shared_ptr<NeuronNode> node = boost::make_shared<NeuronNode>();
     node->id_ = ptr->id_;
     node->gx_ = ptr->gx_;
     node->gy_ = ptr->gy_;
@@ -26,8 +27,8 @@ neuron neuron::clone() const {
   }
 
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
-    for (neuron_node *adj : this->storage_[i].get()->adjacent_) {
-      neuron_node *p = ret.storage_[ptr_to_int[adj]].get();
+    for (NeuronNode *adj : this->storage_[i].get()->adjacent_) {
+      NeuronNode *p = ret.storage_[ptr_to_int[adj]].get();
       ret.storage_[i]->add_connection(p);
     }
   }

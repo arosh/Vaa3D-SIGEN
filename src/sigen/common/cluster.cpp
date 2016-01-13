@@ -3,13 +3,13 @@
 #include <boost/foreach.hpp>
 #include "sigen/common/cluster.h"
 namespace sigen {
-cluster::cluster(const std::vector<point<int> > &ps) : points_(ps) {}
+Cluster::Cluster(const std::vector<Point<int> > &ps) : points_(ps) {}
 // This functions is HOT SPOT.
 // This functions is called too many.
 // This is worth to tune.
-bool cluster::check_neighbor(const cluster *other) {
-  for (const point<int> &p : points_) {
-    for (const point<int> &q : other->points_) {
+bool Cluster::check_neighbor(const Cluster *other) {
+  for (const Point<int> &p : points_) {
+    for (const Point<int> &q : other->points_) {
       int dx = std::abs(p.x_ - q.x_);
       int dy = std::abs(p.y_ - q.y_);
       int dz = std::abs(p.z_ - q.z_);
@@ -19,7 +19,7 @@ bool cluster::check_neighbor(const cluster *other) {
   }
   return false;
 }
-void cluster::add_connection(cluster *other) {
+void Cluster::add_connection(Cluster *other) {
   adjacent_.push_back(other);
 }
 } // namespace sigen

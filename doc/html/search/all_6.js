@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gx_5f',['gx_',['../classsigen_1_1cluster.html#a25fe30cdd3c70c1fee56151ac62a3462',1,'sigen::cluster::gx_()'],['../classsigen_1_1neuron__node.html#a10178d9a4eab47e7c865a42f95e4a628',1,'sigen::neuron_node::gx_()']]],
-  ['gy_5f',['gy_',['../classsigen_1_1cluster.html#a915f5f69ee507e58e8f6b5f704deda70',1,'sigen::cluster::gy_()'],['../classsigen_1_1neuron__node.html#ad416ff04a260b359be264a3eb751030d',1,'sigen::neuron_node::gy_()']]],
-  ['gz_5f',['gz_',['../classsigen_1_1cluster.html#a9c5257db288c2a755df1c533dc930d55',1,'sigen::cluster::gz_()'],['../classsigen_1_1neuron__node.html#a124e040a8738a485daff6101c078722b',1,'sigen::neuron_node::gz_()']]]
+  ['gx_5f',['gx_',['../classsigen_1_1_cluster.html#a9c7a09747074ded20a329aee2ca3a3fe',1,'sigen::Cluster::gx_()'],['../classsigen_1_1_neuron_node.html#af0f31acb041d182c18ced75257f6c763',1,'sigen::NeuronNode::gx_()'],['../structsigen_1_1point__and__radius.html#a1058c8e4c428210e73926a92ca5a95fc',1,'sigen::point_and_radius::gx_()']]],
+  ['gy_5f',['gy_',['../classsigen_1_1_cluster.html#aa6dbfbaa37faefc38288071916fb1b10',1,'sigen::Cluster::gy_()'],['../classsigen_1_1_neuron_node.html#acf8ec1d289969f5a6161648b0cfa3c19',1,'sigen::NeuronNode::gy_()'],['../structsigen_1_1point__and__radius.html#a9b92d99797a441ecfa47149d48b3350b',1,'sigen::point_and_radius::gy_()']]],
+  ['gz_5f',['gz_',['../classsigen_1_1_cluster.html#a7d357f96850ab5403b202eefac8fc756',1,'sigen::Cluster::gz_()'],['../classsigen_1_1_neuron_node.html#a272925bce6a3cde7544aa45b7c38b773',1,'sigen::NeuronNode::gz_()'],['../structsigen_1_1point__and__radius.html#a85944d41b3830b8b623bb38cc4c88a9b',1,'sigen::point_and_radius::gz_()']]]
 ];

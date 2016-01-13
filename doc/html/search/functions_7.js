@@ -1,5 +1,6 @@
 var searchData=
 [
   ['main',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
-  ['merge',['merge',['../classsigen_1_1disjoint__set__internal.html#a318c6e00f028527866ceeef7ca2c65c5',1,'sigen::disjoint_set_internal::merge()'],['../classsigen_1_1disjoint__set.html#a24a7aeade87dd127616434dc480effff',1,'sigen::disjoint_set::merge()']]]
+  ['mean',['mean',['../namespacesigen.html#a8c1d4025606ec794ca1f875dc951158a',1,'sigen']]],
+  ['merge',['merge',['../classsigen_1_1_disjoint_set_internal.html#a916a7fdae57404f5c077905840be9e28',1,'sigen::DisjointSetInternal::merge()'],['../classsigen_1_1_disjoint_set.html#ae3e4c3fc3de5cb56bc14bf3211925cdd',1,'sigen::DisjointSet::merge()']]]
 ];

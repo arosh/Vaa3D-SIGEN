@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['voxel',['voxel',['../classsigen_1_1voxel.html',1,'sigen']]]
+  ['swcwriter',['SwcWriter',['../classsigen_1_1_swc_writer.html',1,'sigen']]]
 ];

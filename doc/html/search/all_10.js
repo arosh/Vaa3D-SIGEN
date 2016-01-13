@@ -2,8 +2,9 @@ var searchData=
 [
   ['variant',['Variant',['../namespacesigen.html#a9e33b23561758d5005a932f40d8e6864',1,'sigen']]],
   ['variant_2eh',['variant.h',['../variant_8h.html',1,'']]],
-  ['voxel',['voxel',['../classsigen_1_1voxel.html#a41d52ff42418e360ebc5f77eaba1c48a',1,'sigen::voxel']]],
-  ['voxel',['voxel',['../classsigen_1_1voxel.html',1,'sigen']]],
+  ['volume_5fthreshold',['volume_threshold',['../structsigen_1_1interface_1_1_options.html#ac4addb80c96b27e29c7d69d40cfeff24',1,'sigen::interface::Options']]],
+  ['voxel',['Voxel',['../classsigen_1_1_voxel.html',1,'sigen']]],
+  ['voxel',['Voxel',['../classsigen_1_1_voxel.html#a840b5e6386d7c59a4dce33aaf2cd227b',1,'sigen::Voxel']]],
   ['voxel_2ecpp',['voxel.cpp',['../voxel_8cpp.html',1,'']]],
   ['voxel_2eh',['voxel.h',['../voxel_8h.html',1,'']]]
 ];

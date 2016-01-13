@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 namespace sigen {
-class file_loader {
+class FileLoader {
 public:
   // load image files from specified directory
-  image_sequence load(const std::string &dir_path);
+  ImageSequence load(const std::string &dir_path);
 };
 }

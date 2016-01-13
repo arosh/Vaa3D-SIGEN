@@ -57,13 +57,20 @@ references
 
 * `Image4DProxy#at` at `v3d_main/basic_c_fun/basic_4dimage.h`
 
+## CMake options
+
+```
+-DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON
+```
+
+## Coverage
+
+```
+gcovr --html --html-detail -r .. -o coverage.html
+```
+
 ## TODO
 
 * sample of configure window? `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
 * https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
-* Boehm GC
-  * http://x768.com/w/boehm-gc.ja
-  * http://snipsnipsnip.tumblr.com/post/376010984/boehm-gc
-* XYZスケールの設定
-* ２値化されていない画像を読み込むと落ちた。空のボクセルを渡してみる？
-* 問題のあるSWCが生成されている可能性が高い
+* [picogc](https://github.com/kazuho/picogc)

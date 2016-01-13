@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['point',['point',['../classsigen_1_1point.html#a112f0c1ed48ec2f655eb21fae6bbff49',1,'sigen::point']]]
+  ['point',['Point',['../classsigen_1_1_point.html#abcfab4b38330f8a926a8adb9bd80356b',1,'sigen::Point']]]
 ];

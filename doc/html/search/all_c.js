@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['point',['point',['../classsigen_1_1point.html',1,'sigen']]],
-  ['point',['point',['../classsigen_1_1point.html#a112f0c1ed48ec2f655eb21fae6bbff49',1,'sigen::point']]],
+  ['point',['Point',['../classsigen_1_1_point.html',1,'sigen']]],
+  ['point',['Point',['../classsigen_1_1_point.html#abcfab4b38330f8a926a8adb9bd80356b',1,'sigen::Point']]],
   ['point_2eh',['point.h',['../point_8h.html',1,'']]],
-  ['points_5f',['points_',['../classsigen_1_1cluster.html#aef5e0dc9e5f830ae345990974d53b780',1,'sigen::cluster']]]
+  ['point_5fand_5fradius',['point_and_radius',['../structsigen_1_1point__and__radius.html',1,'sigen']]],
+  ['points_5f',['points_',['../classsigen_1_1_cluster.html#a85cf3ba3205b8fbf33527a2c7265909a',1,'sigen::Cluster']]]
 ];

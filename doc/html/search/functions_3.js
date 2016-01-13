@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['disjoint_5fset_5finternal',['disjoint_set_internal',['../classsigen_1_1disjoint__set__internal.html#ad6c6a2042b49e36c5646c7e72736a2d1',1,'sigen::disjoint_set_internal']]]
+  ['disjointsetinternal',['DisjointSetInternal',['../classsigen_1_1_disjoint_set_internal.html#a559615be106a83384a25bd30fc7d79d8',1,'sigen::DisjointSetInternal']]]
 ];

@@ -3,7 +3,7 @@
 #include "sigen/writer/swc_writer.h"
 #include "sigen/writer/fileutils.h"
 namespace sigen {
-static void write_rec(std::ostream &os, const neuron_node *node,
+static void write_rec(std::ostream &os, const NeuronNode *node,
                       const int parent_id) {
   int type_id = -1;
   switch (node->type_) {
@@ -27,10 +27,10 @@ static void write_rec(std::ostream &os, const neuron_node *node,
     }
   }
 }
-void swc_writer::write(std::ostream &os, const neuron &neu) {
+void SwcWriter::write(std::ostream &os, const Neuron &neu) {
   write_rec(os, neu.root_, -1);
 }
-void swc_writer::write(const std::string &fname, const neuron &neu) {
+void SwcWriter::write(const std::string &fname, const Neuron &neu) {
   std::ofstream ofs(fileutils::add_extension(fname, ".swc").c_str());
   write_rec(ofs, neu.root_, -1);
 }

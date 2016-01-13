@@ -4,14 +4,14 @@
 #include "sigen/common/voxel.h"
 #include "sigen/common/point.h"
 namespace sigen {
-class cluster : boost::noncopyable {
+class Cluster : boost::noncopyable {
 public:
   double gx_, gy_, gz_;
   double radius_;
-  std::vector<point<int> > points_;
-  std::vector<cluster *> adjacent_;
-  explicit cluster(const std::vector<point<int> > &points);
-  bool check_neighbor(const cluster *p);
-  void add_connection(cluster *p);
+  std::vector<Point<int> > points_;
+  std::vector<Cluster *> adjacent_;
+  explicit Cluster(const std::vector<Point<int> > &points);
+  bool check_neighbor(const Cluster *p);
+  void add_connection(Cluster *p);
 };
 } // namespace sigen

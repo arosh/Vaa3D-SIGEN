@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['extract',['extract',['../classsigen_1_1extractor.html#a3b77d2ee40cb586061bceb8d7695023a',1,'sigen::extractor']]],
-  ['extractor',['extractor',['../classsigen_1_1extractor.html#adf7d80d0bb02ad56c1c35b1622886a7f',1,'sigen::extractor']]]
+  ['extract',['extract',['../classsigen_1_1_extractor.html#a0abe025038948586119f41db8e2ea6f9',1,'sigen::Extractor']]],
+  ['extractor',['Extractor',['../classsigen_1_1_extractor.html#a6c88d77850b39e060374eff2e68e1635',1,'sigen::Extractor']]]
 ];

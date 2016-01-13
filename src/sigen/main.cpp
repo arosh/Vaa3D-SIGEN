@@ -38,23 +38,23 @@ int main(int argc, char *argv[]) {
   a.add<int>("smoothing", '\0', "smoothing level", false, 0);
   a.parse_check(argc, argv);
 
-  sigen::file_loader loader;
-  sigen::image_sequence is = loader.load(a.get<std::string>("input"));
+  sigen::FileLoader loader;
+  sigen::ImageSequence is = loader.load(a.get<std::string>("input"));
   LOG(INFO) << "load (done)";
-  sigen::binarizer bin;
-  sigen::binary_cube cube = bin.binarize(is);
+  sigen::Binarizer bin;
+  sigen::BinaryCube cube = bin.binarize(is);
   LOG(INFO) << "binarize (done)";
   is.clear();
-  sigen::extractor ext(cube);
-  std::vector<boost::shared_ptr<sigen::cluster> > clusters = ext.extract();
+  sigen::Extractor ext(cube);
+  std::vector<boost::shared_ptr<sigen::Cluster> > clusters = ext.extract();
   LOG(INFO) << "extract (done)";
   cube.clear();
-  sigen::builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
-  std::vector<sigen::neuron> ns = builder.build();
+  sigen::Builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
+  std::vector<sigen::Neuron> ns = builder.build();
   LOG(INFO) << "build (done)";
   ns = sigen::interpolate(ns, a.get<double>("dt"), a.get<int>("vt"));
   LOG(INFO) << "interpolate (done)";
-  sigen::swc_writer writer;
+  sigen::SwcWriter writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =
         "sample_output/" + std::to_string(i) + ".swc";

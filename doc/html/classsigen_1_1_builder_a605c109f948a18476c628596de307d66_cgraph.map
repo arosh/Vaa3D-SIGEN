@@ -1,0 +1,6 @@
+<map id="sigen::Builder::cut_loops" name="sigen::Builder::cut_loops">
+<area shape="rect" id="node2" href="$classsigen_1_1_disjoint_set.html#a76292ebf9214b64e79e48f68f7e163e2" title="sigen::DisjointSet::add" alt="" coords="181,5,335,31"/>
+<area shape="rect" id="node3" href="$classsigen_1_1_disjoint_set.html#ae202ae50c3690c007694ebe9f9ffe813" title="sigen::DisjointSet\l::setup" alt="" coords="195,55,320,93"/>
+<area shape="rect" id="node4" href="$classsigen_1_1_disjoint_set.html#a299ec7087a734826088809fc20172a05" title="sigen::DisjointSet\l::same" alt="" coords="195,117,320,156"/>
+<area shape="rect" id="node5" href="$classsigen_1_1_disjoint_set.html#ae3e4c3fc3de5cb56bc14bf3211925cdd" title="sigen::DisjointSet\l::merge" alt="" coords="195,180,320,219"/>
+</map>

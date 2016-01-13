@@ -1,12 +1,13 @@
 #pragma once
+#include <vector>
 namespace sigen {
-template <class U, class T>
-U mean(const T &xs) {
-  if(xs.size() == 0) return 0.0;
-  U sum = 0.0;
-  for(int i = 0; i < (int)xs.size(); ++i) {
+inline double Mean(const std::vector<double> &xs) {
+  if (xs.empty())
+    return 0.0;
+  double sum = 0.0;
+  for (int i = 0; i < (int)xs.size(); ++i) {
     sum += xs[i];
   }
   return sum / xs.size();
 }
-};
+}; // namespace sigen
