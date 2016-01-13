@@ -10,7 +10,7 @@ DESTDIR = build
 OBJECTS_DIR = build
 MOC_DIR = build
 
-QMAKE_CXXFLAGS += -Wno-c++11-extensions
+QMAKE_CXXFLAGS += -Wall -Wextra -Wshadow -Wno-c++11-extensions
 
 INCLUDEPATH += $$VAA3DPATH/v3d_main/basic_c_fun
 INCLUDEPATH += $$VAA3DPATH/v3d_main/common_lib/include

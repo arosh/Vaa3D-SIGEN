@@ -1,5 +1,6 @@
 #include <cassert>
 #include <algorithm>
+#include <map>
 #include "sigen/common/neuron.h"
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>

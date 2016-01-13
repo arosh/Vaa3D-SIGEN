@@ -4,6 +4,9 @@
 #include <set>
 #include <map>
 #include <limits>
+#include <algorithm>
+#include <vector>
+#include <functional>
 #include "sigen/neuronprocess/neuronprocess.h"
 #include "sigen/common/disjoint_set.h"
 #include "sigen/common/math.h"
@@ -119,16 +122,16 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].clone());
   }
-  for(int iter = 0; iter < n_iter; ++iter) {
+  for (int iter = 0; iter < n_iter; ++iter) {
     std::map<int, point_and_radius> next_value;
-    for(int i = 0; i < (int)forest.size(); ++i) {
-      for(boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
+    for (int i = 0; i < (int)forest.size(); ++i) {
+      for (boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
         std::vector<double> gx, gy, gz, radius;
         gx.push_back(node->gx_);
         gy.push_back(node->gy_);
         gz.push_back(node->gz_);
         radius.push_back(node->radius_);
-        for(NeuronNode *adj : node->adjacent_) {
+        for (NeuronNode *adj : node->adjacent_) {
           gx.push_back(adj->gx_);
           gy.push_back(adj->gy_);
           gz.push_back(adj->gz_);
@@ -142,8 +145,8 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
         next_value[node->id_] = next_node;
       }
     }
-    for(int i = 0; i < (int)forest.size(); ++i) {
-      for(boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
+    for (int i = 0; i < (int)forest.size(); ++i) {
+      for (boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
         point_and_radius next_node = next_value[node->id_];
         node->gx_ = next_node.gx_;
         node->gy_ = next_node.gy_;
@@ -161,38 +164,38 @@ int clipping_dfs(
     std::set<int> &will_remove) {
   int mindepth = std::numeric_limits<int>::max();
   int longpath = 0;
-  for(NeuronNode *next : node->adjacent_) {
-    if(next != parent) {
+  for (NeuronNode *next : node->adjacent_) {
+    if (next != parent) {
       int dep = clipping_dfs(next, node, level, will_remove);
-      if(dep > level) longpath++;
+      if (dep > level)
+        longpath++;
       mindepth = std::min(mindepth, dep);
     }
   }
-  if(longpath > 0) {
-    for(NeuronNode *next : node->adjacent_) {
-      if(next != parent) {
+  if (longpath > 0) {
+    for (NeuronNode *next : node->adjacent_) {
+      if (next != parent) {
         int dep = clipping_dfs(next, node, level, will_remove);
-        if(dep <= level) {
+        if (dep <= level) {
           will_remove.insert(next->id_);
         }
       }
     }
-  }
-  else {
+  } else {
     int longest_depth = 0;
     NeuronNode *longest_child = NULL;
-    for(NeuronNode *next : node->adjacent_) {
-      if(next != parent) {
+    for (NeuronNode *next : node->adjacent_) {
+      if (next != parent) {
         int dep = clipping_dfs(next, node, level, will_remove);
-        if(longest_depth < dep) {
+        if (longest_depth < dep) {
           longest_depth = dep;
           longest_child = next;
         }
       }
     }
-    if(longest_depth > 0) {
-      for(NeuronNode *next : node->adjacent_) {
-        if(next != parent) {
+    if (longest_depth > 0) {
+      for (NeuronNode *next : node->adjacent_) {
+        if (next != parent) {
           if (next != longest_child) {
             will_remove.insert(next->id_);
           }
@@ -200,7 +203,7 @@ int clipping_dfs(
       }
     }
   }
-  if(mindepth == std::numeric_limits<int>::max()) {
+  if (mindepth == std::numeric_limits<int>::max()) {
     mindepth = 0;
   }
   return mindepth + 1;
@@ -212,10 +215,10 @@ std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) 
     forest.push_back(input[i].clone());
     clipping_dfs(forest[i].root_, NULL, level, will_remove);
   }
-  for(int i = 0; i < (int)forest.size(); ++i) {
-    for(int j = 0; j < (int)forest[i].storage_.size(); ++j) {
-      for(int k = 0; k < (int)forest[i].storage_[j]->adjacent_.size(); ++k) {
-        if(will_remove.count(forest[i].storage_[j]->adjacent_[k]->id_)) {
+  for (int i = 0; i < (int)forest.size(); ++i) {
+    for (int j = 0; j < (int)forest[i].storage_.size(); ++j) {
+      for (int k = 0; k < (int)forest[i].storage_[j]->adjacent_.size(); ++k) {
+        if (will_remove.count(forest[i].storage_[j]->adjacent_[k]->id_)) {
           forest[i].storage_[j]->adjacent_.erase(forest[i].storage_[j]->adjacent_.begin() + k);
           --k;
         }
@@ -224,4 +227,4 @@ std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) 
   }
   return forest;
 }
-};
+}; // namespace sigen

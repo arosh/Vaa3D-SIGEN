@@ -49,13 +49,13 @@ static void write(
 
 void run(
     const BinaryCube &cube,
-    const double scale_xy, const double scale_z,
     std::vector<int> &out_n, std::vector<int> &out_type,
     std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
-    std::vector<double> &out_r, std::vector<int> &out_pn, Options options) {
+    std::vector<double> &out_r, std::vector<int> &out_pn,
+    const Options &options) {
   sigen::Extractor ext(cube);
   std::vector<boost::shared_ptr<sigen::Cluster> > clusters = ext.extract();
-  sigen::Builder bld(clusters, scale_xy, scale_z);
+  sigen::Builder bld(clusters, options.scale_xy, options.scale_z);
   std::vector<sigen::Neuron> neurons = bld.build();
   // std::cerr << "build finished" << std::endl;
   neurons = interpolate(neurons, options.distance_threshold, options.volume_threshold);

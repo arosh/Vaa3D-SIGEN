@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "sigen/common/neuron.h"
 namespace sigen {
 std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double dt, const int vt);
