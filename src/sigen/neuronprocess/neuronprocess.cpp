@@ -20,8 +20,8 @@ double norm_l2(
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 // This functions is HOT SPOT.
-// This functions is called too many.
-// This is worth to tune.
+// This functions is called too many times.
+// This is worth to hack.
 std::pair<double, std::pair<int, int> > norm_neuron(const Neuron &lhs, const Neuron &rhs) {
   assert(lhs.storage_.size() > 0);
   assert(rhs.storage_.size() > 0);
@@ -218,8 +218,9 @@ std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) 
   for (int i = 0; i < (int)forest.size(); ++i) {
     for (int j = 0; j < (int)forest[i].storage_.size(); ++j) {
       for (int k = 0; k < (int)forest[i].storage_[j]->adjacent_.size(); ++k) {
-        if (will_remove.count(forest[i].storage_[j]->adjacent_[k]->id_)) {
-          forest[i].storage_[j]->adjacent_.erase(forest[i].storage_[j]->adjacent_.begin() + k);
+        NeuronNode *p = forest[i].storage_[j]->adjacent_[k];
+        if (will_remove.count(p->id_)) {
+          forest[i].storage_[j]->remove_connection(p);
           --k;
         }
       }

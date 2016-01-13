@@ -23,6 +23,7 @@ public:
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   // std::map<std::string, Variant> values_;
   void add_connection(NeuronNode *node);
+  void remove_connection(NeuronNode *node);
 };
 class Neuron /* : noncopyable */ {
 public:
