@@ -217,13 +217,7 @@ std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) 
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
     for (int j = 0; j < (int)forest[i].storage_.size(); ++j) {
-      for (int k = 0; k < (int)forest[i].storage_[j]->adjacent_.size(); ++k) {
-        NeuronNode *p = forest[i].storage_[j]->adjacent_[k];
-        if (will_remove.count(p->id_)) {
-          forest[i].storage_[j]->remove_connection(p);
-          --k;
-        }
-      }
+      forest[i].storage_[j]->remove_connection(will_remove);
     }
   }
   return forest;

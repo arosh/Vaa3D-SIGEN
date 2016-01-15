@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
 // #include "common/variant.h"
@@ -19,11 +20,15 @@ public:
   double gx_, gy_, gz_;
   double radius_;
   neuron_type type_;
-  std::vector<NeuronNode *> adjacent_;
+  std::set<NeuronNode *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   // std::map<std::string, Variant> values_;
   void add_connection(NeuronNode *node);
   void remove_connection(NeuronNode *node);
+  void remove_connection(const std::set<int> &nodes);
+  inline bool has_connection(NeuronNode *node) {
+    return adjacent_.count(node);
+  }
 };
 class Neuron /* : noncopyable */ {
 public:

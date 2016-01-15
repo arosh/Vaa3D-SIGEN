@@ -78,12 +78,12 @@ TEST(Builder, convert_to_neuron_node) {
   EXPECT_EQ(1, (int)nn[2]->adjacent_.size());
   EXPECT_EQ(1, (int)nn[3]->adjacent_.size());
   EXPECT_EQ(1, (int)nn[4]->adjacent_.size());
-  EXPECT_EQ(nn[1].get(), nn[0]->adjacent_[0]);
-  EXPECT_EQ(nn[0].get(), nn[1]->adjacent_[0]);
-  EXPECT_EQ(nn[2].get(), nn[1]->adjacent_[1]);
-  EXPECT_EQ(nn[1].get(), nn[2]->adjacent_[0]);
-  EXPECT_EQ(nn[4].get(), nn[3]->adjacent_[0]);
-  EXPECT_EQ(nn[3].get(), nn[4]->adjacent_[0]);
+  EXPECT_TRUE(nn[0]->has_connection(nn[1].get()));
+  EXPECT_TRUE(nn[1]->has_connection(nn[0].get()));
+  EXPECT_TRUE(nn[1]->has_connection(nn[2].get()));
+  EXPECT_TRUE(nn[2]->has_connection(nn[1].get()));
+  EXPECT_TRUE(nn[3]->has_connection(nn[4].get()));
+  EXPECT_TRUE(nn[4]->has_connection(nn[3].get()));
 }
 TEST(Builder, convert_to_neuron) {
   BinaryCube cube(5, 5, 3);
@@ -151,12 +151,12 @@ TEST(Builder, convert_to_neuron_node_loops) {
   ASSERT_EQ(2, (int)nn[1]->adjacent_.size());
   ASSERT_EQ(1, (int)nn[2]->adjacent_.size());
   ASSERT_EQ(1, (int)nn[3]->adjacent_.size());
-  EXPECT_EQ(nn[1].get(), nn[0]->adjacent_[0]);
-  EXPECT_EQ(nn[2].get(), nn[0]->adjacent_[1]);
-  EXPECT_EQ(nn[0].get(), nn[1]->adjacent_[0]);
-  EXPECT_EQ(nn[3].get(), nn[1]->adjacent_[1]);
-  EXPECT_EQ(nn[0].get(), nn[2]->adjacent_[0]);
-  EXPECT_EQ(nn[1].get(), nn[3]->adjacent_[0]);
+  EXPECT_TRUE(nn[0]->has_connection(nn[1].get()));
+  EXPECT_TRUE(nn[0]->has_connection(nn[2].get()));
+  EXPECT_TRUE(nn[1]->has_connection(nn[0].get()));
+  EXPECT_TRUE(nn[1]->has_connection(nn[3].get()));
+  EXPECT_TRUE(nn[2]->has_connection(nn[0].get()));
+  EXPECT_TRUE(nn[3]->has_connection(nn[1].get()));
 }
 TEST(Builder, convert_to_neuron_loops) {
   BinaryCube cube(5, 5, 3);

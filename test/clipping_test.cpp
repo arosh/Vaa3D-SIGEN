@@ -36,8 +36,8 @@ TEST(clipping, clipping) {
   ns.push_back(n);
   std::vector<Neuron> ret = clipping(ns, 2);
   EXPECT_EQ(1, (int)ret.size());
-  EXPECT_EQ(1, ret[0].storage_[0]->adjacent_.size());
-  EXPECT_EQ(2, ret[0].storage_[1]->adjacent_.size());
+  EXPECT_EQ(1, (int)ret[0].storage_[0]->adjacent_.size());
+  EXPECT_EQ(2, (int)ret[0].storage_[1]->adjacent_.size());
 }
 
 TEST(clipping, clipping2) {
@@ -59,6 +59,6 @@ TEST(clipping, clipping2) {
   ns.push_back(n);
   std::vector<Neuron> ret = clipping(ns, 10);
   EXPECT_EQ(1, (int)ret.size());
-  EXPECT_EQ(1, ret[0].storage_[0]->adjacent_.size());
-  EXPECT_EQ(2, ret[0].storage_[1]->adjacent_.size());
+  EXPECT_EQ(1, (int)ret[0].storage_[0]->adjacent_.size());
+  EXPECT_EQ(2, (int)ret[0].storage_[1]->adjacent_.size());
 }

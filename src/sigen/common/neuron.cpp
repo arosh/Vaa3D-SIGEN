@@ -6,13 +6,25 @@
 #include <boost/make_shared.hpp>
 namespace sigen {
 void NeuronNode::add_connection(NeuronNode *node) {
-  assert(std::find(adjacent_.begin(), adjacent_.end(), node) == adjacent_.end());
-  adjacent_.push_back(node);
+  assert(!adjacent_.count(node));
+  adjacent_.insert(node);
 }
 void NeuronNode::remove_connection(NeuronNode *node) {
-  std::vector<NeuronNode *>::iterator it = std::find(adjacent_.begin(), adjacent_.end(), node);
-  assert(it != adjacent_.end());
-  adjacent_.erase(it);
+  assert(adjacent_.count(node));
+  adjacent_.erase(node);
+}
+void NeuronNode::remove_connection(const std::set<int> &nodes) {
+  // `erase` invalidates iterator. Be careful.
+  // http://qiita.com/satoruhiga/items/fa6eae09c9d89bd48b5d
+  std::set<NeuronNode *>::iterator it = adjacent_.begin();
+  while(it != adjacent_.end()) {
+    if(nodes.count((*it)->id_)) {
+      adjacent_.erase(it++);
+    }
+    else {
+      ++it;
+    }
+  }
 }
 Neuron Neuron::clone() const {
   Neuron ret;
