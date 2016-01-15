@@ -27,28 +27,23 @@ void NeuronNode::remove_connection(const std::set<int> &nodes) {
   }
 }
 Neuron Neuron::clone() const {
+  assert(this->root_ != NULL);
   Neuron ret;
-  std::map<NeuronNode *, int> ptr_to_int;
+  std::map<NeuronNode *, int> ptr_to_index;
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
     boost::shared_ptr<NeuronNode> ptr = this->storage_[i];
-    ptr_to_int[ptr.get()] = i;
-
-    boost::shared_ptr<NeuronNode> node = boost::make_shared<NeuronNode>();
-    node->id_ = ptr->id_;
-    node->coord(ptr->gx_, ptr->gy_, ptr->gz_);
-    node->radius_ = ptr->radius_;
-    node->type_ = ptr->type_;
-    ret.storage_.push_back(node);
+    ptr_to_index[ptr.get()] = i;
+    ret.storage_.push_back(ptr->clone());
   }
 
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
     for (NeuronNode *adj : this->storage_[i].get()->adjacent_) {
-      NeuronNode *p = ret.storage_[ptr_to_int[adj]].get();
+      NeuronNode *p = ret.storage_[ptr_to_index[adj]].get();
       ret.storage_[i]->add_connection(p);
     }
   }
 
-  ret.root_ = ret.storage_[ptr_to_int[this->root_]].get();
+  ret.setRoot(ptr_to_index[this->root_]);
   return ret;
 }
 }; // namespace sigen

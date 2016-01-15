@@ -5,6 +5,7 @@
 #include <set>
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 // #include "common/variant.h"
 namespace sigen {
 enum neuron_type {
@@ -26,13 +27,21 @@ public:
   void add_connection(NeuronNode *node);
   void remove_connection(NeuronNode *node);
   void remove_connection(const std::set<int> &nodes);
-  inline bool has_connection(NeuronNode *node) {
+  inline bool has_connection(NeuronNode *node) const {
     return adjacent_.count(node);
   }
   inline void coord(const double gx, const double gy, const double gz) {
     gx_ = gx;
     gy_ = gy;
     gz_ = gz;
+  }
+  inline boost::shared_ptr<NeuronNode> clone() const {
+    boost::shared_ptr<NeuronNode> r = boost::make_shared<NeuronNode>();
+    r->id_ = id_;
+    r->coord(gx_, gy_, gz_);
+    r->radius_ = radius_;
+    r->type_ = type_;
+    return r;
   }
 };
 class Neuron /* : noncopyable */ {
@@ -52,6 +61,10 @@ public:
   }
   inline void extend(const Neuron &other) {
     this->storage_.insert(this->storage_.end(), other.storage_.begin(), other.storage_.end());
+  }
+  inline void setRoot(int nth) {
+    assert(0 <= nth && nth < storage_.size());
+    root_ = storage_[nth].get();
   }
 };
 } // namespace sigen
