@@ -23,8 +23,8 @@ double norm_l2(
 // This functions is called too many times.
 // This is worth to hack.
 std::pair<double, std::pair<int, int> > norm_neuron(const Neuron &lhs, const Neuron &rhs) {
-  assert(lhs.storage_.size() > 0);
-  assert(rhs.storage_.size() > 0);
+  assert(!lhs.empty());
+  assert(!rhs.empty());
   int l = 0;
   int r = 0;
   double minimum = norm_l2(lhs.storage_[0], rhs.storage_[0]);
@@ -78,9 +78,9 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
     pq.pop();
     int l = node.second.first;
     int r = node.second.second;
-    if (forest[l].storage_.size() == 0)
+    if (forest[l].empty())
       continue;
-    if (forest[r].storage_.size() == 0)
+    if (forest[r].empty())
       continue;
     if (set.same(l, r))
       continue;
@@ -89,14 +89,11 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
     set.merge(l, r);
     forest[l].storage_[dist.second.first]->add_connection(forest[r].storage_[dist.second.second].get());
     forest[r].storage_[dist.second.second]->add_connection(forest[l].storage_[dist.second.first].get());
-    forest[l].storage_.insert(
-        forest[l].storage_.end(),
-        forest[r].storage_.begin(),
-        forest[r].storage_.end());
-    forest[r].storage_.clear();
+    forest[l].extend(forest[r]);
+    forest[r].clear();
 
     for (int i = 0; i < N; ++i) {
-      if (i != l && is_not_small[i] && forest[i].storage_.size() != 0) {
+      if (i != l && is_not_small[i] && forest[i].empty() == false) {
         assert(l != i);
         double d = norm_neuron(forest[l], forest[i]).first;
         if (d <= dt) {
@@ -106,7 +103,7 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
     }
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
-    if (forest[i].storage_.size() == 0) {
+    if (forest[i].empty()) {
       forest.erase(forest.begin() + i);
       i--;
     }

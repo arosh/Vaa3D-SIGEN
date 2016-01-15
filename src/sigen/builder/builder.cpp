@@ -152,7 +152,7 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
     neurons.push_back(Neuron());
     Neuron &n = neurons.back();
     n.root_ = find_edge(node.get());
-    n.storage_.push_back(node);
+    n.add_node(node);
     std::stack<NeuronNode *> stk;
     stk.push(node.get());
     used.insert(node.get());
@@ -163,7 +163,7 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
         if (!used.count(next)) {
           for (boost::shared_ptr<NeuronNode> inst : neuron_nodes) {
             if (inst.get() == next)
-              n.storage_.push_back(inst);
+              n.add_node(inst);
           }
           stk.push(next);
           used.insert(next);

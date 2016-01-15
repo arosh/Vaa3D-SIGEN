@@ -37,8 +37,21 @@ public:
 };
 class Neuron /* : noncopyable */ {
 public:
-  NeuronNode *root_;
   std::vector<boost::shared_ptr<NeuronNode> > storage_;
+  NeuronNode *root_;
   Neuron clone() const;
+  inline void add_node(boost::shared_ptr<NeuronNode> node) {
+    storage_.push_back(node);
+  }
+  inline bool empty() const {
+    return storage_.empty();
+  }
+  inline void clear() {
+    root_ = NULL;
+    storage_.clear();
+  }
+  inline void extend(const Neuron &other) {
+    this->storage_.insert(this->storage_.end(), other.storage_.begin(), other.storage_.end());
+  }
 };
 } // namespace sigen
