@@ -29,6 +29,11 @@ public:
   inline bool has_connection(NeuronNode *node) {
     return adjacent_.count(node);
   }
+  inline void coord(const double gx, const double gy, const double gz) {
+    gx_ = gx;
+    gy_ = gy;
+    gz_ = gz;
+  }
 };
 class Neuron /* : noncopyable */ {
 public:

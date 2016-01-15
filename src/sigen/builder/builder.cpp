@@ -119,9 +119,9 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
   std::vector<std::pair<int, int> > edges;
   for (int i = 0; i < (int)data.size(); ++i) {
     auto n = boost::make_shared<NeuronNode>();
-    n->gx_ = data[i]->gx_ * scale_xy;
-    n->gy_ = data[i]->gy_ * scale_xy;
-    n->gz_ = data[i]->gz_ * scale_z;
+    n->coord(data[i]->gx_ * scale_xy,
+             data[i]->gy_ * scale_xy,
+             data[i]->gz_ * scale_z);
     n->radius_ = data[i]->radius_;
     neuron_nodes.push_back(n);
     for (int j = i + 1; j < (int)data.size(); ++j) {

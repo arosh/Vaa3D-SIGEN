@@ -116,6 +116,11 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
 
 struct point_and_radius {
   double gx_, gy_, gz_, radius_;
+  inline void coord(const double gx, const double gy, const double gz) {
+    gx_ = gx;
+    gy_ = gy;
+    gz_ = gz;
+  }
 };
 std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter) {
   std::vector<Neuron> forest;
@@ -138,9 +143,7 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
           radius.push_back(adj->radius_);
         }
         point_and_radius next_node;
-        next_node.gx_ = Mean(gx);
-        next_node.gy_ = Mean(gy);
-        next_node.gz_ = Mean(gz);
+        next_node.coord(Mean(gx), Mean(gy), Mean(gz));
         next_node.radius_ = Mean(radius);
         next_value[node->id_] = next_node;
       }
@@ -148,9 +151,7 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
     for (int i = 0; i < (int)forest.size(); ++i) {
       for (boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
         point_and_radius next_node = next_value[node->id_];
-        node->gx_ = next_node.gx_;
-        node->gy_ = next_node.gy_;
-        node->gz_ = next_node.gz_;
+        node->coord(next_node.gx_, next_node.gy_, next_node.gz_);
         node->radius_ = next_node.radius_;
       }
     }

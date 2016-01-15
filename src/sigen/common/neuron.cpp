@@ -35,9 +35,7 @@ Neuron Neuron::clone() const {
 
     boost::shared_ptr<NeuronNode> node = boost::make_shared<NeuronNode>();
     node->id_ = ptr->id_;
-    node->gx_ = ptr->gx_;
-    node->gy_ = ptr->gy_;
-    node->gz_ = ptr->gz_;
+    node->coord(ptr->gx_, ptr->gy_, ptr->gz_);
     node->radius_ = ptr->radius_;
     node->type_ = ptr->type_;
     ret.storage_.push_back(node);
