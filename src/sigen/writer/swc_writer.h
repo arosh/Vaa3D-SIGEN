@@ -6,6 +6,6 @@ namespace sigen {
 class SwcWriter {
 public:
   void write(std::ostream &os, const Neuron &neuron);
-  void write(const char * fname, const Neuron &neuron);
+  void write(const char *fname, const Neuron &neuron);
 };
 };

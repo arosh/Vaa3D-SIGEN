@@ -30,7 +30,7 @@ static void write_rec(std::ostream &os, const NeuronNode *node,
 void SwcWriter::write(std::ostream &os, const Neuron &neu) {
   write_rec(os, neu.root_, -1);
 }
-void SwcWriter::write(const char * fname, const Neuron &neu) {
+void SwcWriter::write(const char *fname, const Neuron &neu) {
   std::ofstream ofs(fname);
   write_rec(ofs, neu.root_, -1);
 }

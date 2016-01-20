@@ -298,7 +298,7 @@ void reconstruction_func(
   sigen::BinaryCube cube = cvt_to_binary_cube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
   std::vector<int> out_n, out_type, out_pn;
   std::vector<double> out_x, out_y, out_z, out_r;
-  sigen::interface::run(
+  sigen::interface::Extract(
       cube, out_n, out_type,
       out_x, out_y, out_z,
       out_r, out_pn, options);

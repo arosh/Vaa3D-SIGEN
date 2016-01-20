@@ -17,11 +17,10 @@ void NeuronNode::remove_connection(const std::set<int> &nodes) {
   // `erase` invalidates iterator. Be careful.
   // http://qiita.com/satoruhiga/items/fa6eae09c9d89bd48b5d
   std::set<NeuronNode *>::iterator it = adjacent_.begin();
-  while(it != adjacent_.end()) {
-    if(nodes.count((*it)->id_)) {
+  while (it != adjacent_.end()) {
+    if (nodes.count((*it)->id_)) {
       adjacent_.erase(it++);
-    }
-    else {
+    } else {
       ++it;
     }
   }

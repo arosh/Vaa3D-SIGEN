@@ -2,6 +2,7 @@
 #include "sigen/common/disjoint_set.h"
 #include <cassert>
 #include <cmath>
+#include <iostream>
 #include <algorithm>
 #include <utility>
 #include <vector>
@@ -13,6 +14,8 @@ namespace sigen {
 Builder::Builder(const std::vector<boost::shared_ptr<Cluster> > &data,
                  const double scale_xy, const double scale_z)
     : is_radius_computed_(false), data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
+// This function is HOT spot.
+// There is worth to hack.
 void Builder::connect_neighbor() {
   for (int i = 0; i < (int)data_.size(); ++i) {
     for (int j = i + 1; j < (int)data_.size(); ++j) {
@@ -213,13 +216,28 @@ void Builder::compute_node_type(std::vector<Neuron> &neu) {
 }
 
 std::vector<Neuron> Builder::build() {
+  bool print_progress = true;
   compute_gravity_point();
+  if (print_progress)
+    std::cerr << "convert_to_neuron" << std::endl;
   compute_radius();
+  if (print_progress)
+    std::cerr << "compute_radius" << std::endl;
   connect_neighbor();
+  if (print_progress)
+    std::cerr << "connect_neighbor" << std::endl;
   cut_loops();
+  if (print_progress)
+    std::cerr << "cut_loops" << std::endl;
   std::vector<Neuron> neu = convert_to_neuron(data_, scale_xy_, scale_z_);
+  if (print_progress)
+    std::cerr << "convert_to_neuron" << std::endl;
   compute_id(neu);
+  if (print_progress)
+    std::cerr << "compute_id" << std::endl;
   compute_node_type(neu);
+  if (print_progress)
+    std::cerr << "compute_node_type" << std::endl;
   return neu;
 }
 } // namespace sigen

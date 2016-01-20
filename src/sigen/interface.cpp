@@ -47,27 +47,38 @@ static void write(
   }
 }
 
-void run(
+void Extract(
     const BinaryCube &cube,
     std::vector<int> &out_n, std::vector<int> &out_type,
     std::vector<double> &out_x, std::vector<double> &out_y, std::vector<double> &out_z,
     std::vector<double> &out_r, std::vector<int> &out_pn,
     const Options &options) {
+  bool print_progress = true;
   sigen::Extractor ext(cube);
+  if (print_progress)
+    std::cerr << "extract start" << std::endl;
   std::vector<boost::shared_ptr<sigen::Cluster> > clusters = ext.extract();
+  if (print_progress)
+    std::cerr << "extract finished" << std::endl;
   sigen::Builder bld(clusters, options.scale_xy, options.scale_z);
   std::vector<sigen::Neuron> neurons = bld.build();
-  // std::cerr << "build finished" << std::endl;
+  if (print_progress)
+    std::cerr << "build finished" << std::endl;
   neurons = interpolate(neurons, options.distance_threshold, options.volume_threshold);
-  // std::cerr << "interpolate finished" << std::endl;
+  if (print_progress)
+    std::cerr << "interpolate finished" << std::endl;
   neurons = smoothing(neurons, options.smoothing_level);
-  // std::cerr << "smoothing finished" << std::endl;
+  if (print_progress)
+    std::cerr << "smoothing finished" << std::endl;
   // neurons = clipping(neurons, options.clipping_level);
-  // std::cerr << "clipping finished" << std::endl;
+  // if(print_progres) std::cerr << "clipping finished" << std::endl;
 
   for (int i = 0; i < (int)neurons.size(); ++i) {
     write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
   }
+}
+void ExtractAndWrite(const BinaryCube &cube, const char *filename, const Options &options) {
+  // not implemented
 }
 }; // namespace interface
 }; // namespace sigen
