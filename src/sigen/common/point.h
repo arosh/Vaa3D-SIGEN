@@ -2,12 +2,11 @@
 #include <boost/tuple/tuple.hpp>
 #include <boost/tuple/tuple_comparison.hpp>
 namespace sigen {
-template <class T>
-class Point {
+class IPoint {
 public:
-  T x_, y_, z_;
-  Point(T x, T y, T z) : x_(x), y_(y), z_(z) {}
-  bool operator<(const Point<T> &other) const {
+  int x_, y_, z_;
+  inline IPoint(const int x, const int y, const int z) : x_(x), y_(y), z_(z) {}
+  inline bool operator<(const IPoint &other) const {
     return boost::tie(x_, y_, z_) < boost::tie(other.x_, other.y_, other.z_);
   }
 };

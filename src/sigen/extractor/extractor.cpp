@@ -72,12 +72,12 @@ bool compare_size(const T &lhs, const T &rhs) {
 // This is worth to tune.
 void Extractor::labeling() {
   before_filter(cube_);
-  std::map<Point<int>, boost::shared_ptr<Voxel> > voxels;
+  std::map<IPoint, boost::shared_ptr<Voxel> > voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
         if (cube_[x][y][z]) {
-          voxels[Point<int>(x, y, z)] = boost::make_shared<Voxel>(x, y, z);
+          voxels[IPoint(x, y, z)] = boost::make_shared<Voxel>(x, y, z);
         }
       }
     }
@@ -92,7 +92,7 @@ void Extractor::labeling() {
           int x = p.first.x_ + dx;
           int y = p.first.y_ + dy;
           int z = p.first.z_ + dz;
-          Point<int> t(x, y, z);
+          IPoint t(x, y, z);
           if (voxels.count(t)) {
             p.second->add_connection(voxels[t].get());
           }
@@ -180,10 +180,10 @@ static std::vector<Voxel *> extract_same_distance(Voxel *seed) {
   }
   return ret;
 }
-static std::vector<Point<int> > voxels_to_points(const std::vector<Voxel *> vs) {
-  std::vector<Point<int> > ps;
+static std::vector<IPoint> voxels_to_points(const std::vector<Voxel *> vs) {
+  std::vector<IPoint> ps;
   for (const auto v : vs) {
-    ps.push_back(Point<int>(v->x_, v->y_, v->z_));
+    ps.push_back(IPoint(v->x_, v->y_, v->z_));
   }
   return ps;
 }
@@ -198,7 +198,7 @@ std::vector<boost::shared_ptr<Cluster> > Extractor::extract() {
     for (auto p : group) {
       if (p->flag_ == false) {
         std::vector<Voxel *> vs = extract_same_distance(p.get());
-        std::vector<Point<int> > ps = voxels_to_points(vs);
+        std::vector<IPoint> ps = voxels_to_points(vs);
         ret.push_back(boost::make_shared<Cluster>(ps));
       }
     }

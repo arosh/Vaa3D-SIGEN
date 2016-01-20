@@ -86,7 +86,7 @@ void Builder::compute_gravity_point() {
   for (boost::shared_ptr<Cluster> cls : data_) {
     assert(!cls->points_.empty());
     double sx = 0, sy = 0, sz = 0;
-    for (const Point<int> &p : cls->points_) {
+    for (const IPoint &p : cls->points_) {
       sx += p.x_;
       sy += p.y_;
       sz += p.z_;
@@ -100,7 +100,7 @@ void Builder::compute_gravity_point() {
 void Builder::compute_radius() {
   for (boost::shared_ptr<Cluster> cls : data_) {
     double mdx = 0, mdy = 0, mdz = 0;
-    for (const Point<int> &p : cls->points_) {
+    for (const IPoint &p : cls->points_) {
       mdx = std::max(mdx, scale_xy_ * std::abs(p.x_ - cls->gx_));
       mdy = std::max(mdy, scale_xy_ * std::abs(p.y_ - cls->gy_));
       mdz = std::max(mdz, scale_z_ * std::abs(p.z_ - cls->gz_));
