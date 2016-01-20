@@ -22,6 +22,8 @@ double norm_l2(
 // This functions is HOT SPOT.
 // This functions is called too many times.
 // This is worth to hack.
+// Reference
+// Golin, M. J., et al.: Simple randomized algorithms for closest pair problems, Nordic Journal of Computing (1995).
 std::pair<double, std::pair<int, int> > norm_neuron(const Neuron &lhs, const Neuron &rhs) {
   assert(!lhs.empty());
   assert(!rhs.empty());

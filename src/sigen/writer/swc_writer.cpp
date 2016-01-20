@@ -30,8 +30,8 @@ static void write_rec(std::ostream &os, const NeuronNode *node,
 void SwcWriter::write(std::ostream &os, const Neuron &neu) {
   write_rec(os, neu.root_, -1);
 }
-void SwcWriter::write(const std::string &fname, const Neuron &neu) {
-  std::ofstream ofs(fileutils::add_extension(fname, ".swc").c_str());
+void SwcWriter::write(const char * fname, const Neuron &neu) {
+  std::ofstream ofs(fname);
   write_rec(ofs, neu.root_, -1);
 }
 } // namespace sigen

@@ -62,8 +62,8 @@ public:
   inline void extend(const Neuron &other) {
     this->storage_.insert(this->storage_.end(), other.storage_.begin(), other.storage_.end());
   }
-  inline void setRoot(int nth) {
-    assert(0 <= nth && nth < storage_.size());
+  inline void setRoot(const int nth) {
+    assert(0 <= nth && nth < (int)storage_.size());
     root_ = storage_[nth].get();
   }
 };

@@ -7,6 +7,7 @@
 #include "sigen/extractor/extractor.h"
 #include "sigen/builder/builder.h"
 #include "sigen/writer/swc_writer.h"
+#include "sigen/writer/fileutils.h"
 #include "sigen/neuronprocess/neuronprocess.h"
 
 // disable specified warning options
@@ -58,7 +59,8 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =
         "sample_output/" + std::to_string(i) + ".swc";
-    writer.write(filename, ns[i]);
+    filename = sigen::fileutils::add_extension(filename, ".swc");
+    writer.write(filename.c_str(), ns[i]);
   }
   LOG(INFO) << "write (done)";
 }
