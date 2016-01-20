@@ -15,14 +15,27 @@ namespace sigen {
 Builder::Builder(const std::vector<boost::shared_ptr<Cluster> > &data,
                  const double scale_xy, const double scale_z)
     : is_radius_computed_(false), data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
-// This function is HOT spot.
-// There is worth to hack.
 void Builder::connect_neighbor() {
+  std::multimap<IPoint, int> coord_to_index;
   for (int i = 0; i < (int)data_.size(); ++i) {
-    for (int j = i + 1; j < (int)data_.size(); ++j) {
-      if (data_[i]->check_neighbor(data_[j].get())) {
-        data_[i]->add_connection(data_[j].get());
-        data_[j]->add_connection(data_[i].get());
+    BOOST_FOREACH (const IPoint &p, data_[i]->points_) {
+      coord_to_index.insert(std::make_pair(p, i));
+    }
+  }
+  for (int i = 0; i < (int)data_.size(); ++i) {
+    BOOST_FOREACH (const IPoint &p, data_[i]->points_) {
+      for (int dx = -1; dx <= 1; ++dx) {
+        for (int dy = -1; dy <= 1; ++dy) {
+          for (int dz = -1; dz <= 1; ++dz) {
+            const IPoint q(p.x_ + dx, p.y_ + dy, p.z_ + dz);
+            auto range = coord_to_index.equal_range(q);
+            for (auto it = range.first; it != range.second; ++it) {
+              if (it->second != i) {
+                data_[i]->add_connection(data_[it->second].get());
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -216,7 +229,7 @@ std::vector<Neuron> Builder::build() {
   bool print_progress = true;
   compute_gravity_point();
   if (print_progress)
-    std::cerr << "convert_to_neuron" << std::endl;
+    std::cerr << "compute_gravity_point" << std::endl;
   compute_radius();
   if (print_progress)
     std::cerr << "compute_radius" << std::endl;

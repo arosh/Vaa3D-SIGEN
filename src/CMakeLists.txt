@@ -8,7 +8,6 @@ add_library(sigen STATIC
   sigen/common/disjoint_set.cpp
   sigen/common/neuron.cpp
   sigen/common/voxel.cpp
-  sigen/common/cluster.cpp
   sigen/extractor/extractor.cpp
   sigen/builder/builder.cpp
   sigen/neuronprocess/neuronprocess.cpp
