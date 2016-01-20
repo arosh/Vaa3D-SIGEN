@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstdlib>
 #include <vector>
 #include <boost/foreach.hpp>
@@ -19,7 +20,8 @@ bool Cluster::check_neighbor(const Cluster *other) {
   }
   return false;
 }
-void Cluster::add_connection(Cluster *other) {
-  adjacent_.push_back(other);
+void Cluster::add_connection(const Cluster *other) {
+  assert(!this->is_connecting_with(other));
+  adjacent_.insert(const_cast<Cluster *>(other));
 }
 } // namespace sigen

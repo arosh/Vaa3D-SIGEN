@@ -9,6 +9,7 @@
 #include <queue>
 #include <stack>
 #include <set>
+#include <map>
 #include <boost/foreach.hpp>
 namespace sigen {
 Builder::Builder(const std::vector<boost::shared_ptr<Cluster> > &data,
@@ -33,9 +34,9 @@ void Builder::cut_loops() {
   // see https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
   DisjointSet<Cluster *> U;
   std::vector<std::pair<double, std::pair<Cluster *, Cluster *> > > E;
-  for (boost::shared_ptr<Cluster> cls : data_) {
+  BOOST_FOREACH (boost::shared_ptr<Cluster> cls, data_) {
     U.add(cls.get());
-    for (Cluster *adj : cls->adjacent_) {
+    BOOST_FOREACH (Cluster *adj, cls->adjacent_) {
       double strength = (cls->radius_ + adj->radius_) / 2.0;
       Cluster *a = cls.get(), *b = adj;
       if (a < b)
@@ -49,11 +50,8 @@ void Builder::cut_loops() {
     Cluster *a = it.second.first;
     Cluster *b = it.second.second;
     if (U.same(a, b)) {
-      std::vector<Cluster *>::iterator iter;
-      iter = std::remove(a->adjacent_.begin(), a->adjacent_.end(), b);
-      a->adjacent_.erase(iter, a->adjacent_.end());
-      iter = std::remove(b->adjacent_.begin(), b->adjacent_.end(), a);
-      b->adjacent_.erase(iter, b->adjacent_.end());
+      a->remove_connection(b);
+      b->remove_connection(a);
     } else {
       U.merge(a, b);
     }
@@ -71,7 +69,7 @@ static NeuronNode *find_edge(NeuronNode *node) {
       NeuronNode *cur = que.front();
       que.pop();
       last = cur;
-      for (NeuronNode *next : cur->adjacent_) {
+      BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
         if (used.count(next))
           continue;
         que.push(next);
@@ -83,10 +81,10 @@ static NeuronNode *find_edge(NeuronNode *node) {
 }
 
 void Builder::compute_gravity_point() {
-  for (boost::shared_ptr<Cluster> cls : data_) {
+  BOOST_FOREACH (boost::shared_ptr<Cluster> cls, data_) {
     assert(!cls->points_.empty());
     double sx = 0, sy = 0, sz = 0;
-    for (const IPoint &p : cls->points_) {
+    BOOST_FOREACH (const IPoint &p, cls->points_) {
       sx += p.x_;
       sy += p.y_;
       sz += p.z_;
@@ -98,9 +96,9 @@ void Builder::compute_gravity_point() {
 }
 
 void Builder::compute_radius() {
-  for (boost::shared_ptr<Cluster> cls : data_) {
+  BOOST_FOREACH (boost::shared_ptr<Cluster> cls, data_) {
     double mdx = 0, mdy = 0, mdz = 0;
-    for (const IPoint &p : cls->points_) {
+    BOOST_FOREACH (const IPoint &p, cls->points_) {
       mdx = std::max(mdx, scale_xy_ * std::abs(p.x_ - cls->gx_));
       mdy = std::max(mdy, scale_xy_ * std::abs(p.y_ - cls->gy_));
       mdz = std::max(mdz, scale_z_ * std::abs(p.z_ - cls->gz_));
@@ -111,8 +109,7 @@ void Builder::compute_radius() {
 }
 
 static bool check_adjacent(const Cluster *a, const Cluster *b) {
-  auto iter = std::find(a->adjacent_.begin(), a->adjacent_.end(), b);
-  return iter != a->adjacent_.end();
+  return a->is_connecting_with(b);
 }
 
 std::vector<boost::shared_ptr<NeuronNode> >
@@ -149,7 +146,7 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
   // split into some neurons
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
-  for (boost::shared_ptr<NeuronNode> node : neuron_nodes) {
+  BOOST_FOREACH (boost::shared_ptr<NeuronNode> node, neuron_nodes) {
     if (used.count(node.get()))
       continue;
     neurons.push_back(Neuron());
@@ -162,9 +159,9 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
     while (!stk.empty()) {
       NeuronNode *cur = stk.top();
       stk.pop();
-      for (NeuronNode *next : cur->adjacent_) {
+      BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
         if (!used.count(next)) {
-          for (boost::shared_ptr<NeuronNode> inst : neuron_nodes) {
+          BOOST_FOREACH (boost::shared_ptr<NeuronNode> inst, neuron_nodes) {
             if (inst.get() == next)
               n.add_node(inst);
           }
@@ -179,7 +176,7 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
 
 static void compute_id_inner(NeuronNode *cur, NeuronNode *prev, int &id) {
   cur->id_ = id++;
-  for (NeuronNode *next : cur->adjacent_) {
+  BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {
       compute_id_inner(next, cur, id);
     }
@@ -202,7 +199,7 @@ static void compute_node_type_inner(NeuronNode *cur, NeuronNode *prev) {
   else
     type = neuron_type::EDGE;
   cur->type_ = type;
-  for (NeuronNode *next : cur->adjacent_) {
+  BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {
       compute_node_type_inner(next, cur);
     }
