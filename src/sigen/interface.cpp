@@ -70,8 +70,9 @@ void Extract(
   neurons = smoothing(neurons, options.smoothing_level);
   if (print_progress)
     std::cerr << "smoothing finished" << std::endl;
-  // neurons = clipping(neurons, options.clipping_level);
-  // if(print_progres) std::cerr << "clipping finished" << std::endl;
+  neurons = clipping(neurons, options.clipping_level);
+  if (print_progress)
+    std::cerr << "clipping finished" << std::endl;
 
   for (int i = 0; i < (int)neurons.size(); ++i) {
     write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);

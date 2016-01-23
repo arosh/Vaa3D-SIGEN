@@ -6,6 +6,7 @@
 #include <limits>
 #include <algorithm>
 #include <vector>
+#include <iostream>
 #include <functional>
 #include "sigen/neuronprocess/neuronprocess.h"
 #include "sigen/common/disjoint_set.h"
@@ -213,6 +214,7 @@ std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) 
   std::vector<Neuron> forest;
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].clone());
+    // infinite loop?
     clipping_dfs(forest[i].root_, NULL, level, will_remove);
   }
   for (int i = 0; i < (int)forest.size(); ++i) {

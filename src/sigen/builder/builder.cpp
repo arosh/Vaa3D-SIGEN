@@ -121,10 +121,6 @@ void Builder::compute_radius() {
   is_radius_computed_ = true;
 }
 
-static bool check_adjacent(const Cluster *a, const Cluster *b) {
-  return a->is_connecting_with(b);
-}
-
 std::vector<boost::shared_ptr<NeuronNode> >
 Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
                                 const double scale_xy, const double scale_z) {
@@ -138,7 +134,7 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
     n->radius_ = data[i]->radius_;
     neuron_nodes.push_back(n);
     for (int j = i + 1; j < (int)data.size(); ++j) {
-      if (check_adjacent(data[i].get(), data[j].get())) {
+      if (data[i]->is_connecting_with(data[j])) {
         edges.push_back(std::make_pair(i, j));
       }
     }
@@ -174,6 +170,7 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
       stk.pop();
       BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
         if (!used.count(next)) {
+          // FIXME TOOOOOO SLOW
           BOOST_FOREACH (boost::shared_ptr<NeuronNode> inst, neuron_nodes) {
             if (inst.get() == next)
               n.add_node(inst);
