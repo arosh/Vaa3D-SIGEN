@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <boost/utility.hpp>
+#include <boost/shared_ptr.hpp>
 namespace sigen {
 class Voxel : boost::noncopyable {
 public:
@@ -11,4 +12,5 @@ public:
   Voxel(int x, int y, int z);
   void add_connection(Voxel *p);
 };
+typedef boost::shared_ptr<Voxel> VoxelPtr;
 } // namespace sigen

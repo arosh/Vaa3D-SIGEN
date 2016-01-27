@@ -48,7 +48,7 @@ public:
   inline int count_num_child(const NeuronNode *parent) const {
     int count = 0;
     for (const NeuronNode *next : this->adjacent_) {
-      if(next != parent) {
+      if (next != parent) {
         count++;
       }
     }

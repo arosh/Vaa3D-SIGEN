@@ -5,6 +5,7 @@
 #include <queue>
 #include <vector>
 #include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
 #include "sigen/extractor/extractor.h"
 #include "sigen/common/point.h"
 namespace sigen {
@@ -72,7 +73,7 @@ bool compare_size(const T &lhs, const T &rhs) {
 // This is worth to tune.
 void Extractor::labeling() {
   before_filter(cube_);
-  std::map<IPoint, boost::shared_ptr<Voxel> > voxels;
+  std::map<IPoint, VoxelPtr> voxels;
   for (int x = 1; x < cube_.x_ - 1; ++x) {
     for (int y = 1; y < cube_.y_ - 1; ++y) {
       for (int z = 1; z < cube_.z_ - 1; ++z) {
@@ -110,18 +111,18 @@ void Extractor::labeling() {
       set_label(p.second.get(), label++);
     }
   }
-  components_.assign(label, std::vector<boost::shared_ptr<Voxel> >());
+  components_.assign(label, std::vector<VoxelPtr>());
   for (auto p : voxels) {
     components_[p.second->label_].push_back(p.second);
   }
-  std::sort(components_.begin(), components_.end(), &compare_size<std::vector<boost::shared_ptr<Voxel> > >);
+  std::sort(components_.begin(), components_.end(), &compare_size<std::vector<VoxelPtr> >);
   std::reverse(components_.begin(), components_.end());
 }
-static void reset_flag(std::vector<boost::shared_ptr<Voxel> > &voxels) {
+static void reset_flag(std::vector<VoxelPtr> &voxels) {
   for (auto p : voxels)
     p->flag_ = false;
 }
-static Voxel *find_single_seed(std::vector<boost::shared_ptr<Voxel> > &group) {
+static Voxel *find_single_seed(std::vector<VoxelPtr> &group) {
   assert(!group.empty());
   Voxel *last = group[0].get();
   for (int i = 0; i < 2; ++i) {
@@ -142,7 +143,7 @@ static Voxel *find_single_seed(std::vector<boost::shared_ptr<Voxel> > &group) {
   }
   return last;
 }
-static void set_distance(std::vector<boost::shared_ptr<Voxel> > &group,
+static void set_distance(std::vector<VoxelPtr> &group,
                          Voxel *seed) {
   reset_flag(group);
   std::queue<Voxel *> que;
@@ -187,11 +188,11 @@ static std::vector<IPoint> voxels_to_points(const std::vector<Voxel *> vs) {
   }
   return ps;
 }
-std::vector<boost::shared_ptr<Cluster> > Extractor::extract() {
+std::vector<ClusterPtr> Extractor::extract() {
   labeling();
-  std::vector<boost::shared_ptr<Cluster> > ret;
+  std::vector<ClusterPtr> ret;
   // NOT const
-  for (std::vector<boost::shared_ptr<Voxel> > &group : components_) {
+  for (std::vector<VoxelPtr> &group : components_) {
     auto seed = find_single_seed(group);
     set_distance(group, seed);
     reset_flag(group);

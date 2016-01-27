@@ -1,7 +1,6 @@
 #include <cassert>
 #include <iostream>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 #include "sigen/interface.h"
 #include "sigen/common/binary_cube.h"
 #include "sigen/extractor/extractor.h"
@@ -57,7 +56,7 @@ void Extract(
   sigen::Extractor ext(cube);
   if (print_progress)
     std::cerr << "extract start" << std::endl;
-  std::vector<boost::shared_ptr<sigen::Cluster> > clusters = ext.extract();
+  std::vector<ClusterPtr> clusters = ext.extract();
   if (print_progress)
     std::cerr << "extract finished" << std::endl;
   sigen::Builder bld(clusters, options.scale_xy, options.scale_z);

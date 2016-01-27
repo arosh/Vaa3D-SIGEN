@@ -7,6 +7,8 @@
 #include "sigen/common/voxel.h"
 #include "sigen/common/point.h"
 namespace sigen {
+class Cluster;
+typedef boost::shared_ptr<Cluster> ClusterPtr;
 class Cluster : boost::noncopyable {
 public:
   double gx_, gy_, gz_;
@@ -19,7 +21,7 @@ public:
   inline bool is_connecting_with(const Cluster *p) const {
     return adjacent_.count(const_cast<Cluster *>(p)); // FIXME please remove const_cast
   }
-  inline bool is_connecting_with(boost::shared_ptr<Cluster> p) const {
+  inline bool is_connecting_with(ClusterPtr p) const {
     return is_connecting_with(p.get());
   }
   inline void remove_connection(const Cluster *p) {

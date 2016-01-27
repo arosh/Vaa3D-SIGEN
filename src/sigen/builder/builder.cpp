@@ -12,7 +12,7 @@
 #include <map>
 #include <boost/foreach.hpp>
 namespace sigen {
-Builder::Builder(const std::vector<boost::shared_ptr<Cluster> > &data,
+Builder::Builder(const std::vector<ClusterPtr> &data,
                  const double scale_xy, const double scale_z)
     : is_radius_computed_(false), data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
 void Builder::connect_neighbor() {
@@ -47,7 +47,7 @@ void Builder::cut_loops() {
   // see https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
   DisjointSet<Cluster *> U;
   std::vector<std::pair<double, std::pair<Cluster *, Cluster *> > > E;
-  BOOST_FOREACH (boost::shared_ptr<Cluster> cls, data_) {
+  BOOST_FOREACH (ClusterPtr cls, data_) {
     U.add(cls.get());
     BOOST_FOREACH (Cluster *adj, cls->adjacent_) {
       double strength = (cls->radius_ + adj->radius_) / 2.0;
@@ -94,7 +94,7 @@ static NeuronNode *find_edge(NeuronNode *node) {
 }
 
 void Builder::compute_gravity_point() {
-  BOOST_FOREACH (boost::shared_ptr<Cluster> cls, data_) {
+  BOOST_FOREACH (ClusterPtr cls, data_) {
     assert(!cls->points_.empty());
     double sx = 0, sy = 0, sz = 0;
     BOOST_FOREACH (const IPoint &p, cls->points_) {
@@ -109,7 +109,7 @@ void Builder::compute_gravity_point() {
 }
 
 void Builder::compute_radius() {
-  BOOST_FOREACH (boost::shared_ptr<Cluster> cls, data_) {
+  BOOST_FOREACH (ClusterPtr cls, data_) {
     double mdx = 0, mdy = 0, mdz = 0;
     BOOST_FOREACH (const IPoint &p, cls->points_) {
       mdx = std::max(mdx, scale_xy_ * std::abs(p.x_ - cls->gx_));
@@ -122,7 +122,7 @@ void Builder::compute_radius() {
 }
 
 std::vector<NeuronNodePtr>
-Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
+Builder::convert_to_neuron_node(std::vector<ClusterPtr> &data,
                                 const double scale_xy, const double scale_z) {
   std::vector<NeuronNodePtr> neuron_nodes;
   std::vector<std::pair<int, int> > edges;
@@ -135,13 +135,13 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
     neuron_nodes.push_back(n);
   }
   std::map<Cluster *, int> ptr2index;
-  for(int i = 0; i < (int)data.size(); ++i) {
+  for (int i = 0; i < (int)data.size(); ++i) {
     ptr2index[data[i].get()] = i;
   }
-  for(int i = 0; i < (int)data.size(); ++i) {
-    for(Cluster *p : data[i]->adjacent_) {
+  for (int i = 0; i < (int)data.size(); ++i) {
+    for (Cluster *p : data[i]->adjacent_) {
       int j = ptr2index[p];
-      if(i < j) {
+      if (i < j) {
         neuron_nodes[i]->add_connection(neuron_nodes[j].get());
         neuron_nodes[j]->add_connection(neuron_nodes[i].get());
       }
@@ -151,7 +151,7 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
 }
 
 std::vector<Neuron>
-Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
+Builder::convert_to_neuron(std::vector<ClusterPtr> &data,
                            const double scale_xy, const double scale_z) {
   std::vector<NeuronNodePtr> neuron_nodes =
       convert_to_neuron_node(data, scale_xy, scale_z);
@@ -159,7 +159,8 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
   std::map<NeuronNode *, NeuronNodePtr> ptr2smartptr;
-  for(NeuronNodePtr p : neuron_nodes) ptr2smartptr[p.get()] = p;
+  for (NeuronNodePtr p : neuron_nodes)
+    ptr2smartptr[p.get()] = p;
 
   BOOST_FOREACH (NeuronNodePtr node, neuron_nodes) {
     if (used.count(node.get()))

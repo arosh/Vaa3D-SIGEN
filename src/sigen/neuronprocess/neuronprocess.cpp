@@ -165,11 +165,12 @@ static int clipping_dfs(
     const int level,
     std::set<int> &will_remove,
     std::map<NeuronNode *, int> &memo) {
-  if(memo.count(node)) return memo[node];
-  if(node->count_num_child(parent) < 2) {
+  if (memo.count(node))
+    return memo[node];
+  if (node->count_num_child(parent) < 2) {
     // If count_num_child == 1
-    for(NeuronNode *next : node->adjacent_) {
-      if(next != parent) {
+    for (NeuronNode *next : node->adjacent_) {
+      if (next != parent) {
         return memo[node] = clipping_dfs(next, node, level, will_remove, memo) + 1;
       }
     }
