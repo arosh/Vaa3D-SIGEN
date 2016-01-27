@@ -133,16 +133,19 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
              data[i]->gz_ * scale_z);
     n->radius_ = data[i]->radius_;
     neuron_nodes.push_back(n);
-    for (int j = i + 1; j < (int)data.size(); ++j) {
-      if (data[i]->is_connecting_with(data[j])) {
-        edges.push_back(std::make_pair(i, j));
+  }
+  std::map<Cluster *, int> ptr2index;
+  for(int i = 0; i < (int)data.size(); ++i) {
+    ptr2index[data[i].get()] = i;
+  }
+  for(int i = 0; i < (int)data.size(); ++i) {
+    for(Cluster *p : data[i]->adjacent_) {
+      int j = ptr2index[p];
+      if(i < j) {
+        neuron_nodes[i]->add_connection(neuron_nodes[j].get());
+        neuron_nodes[j]->add_connection(neuron_nodes[i].get());
       }
     }
-  }
-  for (std::pair<int, int> item : edges) {
-    int a = item.first, b = item.second;
-    neuron_nodes[a]->add_connection(neuron_nodes[b].get());
-    neuron_nodes[b]->add_connection(neuron_nodes[a].get());
   }
   return neuron_nodes;
 }
@@ -155,9 +158,13 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
   // split into some neurons
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
+  std::map<NeuronNode *, NeuronNodePtr> ptr2smartptr;
+  for(NeuronNodePtr p : neuron_nodes) ptr2smartptr[p.get()] = p;
+
   BOOST_FOREACH (NeuronNodePtr node, neuron_nodes) {
     if (used.count(node.get()))
       continue;
+    // FIXME
     neurons.push_back(Neuron());
     Neuron &n = neurons.back();
     n.root_ = find_edge(node.get());
@@ -169,12 +176,9 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
       NeuronNode *cur = stk.top();
       stk.pop();
       BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
+        // If next != parent
         if (!used.count(next)) {
-          // FIXME TOOOOOO SLOW
-          BOOST_FOREACH (NeuronNodePtr inst, neuron_nodes) {
-            if (inst.get() == next)
-              n.add_node(inst);
-          }
+          n.add_node(ptr2smartptr[next]);
           stk.push(next);
           used.insert(next);
         }
