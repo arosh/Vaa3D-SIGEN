@@ -13,6 +13,8 @@ enum neuron_type {
   BRANCH,
   CONNECT
 };
+class NeuronNode;
+typedef boost::shared_ptr<NeuronNode> NeuronNodePtr;
 class NeuronNode : boost::noncopyable {
 public:
   // 1-based
@@ -35,8 +37,8 @@ public:
     gy_ = gy;
     gz_ = gz;
   }
-  inline boost::shared_ptr<NeuronNode> clone() const {
-    boost::shared_ptr<NeuronNode> r = boost::make_shared<NeuronNode>();
+  inline NeuronNodePtr clone() const {
+    NeuronNodePtr r = boost::make_shared<NeuronNode>();
     r->id_ = id_;
     r->coord(gx_, gy_, gz_);
     r->radius_ = radius_;
@@ -53,13 +55,12 @@ public:
     return count;
   }
 };
-typedef boost::shared_ptr<NeuronNode> NeuronNodePtr;
 class Neuron /* : noncopyable */ {
 public:
-  std::vector<boost::shared_ptr<NeuronNode> > storage_;
+  std::vector<NeuronNodePtr> storage_;
   NeuronNode *root_;
   Neuron clone() const;
-  inline void add_node(boost::shared_ptr<NeuronNode> node) {
+  inline void add_node(NeuronNodePtr node) {
     storage_.push_back(node);
   }
   inline bool empty() const {

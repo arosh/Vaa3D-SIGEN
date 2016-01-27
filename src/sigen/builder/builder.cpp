@@ -121,13 +121,13 @@ void Builder::compute_radius() {
   is_radius_computed_ = true;
 }
 
-std::vector<boost::shared_ptr<NeuronNode> >
+std::vector<NeuronNodePtr>
 Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
                                 const double scale_xy, const double scale_z) {
-  std::vector<boost::shared_ptr<NeuronNode> > neuron_nodes;
+  std::vector<NeuronNodePtr> neuron_nodes;
   std::vector<std::pair<int, int> > edges;
   for (int i = 0; i < (int)data.size(); ++i) {
-    boost::shared_ptr<NeuronNode> n = boost::make_shared<NeuronNode>();
+    NeuronNodePtr n = boost::make_shared<NeuronNode>();
     n->coord(data[i]->gx_ * scale_xy,
              data[i]->gy_ * scale_xy,
              data[i]->gz_ * scale_z);
@@ -150,12 +150,12 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
 std::vector<Neuron>
 Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
                            const double scale_xy, const double scale_z) {
-  std::vector<boost::shared_ptr<NeuronNode> > neuron_nodes =
+  std::vector<NeuronNodePtr> neuron_nodes =
       convert_to_neuron_node(data, scale_xy, scale_z);
   // split into some neurons
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
-  BOOST_FOREACH (boost::shared_ptr<NeuronNode> node, neuron_nodes) {
+  BOOST_FOREACH (NeuronNodePtr node, neuron_nodes) {
     if (used.count(node.get()))
       continue;
     neurons.push_back(Neuron());
@@ -171,7 +171,7 @@ Builder::convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
       BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
         if (!used.count(next)) {
           // FIXME TOOOOOO SLOW
-          BOOST_FOREACH (boost::shared_ptr<NeuronNode> inst, neuron_nodes) {
+          BOOST_FOREACH (NeuronNodePtr inst, neuron_nodes) {
             if (inst.get() == next)
               n.add_node(inst);
           }

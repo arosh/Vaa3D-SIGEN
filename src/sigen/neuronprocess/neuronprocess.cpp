@@ -13,8 +13,8 @@
 #include "sigen/common/math.h"
 namespace sigen {
 double norm_l2(
-    const boost::shared_ptr<NeuronNode> &lhs,
-    const boost::shared_ptr<NeuronNode> &rhs) {
+    const NeuronNodePtr &lhs,
+    const NeuronNodePtr &rhs) {
   const double dx = std::abs(lhs->gx_ - rhs->gx_);
   const double dy = std::abs(lhs->gy_ - rhs->gy_);
   const double dz = std::abs(lhs->gz_ - rhs->gz_);
@@ -130,7 +130,7 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
   for (int iter = 0; iter < n_iter; ++iter) {
     std::map<int, point_and_radius> next_value;
     for (int i = 0; i < (int)forest.size(); ++i) {
-      for (boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
+      for (NeuronNodePtr node : forest[i].storage_) {
         std::vector<double> gx, gy, gz, radius;
         gx.push_back(node->gx_);
         gy.push_back(node->gy_);
@@ -149,7 +149,7 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
       }
     }
     for (int i = 0; i < (int)forest.size(); ++i) {
-      for (boost::shared_ptr<NeuronNode> node : forest[i].storage_) {
+      for (NeuronNodePtr node : forest[i].storage_) {
         point_and_radius next_node = next_value[node->id_];
         node->coord(next_node.gx_, next_node.gy_, next_node.gz_);
         node->radius_ = next_node.radius_;

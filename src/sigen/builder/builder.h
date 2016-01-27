@@ -16,7 +16,7 @@ public:
   static std::vector<Neuron>
   convert_to_neuron(std::vector<boost::shared_ptr<Cluster> > &data,
                     const double scale_xy, const double scale_z);
-  static std::vector<boost::shared_ptr<NeuronNode> >
+  static std::vector<NeuronNodePtr>
   convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
                          const double scale_xy, const double scale_z);
   static void compute_node_type(std::vector<Neuron> &neu);

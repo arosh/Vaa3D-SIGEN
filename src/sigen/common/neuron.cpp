@@ -31,7 +31,7 @@ Neuron Neuron::clone() const {
   Neuron ret;
   std::map<NeuronNode *, int> ptr_to_index;
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
-    boost::shared_ptr<NeuronNode> ptr = this->storage_[i];
+    NeuronNodePtr ptr = this->storage_[i];
     ptr_to_index[ptr.get()] = i;
     ret.storage_.push_back(ptr->clone());
   }
