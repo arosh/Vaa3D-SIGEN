@@ -127,7 +127,7 @@ Builder::convert_to_neuron_node(std::vector<boost::shared_ptr<Cluster> > &data,
   std::vector<boost::shared_ptr<NeuronNode> > neuron_nodes;
   std::vector<std::pair<int, int> > edges;
   for (int i = 0; i < (int)data.size(); ++i) {
-    auto n = boost::make_shared<NeuronNode>();
+    boost::shared_ptr<NeuronNode> n = boost::make_shared<NeuronNode>();
     n->coord(data[i]->gx_ * scale_xy,
              data[i]->gy_ * scale_xy,
              data[i]->gz_ * scale_z);

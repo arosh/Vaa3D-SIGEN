@@ -158,43 +158,57 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
   }
   return forest;
 }
-int clipping_dfs(
+// return max_height
+static int clipping_dfs(
     NeuronNode *node,
     NeuronNode *parent,
     const int level,
-    std::set<int> &will_remove) {
-  int mindepth = std::numeric_limits<int>::max();
-  int longpath = 0;
-  for (NeuronNode *next : node->adjacent_) {
-    if (next != parent) {
-      int dep = clipping_dfs(next, node, level, will_remove);
-      if (dep > level)
-        longpath++;
-      mindepth = std::min(mindepth, dep);
-    }
-  }
-  if (longpath > 0) {
-    for (NeuronNode *next : node->adjacent_) {
-      if (next != parent) {
-        int dep = clipping_dfs(next, node, level, will_remove);
-        if (dep <= level) {
-          will_remove.insert(next->id_);
-        }
+    std::set<int> &will_remove,
+    std::map<NeuronNode *, int> &memo) {
+  if(memo.count(node)) return memo[node];
+  if(node->count_num_child(parent) < 2) {
+    // If count_num_child == 1
+    for(NeuronNode *next : node->adjacent_) {
+      if(next != parent) {
+        return memo[node] = clipping_dfs(next, node, level, will_remove, memo) + 1;
       }
     }
+    // If count_num_child == 0
+    return 1;
+  }
+  int has_longpath = 0;
+  for (NeuronNode *next : node->adjacent_) {
+    if (next != parent) {
+      int depth = clipping_dfs(next, node, level, will_remove, memo);
+      if (depth > level)
+        has_longpath = true;
+    }
+  }
+  if (has_longpath) {
+    int maxdepth = 0;
+    for (NeuronNode *next : node->adjacent_) {
+      if (next != parent) {
+        int depth = clipping_dfs(next, node, level, will_remove, memo);
+        if (depth <= level) {
+          will_remove.insert(next->id_);
+        }
+        maxdepth = std::max(maxdepth, depth);
+      }
+    }
+    return memo[node] = maxdepth + 1;
   } else {
-    int longest_depth = 0;
+    int maxdepth = 0;
     NeuronNode *longest_child = NULL;
     for (NeuronNode *next : node->adjacent_) {
       if (next != parent) {
-        int dep = clipping_dfs(next, node, level, will_remove);
-        if (longest_depth < dep) {
-          longest_depth = dep;
+        int depth = clipping_dfs(next, node, level, will_remove, memo);
+        if (maxdepth < depth) {
+          maxdepth = depth;
           longest_child = next;
         }
       }
     }
-    if (longest_depth > 0) {
+    if (maxdepth > 0) {
       for (NeuronNode *next : node->adjacent_) {
         if (next != parent) {
           if (next != longest_child) {
@@ -203,19 +217,16 @@ int clipping_dfs(
         }
       }
     }
+    return memo[node] = maxdepth + 1;
   }
-  if (mindepth == std::numeric_limits<int>::max()) {
-    mindepth = 0;
-  }
-  return mindepth + 1;
 }
 std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) {
   std::set<int> will_remove;
   std::vector<Neuron> forest;
+  std::map<NeuronNode *, int> memo;
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].clone());
-    // infinite loop?
-    clipping_dfs(forest[i].root_, NULL, level, will_remove);
+    clipping_dfs(forest[i].root_, NULL, level, will_remove, memo);
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
     for (int j = 0; j < (int)forest[i].storage_.size(); ++j) {

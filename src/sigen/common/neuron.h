@@ -43,7 +43,17 @@ public:
     r->type_ = type_;
     return r;
   }
+  inline int count_num_child(const NeuronNode *parent) const {
+    int count = 0;
+    for (const NeuronNode *next : this->adjacent_) {
+      if(next != parent) {
+        count++;
+      }
+    }
+    return count;
+  }
 };
+typedef boost::shared_ptr<NeuronNode> NeuronNodePtr;
 class Neuron /* : noncopyable */ {
 public:
   std::vector<boost::shared_ptr<NeuronNode> > storage_;
