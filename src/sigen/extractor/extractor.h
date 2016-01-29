@@ -6,7 +6,7 @@
 #include <boost/utility.hpp>
 namespace sigen {
 class Extractor : boost::noncopyable {
-  void labeling();
+  void Labeling();
 
 public:
   BinaryCube cube_;

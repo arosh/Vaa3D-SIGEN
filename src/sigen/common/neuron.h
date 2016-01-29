@@ -62,7 +62,7 @@ class Neuron /* : noncopyable */ {
 public:
   std::vector<NeuronNodePtr> storage_;
   NeuronNode *root_;
-  Neuron clone() const;
+  Neuron Clone() const;
   inline void AddNode(NeuronNodePtr node) {
     storage_.push_back(node);
   }

@@ -26,7 +26,7 @@ void NeuronNode::RemoveConnection(const std::set<int> &nodes) {
     }
   }
 }
-Neuron Neuron::clone() const {
+Neuron Neuron::Clone() const {
   assert(this->root_ != NULL);
   Neuron ret;
   std::map<NeuronNode *, int> ptr_to_index;
