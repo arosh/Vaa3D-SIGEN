@@ -1,7 +1,6 @@
 <map id="sigen::DisjointSet::same" name="sigen::DisjointSet::same">
-<area shape="rect" id="node2" href="$classsigen_1_1_builder.html#a605c109f948a18476c628596de307d66" title="sigen::Builder::cut\l_loops" alt="" coords="178,5,305,44"/>
-<area shape="rect" id="node6" href="$namespacesigen.html#aa7a1ad6a2f0833327e81abed89685171" title="sigen::interpolate" alt="" coords="360,65,483,91"/>
-<area shape="rect" id="node3" href="$classsigen_1_1_builder.html#afdba46efcdcbf5b4669ad2780d545891" title="sigen::Builder::build" alt="" coords="353,16,491,41"/>
-<area shape="rect" id="node4" href="$namespacesigen_1_1interface.html#a8ed6b06d4aa09c111930f3c208e25c6c" title="sigen::interface::run" alt="" coords="539,16,677,41"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="583,65,633,91"/>
+<area shape="rect" id="node2" href="$classsigen_1_1_builder.html#a605c109f948a18476c628596de307d66" title="sigen::Builder::cut\l_loops" alt="" coords="178,24,305,63"/>
+<area shape="rect" id="node3" href="$classsigen_1_1_builder.html#afdba46efcdcbf5b4669ad2780d545891" title="sigen::Builder::build" alt="" coords="353,31,491,56"/>
+<area shape="rect" id="node4" href="$namespacesigen_1_1interface.html#ae422b4b6127d885198ead14690ae8ccc" title="sigen::interface::Extract" alt="" coords="539,5,699,31"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="594,55,644,80"/>
 </map>

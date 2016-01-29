@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['variant',['Variant',['../namespacesigen.html#a9e33b23561758d5005a932f40d8e6864',1,'sigen']]]
+  ['imagesequence',['ImageSequence',['../namespacesigen.html#a44e93b4efc659a04b29540fee90beaef',1,'sigen']]]
 ];

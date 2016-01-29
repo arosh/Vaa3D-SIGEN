@@ -4,10 +4,7 @@ var dir_9054e72758548ea68d37f3f859759a61 =
     [ "binary_cube.h", "binary__cube_8h.html", [
       [ "BinaryCube", "classsigen_1_1_binary_cube.html", "classsigen_1_1_binary_cube" ]
     ] ],
-    [ "cluster.cpp", "cluster_8cpp.html", null ],
-    [ "cluster.h", "cluster_8h.html", [
-      [ "Cluster", "classsigen_1_1_cluster.html", "classsigen_1_1_cluster" ]
-    ] ],
+    [ "cluster.h", "cluster_8h.html", "cluster_8h" ],
     [ "disjoint_set.cpp", "disjoint__set_8cpp.html", null ],
     [ "disjoint_set.h", "disjoint__set_8h.html", [
       [ "DisjointSetInternal", "classsigen_1_1_disjoint_set_internal.html", "classsigen_1_1_disjoint_set_internal" ],
@@ -21,11 +18,9 @@ var dir_9054e72758548ea68d37f3f859759a61 =
       [ "noncopyable", "structsigen_1_1noncopyable.html", "structsigen_1_1noncopyable" ]
     ] ],
     [ "point.h", "point_8h.html", [
-      [ "Point", "classsigen_1_1_point.html", "classsigen_1_1_point" ]
+      [ "IPoint", "classsigen_1_1_i_point.html", "classsigen_1_1_i_point" ]
     ] ],
     [ "variant.h", "variant_8h.html", "variant_8h" ],
     [ "voxel.cpp", "voxel_8cpp.html", null ],
-    [ "voxel.h", "voxel_8h.html", [
-      [ "Voxel", "classsigen_1_1_voxel.html", "classsigen_1_1_voxel" ]
-    ] ]
+    [ "voxel.h", "voxel_8h.html", "voxel_8h" ]
 ];

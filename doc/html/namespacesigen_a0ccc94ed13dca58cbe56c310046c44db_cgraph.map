@@ -1,3 +1,4 @@
 <map id="sigen::norm_neuron" name="sigen::norm_neuron">
-<area shape="rect" id="node2" href="$namespacesigen.html#a474a0b6c971276309e0ddbfd1f0a31b4" title="sigen::norm_l2" alt="" coords="193,5,302,31"/>
+<area shape="rect" id="node2" href="$classsigen_1_1_neuron.html#aeedab897fb4a4d44f731fad7fbbdc12e" title="sigen::Neuron::empty" alt="" coords="193,5,341,31"/>
+<area shape="rect" id="node3" href="$namespacesigen.html#ab2e838279faedf75788372ffa32e7286" title="sigen::norm_l2" alt="" coords="213,55,322,80"/>
 </map>

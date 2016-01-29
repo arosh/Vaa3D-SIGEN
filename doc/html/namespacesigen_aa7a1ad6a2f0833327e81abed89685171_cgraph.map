@@ -1,8 +1,6 @@
 <map id="sigen::interpolate" name="sigen::interpolate">
 <area shape="rect" id="node2" href="$classsigen_1_1_disjoint_set.html#a76292ebf9214b64e79e48f68f7e163e2" title="sigen::DisjointSet::add" alt="" coords="176,5,330,31"/>
-<area shape="rect" id="node3" href="$classsigen_1_1_disjoint_set.html#ae202ae50c3690c007694ebe9f9ffe813" title="sigen::DisjointSet\l::setup" alt="" coords="191,55,315,93"/>
-<area shape="rect" id="node4" href="$namespacesigen.html#a0ccc94ed13dca58cbe56c310046c44db" title="sigen::norm_neuron" alt="" coords="183,117,323,143"/>
-<area shape="rect" id="node6" href="$classsigen_1_1_disjoint_set.html#a299ec7087a734826088809fc20172a05" title="sigen::DisjointSet\l::same" alt="" coords="191,167,315,205"/>
-<area shape="rect" id="node7" href="$classsigen_1_1_disjoint_set.html#ae3e4c3fc3de5cb56bc14bf3211925cdd" title="sigen::DisjointSet\l::merge" alt="" coords="191,229,315,268"/>
-<area shape="rect" id="node5" href="$namespacesigen.html#a474a0b6c971276309e0ddbfd1f0a31b4" title="sigen::norm_l2" alt="" coords="378,117,487,143"/>
+<area shape="rect" id="node3" href="$namespacesigen.html#a0ccc94ed13dca58cbe56c310046c44db" title="sigen::norm_neuron" alt="" coords="183,55,323,80"/>
+<area shape="rect" id="node4" href="$classsigen_1_1_neuron.html#aeedab897fb4a4d44f731fad7fbbdc12e" title="sigen::Neuron::empty" alt="" coords="378,29,526,55"/>
+<area shape="rect" id="node5" href="$namespacesigen.html#ab2e838279faedf75788372ffa32e7286" title="sigen::norm_l2" alt="" coords="398,79,507,104"/>
 </map>

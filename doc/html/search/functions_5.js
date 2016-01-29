@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['init_5fglog',['init_glog',['../main_8cpp.html#a76eecb5e71fb12e7b676035992ca3904',1,'main.cpp']]],
-  ['interpolate',['interpolate',['../namespacesigen.html#aa7a1ad6a2f0833327e81abed89685171',1,'sigen']]]
+  ['has_5fconnection',['has_connection',['../classsigen_1_1_neuron_node.html#a2eca98382fbb1bbdb5c192fbf0b2212f',1,'sigen::NeuronNode::has_connection(NeuronNode *node) const '],['../classsigen_1_1_neuron_node.html#a24f8950ca4bedf0ef738f4a9abffce0b',1,'sigen::NeuronNode::has_connection(NeuronNodePtr node) const ']]]
 ];

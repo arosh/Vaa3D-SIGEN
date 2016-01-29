@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['imagesequence',['ImageSequence',['../namespacesigen.html#a44e93b4efc659a04b29540fee90beaef',1,'sigen']]]
+  ['clusterptr',['ClusterPtr',['../namespacesigen.html#aa9daed56a58b76cb1a41264950901550',1,'sigen']]]
 ];

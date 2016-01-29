@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write',['write',['../classsigen_1_1_swc_writer.html#ab458cb623398ec7ee7ea51794e5a28b4',1,'sigen::SwcWriter::write(std::ostream &amp;os, const Neuron &amp;neuron__)'],['../classsigen_1_1_swc_writer.html#a35c1803a3053247a67c533ecfab6cb1a',1,'sigen::SwcWriter::write(const std::string &amp;fname, const Neuron &amp;neuron__)']]]
+  ['write',['write',['../classsigen_1_1_swc_writer.html#afc517c4af2fa717db06b677e769fbaae',1,'sigen::SwcWriter::write(std::ostream &amp;os, const Neuron &amp;neuron)'],['../classsigen_1_1_swc_writer.html#a072aadba32b8ceeee66fd5470b9ddfec',1,'sigen::SwcWriter::write(const char *fname, const Neuron &amp;neuron)']]]
 ];

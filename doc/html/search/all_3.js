@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data_5f',['data_',['../classsigen_1_1_builder.html#aabdb2e9a0f4f1395481fce29b64d0513',1,'sigen::Builder::data_()'],['../classsigen_1_1_binary_cube.html#a6855bdef0e37d6f52f3fbb1a0c5b2469',1,'sigen::BinaryCube::data_()']]],
+  ['data_5f',['data_',['../classsigen_1_1_builder.html#a91200c3590a095979ca36f120be8c2dc',1,'sigen::Builder::data_()'],['../classsigen_1_1_binary_cube.html#a6855bdef0e37d6f52f3fbb1a0c5b2469',1,'sigen::BinaryCube::data_()']]],
   ['debug',['DEBUG',['../interface_8cpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d',1,'interface.cpp']]],
   ['disjoint_5fset_2ecpp',['disjoint_set.cpp',['../disjoint__set_8cpp.html',1,'']]],
   ['disjoint_5fset_2eh',['disjoint_set.h',['../disjoint__set_8h.html',1,'']]],

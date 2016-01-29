@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['noncopyable',['noncopyable',['../structsigen_1_1noncopyable.html#a60a0eb520cf30078c399069cb03f8a35',1,'sigen::noncopyable::noncopyable()=default'],['../structsigen_1_1noncopyable.html#a86dd5dd999c3875d13f5034c8b9474a4',1,'sigen::noncopyable::noncopyable(const noncopyable &amp;)=delete']]],
-  ['norm_5fl2',['norm_l2',['../namespacesigen.html#a474a0b6c971276309e0ddbfd1f0a31b4',1,'sigen']]],
-  ['norm_5fneuron',['norm_neuron',['../namespacesigen.html#a0ccc94ed13dca58cbe56c310046c44db',1,'sigen']]]
+  ['main',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
+  ['mean',['Mean',['../namespacesigen.html#ab5aa59202cd058d7d5928ec6d2f14c91',1,'sigen']]],
+  ['merge',['merge',['../classsigen_1_1_disjoint_set_internal.html#a916a7fdae57404f5c077905840be9e28',1,'sigen::DisjointSetInternal::merge()'],['../classsigen_1_1_disjoint_set.html#ae3e4c3fc3de5cb56bc14bf3211925cdd',1,'sigen::DisjointSet::merge()']]]
 ];

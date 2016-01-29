@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['point',['Point',['../classsigen_1_1_point.html',1,'sigen']]],
-  ['point',['Point',['../classsigen_1_1_point.html#abcfab4b38330f8a926a8adb9bd80356b',1,'sigen::Point']]],
-  ['point_2eh',['point.h',['../point_8h.html',1,'']]],
-  ['point_5fand_5fradius',['point_and_radius',['../structsigen_1_1point__and__radius.html',1,'sigen']]],
-  ['points_5f',['points_',['../classsigen_1_1_cluster.html#a85cf3ba3205b8fbf33527a2c7265909a',1,'sigen::Cluster']]]
+  ['operator_3c',['operator&lt;',['../classsigen_1_1_i_point.html#afc93d93ec354c14c815e9f0586d44100',1,'sigen::IPoint']]],
+  ['operator_3d',['operator=',['../structsigen_1_1noncopyable.html#a055fec99da6f6d8cffb5078e30fadfd0',1,'sigen::noncopyable']]],
+  ['operator_5b_5d',['operator[]',['../classsigen_1_1_binary_cube.html#a7ddee108e296e986e50839594b94a120',1,'sigen::BinaryCube::operator[](int index)'],['../classsigen_1_1_binary_cube.html#a2995b99d422d723b5570bac373f11e28',1,'sigen::BinaryCube::operator[](int index) const ']]],
+  ['options',['Options',['../structsigen_1_1interface_1_1_options.html',1,'sigen::interface']]]
 ];
