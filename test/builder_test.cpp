@@ -24,6 +24,7 @@ static BinaryCube vectorStringToBinaryCube(const std::vector<std::string> &vs) {
   return cube;
 }
 
+// Fixture
 class BuilderTestAlpha : public ::testing::Test {
 protected:
   boost::shared_ptr<Builder> bld;
@@ -58,7 +59,7 @@ TEST_F(BuilderTestAlpha, ComputeGravityPoints) {
   EXPECT_DOUBLE_EQ(1.0, bld->data_[4]->gy_);
   EXPECT_DOUBLE_EQ(1.0, bld->data_[4]->gz_);
 }
-TEST_F(BuilderTestAlpha, convert_to_neuron_node) {
+TEST_F(BuilderTestAlpha, ConvertToNeuronNodes) {
   bld->ConnectNeighbors();
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
@@ -83,7 +84,7 @@ TEST_F(BuilderTestAlpha, convert_to_neuron_node) {
   EXPECT_TRUE(nn[3]->HasConnection(nn[4]));
   EXPECT_TRUE(nn[4]->HasConnection(nn[3]));
 }
-TEST_F(BuilderTestAlpha, convert_to_neuron) {
+TEST_F(BuilderTestAlpha, ConvertToNeuron) {
   bld->ConnectNeighbors();
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
@@ -93,7 +94,7 @@ TEST_F(BuilderTestAlpha, convert_to_neuron) {
   EXPECT_EQ(3, (int)ns[0].storage_.size());
   EXPECT_EQ(2, (int)ns[1].storage_.size());
 }
-TEST_F(BuilderTestAlpha, compute_id) {
+TEST_F(BuilderTestAlpha, ComputeIds) {
   bld->ConnectNeighbors();
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
@@ -107,6 +108,7 @@ TEST_F(BuilderTestAlpha, compute_id) {
   EXPECT_EQ(5, ns[1].storage_[1]->id_);
 }
 
+// Fixture
 class BuilderTestBeta : public ::testing::Test {
 protected:
   boost::shared_ptr<Builder> bld;
@@ -122,7 +124,7 @@ protected:
   }
 };
 
-TEST_F(BuilderTestBeta, convert_to_neuron_node_loops) {
+TEST_F(BuilderTestBeta, DISABLED_convertToNeuronNodesWithLoops) {
   bld->ConnectNeighbors();
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
@@ -151,7 +153,7 @@ TEST_F(BuilderTestBeta, convert_to_neuron_node_loops) {
   EXPECT_TRUE(nn[3]->HasConnection(nn[2]));
   EXPECT_TRUE(nn[3]->HasConnection(nn[1]));
 }
-TEST_F(BuilderTestBeta, convert_to_neuron_loops) {
+TEST_F(BuilderTestBeta, ConvertToNeuronWithLoops) {
   bld->ConnectNeighbors();
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
@@ -160,7 +162,7 @@ TEST_F(BuilderTestBeta, convert_to_neuron_loops) {
   EXPECT_EQ(1, (int)ns.size());
   EXPECT_EQ(4, (int)ns[0].storage_.size());
 }
-TEST_F(BuilderTestBeta, compute_id_with_loops) {
+TEST_F(BuilderTestBeta, ComputeIdsWithLoops) {
   bld->ConnectNeighbors();
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
@@ -168,5 +170,6 @@ TEST_F(BuilderTestBeta, compute_id_with_loops) {
   std::vector<Neuron> ns = bld->ConvertToNeuron(bld->data_, bld->scale_xy_, bld->scale_z_);
   bld->ComputeIds(ns);
 }
-TEST(Builder, compute_node_type) {
+TEST(Builder, DISABLED_ComputeNodeTypes) {
+  ASSERT_TRUE(false);
 }
