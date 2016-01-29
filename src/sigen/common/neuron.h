@@ -32,6 +32,9 @@ public:
   inline bool has_connection(NeuronNode *node) const {
     return adjacent_.count(node);
   }
+  inline bool has_connection(NeuronNodePtr node) const {
+    return this->has_connection(node.get());
+  }
   inline void coord(const double gx, const double gy, const double gz) {
     gx_ = gx;
     gy_ = gy;
