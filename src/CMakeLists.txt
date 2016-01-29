@@ -1,25 +1,40 @@
 include_directories(.)
 
+# http://stackoverflow.com/questions/1167154/listing-header-files-in-visual-studio-c-project-generated-by-cmake
+
 # Vaa3D plugin
 add_library(sigen STATIC
-  sigen/common/binary_cube.cpp
-  sigen/common/disjoint_set.cpp
-  sigen/common/neuron.cpp
-  sigen/common/voxel.cpp
-  sigen/extractor/extractor.cpp
   sigen/builder/builder.cpp
-  sigen/neuronprocess/neuronprocess.cpp
+  sigen/builder/builder.h
+  sigen/common/binary_cube.cpp
+  sigen/common/binary_cube.h
+  sigen/common/cluster.h
+  sigen/common/disjoint_set.cpp
+  sigen/common/disjoint_set.h
+  sigen/common/math.h
+  sigen/common/neuron.cpp
+  sigen/common/neuron.h
+  sigen/common/noncopyable.h
+  sigen/common/point.h
+  sigen/common/variant.h
+  sigen/common/voxel.cpp
+  sigen/common/voxel.h
+  sigen/extractor/extractor.cpp
+  sigen/extractor/extractor.h
   sigen/interface.cpp
+  sigen/interface.h
+  sigen/neuronprocess/neuronprocess.cpp
+  sigen/neuronprocess/neuronprocess.h
 )
 
 if(BUILD_MAIN)
   include_directories(../third_party ${OPENCV_INCLUDE_DIRS})
 
   add_library(sigen_io STATIC
+    sigen/binarizer/binarizer.cpp
     sigen/loader/file_loader.cpp
     sigen/writer/swc_writer.cpp
     sigen/writer/fileutils.cpp
-    sigen/binarizer/binarizer.cpp
   )
 
   add_executable(main
