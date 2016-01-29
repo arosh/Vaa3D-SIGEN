@@ -18,15 +18,15 @@ TBD...
 ## How to Build Plugin
 
 ```
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release ..
+$ cd vaa3d
+$ nano SIGEN.pro # edit `VAA3DPATH` variable
+$ qmake
 $ make
 ```
 
-If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `cmake_install.cmake`, `Makefile` will be located in undesirable directories.
+`libSIGEN.*` will be located in `SIGEN_ROOT/vaa3d/build`.
 
-## How to Build Runner
+## How to Build Standalone Runner
 
 ```
 $ mkdir build
@@ -35,14 +35,19 @@ $ cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_MAIN=ON ..
 $ make
 ```
 
+If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `cmake_install.cmake`, `Makefile` will be located in undesirable directories.
+
 ## How to Test
 
 ```
 $ mkdir build
 $ cd build
 $ cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON ..
+$ make
 $ make test
 ```
+
+If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `cmake_install.cmake`, `Makefile` will be located in undesirable directories.
 
 ## Setting
 
