@@ -95,7 +95,7 @@ void Extractor::labeling() {
           int z = p.first.z_ + dz;
           IPoint t(x, y, z);
           if (voxels.count(t)) {
-            p.second->add_connection(voxels[t].get());
+            p.second->AddConection(voxels[t].get());
           }
         }
       }
@@ -188,7 +188,7 @@ static std::vector<IPoint> voxels_to_points(const std::vector<Voxel *> vs) {
   }
   return ps;
 }
-std::vector<ClusterPtr> Extractor::extract() {
+std::vector<ClusterPtr> Extractor::Extract() {
   labeling();
   std::vector<ClusterPtr> ret;
   // NOT const

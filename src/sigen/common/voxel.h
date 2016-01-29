@@ -10,7 +10,7 @@ public:
   int label_; // any functions can use this variable
   std::vector<Voxel *> adjacent_;
   Voxel(int x, int y, int z);
-  void add_connection(Voxel *p);
+  void AddConection(Voxel *p);
 };
 typedef boost::shared_ptr<Voxel> VoxelPtr;
 } // namespace sigen

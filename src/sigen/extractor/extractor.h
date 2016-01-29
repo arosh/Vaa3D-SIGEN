@@ -12,6 +12,6 @@ public:
   BinaryCube cube_;
   std::vector<std::vector<VoxelPtr> > components_;
   explicit Extractor(const BinaryCube &cube);
-  std::vector<ClusterPtr> extract();
+  std::vector<ClusterPtr> Extract();
 };
 } // namespace sigen

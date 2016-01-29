@@ -6,15 +6,15 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 namespace sigen {
-void NeuronNode::add_connection(NeuronNode *node) {
+void NeuronNode::AddConnection(NeuronNode *node) {
   assert(!adjacent_.count(node));
   adjacent_.insert(node);
 }
-void NeuronNode::remove_connection(NeuronNode *node) {
+void NeuronNode::RemoveConnection(NeuronNode *node) {
   assert(adjacent_.count(node));
   adjacent_.erase(node);
 }
-void NeuronNode::remove_connection(const std::set<int> &nodes) {
+void NeuronNode::RemoveConnection(const std::set<int> &nodes) {
   // `erase` invalidates iterator. Be careful.
   // http://qiita.com/satoruhiga/items/fa6eae09c9d89bd48b5d
   std::set<NeuronNode *>::iterator it = adjacent_.begin();
@@ -33,17 +33,17 @@ Neuron Neuron::clone() const {
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
     NeuronNodePtr ptr = this->storage_[i];
     ptr_to_index[ptr.get()] = i;
-    ret.storage_.push_back(ptr->clone());
+    ret.storage_.push_back(ptr->Clone());
   }
 
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
     for (NeuronNode *adj : this->storage_[i].get()->adjacent_) {
       NeuronNode *p = ret.storage_[ptr_to_index[adj]].get();
-      ret.storage_[i]->add_connection(p);
+      ret.storage_[i]->AddConnection(p);
     }
   }
 
-  ret.setRoot(ptr_to_index[this->root_]);
+  ret.UpdateRoot(ptr_to_index[this->root_]);
   return ret;
 }
 }; // namespace sigen

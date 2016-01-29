@@ -15,7 +15,7 @@ namespace sigen {
 Builder::Builder(const std::vector<ClusterPtr> &data,
                  const double scale_xy, const double scale_z)
     : is_radius_computed_(false), data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
-void Builder::connect_neighbor() {
+void Builder::ConnectNeightbors() {
   std::multimap<IPoint, int> coord_to_index;
   for (int i = 0; i < (int)data_.size(); ++i) {
     BOOST_FOREACH (const IPoint &p, data_[i]->points_) {
@@ -31,7 +31,7 @@ void Builder::connect_neighbor() {
             auto range = coord_to_index.equal_range(q);
             for (auto it = range.first; it != range.second; ++it) {
               if (it->second != i) {
-                data_[i]->add_connection(data_[it->second].get());
+                data_[i]->AddConnection(data_[it->second].get());
               }
             }
           }
@@ -41,14 +41,14 @@ void Builder::connect_neighbor() {
   }
 }
 
-void Builder::cut_loops() {
+void Builder::CutLoops() {
   assert(is_radius_computed_);
   // use kruskal like algorithm
   // see https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
   DisjointSet<Cluster *> U;
   std::vector<std::pair<double, std::pair<Cluster *, Cluster *> > > E;
   BOOST_FOREACH (ClusterPtr cls, data_) {
-    U.add(cls.get());
+    U.Add(cls.get());
     BOOST_FOREACH (Cluster *adj, cls->adjacent_) {
       double strength = (cls->radius_ + adj->radius_) / 2.0;
       Cluster *a = cls.get(), *b = adj;
@@ -56,17 +56,17 @@ void Builder::cut_loops() {
         E.push_back(std::make_pair(strength, std::make_pair(cls.get(), adj)));
     }
   }
-  U.setup();
+  U.SetUp();
   std::sort(E.begin(), E.end());
   std::reverse(E.begin(), E.end());
   for (const std::pair<double, std::pair<Cluster *, Cluster *> > &it : E) {
     Cluster *a = it.second.first;
     Cluster *b = it.second.second;
-    if (U.same(a, b)) {
-      a->remove_connection(b);
-      b->remove_connection(a);
+    if (U.IsSame(a, b)) {
+      a->RemoveConnection(b);
+      b->RemoveConnection(a);
     } else {
-      U.merge(a, b);
+      U.Merge(a, b);
     }
   }
 }
@@ -93,7 +93,7 @@ static NeuronNode *find_edge(NeuronNode *node) {
   return last;
 }
 
-void Builder::compute_gravity_point() {
+void Builder::ComputeGravityPoints() {
   BOOST_FOREACH (ClusterPtr cls, data_) {
     assert(!cls->points_.empty());
     double sx = 0, sy = 0, sz = 0;
@@ -108,7 +108,7 @@ void Builder::compute_gravity_point() {
   }
 }
 
-void Builder::compute_radius() {
+void Builder::ComputeRadius() {
   BOOST_FOREACH (ClusterPtr cls, data_) {
     double mdx = 0, mdy = 0, mdz = 0;
     BOOST_FOREACH (const IPoint &p, cls->points_) {
@@ -122,13 +122,13 @@ void Builder::compute_radius() {
 }
 
 std::vector<NeuronNodePtr>
-Builder::convert_to_neuron_node(std::vector<ClusterPtr> &data,
+Builder::ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
                                 const double scale_xy, const double scale_z) {
   std::vector<NeuronNodePtr> neuron_nodes;
   std::vector<std::pair<int, int> > edges;
   for (int i = 0; i < (int)data.size(); ++i) {
     NeuronNodePtr n = boost::make_shared<NeuronNode>();
-    n->coord(data[i]->gx_ * scale_xy,
+    n->setCoord(data[i]->gx_ * scale_xy,
              data[i]->gy_ * scale_xy,
              data[i]->gz_ * scale_z);
     n->radius_ = data[i]->radius_;
@@ -142,8 +142,8 @@ Builder::convert_to_neuron_node(std::vector<ClusterPtr> &data,
     for (Cluster *p : data[i]->adjacent_) {
       int j = ptr2index[p];
       if (i < j) {
-        neuron_nodes[i]->add_connection(neuron_nodes[j].get());
-        neuron_nodes[j]->add_connection(neuron_nodes[i].get());
+        neuron_nodes[i]->AddConnection(neuron_nodes[j].get());
+        neuron_nodes[j]->AddConnection(neuron_nodes[i].get());
       }
     }
   }
@@ -151,10 +151,10 @@ Builder::convert_to_neuron_node(std::vector<ClusterPtr> &data,
 }
 
 std::vector<Neuron>
-Builder::convert_to_neuron(std::vector<ClusterPtr> &data,
+Builder::ConvertToNeuron(std::vector<ClusterPtr> &data,
                            const double scale_xy, const double scale_z) {
   std::vector<NeuronNodePtr> neuron_nodes =
-      convert_to_neuron_node(data, scale_xy, scale_z);
+      ConvertToNeuronNodes(data, scale_xy, scale_z);
   // split into some neurons
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
@@ -169,7 +169,7 @@ Builder::convert_to_neuron(std::vector<ClusterPtr> &data,
     neurons.push_back(Neuron());
     Neuron &n = neurons.back();
     n.root_ = find_edge(node.get());
-    n.add_node(node);
+    n.AddNode(node);
     std::stack<NeuronNode *> stk;
     stk.push(node.get());
     used.insert(node.get());
@@ -179,7 +179,7 @@ Builder::convert_to_neuron(std::vector<ClusterPtr> &data,
       BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
         // If next != parent
         if (!used.count(next)) {
-          n.add_node(ptr2smartptr[next]);
+          n.AddNode(ptr2smartptr[next]);
           stk.push(next);
           used.insert(next);
         }
@@ -198,7 +198,7 @@ static void compute_id_inner(NeuronNode *cur, NeuronNode *prev, int &id) {
   }
 }
 
-void Builder::compute_id(std::vector<Neuron> &ns) {
+void Builder::ComputeIds(std::vector<Neuron> &ns) {
   int id = 1;
   for (int i = 0; i < (int)ns.size(); ++i) {
     compute_id_inner(ns[i].root_, NULL, id);
@@ -221,33 +221,33 @@ static void compute_node_type_inner(NeuronNode *cur, NeuronNode *prev) {
   }
 }
 
-void Builder::compute_node_type(std::vector<Neuron> &neu) {
+void Builder::ComputeNodeTypes(std::vector<Neuron> &neu) {
   for (int i = 0; i < (int)neu.size(); ++i) {
     compute_node_type_inner(neu[i].root_, NULL);
   }
 }
 
-std::vector<Neuron> Builder::build() {
+std::vector<Neuron> Builder::Build() {
   bool print_progress = true;
-  compute_gravity_point();
+  ComputeGravityPoints();
   if (print_progress)
     std::cerr << "compute_gravity_point" << std::endl;
-  compute_radius();
+  ComputeRadius();
   if (print_progress)
     std::cerr << "compute_radius" << std::endl;
-  connect_neighbor();
+  ConnectNeightbors();
   if (print_progress)
     std::cerr << "connect_neighbor" << std::endl;
-  cut_loops();
+  CutLoops();
   if (print_progress)
     std::cerr << "cut_loops" << std::endl;
-  std::vector<Neuron> neu = convert_to_neuron(data_, scale_xy_, scale_z_);
+  std::vector<Neuron> neu = ConvertToNeuron(data_, scale_xy_, scale_z_);
   if (print_progress)
     std::cerr << "convert_to_neuron" << std::endl;
-  compute_id(neu);
+  ComputeIds(neu);
   if (print_progress)
     std::cerr << "compute_id" << std::endl;
-  compute_node_type(neu);
+  ComputeNodeTypes(neu);
   if (print_progress)
     std::cerr << "compute_node_type" << std::endl;
   return neu;

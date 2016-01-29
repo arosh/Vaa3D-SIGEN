@@ -4,7 +4,7 @@
 namespace sigen {
 Voxel::Voxel(int x, int y, int z)
     : x_(x), y_(y), z_(z), flag_(false), label_(-1) {}
-void Voxel::add_connection(Voxel *p) {
+void Voxel::AddConection(Voxel *p) {
   assert(std::find(adjacent_.begin(), adjacent_.end(), p) == adjacent_.end());
   adjacent_.push_back(p);
 }

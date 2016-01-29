@@ -1,6 +1,6 @@
 #pragma once
-#include "../common/cluster.h"
-#include "../common/neuron.h"
+#include "sigen/common/cluster.h"
+#include "sigen/common/neuron.h"
 #include <boost/utility.hpp>
 #include <vector>
 namespace sigen {
@@ -12,18 +12,18 @@ public:
   double scale_xy_, scale_z_;
   explicit Builder(const std::vector<ClusterPtr> &data,
                    const double scale_xy, const double scale_z);
-  std::vector<Neuron> build();
+  std::vector<Neuron> Build();
   static std::vector<Neuron>
-  convert_to_neuron(std::vector<ClusterPtr> &data,
+  ConvertToNeuron(std::vector<ClusterPtr> &data,
                     const double scale_xy, const double scale_z);
   static std::vector<NeuronNodePtr>
-  convert_to_neuron_node(std::vector<ClusterPtr> &data,
+  ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
                          const double scale_xy, const double scale_z);
-  static void compute_node_type(std::vector<Neuron> &neu);
-  static void compute_id(std::vector<Neuron> &neu);
-  void connect_neighbor();
-  void cut_loops();
-  void compute_gravity_point();
-  void compute_radius();
+  static void ComputeNodeTypes(std::vector<Neuron> &neu);
+  static void ComputeIds(std::vector<Neuron> &neu);
+  void ConnectNeightbors();
+  void CutLoops();
+  void ComputeGravityPoints();
+  void ComputeRadius();
 };
 } // namespace sigen

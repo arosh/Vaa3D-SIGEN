@@ -26,8 +26,8 @@ double norm_l2(
 // Reference
 // Golin, M. J., et al.: Simple randomized algorithms for closest pair problems, Nordic Journal of Computing (1995).
 std::pair<double, std::pair<int, int> > norm_neuron(const Neuron &lhs, const Neuron &rhs) {
-  assert(!lhs.empty());
-  assert(!rhs.empty());
+  assert(!lhs.IsEmpty());
+  assert(!rhs.IsEmpty());
   int l = 0;
   int r = 0;
   double minimum = norm_l2(lhs.storage_[0], rhs.storage_[0]);
@@ -43,7 +43,7 @@ std::pair<double, std::pair<int, int> > norm_neuron(const Neuron &lhs, const Neu
   }
   return std::make_pair(minimum, std::make_pair(l, r));
 }
-std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double dt, const int vt) {
+std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double dt, const int vt) {
   const int N = input.size();
   std::vector<Neuron> forest;
   for (int i = 0; i < N; ++i) {
@@ -53,11 +53,11 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
   std::vector<bool> is_not_small(forest.size(), false);
   for (int i = 0; i < N; ++i) {
     if ((int)forest[i].storage_.size() >= vt) {
-      set.add(i);
+      set.Add(i);
       is_not_small[i] = true;
     }
   }
-  set.setup();
+  set.SetUp();
   typedef std::pair<double, std::pair<int, int> > priority_queue_node;
   std::priority_queue<
       priority_queue_node,
@@ -81,22 +81,22 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
     pq.pop();
     int l = node.second.first;
     int r = node.second.second;
-    if (forest[l].empty())
+    if (forest[l].IsEmpty())
       continue;
-    if (forest[r].empty())
+    if (forest[r].IsEmpty())
       continue;
-    if (set.same(l, r))
+    if (set.IsSame(l, r))
       continue;
     // if(forest[l].storage_.size() < forest[r].storage_.size()) std::swap(l, r);
     std::pair<double, std::pair<int, int> > dist = norm_neuron(forest[l], forest[r]);
-    set.merge(l, r);
-    forest[l].storage_[dist.second.first]->add_connection(forest[r].storage_[dist.second.second].get());
-    forest[r].storage_[dist.second.second]->add_connection(forest[l].storage_[dist.second.first].get());
-    forest[l].extend(forest[r]);
-    forest[r].clear();
+    set.Merge(l, r);
+    forest[l].storage_[dist.second.first]->AddConnection(forest[r].storage_[dist.second.second].get());
+    forest[r].storage_[dist.second.second]->AddConnection(forest[l].storage_[dist.second.first].get());
+    forest[l].Extend(forest[r]);
+    forest[r].Clear();
 
     for (int i = 0; i < N; ++i) {
-      if (i != l && is_not_small[i] && forest[i].empty() == false) {
+      if (i != l && is_not_small[i] && forest[i].IsEmpty() == false) {
         assert(l != i);
         double d = norm_neuron(forest[l], forest[i]).first;
         if (d <= dt) {
@@ -106,7 +106,7 @@ std::vector<Neuron> interpolate(const std::vector<Neuron> &input, const double d
     }
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
-    if (forest[i].empty()) {
+    if (forest[i].IsEmpty()) {
       forest.erase(forest.begin() + i);
       i--;
     }
@@ -122,7 +122,7 @@ struct point_and_radius {
     gz_ = gz;
   }
 };
-std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter) {
+std::vector<Neuron> Smoothing(const std::vector<Neuron> &input, const int n_iter) {
   std::vector<Neuron> forest;
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].clone());
@@ -151,7 +151,7 @@ std::vector<Neuron> smoothing(const std::vector<Neuron> &input, const int n_iter
     for (int i = 0; i < (int)forest.size(); ++i) {
       for (NeuronNodePtr node : forest[i].storage_) {
         point_and_radius next_node = next_value[node->id_];
-        node->coord(next_node.gx_, next_node.gy_, next_node.gz_);
+        node->setCoord(next_node.gx_, next_node.gy_, next_node.gz_);
         node->radius_ = next_node.radius_;
       }
     }
@@ -167,7 +167,7 @@ static int clipping_dfs(
     std::map<NeuronNode *, int> &memo) {
   if (memo.count(node))
     return memo[node];
-  if (node->count_num_child(parent) < 2) {
+  if (node->CountNumChild(parent) < 2) {
     // If count_num_child == 1
     for (NeuronNode *next : node->adjacent_) {
       if (next != parent) {
@@ -221,7 +221,7 @@ static int clipping_dfs(
     return memo[node] = maxdepth + 1;
   }
 }
-std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) {
+std::vector<Neuron> Clipping(const std::vector<Neuron> &input, const int level) {
   std::set<int> will_remove;
   std::vector<Neuron> forest;
   std::map<NeuronNode *, int> memo;
@@ -231,7 +231,7 @@ std::vector<Neuron> clipping(const std::vector<Neuron> &input, const int level) 
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
     for (int j = 0; j < (int)forest[i].storage_.size(); ++j) {
-      forest[i].storage_[j]->remove_connection(will_remove);
+      forest[i].storage_[j]->RemoveConnection(will_remove);
     }
   }
   return forest;

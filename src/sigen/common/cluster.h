@@ -16,19 +16,19 @@ public:
   std::vector<IPoint> points_;
   std::set<Cluster *> adjacent_;
   inline explicit Cluster(const std::vector<IPoint> &points) : points_(points) {}
-  bool check_neighbor(const Cluster *p);
+  
   // http://stackoverflow.com/questions/5727264
-  inline bool is_connecting_with(const Cluster *p) const {
-    return adjacent_.count(const_cast<Cluster *>(p)); // FIXME please remove const_cast
+  inline bool HasConnection(const Cluster *p) const {
+    return adjacent_.count(const_cast<Cluster *>(p)) > 0; // FIXME please remove const_cast
   }
-  inline bool is_connecting_with(ClusterPtr p) const {
-    return is_connecting_with(p.get());
+  inline bool HasConnection(ClusterPtr p) const {
+    return this->HasConnection(p.get());
   }
-  inline void remove_connection(const Cluster *p) {
-    assert(is_connecting_with(p));
+  inline void RemoveConnection(const Cluster *p) {
+    assert(this->HasConnection(p));
     adjacent_.erase(const_cast<Cluster *>(p)); // FIXME please remove const_cast
   }
-  inline void add_connection(const Cluster *p) {
+  inline void AddConnection(const Cluster *p) {
     adjacent_.insert(const_cast<Cluster *>(p)); // FIXME please remove const_cast
   }
 };

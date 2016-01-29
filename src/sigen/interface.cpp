@@ -56,20 +56,20 @@ void Extract(
   sigen::Extractor ext(cube);
   if (print_progress)
     std::cerr << "extract start" << std::endl;
-  std::vector<ClusterPtr> clusters = ext.extract();
+  std::vector<ClusterPtr> clusters = ext.Extract();
   if (print_progress)
     std::cerr << "extract finished" << std::endl;
   sigen::Builder bld(clusters, options.scale_xy, options.scale_z);
-  std::vector<sigen::Neuron> neurons = bld.build();
+  std::vector<sigen::Neuron> neurons = bld.Build();
   if (print_progress)
     std::cerr << "build finished" << std::endl;
-  neurons = interpolate(neurons, options.distance_threshold, options.volume_threshold);
+  neurons = Interpolate(neurons, options.distance_threshold, options.volume_threshold);
   if (print_progress)
     std::cerr << "interpolate finished" << std::endl;
-  neurons = smoothing(neurons, options.smoothing_level);
+  neurons = Smoothing(neurons, options.smoothing_level);
   if (print_progress)
     std::cerr << "smoothing finished" << std::endl;
-  neurons = clipping(neurons, options.clipping_level);
+  neurons = Clipping(neurons, options.clipping_level);
   if (print_progress)
     std::cerr << "clipping finished" << std::endl;
 

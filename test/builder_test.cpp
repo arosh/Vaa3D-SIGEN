@@ -34,7 +34,7 @@ protected:
     vs.push_back("###");
     BinaryCube cube = vectorStringToBinaryCube(vs);
     Extractor ext(cube);
-    std::vector<ClusterPtr> data = ext.extract();
+    std::vector<ClusterPtr> data = ext.Extract();
     bld = boost::make_shared<Builder>(data, 1.0, 1.0);
   }
 };
@@ -117,7 +117,7 @@ protected:
     vs.push_back(".#.");
     BinaryCube cube = vectorStringToBinaryCube(vs);
     Extractor ext(cube);
-    std::vector<ClusterPtr> data = ext.extract();
+    std::vector<ClusterPtr> data = ext.Extract();
     bld = boost::make_shared<Builder>(data, 1.0, 1.0);
   }
 };

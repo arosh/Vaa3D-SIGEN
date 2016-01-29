@@ -12,7 +12,7 @@ TEST(Extractor, labeling) {
   cube[2][3][1] = 1;
   cube[3][3][1] = 1;
   Extractor ext(cube);
-  auto ret = ext.extract();
+  auto ret = ext.Extract();
   EXPECT_EQ(2, (int)ext.components_.size());
   EXPECT_EQ(3, (int)ext.components_[0].size());
   EXPECT_EQ(2, (int)ext.components_[1].size());
@@ -35,7 +35,7 @@ TEST(Extractor, labeling2) {
   cube[1][3][1] = 1;
   cube[2][3][1] = 1;
   Extractor ext(cube);
-  auto ret = ext.extract();
+  auto ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(5, (int)ext.components_[0].size());
   EXPECT_EQ(5, (int)ret.size());
@@ -47,7 +47,7 @@ TEST(Extractor, labeling_with_loops) {
   cube[3][2][1] = 1;
   cube[2][3][1] = 1;
   Extractor ext(cube);
-  auto ret = ext.extract();
+  auto ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(4, (int)ext.components_[0].size());
   for (auto c : ret) {
@@ -67,7 +67,7 @@ TEST(Extractor, same_distance) {
   cube[1][2][1] = 1;
   cube[2][2][1] = 1;
   Extractor ext(cube);
-  auto ret = ext.extract();
+  auto ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(4, (int)ext.components_[0].size());
   EXPECT_EQ(2, (int)ret.size());

@@ -26,29 +26,29 @@ class DisjointSet : boost::noncopyable {
   boost::shared_ptr<DisjointSetInternal> U;
 
 public:
-  void add(T x) {
+  void Add(T x) {
     int next_id = forward.size();
     forward[x] = next_id;
   }
 
-  void setup() {
+  void SetUp() {
     U = boost::make_shared<DisjointSetInternal>(forward.size());
   }
 
-  int size(T x) {
+  int Size(T x) {
     assert((bool)U);
     assert(forward.count(x) > 0);
     return U->size(forward[x]);
   }
 
-  bool same(T x, T y) {
+  bool IsSame(T x, T y) {
     assert((bool)U);
     assert(forward.count(x) > 0);
     assert(forward.count(y) > 0);
     return U->same(forward[x], forward[y]);
   }
 
-  void merge(T x, T y) {
+  void Merge(T x, T y) {
     assert((bool)U);
     assert(forward.count(x) > 0);
     assert(forward.count(y) > 0);

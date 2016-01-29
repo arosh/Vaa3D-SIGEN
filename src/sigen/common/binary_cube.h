@@ -15,6 +15,6 @@ public:
   inline const std::vector<std::vector<bool> > &operator[](int index) const {
     return data_[index];
   }
-  void clear();
+  void Clear();
 };
 } // namespace sigen
