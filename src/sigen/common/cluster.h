@@ -15,7 +15,8 @@ public:
   double radius_;
   std::vector<IPoint> points_;
   std::set<Cluster *> adjacent_;
-  inline explicit Cluster(const std::vector<IPoint> &points) : points_(points) {}
+  inline explicit Cluster(const std::vector<IPoint> &points) :
+    gx_(0.0), gy_(0.0), gz_(0.0), radius_(0.0), points_(points) {}
   
   // http://stackoverflow.com/questions/5727264
   inline bool HasConnection(const Cluster *p) const {

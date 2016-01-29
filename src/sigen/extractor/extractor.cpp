@@ -193,7 +193,7 @@ static std::vector<Voxel *> extractSameDistance(Voxel *seed) {
   return ret;
 }
 
-static std::vector<IPoint> voxelsToPoints(const std::vector<Voxel *> vs) {
+static std::vector<IPoint> voxelsToPoints(const std::vector<Voxel *> &vs) {
   std::vector<IPoint> ps;
   for (const auto v : vs) {
     ps.push_back(IPoint(v->x_, v->y_, v->z_));
