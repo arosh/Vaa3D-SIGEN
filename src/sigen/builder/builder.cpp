@@ -15,7 +15,7 @@ namespace sigen {
 Builder::Builder(const std::vector<ClusterPtr> &data,
                  const double scale_xy, const double scale_z)
     : is_radius_computed_(false), data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
-void Builder::ConnectNeightbors() {
+void Builder::ConnectNeighbors() {
   std::multimap<IPoint, int> coord_to_index;
   for (int i = 0; i < (int)data_.size(); ++i) {
     BOOST_FOREACH (const IPoint &p, data_[i]->points_) {
@@ -235,7 +235,7 @@ std::vector<Neuron> Builder::Build() {
   ComputeRadius();
   if (print_progress)
     std::cerr << "compute_radius" << std::endl;
-  ConnectNeightbors();
+  ConnectNeighbors();
   if (print_progress)
     std::cerr << "connect_neighbor" << std::endl;
   CutLoops();

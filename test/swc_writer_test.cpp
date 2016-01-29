@@ -4,41 +4,41 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "sigen/writer/swc_writer.h"
-void conn(boost::shared_ptr<sigen::NeuronNode> a, boost::shared_ptr<sigen::NeuronNode> b) {
-  a->add_connection(b.get());
-  b->add_connection(a.get());
+void connect(boost::shared_ptr<sigen::NeuronNode> a, boost::shared_ptr<sigen::NeuronNode> b) {
+  a->AddConnection(b.get());
+  b->AddConnection(a.get());
 }
 TEST(SwcWriter, write) {
   sigen::NeuronNodePtr a, b, c, d, e;
   a = boost::make_shared<sigen::NeuronNode>();
   a->id_ = 1;
-  a->coord(1.1, 1.2, 1.3);
+  a->setCoord(1.1, 1.2, 1.3);
   a->radius_ = 1.4;
   a->type_ = sigen::neuron_type::EDGE;
   b = boost::make_shared<sigen::NeuronNode>();
   b->id_ = 2;
-  b->coord(2.1, 2.2, 2.3);
+  b->setCoord(2.1, 2.2, 2.3);
   b->radius_ = 2.4;
   b->type_ = sigen::neuron_type::BRANCH;
   c = boost::make_shared<sigen::NeuronNode>();
   c->id_ = 3;
-  c->coord(3.1, 3.2, 3.3);
+  c->setCoord(3.1, 3.2, 3.3);
   c->radius_ = 3.4;
   c->type_ = sigen::neuron_type::CONNECT;
   d = boost::make_shared<sigen::NeuronNode>();
   d->id_ = 4;
-  d->coord(4.1, 4.2, 4.3);
+  d->setCoord(4.1, 4.2, 4.3);
   d->radius_ = 4.4;
   d->type_ = sigen::neuron_type::EDGE;
   e = boost::make_shared<sigen::NeuronNode>();
   e->id_ = 5;
-  e->coord(5.1, 5.2, 5.3);
+  e->setCoord(5.1, 5.2, 5.3);
   e->radius_ = 5.4;
   e->type_ = sigen::neuron_type::EDGE;
-  conn(a, b);
-  conn(b, c);
-  conn(c, d);
-  conn(b, e);
+  connect(a, b);
+  connect(b, c);
+  connect(c, d);
+  connect(b, e);
   sigen::Neuron n;
   n.storage_.push_back(a);
   n.storage_.push_back(b);

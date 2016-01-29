@@ -21,7 +21,7 @@ public:
                          const double scale_xy, const double scale_z);
   static void ComputeNodeTypes(std::vector<Neuron> &neu);
   static void ComputeIds(std::vector<Neuron> &neu);
-  void ConnectNeightbors();
+  void ConnectNeighbors();
   void CutLoops();
   void ComputeGravityPoints();
   void ComputeRadius();

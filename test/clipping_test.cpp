@@ -13,8 +13,8 @@ void add(Neuron &n, int id) {
 
 /* l, r : storage_ のインデックス */
 void connect(Neuron &n, int l, int r) {
-  n.storage_[l]->add_connection(n.storage_[r].get());
-  n.storage_[r]->add_connection(n.storage_[l].get());
+  n.storage_[l]->AddConnection(n.storage_[r].get());
+  n.storage_[r]->AddConnection(n.storage_[l].get());
 }
 
 TEST(Clipping, Clipping) {

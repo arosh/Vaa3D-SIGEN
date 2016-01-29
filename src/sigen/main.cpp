@@ -47,13 +47,13 @@ int main(int argc, char *argv[]) {
   LOG(INFO) << "binarize (done)";
   is.clear();
   sigen::Extractor ext(cube);
-  std::vector<sigen::ClusterPtr> clusters = ext.extract();
+  std::vector<sigen::ClusterPtr> clusters = ext.Extract();
   LOG(INFO) << "extract (done)";
-  cube.clear();
+  cube.Clear();
   sigen::Builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
-  std::vector<sigen::Neuron> ns = builder.build();
+  std::vector<sigen::Neuron> ns = builder.Build();
   LOG(INFO) << "build (done)";
-  ns = sigen::interpolate(ns, a.get<double>("dt"), a.get<int>("vt"));
+  ns = sigen::Interpolate(ns, a.get<double>("dt"), a.get<int>("vt"));
   LOG(INFO) << "interpolate (done)";
   sigen::SwcWriter writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
