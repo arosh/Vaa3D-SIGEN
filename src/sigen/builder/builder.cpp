@@ -12,9 +12,11 @@
 #include <map>
 #include <boost/foreach.hpp>
 namespace sigen {
+
 Builder::Builder(const std::vector<ClusterPtr> &data,
                  const double scale_xy, const double scale_z)
     : is_radius_computed_(false), data_(data), scale_xy_(scale_xy), scale_z_(scale_z) {}
+
 void Builder::ConnectNeighbors() {
   std::multimap<IPoint, int> coord_to_index;
   for (int i = 0; i < (int)data_.size(); ++i) {
@@ -71,7 +73,7 @@ void Builder::CutLoops() {
   }
 }
 
-static NeuronNode *find_edge(NeuronNode *node) {
+static NeuronNode *findEdgeNode(NeuronNode *node) {
   std::queue<NeuronNode *> que;
   NeuronNode *last = node;
   for (int i = 0; i < 2; ++i) {
@@ -168,7 +170,7 @@ Builder::ConvertToNeuron(std::vector<ClusterPtr> &data,
     // FIXME
     neurons.push_back(Neuron());
     Neuron &n = neurons.back();
-    n.root_ = find_edge(node.get());
+    n.root_ = findEdgeNode(node.get());
     n.AddNode(node);
     std::stack<NeuronNode *> stk;
     stk.push(node.get());
@@ -189,11 +191,11 @@ Builder::ConvertToNeuron(std::vector<ClusterPtr> &data,
   return neurons;
 }
 
-static void compute_id_inner(NeuronNode *cur, NeuronNode *prev, int &id) {
+static void computeIdInner(NeuronNode *cur, NeuronNode *prev, int &id) {
   cur->id_ = id++;
   BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {
-      compute_id_inner(next, cur, id);
+      computeIdInner(next, cur, id);
     }
   }
 }
@@ -201,7 +203,7 @@ static void compute_id_inner(NeuronNode *cur, NeuronNode *prev, int &id) {
 void Builder::ComputeIds(std::vector<Neuron> &ns) {
   int id = 1;
   for (int i = 0; i < (int)ns.size(); ++i) {
-    compute_id_inner(ns[i].root_, NULL, id);
+    computeIdInner(ns[i].root_, NULL, id);
   }
 }
 

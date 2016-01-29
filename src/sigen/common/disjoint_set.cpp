@@ -5,22 +5,22 @@ namespace sigen {
 
 DisjointSetInternal::DisjointSetInternal(int size) : data(size, -1) {}
 
-int DisjointSetInternal::root(int x) {
-  return data[x] < 0 ? x : data[x] = root(data[x]);
+int DisjointSetInternal::Root(int x) {
+  return data[x] < 0 ? x : data[x] = Root(data[x]);
 }
 
-bool DisjointSetInternal::same(int x, int y) {
-  return root(x) == root(y);
+bool DisjointSetInternal::Same(int x, int y) {
+  return Root(x) == Root(y);
 }
 
-int DisjointSetInternal::size(int x) {
-  return -data[root(x)];
+int DisjointSetInternal::Size(int x) {
+  return -data[Root(x)];
 }
 
-void DisjointSetInternal::merge(int x, int y) {
-  x = root(x), y = root(y);
+void DisjointSetInternal::Merge(int x, int y) {
+  x = Root(x), y = Root(y);
   if (x != y) {
-    if (size(y) > size(x))
+    if (Size(y) > Size(x))
       std::swap(x, y);
     data[x] += data[y];
     data[y] = x;

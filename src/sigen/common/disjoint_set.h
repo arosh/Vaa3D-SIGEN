@@ -11,13 +11,13 @@ namespace sigen {
 
 class DisjointSetInternal {
   std::vector<int> data;
-  int root(int x);
+  int Root(int x);
 
 public:
   explicit DisjointSetInternal(int size);
-  int size(int x);
-  bool same(int x, int y);
-  void merge(int x, int y);
+  int Size(int x);
+  bool Same(int x, int y);
+  void Merge(int x, int y);
 };
 
 template <class T>
@@ -38,21 +38,21 @@ public:
   int Size(T x) {
     assert((bool)U);
     assert(forward.count(x) > 0);
-    return U->size(forward[x]);
+    return U->Size(forward[x]);
   }
 
   bool IsSame(T x, T y) {
     assert((bool)U);
     assert(forward.count(x) > 0);
     assert(forward.count(y) > 0);
-    return U->same(forward[x], forward[y]);
+    return U->Same(forward[x], forward[y]);
   }
 
   void Merge(T x, T y) {
     assert((bool)U);
     assert(forward.count(x) > 0);
     assert(forward.count(y) > 0);
-    U->merge(forward[x], forward[y]);
+    U->Merge(forward[x], forward[y]);
   }
 };
 

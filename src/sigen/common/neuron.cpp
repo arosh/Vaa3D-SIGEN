@@ -10,10 +10,12 @@ void NeuronNode::AddConnection(NeuronNode *node) {
   assert(!adjacent_.count(node));
   adjacent_.insert(node);
 }
+
 void NeuronNode::RemoveConnection(NeuronNode *node) {
   assert(adjacent_.count(node));
   adjacent_.erase(node);
 }
+
 void NeuronNode::RemoveConnection(const std::set<int> &nodes) {
   // `erase` invalidates iterator. Be careful.
   // http://qiita.com/satoruhiga/items/fa6eae09c9d89bd48b5d
@@ -26,6 +28,7 @@ void NeuronNode::RemoveConnection(const std::set<int> &nodes) {
     }
   }
 }
+
 Neuron Neuron::Clone() const {
   assert(this->root_ != NULL);
   Neuron ret;

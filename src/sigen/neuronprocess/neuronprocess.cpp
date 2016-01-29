@@ -20,6 +20,7 @@ static double normL2(
   const double dz = std::abs(lhs->gz_ - rhs->gz_);
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
+
 // This function is HOT SPOT.
 // This function spent too much time.
 // There is worth to fix. Randomized algorithms by [Golin 1995] provides O(N) time.
@@ -45,6 +46,7 @@ static std::pair<double, std::pair<int, int> > normNeuron(const Neuron &lhs, con
   }
   return std::make_pair(minimum, std::make_pair(l, r));
 }
+
 std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double dt, const int vt) {
   const int N = input.size();
   std::vector<Neuron> forest;
@@ -161,6 +163,7 @@ std::vector<Neuron> Smoothing(const std::vector<Neuron> &input, const int n_iter
   }
   return forest;
 }
+
 // return max_height
 static int clippingDfs(
     NeuronNode *node,
@@ -224,6 +227,7 @@ static int clippingDfs(
     return memo[node] = maxdepth + 1;
   }
 }
+
 std::vector<Neuron> Clipping(const std::vector<Neuron> &input, const int level) {
   std::set<int> will_remove;
   std::vector<Neuron> forest;
