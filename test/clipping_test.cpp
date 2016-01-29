@@ -6,7 +6,7 @@
 #include "sigen/neuronprocess/neuronprocess.h"
 using namespace sigen;
 void add(Neuron &n, int id) {
-  boost::shared_ptr<NeuronNode> node = boost::make_shared<NeuronNode>();
+  NeuronNodePtr node = boost::make_shared<NeuronNode>();
   node->id_ = id;
   n.storage_.push_back(node);
 }

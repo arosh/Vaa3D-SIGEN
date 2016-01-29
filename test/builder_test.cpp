@@ -34,7 +34,7 @@ protected:
     vs.push_back("###");
     BinaryCube cube = vectorStringToBinaryCube(vs);
     Extractor ext(cube);
-    std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+    std::vector<ClusterPtr> data = ext.extract();
     bld = boost::make_shared<Builder>(data, 1.0, 1.0);
   }
 };
@@ -63,7 +63,7 @@ TEST_F(BuilderTestAlpha, convert_to_neuron_node) {
   bld->compute_gravity_point();
   bld->compute_radius();
   bld->cut_loops();
-  std::vector<boost::shared_ptr<NeuronNode> > nn = bld->convert_to_neuron_node(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<NeuronNodePtr> nn = bld->convert_to_neuron_node(bld->data_, bld->scale_xy_, bld->scale_z_);
   ASSERT_EQ(5, (int)nn.size());
   EXPECT_DOUBLE_EQ(1.0, nn[0]->gx_);
   EXPECT_DOUBLE_EQ(3.0, nn[0]->gy_);
@@ -117,7 +117,7 @@ protected:
     vs.push_back(".#.");
     BinaryCube cube = vectorStringToBinaryCube(vs);
     Extractor ext(cube);
-    std::vector<boost::shared_ptr<Cluster> > data = ext.extract();
+    std::vector<ClusterPtr> data = ext.extract();
     bld = boost::make_shared<Builder>(data, 1.0, 1.0);
   }
 };

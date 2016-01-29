@@ -9,7 +9,7 @@ void conn(boost::shared_ptr<sigen::NeuronNode> a, boost::shared_ptr<sigen::Neuro
   b->add_connection(a.get());
 }
 TEST(SwcWriter, write) {
-  boost::shared_ptr<sigen::NeuronNode> a, b, c, d, e;
+  sigen::NeuronNodePtr a, b, c, d, e;
   a = boost::make_shared<sigen::NeuronNode>();
   a->id_ = 1;
   a->gx_ = 1.1; a->gy_ = 1.2; a->gz_ = 1.3; a->radius_ = 1.4;
