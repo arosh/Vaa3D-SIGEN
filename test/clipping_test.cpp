@@ -20,7 +20,7 @@ void connect(Neuron &n, int l, int r) {
 TEST(clipping, clipping) {
   Neuron n;
 
-  for(int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 10; ++i) {
     add(n, i);
   }
   connect(n, 0, 1);
@@ -43,7 +43,7 @@ TEST(clipping, clipping) {
 TEST(clipping, clipping2) {
   Neuron n;
 
-  for(int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 10; ++i) {
     add(n, i);
   }
   connect(n, 0, 1);

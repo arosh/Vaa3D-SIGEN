@@ -12,12 +12,12 @@ static BinaryCube vectorStringToBinaryCube(const std::vector<std::string> &vs) {
   const int zdepth = 3;
   const int size_x = vs[0].size();
   const int size_y = vs.size();
-  for(int i = 0; i < (int)size_y; ++i) {
+  for (int i = 0; i < (int)size_y; ++i) {
     assert(size_x == (int)vs[i].size());
   }
-  BinaryCube cube(size_x+2, size_y+2, zdepth);
-  for(int y = 0; y < size_y; ++y) {
-    for(int x = 0; x < size_x; ++x) {
+  BinaryCube cube(size_x + 2, size_y + 2, zdepth);
+  for (int y = 0; y < size_y; ++y) {
+    for (int x = 0; x < size_x; ++x) {
       cube[x + 1][y + 1][1] = (vs[y][x] == '#');
     }
   }
