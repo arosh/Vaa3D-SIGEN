@@ -15,11 +15,11 @@ public:
   Voxel(int x, int y, int z)
       : x_(x), y_(y), z_(z), flag_(false), label_(-1) {}
 
-  inline void AddConection(Voxel *p) {
+  void AddConection(Voxel *p) {
     assert(std::find(adjacent_.begin(), adjacent_.end(), p) == adjacent_.end());
     adjacent_.push_back(p);
   }
-  inline void AddConection(VoxelPtr p) {
+  void AddConection(VoxelPtr p) {
     this->AddConection(p.get());
   }
 };

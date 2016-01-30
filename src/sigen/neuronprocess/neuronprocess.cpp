@@ -120,7 +120,7 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
 
 struct PointAndRadius {
   double gx_, gy_, gz_, radius_;
-  inline void setCoord(const double gx, const double gy, const double gz) {
+  void setCoord(const double gx, const double gy, const double gz) {
     gx_ = gx;
     gy_ = gy;
     gz_ = gz;

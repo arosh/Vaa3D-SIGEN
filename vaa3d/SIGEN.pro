@@ -26,6 +26,5 @@ SOURCES += ../src/sigen/builder/builder.cpp
 SOURCES += ../src/sigen/common/binary_cube.cpp
 SOURCES += ../src/sigen/common/disjoint_set.cpp
 SOURCES += ../src/sigen/common/neuron.cpp
-SOURCES += ../src/sigen/common/voxel.cpp
 SOURCES += ../src/sigen/extractor/extractor.cpp
 SOURCES += ../src/sigen/neuronprocess/neuronprocess.cpp

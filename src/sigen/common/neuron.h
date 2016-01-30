@@ -27,32 +27,32 @@ public:
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   // std::map<std::string, Variant> values_;
 
-  inline void AddConnection(NeuronNode *node) {
+  void AddConnection(NeuronNode *node) {
     assert(!adjacent_.count(node));
     adjacent_.insert(node);
   }
-  inline void AddConnection(NeuronNodePtr node) {
+  void AddConnection(NeuronNodePtr node) {
     this->AddConnection(node.get());
   }
-  inline void RemoveConnection(NeuronNode *node) {
+  void RemoveConnection(NeuronNode *node) {
     assert(adjacent_.count(node));
     adjacent_.erase(node);
   }
 
   void RemoveConnection(const std::set<int> &nodes);
 
-  inline bool HasConnection(NeuronNode *node) const {
+  bool HasConnection(NeuronNode *node) const {
     return adjacent_.count(node) > 0;
   }
-  inline bool HasConnection(NeuronNodePtr node) const {
+  bool HasConnection(NeuronNodePtr node) const {
     return this->HasConnection(node.get());
   }
-  inline void setCoord(const double gx, const double gy, const double gz) {
+  void setCoord(const double gx, const double gy, const double gz) {
     gx_ = gx;
     gy_ = gy;
     gz_ = gz;
   }
-  inline NeuronNodePtr Clone() const {
+  NeuronNodePtr Clone() const {
     NeuronNodePtr r = boost::make_shared<NeuronNode>();
     r->id_ = id_;
     r->setCoord(gx_, gy_, gz_);
@@ -60,7 +60,7 @@ public:
     r->type_ = type_;
     return r;
   }
-  inline int CountNumChild(const NeuronNode *parent) const {
+  int CountNumChild(const NeuronNode *parent) const {
     int count = 0;
     for (const NeuronNode *next : this->adjacent_) {
       if (next != parent) {
@@ -77,20 +77,20 @@ public:
 
   Neuron Clone() const;
 
-  inline void AddNode(NeuronNodePtr node) {
+  void AddNode(NeuronNodePtr node) {
     storage_.push_back(node);
   }
-  inline bool IsEmpty() const {
+  bool IsEmpty() const {
     return storage_.empty();
   }
-  inline void Clear() {
+  void Clear() {
     root_ = NULL;
     storage_.clear();
   }
-  inline void Extend(const Neuron &other) {
+  void Extend(const Neuron &other) {
     this->storage_.insert(this->storage_.end(), other.storage_.begin(), other.storage_.end());
   }
-  inline void UpdateRoot(const int nth) {
+  void UpdateRoot(const int nth) {
     assert(0 <= nth && nth < (int)storage_.size());
     root_ = storage_[nth].get();
   }

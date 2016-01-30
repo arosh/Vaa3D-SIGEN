@@ -15,24 +15,24 @@ public:
   double radius_;
   std::vector<IPoint> points_;
   std::set<Cluster *> adjacent_;
-  inline explicit Cluster(const std::vector<IPoint> &points) : gx_(0.0), gy_(0.0), gz_(0.0), radius_(0.0), points_(points) {}
+  explicit Cluster(const std::vector<IPoint> &points) : gx_(0.0), gy_(0.0), gz_(0.0), radius_(0.0), points_(points) {}
 
   // http://stackoverflow.com/questions/5727264
-  inline bool HasConnection(const Cluster *p) const {
+  bool HasConnection(const Cluster *p) const {
     return adjacent_.count(const_cast<Cluster *>(p)) > 0; // FIXME please remove const_cast
   }
-  inline bool HasConnection(ClusterPtr p) const {
+  bool HasConnection(ClusterPtr p) const {
     return this->HasConnection(p.get());
   }
-  inline void RemoveConnection(const Cluster *p) {
+  void RemoveConnection(const Cluster *p) {
     assert(this->HasConnection(p));
     adjacent_.erase(const_cast<Cluster *>(p)); // FIXME please remove const_cast
   }
-  inline void AddConnection(const Cluster *p) {
+  void AddConnection(const Cluster *p) {
     assert(!this->HasConnection(p));
     adjacent_.insert(const_cast<Cluster *>(p)); // FIXME please remove const_cast
   }
-  inline void AddConnection(ClusterPtr p) {
+  void AddConnection(ClusterPtr p) {
     this->AddConnection(p.get());
   }
 };
