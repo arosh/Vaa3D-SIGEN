@@ -75,6 +75,12 @@ gcovr --html --html-detail -r .. -o coverage.html
 /usr/local/Trolltech/Qt-4.7.1/bin/qmake
 ```
 
+## Doxygen
+
+```
+doxywizard Doxyfile
+```
+
 ## TODO
 
 * sample of configure window? `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
