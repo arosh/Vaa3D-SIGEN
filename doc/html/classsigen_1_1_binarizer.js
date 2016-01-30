@@ -1,4 +1,4 @@
 var classsigen_1_1_binarizer =
 [
-    [ "binarize", "classsigen_1_1_binarizer.html#af8cc70657e4d0b89c36f8912f7a889c8", null ]
+    [ "Binarize", "classsigen_1_1_binarizer.html#a80ac987bb56834af07aac0779d642e3a", null ]
 ];

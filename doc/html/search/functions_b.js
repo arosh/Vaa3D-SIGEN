@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['remove_5fconnection',['remove_connection',['../classsigen_1_1_cluster.html#a7a71c68c099b8b5a00cbad37af16e6d3',1,'sigen::Cluster::remove_connection()'],['../classsigen_1_1_neuron_node.html#aac9d3466cef8a2d23c5f0517c3fd2df1',1,'sigen::NeuronNode::remove_connection(NeuronNode *node)'],['../classsigen_1_1_neuron_node.html#ab96072d0ccee3e6cf41b507f67f70405',1,'sigen::NeuronNode::remove_connection(const std::set&lt; int &gt; &amp;nodes)']]]
+  ['removeconnection',['RemoveConnection',['../classsigen_1_1_cluster.html#a3615d1143f89ae4245e3523620d80852',1,'sigen::Cluster::RemoveConnection()'],['../classsigen_1_1_neuron_node.html#a2a4f8d30a494941ab71a6baaffa35492',1,'sigen::NeuronNode::RemoveConnection(NeuronNode *node)'],['../classsigen_1_1_neuron_node.html#ac3cf4ef87dc56a5ba181940d3bf39793',1,'sigen::NeuronNode::RemoveConnection(const std::set&lt; int &gt; &amp;nodes)']]]
 ];

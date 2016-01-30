@@ -1,6 +1,0 @@
-<map id="sigen::interpolate" name="sigen::interpolate">
-<area shape="rect" id="node2" href="$classsigen_1_1_disjoint_set.html#a76292ebf9214b64e79e48f68f7e163e2" title="sigen::DisjointSet::add" alt="" coords="176,5,330,31"/>
-<area shape="rect" id="node3" href="$namespacesigen.html#a0ccc94ed13dca58cbe56c310046c44db" title="sigen::norm_neuron" alt="" coords="183,55,323,80"/>
-<area shape="rect" id="node4" href="$classsigen_1_1_neuron.html#aeedab897fb4a4d44f731fad7fbbdc12e" title="sigen::Neuron::empty" alt="" coords="378,29,526,55"/>
-<area shape="rect" id="node5" href="$namespacesigen.html#ab2e838279faedf75788372ffa32e7286" title="sigen::norm_l2" alt="" coords="398,79,507,104"/>
-</map>

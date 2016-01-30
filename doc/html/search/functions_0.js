@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['add',['add',['../classsigen_1_1_disjoint_set.html#a76292ebf9214b64e79e48f68f7e163e2',1,'sigen::DisjointSet']]],
-  ['add_5fconnection',['add_connection',['../classsigen_1_1_cluster.html#a0f417d83616c589d08aeec1132dcca52',1,'sigen::Cluster::add_connection()'],['../classsigen_1_1_neuron_node.html#a46a8a3fc1e8b886bd75f4c20cd8e68cc',1,'sigen::NeuronNode::add_connection()'],['../classsigen_1_1_voxel.html#a5ea85697c8a13f529003e19a1ea25235',1,'sigen::Voxel::add_connection()']]],
-  ['add_5fextension',['add_extension',['../namespacesigen_1_1fileutils.html#aa108d02bc65c0047979a9dad253246d7',1,'sigen::fileutils']]],
-  ['add_5fnode',['add_node',['../classsigen_1_1_neuron.html#ae9985d0cee3fe85bce4719efe9bd9c52',1,'sigen::Neuron']]]
+  ['add',['Add',['../classsigen_1_1_disjoint_set.html#a8b327b4ece9719df8d912a9c2b497b1d',1,'sigen::DisjointSet']]],
+  ['addconection',['AddConection',['../classsigen_1_1_voxel.html#ab5a264b8bea7bac381be1bbd6b6e4aa2',1,'sigen::Voxel']]],
+  ['addconnection',['AddConnection',['../classsigen_1_1_cluster.html#a3cf74c0676e7a8637da9aa0c54643360',1,'sigen::Cluster::AddConnection()'],['../classsigen_1_1_neuron_node.html#a00fc490155e848246e56635727d38baf',1,'sigen::NeuronNode::AddConnection()']]],
+  ['addextension',['AddExtension',['../classsigen_1_1_file_utils.html#ac8ebca2c4fe2df06b8404840b2168ac4',1,'sigen::FileUtils']]],
+  ['addnode',['AddNode',['../classsigen_1_1_neuron.html#a86a53e4c347087a6472f81faf5360133',1,'sigen::Neuron']]]
 ];

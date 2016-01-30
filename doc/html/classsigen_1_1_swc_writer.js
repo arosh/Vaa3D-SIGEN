@@ -1,5 +1,5 @@
 var classsigen_1_1_swc_writer =
 [
-    [ "write", "classsigen_1_1_swc_writer.html#afc517c4af2fa717db06b677e769fbaae", null ],
-    [ "write", "classsigen_1_1_swc_writer.html#a072aadba32b8ceeee66fd5470b9ddfec", null ]
+    [ "Write", "classsigen_1_1_swc_writer.html#a26c821317b23af8d2f71490abdd1376b", null ],
+    [ "Write", "classsigen_1_1_swc_writer.html#a1adb7173f58bd8961c6895a97047d16d", null ]
 ];

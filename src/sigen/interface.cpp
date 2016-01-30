@@ -79,6 +79,7 @@ void Extract(
 }
 void ExtractAndWrite(const BinaryCube &cube, const char *filename, const Options &options) {
   // not implemented
+  assert(false);
 }
 }; // namespace interface
 }; // namespace sigen

@@ -1,7 +1,7 @@
 var classsigen_1_1_binary_cube =
 [
     [ "BinaryCube", "classsigen_1_1_binary_cube.html#afb14d0f82b5b604782ddc7e84f07d90d", null ],
-    [ "clear", "classsigen_1_1_binary_cube.html#a769c10cd637acf7682b1f48b30a81d2c", null ],
+    [ "Clear", "classsigen_1_1_binary_cube.html#ac4001b7d8439bffe3b0e2b9b81b8da75", null ],
     [ "operator[]", "classsigen_1_1_binary_cube.html#a7ddee108e296e986e50839594b94a120", null ],
     [ "operator[]", "classsigen_1_1_binary_cube.html#a2995b99d422d723b5570bac373f11e28", null ],
     [ "data_", "classsigen_1_1_binary_cube.html#a6855bdef0e37d6f52f3fbb1a0c5b2469", null ],

@@ -1,6 +1,0 @@
-<map id="sigen::Neuron::empty" name="sigen::Neuron::empty">
-<area shape="rect" id="node2" href="$namespacesigen.html#a0ccc94ed13dca58cbe56c310046c44db" title="sigen::norm_neuron" alt="" coords="201,31,341,56"/>
-<area shape="rect" id="node3" href="$namespacesigen.html#aa7a1ad6a2f0833327e81abed89685171" title="sigen::interpolate" alt="" coords="389,31,512,56"/>
-<area shape="rect" id="node4" href="$namespacesigen_1_1interface.html#ae422b4b6127d885198ead14690ae8ccc" title="sigen::interface::Extract" alt="" coords="560,5,721,31"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="615,55,666,80"/>
-</map>

@@ -1,11 +1,11 @@
 var classsigen_1_1_neuron =
 [
-    [ "add_node", "classsigen_1_1_neuron.html#ae9985d0cee3fe85bce4719efe9bd9c52", null ],
-    [ "clear", "classsigen_1_1_neuron.html#ab925f74716bc0a4e17e10523a2617f2d", null ],
-    [ "clone", "classsigen_1_1_neuron.html#a716c97cd0a8caaf1390f6f4f647958b7", null ],
-    [ "empty", "classsigen_1_1_neuron.html#aeedab897fb4a4d44f731fad7fbbdc12e", null ],
-    [ "extend", "classsigen_1_1_neuron.html#a1337b7097df46eb3434ea1f0528186bb", null ],
-    [ "setRoot", "classsigen_1_1_neuron.html#a8ac8330aece116ce87422b599dc75f00", null ],
+    [ "AddNode", "classsigen_1_1_neuron.html#a86a53e4c347087a6472f81faf5360133", null ],
+    [ "Clear", "classsigen_1_1_neuron.html#a7bb9f1e409df61939901de3f82a167b3", null ],
+    [ "Clone", "classsigen_1_1_neuron.html#ae7528e8b1ba44f9b9459ace294a3966e", null ],
+    [ "Extend", "classsigen_1_1_neuron.html#abcba524b798f4398c43ae8077b707e74", null ],
+    [ "IsEmpty", "classsigen_1_1_neuron.html#ac724d9d7a7e5938cfc497be7a4017894", null ],
+    [ "UpdateRoot", "classsigen_1_1_neuron.html#acd419c36c090f6029ed3d8f7f0bba22a", null ],
     [ "root_", "classsigen_1_1_neuron.html#a58af503e69f0140c213b604ce311f8f9", null ],
     [ "storage_", "classsigen_1_1_neuron.html#acb19f62d87968cb072b567c82cd0377d", null ]
 ];

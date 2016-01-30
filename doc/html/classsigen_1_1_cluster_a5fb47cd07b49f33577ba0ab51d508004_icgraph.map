@@ -1,8 +1,0 @@
-<map id="sigen::Cluster::is_connecting_with" name="sigen::Cluster::is_connecting_with">
-<area shape="rect" id="node2" href="$classsigen_1_1_cluster.html#ade4015c044e35f2e595aa1fa6837f9c2" title="sigen::Cluster::is\l_connecting_with" alt="" coords="193,5,317,44"/>
-<area shape="rect" id="node3" href="$classsigen_1_1_cluster.html#a7a71c68c099b8b5a00cbad37af16e6d3" title="sigen::Cluster::remove\l_connection" alt="" coords="178,68,332,107"/>
-<area shape="rect" id="node4" href="$classsigen_1_1_builder.html#a605c109f948a18476c628596de307d66" title="sigen::Builder::cut\l_loops" alt="" coords="380,68,508,107"/>
-<area shape="rect" id="node5" href="$classsigen_1_1_builder.html#afdba46efcdcbf5b4669ad2780d545891" title="sigen::Builder::build" alt="" coords="556,75,693,100"/>
-<area shape="rect" id="node6" href="$namespacesigen_1_1interface.html#ae422b4b6127d885198ead14690ae8ccc" title="sigen::interface::Extract" alt="" coords="741,49,902,75"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="797,99,847,124"/>
-</map>

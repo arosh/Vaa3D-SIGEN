@@ -1,7 +1,7 @@
 var classsigen_1_1_voxel =
 [
     [ "Voxel", "classsigen_1_1_voxel.html#a840b5e6386d7c59a4dce33aaf2cd227b", null ],
-    [ "add_connection", "classsigen_1_1_voxel.html#a5ea85697c8a13f529003e19a1ea25235", null ],
+    [ "AddConection", "classsigen_1_1_voxel.html#ab5a264b8bea7bac381be1bbd6b6e4aa2", null ],
     [ "adjacent_", "classsigen_1_1_voxel.html#ac42c0a6553b103014298d60ef8294a97", null ],
     [ "flag_", "classsigen_1_1_voxel.html#a6b76ff0a5fd9404d5b6d5e67d426e7d9", null ],
     [ "label_", "classsigen_1_1_voxel.html#aabde79b86fbc956997e3ba2cc5fee33f", null ],

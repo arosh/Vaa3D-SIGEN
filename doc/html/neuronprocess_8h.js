@@ -1,6 +1,6 @@
 var neuronprocess_8h =
 [
-    [ "clipping", "neuronprocess_8h.html#a645e95cef4d1b994a1d8bdac2d49180d", null ],
-    [ "interpolate", "neuronprocess_8h.html#aa7a1ad6a2f0833327e81abed89685171", null ],
-    [ "smoothing", "neuronprocess_8h.html#a71444c02dd0cbcc345bc517baa2cc99d", null ]
+    [ "Clipping", "neuronprocess_8h.html#aabe89bcd445a3e11824624b185ab7fb3", null ],
+    [ "Interpolate", "neuronprocess_8h.html#abceeb5ab2bcd814d03397e994cddbf2e", null ],
+    [ "Smoothing", "neuronprocess_8h.html#a0c29339c312ebcbd1fea171a471adb6f", null ]
 ];
