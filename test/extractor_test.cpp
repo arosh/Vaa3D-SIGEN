@@ -3,14 +3,30 @@
 #include "sigen/extractor/extractor.h"
 using namespace std;
 using namespace sigen;
-TEST(Extractor, labeling) {
-  BinaryCube cube(5, 5, 3);
-  cube[1][1][1] = 1;
-  cube[2][1][1] = 1;
 
-  cube[1][3][1] = 1;
-  cube[2][3][1] = 1;
-  cube[3][3][1] = 1;
+static BinaryCube vectorStringToBinaryCube(const std::vector<std::string> &vs) {
+  const int zdepth = 3;
+  const int size_x = vs[0].size();
+  const int size_y = vs.size();
+  for (int i = 0; i < (int)size_y; ++i) {
+    assert(size_x == (int)vs[i].size());
+  }
+  BinaryCube cube(size_x + 2, size_y + 2, zdepth);
+  for (int y = 0; y < size_y; ++y) {
+    for (int x = 0; x < size_x; ++x) {
+      cube[x + 1][y + 1][1] = (vs[y][x] == '#');
+    }
+  }
+  return cube;
+}
+
+TEST(Extractor, labeling) {
+  std::vector<std::string> vs;
+  vs.push_back("##.");
+  vs.push_back("...");
+  vs.push_back("###");
+  BinaryCube cube = vectorStringToBinaryCube(vs);
+
   Extractor ext(cube);
   auto ret = ext.Extract();
   EXPECT_EQ(2, (int)ext.components_.size());
@@ -28,12 +44,11 @@ TEST(Extractor, labeling) {
   }
 }
 TEST(Extractor, labeling2) {
-  BinaryCube cube(5, 5, 3);
-  cube[1][1][1] = 1;
-  cube[2][1][1] = 1;
-  cube[3][2][1] = 1;
-  cube[1][3][1] = 1;
-  cube[2][3][1] = 1;
+  std::vector<std::string> vs;
+  vs.push_back("##.");
+  vs.push_back("..#");
+  vs.push_back("##.");
+  BinaryCube cube = vectorStringToBinaryCube(vs);
   Extractor ext(cube);
   auto ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
@@ -41,11 +56,11 @@ TEST(Extractor, labeling2) {
   EXPECT_EQ(5, (int)ret.size());
 }
 TEST(Extractor, labeling_with_loops) {
-  BinaryCube cube(5, 5, 3);
-  cube[2][1][1] = 1;
-  cube[1][2][1] = 1;
-  cube[3][2][1] = 1;
-  cube[2][3][1] = 1;
+  std::vector<std::string> vs;
+  vs.push_back(".#.");
+  vs.push_back("#.#");
+  vs.push_back(".#.");
+  BinaryCube cube = vectorStringToBinaryCube(vs);
   Extractor ext(cube);
   auto ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
@@ -61,11 +76,10 @@ TEST(Extractor, labeling_with_loops) {
   }
 }
 TEST(Extractor, same_distance) {
-  BinaryCube cube(4, 4, 3);
-  cube[1][1][1] = 1;
-  cube[2][1][1] = 1;
-  cube[1][2][1] = 1;
-  cube[2][2][1] = 1;
+  std::vector<std::string> vs;
+  vs.push_back("##");
+  vs.push_back("##");
+  BinaryCube cube = vectorStringToBinaryCube(vs);
   Extractor ext(cube);
   auto ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
