@@ -21,7 +21,7 @@ static void writeRec(std::ostream &os, const NeuronNode *node,
   os << node->id_ << ' ' << type_id << ' ' << node->gx_ << ' ' << node->gy_
      << ' ' << node->gz_ << ' ' << node->radius_ << ' ' << parent_id
      << std::endl;
-  for (auto next : node->adjacent_) {
+  for (NeuronNode *next : node->adjacent_) {
     if (next->id_ != parent_id) {
       writeRec(os, next, node->id_);
     }

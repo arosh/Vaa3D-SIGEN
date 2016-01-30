@@ -16,8 +16,9 @@ ImageSequence FileLoader::Load(const std::string &dir_path) {
   namespace fs = boost::filesystem;
   std::vector<std::string> fnames;
   // enumerate files in specified directory
-  for (const auto &entry : fs::directory_iterator(dir_path)) {
-    fnames.push_back(entry.path().string());
+  fs::directory_iterator end;
+  for (fs::directory_iterator it(dir_path); it != end; ++it) {
+    fnames.push_back(it->path().string());
   }
   // sort by file name in ascending order
   std::sort(fnames.begin(), fnames.end());
