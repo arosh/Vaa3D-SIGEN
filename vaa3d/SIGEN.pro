@@ -23,7 +23,6 @@ SOURCES += SIGEN_plugin.cpp
 INCLUDEPATH += ../src
 SOURCES += ../src/sigen/interface.cpp
 SOURCES += ../src/sigen/builder/builder.cpp
-SOURCES += ../src/sigen/common/binary_cube.cpp
 SOURCES += ../src/sigen/common/disjoint_set.cpp
 SOURCES += ../src/sigen/common/neuron.cpp
 SOURCES += ../src/sigen/extractor/extractor.cpp

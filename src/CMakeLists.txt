@@ -6,7 +6,6 @@ include_directories(.)
 add_library(sigen STATIC
   sigen/builder/builder.cpp
   sigen/builder/builder.h
-  sigen/common/binary_cube.cpp
   sigen/common/binary_cube.h
   sigen/common/cluster.h
   sigen/common/disjoint_set.cpp
