@@ -17,7 +17,7 @@
 #include <cmdline/cmdline.h>
 #pragma GCC diagnostic pop
 
-void init_glog(const char *program_name) {
+void initGlog(const char *program_name) {
   // https://google-glog.googlecode.com/svn/trunk/doc/glog.html
   // FLAGS_log_dir = "log";
   FLAGS_logtostderr = true;
@@ -25,9 +25,7 @@ void init_glog(const char *program_name) {
   google::InstallFailureSignalHandler(); // print stack trace if program fault
 }
 
-int main(int argc, char *argv[]) {
-  init_glog(argv[0]);
-
+cmdline::parser parse_args(int argc, char *argv[]) {
   cmdline::parser a;
   a.add<std::string>("input", 'i', "input image directory");
   a.add<std::string>("output", 'o', "output filename");
@@ -38,23 +36,41 @@ int main(int argc, char *argv[]) {
   a.add<int>("clipping", '\0', "clipping level", false, 0);
   a.add<int>("smoothing", '\0', "smoothing level", false, 0);
   a.parse_check(argc, argv);
+  return a;
+}
+
+int main(int argc, char *argv[]) {
+  initGlog(argv[0]);
+
+  cmdline::parser args = parse_args(argc, argv);
 
   sigen::FileLoader loader;
-  sigen::ImageSequence is = loader.Load(a.get<std::string>("input"));
+  sigen::ImageSequence is = loader.Load(args.get<std::string>("input"));
   LOG(INFO) << "load (done)";
+
   sigen::Binarizer bin;
   sigen::BinaryCube cube = bin.Binarize(is);
-  LOG(INFO) << "binarize (done)";
   is.clear();
+  LOG(INFO) << "binarize (done)";
+
   sigen::Extractor ext(cube);
   std::vector<sigen::ClusterPtr> clusters = ext.Extract();
-  LOG(INFO) << "extract (done)";
   cube.Clear();
-  sigen::Builder builder(clusters, a.get<double>("scale-xy"), a.get<double>("scale-z"));
+  LOG(INFO) << "extract (done)";
+
+  sigen::Builder builder(clusters, args.get<double>("scale-xy"), args.get<double>("scale-z"));
   std::vector<sigen::Neuron> ns = builder.Build();
   LOG(INFO) << "build (done)";
-  ns = sigen::Interpolate(ns, a.get<double>("dt"), a.get<int>("vt"));
+
+  ns = sigen::Interpolate(ns, args.get<double>("dt"), args.get<int>("vt"));
   LOG(INFO) << "interpolate (done)";
+
+  ns = sigen::Smoothing(ns, args.get<int>("smoothing"));
+  LOG(INFO) << "smoothing (done)";
+
+  ns = sigen::Clipping(ns, args.get<int>("clipping"));
+  LOG(INFO) << "clipping (done)";
+
   sigen::SwcWriter writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =
