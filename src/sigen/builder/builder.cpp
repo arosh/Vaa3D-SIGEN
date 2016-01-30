@@ -33,7 +33,7 @@ void Builder::ConnectNeighbors() {
             auto range = coord_to_index.equal_range(q);
             for (auto it = range.first; it != range.second; ++it) {
               if (it->second != i) {
-                data_[i]->AddConnection(data_[it->second].get());
+                data_[i]->AddConnection(data_[it->second]);
               }
             }
           }
@@ -144,8 +144,8 @@ Builder::ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
     for (Cluster *p : data[i]->adjacent_) {
       int j = ptr2index[p];
       if (i < j) {
-        neuron_nodes[i]->AddConnection(neuron_nodes[j].get());
-        neuron_nodes[j]->AddConnection(neuron_nodes[i].get());
+        neuron_nodes[i]->AddConnection(neuron_nodes[j]);
+        neuron_nodes[j]->AddConnection(neuron_nodes[i]);
       }
     }
   }

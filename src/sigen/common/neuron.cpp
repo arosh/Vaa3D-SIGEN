@@ -6,15 +6,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 namespace sigen {
-void NeuronNode::AddConnection(NeuronNode *node) {
-  assert(!adjacent_.count(node));
-  adjacent_.insert(node);
-}
-
-void NeuronNode::RemoveConnection(NeuronNode *node) {
-  assert(adjacent_.count(node));
-  adjacent_.erase(node);
-}
 
 void NeuronNode::RemoveConnection(const std::set<int> &nodes) {
   // `erase` invalidates iterator. Be careful.

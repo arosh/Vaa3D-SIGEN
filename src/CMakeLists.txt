@@ -17,7 +17,6 @@ add_library(sigen STATIC
   sigen/common/noncopyable.h
   sigen/common/point.h
   sigen/common/variant.h
-  sigen/common/voxel.cpp
   sigen/common/voxel.h
   sigen/extractor/extractor.cpp
   sigen/extractor/extractor.h

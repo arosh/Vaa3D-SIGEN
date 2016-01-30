@@ -94,8 +94,8 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
     // if(forest[l].storage_.size() < forest[r].storage_.size()) std::swap(l, r);
     std::pair<double, std::pair<int, int> > dist = normNeuron(forest[l], forest[r]);
     set.Merge(l, r);
-    forest[l].storage_[dist.second.first]->AddConnection(forest[r].storage_[dist.second.second].get());
-    forest[r].storage_[dist.second.second]->AddConnection(forest[l].storage_[dist.second.first].get());
+    forest[l].storage_[dist.second.first]->AddConnection(forest[r].storage_[dist.second.second]);
+    forest[r].storage_[dist.second.second]->AddConnection(forest[l].storage_[dist.second.first]);
     forest[l].Extend(forest[r]);
     forest[r].Clear();
 

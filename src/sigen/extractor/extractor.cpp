@@ -103,7 +103,7 @@ void Extractor::Labeling() {
           int z = p.first.z_ + dz;
           IPoint t(x, y, z);
           if (voxels.count(t)) {
-            p.second->AddConection(voxels[t].get());
+            p.second->AddConection(voxels[t]);
           }
         }
       }

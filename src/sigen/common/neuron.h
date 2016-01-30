@@ -26,9 +26,21 @@ public:
   std::set<NeuronNode *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   // std::map<std::string, Variant> values_;
-  void AddConnection(NeuronNode *node);
-  void RemoveConnection(NeuronNode *node);
+
+  inline void AddConnection(NeuronNode *node) {
+    assert(!adjacent_.count(node));
+    adjacent_.insert(node);
+  }
+  inline void AddConnection(NeuronNodePtr node) {
+    this->AddConnection(node.get());
+  }
+  inline void RemoveConnection(NeuronNode *node) {
+    assert(adjacent_.count(node));
+    adjacent_.erase(node);
+  }
+
   void RemoveConnection(const std::set<int> &nodes);
+
   inline bool HasConnection(NeuronNode *node) const {
     return adjacent_.count(node) > 0;
   }
@@ -62,7 +74,9 @@ class Neuron /* : noncopyable */ {
 public:
   std::vector<NeuronNodePtr> storage_;
   NeuronNode *root_;
+
   Neuron Clone() const;
+
   inline void AddNode(NeuronNodePtr node) {
     storage_.push_back(node);
   }

@@ -29,7 +29,11 @@ public:
     adjacent_.erase(const_cast<Cluster *>(p)); // FIXME please remove const_cast
   }
   inline void AddConnection(const Cluster *p) {
+    assert(!this->HasConnection(p));
     adjacent_.insert(const_cast<Cluster *>(p)); // FIXME please remove const_cast
+  }
+  inline void AddConnection(ClusterPtr p) {
+    this->AddConnection(p.get());
   }
 };
 } // namespace sigen
