@@ -3,8 +3,6 @@
 #include <map>
 #include <set>
 #include "sigen/common/neuron.h"
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
 namespace sigen {
 
 void NeuronNode::RemoveConnection(const std::set<int> &nodes) {

@@ -27,11 +27,11 @@ static void writeRec(std::ostream &os, const NeuronNode *node,
     }
   }
 }
-void SwcWriter::Write(std::ostream &os, const Neuron &neu) {
-  writeRec(os, neu.root_, -1);
+void SwcWriter::Write(std::ostream &os, const Neuron &neuron) {
+  writeRec(os, neuron.root_, -1);
 }
-void SwcWriter::Write(const char *fname, const Neuron &neu) {
+void SwcWriter::Write(const char *fname, const Neuron &neuron) {
   std::ofstream ofs(fname);
-  writeRec(ofs, neu.root_, -1);
+  writeRec(ofs, neuron.root_, -1);
 }
 } // namespace sigen

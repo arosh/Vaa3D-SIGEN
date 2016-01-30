@@ -73,9 +73,12 @@ static void setLabel(Voxel *p, const int label) {
 }
 
 template <class T>
-bool compareSize(const T &lhs, const T &rhs) {
-  return lhs.size() < rhs.size();
-}
+class compareSize {
+public:
+  bool operator()(const T &lhs, const T &rhs) const {
+    return lhs.size() < rhs.size();
+  }
+};
 
 // This functions is HOT SPOT.
 // This is worth to tune.
@@ -123,7 +126,7 @@ void Extractor::Labeling() {
   for (auto p : voxels) {
     components_[p.second->label_].push_back(p.second);
   }
-  std::sort(components_.begin(), components_.end(), &compareSize<std::vector<VoxelPtr> >);
+  std::sort(components_.begin(), components_.end(), compareSize<std::vector<VoxelPtr> >());
   std::reverse(components_.begin(), components_.end());
 }
 

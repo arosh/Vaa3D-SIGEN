@@ -200,14 +200,14 @@ static void computeIdInner(NeuronNode *cur, NeuronNode *prev, int &id) {
   }
 }
 
-void Builder::ComputeIds(std::vector<Neuron> &ns) {
+void Builder::ComputeIds(std::vector<Neuron> &neurons) {
   int id = 1;
-  for (int i = 0; i < (int)ns.size(); ++i) {
-    computeIdInner(ns[i].root_, NULL, id);
+  for (int i = 0; i < (int)neurons.size(); ++i) {
+    computeIdInner(neurons[i].root_, NULL, id);
   }
 }
 
-static void compute_node_type_inner(NeuronNode *cur, NeuronNode *prev) {
+static void computeNodeTypesInner(NeuronNode *cur, NeuronNode *prev) {
   neuron_type type;
   if (cur->adjacent_.size() >= 3)
     type = neuron_type::BRANCH;
@@ -218,14 +218,14 @@ static void compute_node_type_inner(NeuronNode *cur, NeuronNode *prev) {
   cur->type_ = type;
   BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {
-      compute_node_type_inner(next, cur);
+      computeNodeTypesInner(next, cur);
     }
   }
 }
 
-void Builder::ComputeNodeTypes(std::vector<Neuron> &neu) {
-  for (int i = 0; i < (int)neu.size(); ++i) {
-    compute_node_type_inner(neu[i].root_, NULL);
+void Builder::ComputeNodeTypes(std::vector<Neuron> &neurons) {
+  for (int i = 0; i < (int)neurons.size(); ++i) {
+    computeNodeTypesInner(neurons[i].root_, NULL);
   }
 }
 
