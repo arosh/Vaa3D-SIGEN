@@ -125,14 +125,14 @@ void Builder::ComputeRadius() {
 
 std::vector<NeuronNodePtr>
 Builder::ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
-                                const double scale_xy, const double scale_z) {
+                              const double scale_xy, const double scale_z) {
   std::vector<NeuronNodePtr> neuron_nodes;
   std::vector<std::pair<int, int> > edges;
   for (int i = 0; i < (int)data.size(); ++i) {
     NeuronNodePtr n = boost::make_shared<NeuronNode>();
     n->setCoord(data[i]->gx_ * scale_xy,
-             data[i]->gy_ * scale_xy,
-             data[i]->gz_ * scale_z);
+                data[i]->gy_ * scale_xy,
+                data[i]->gz_ * scale_z);
     n->radius_ = data[i]->radius_;
     neuron_nodes.push_back(n);
   }
@@ -154,7 +154,7 @@ Builder::ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
 
 std::vector<Neuron>
 Builder::ConvertToNeuron(std::vector<ClusterPtr> &data,
-                           const double scale_xy, const double scale_z) {
+                         const double scale_xy, const double scale_z) {
   std::vector<NeuronNodePtr> neuron_nodes =
       ConvertToNeuronNodes(data, scale_xy, scale_z);
   // split into some neurons

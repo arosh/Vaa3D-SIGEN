@@ -40,10 +40,10 @@ int main(int argc, char *argv[]) {
   a.parse_check(argc, argv);
 
   sigen::FileLoader loader;
-  sigen::ImageSequence is = loader.load(a.get<std::string>("input"));
+  sigen::ImageSequence is = loader.Load(a.get<std::string>("input"));
   LOG(INFO) << "load (done)";
   sigen::Binarizer bin;
-  sigen::BinaryCube cube = bin.binarize(is);
+  sigen::BinaryCube cube = bin.Binarize(is);
   LOG(INFO) << "binarize (done)";
   is.clear();
   sigen::Extractor ext(cube);
@@ -59,8 +59,8 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =
         "sample_output/" + std::to_string(i) + ".swc";
-    filename = sigen::fileutils::add_extension(filename, ".swc");
-    writer.write(filename.c_str(), ns[i]);
+    filename = sigen::FileUtils::AddExtension(filename, ".swc");
+    writer.Write(filename.c_str(), ns[i]);
   }
   LOG(INFO) << "write (done)";
 }

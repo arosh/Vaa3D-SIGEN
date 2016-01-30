@@ -49,9 +49,9 @@ static void removeIsolatedPoints(BinaryCube &c) {
             }
           }
         }
-		if (!any) {
-		  c[x][y][z] = false;
-		}
+        if (!any) {
+          c[x][y][z] = false;
+        }
       }
     }
   }

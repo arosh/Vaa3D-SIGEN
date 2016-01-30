@@ -3,7 +3,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include "sigen/binarizer/binarizer.h"
 namespace sigen {
-BinaryCube Binarizer::binarize(const ImageSequence &is) {
+BinaryCube Binarizer::Binarize(const ImageSequence &is) {
   CHECK(!is.empty());
   int width = is[0].cols;
   int height = is[0].rows;

@@ -1,11 +1,13 @@
 #include <gtest/gtest.h>
 #include "sigen/writer/fileutils.h"
-using namespace sigen::fileutils;
-TEST(fileutils, add_extension) {
-  EXPECT_EQ("hello.swc", add_extension("hello", "swc"));
-  EXPECT_EQ("hello.out.swc", add_extension("hello.out", "swc"));
-  EXPECT_EQ("hello.swc", add_extension("hello.swc", "swc"));
-  EXPECT_EQ("hello.swc", add_extension("hello", ".swc"));
-  EXPECT_EQ("hello.out.swc", add_extension("hello.out", ".swc"));
-  EXPECT_EQ("hello.swc", add_extension("hello.swc", ".swc"));
+std::string add(const std::string &a, const std::string &b) {
+  return sigen::FileUtils::AddExtension(a, b);
+}
+TEST(FileUtils, AddExtension) {
+  EXPECT_EQ("hello.swc", add("hello", "swc"));
+  EXPECT_EQ("hello.out.swc", add("hello.out", "swc"));
+  EXPECT_EQ("hello.swc", add("hello.swc", "swc"));
+  EXPECT_EQ("hello.swc", add("hello", ".swc"));
+  EXPECT_EQ("hello.out.swc", add("hello.out", ".swc"));
+  EXPECT_EQ("hello.swc", add("hello.swc", ".swc"));
 }

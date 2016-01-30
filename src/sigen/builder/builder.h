@@ -15,10 +15,10 @@ public:
   std::vector<Neuron> Build();
   static std::vector<Neuron>
   ConvertToNeuron(std::vector<ClusterPtr> &data,
-                    const double scale_xy, const double scale_z);
+                  const double scale_xy, const double scale_z);
   static std::vector<NeuronNodePtr>
   ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
-                         const double scale_xy, const double scale_z);
+                       const double scale_xy, const double scale_z);
   static void ComputeNodeTypes(std::vector<Neuron> &neu);
   static void ComputeIds(std::vector<Neuron> &neu);
   void ConnectNeighbors();

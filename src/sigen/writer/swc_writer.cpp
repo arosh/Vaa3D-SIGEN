@@ -3,8 +3,8 @@
 #include "sigen/writer/swc_writer.h"
 #include "sigen/writer/fileutils.h"
 namespace sigen {
-static void write_rec(std::ostream &os, const NeuronNode *node,
-                      const int parent_id) {
+static void writeRec(std::ostream &os, const NeuronNode *node,
+                     const int parent_id) {
   int type_id = -1;
   switch (node->type_) {
   case neuron_type::EDGE:
@@ -23,15 +23,15 @@ static void write_rec(std::ostream &os, const NeuronNode *node,
      << std::endl;
   for (auto next : node->adjacent_) {
     if (next->id_ != parent_id) {
-      write_rec(os, next, node->id_);
+      writeRec(os, next, node->id_);
     }
   }
 }
-void SwcWriter::write(std::ostream &os, const Neuron &neu) {
-  write_rec(os, neu.root_, -1);
+void SwcWriter::Write(std::ostream &os, const Neuron &neu) {
+  writeRec(os, neu.root_, -1);
 }
-void SwcWriter::write(const char *fname, const Neuron &neu) {
+void SwcWriter::Write(const char *fname, const Neuron &neu) {
   std::ofstream ofs(fname);
-  write_rec(ofs, neu.root_, -1);
+  writeRec(ofs, neu.root_, -1);
 }
 } // namespace sigen

@@ -48,7 +48,7 @@ TEST(SwcWriter, write) {
 
   std::stringstream ss;
   sigen::SwcWriter w;
-  w.write(ss, n);
+  w.Write(ss, n);
 
   std::set<std::string> file_content;
   file_content.insert("1 6 1.1 1.2 1.3 1.4 -1");
