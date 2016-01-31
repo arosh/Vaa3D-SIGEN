@@ -81,6 +81,12 @@ gcovr --html --html-detail -r .. -o coverage.html
 doxywizard Doxyfile
 ```
 
+## CppCheck
+
+```
+cppcheck --enable=all src/**/*.cpp
+```
+
 ## TODO
 
 * sample of configure window? `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
