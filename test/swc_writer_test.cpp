@@ -44,7 +44,7 @@ TEST(SwcWriter, write) {
   n.storage_.push_back(b);
   n.storage_.push_back(c);
   n.storage_.push_back(d);
-  n.root_ = a.get();
+  n.set_root(a.get());
 
   std::stringstream ss;
   sigen::SwcWriter w;

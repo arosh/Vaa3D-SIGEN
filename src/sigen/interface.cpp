@@ -75,7 +75,7 @@ void Extract(
     std::cerr << "clipping finished" << std::endl;
 
   for (int i = 0; i < (int)neurons.size(); ++i) {
-    write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
+    write(neurons[i].get_root(), -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
   }
 }
 } // namespace interface

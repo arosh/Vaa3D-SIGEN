@@ -72,12 +72,14 @@ public:
   }
 };
 class Neuron /* : noncopyable */ {
+  NeuronNode *root_;
 public:
   std::vector<NeuronNodePtr> storage_;
-  NeuronNode *root_;
 
   Neuron Clone() const;
 
+  NeuronNode *get_root() const { return root_; }
+  void set_root(NeuronNode *value) { root_ = value; }
   void AddNode(NeuronNodePtr node) {
     storage_.push_back(node);
   }
@@ -94,6 +96,11 @@ public:
   void UpdateRoot(const int nth) {
     assert(0 <= nth && nth < (int)storage_.size());
     root_ = storage_[nth].get();
+  }
+  void RemoveConnection(const std::set<int> &nodes) {
+    BOOST_FOREACH (NeuronNodePtr p, storage_) {
+      p->RemoveConnection(nodes);
+    }
   }
 };
 } // namespace sigen

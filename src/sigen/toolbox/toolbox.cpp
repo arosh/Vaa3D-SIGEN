@@ -235,12 +235,10 @@ std::vector<Neuron> Clipping(const std::vector<Neuron> &input, const int level) 
   std::map<NeuronNode *, int> memo;
   for (int i = 0; i < (int)input.size(); ++i) {
     forest.push_back(input[i].Clone());
-    clippingDfs(forest[i].root_, NULL, level, will_remove, memo);
+    clippingDfs(forest[i].get_root(), NULL, level, will_remove, memo);
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
-    for (int j = 0; j < (int)forest[i].storage_.size(); ++j) {
-      forest[i].storage_[j]->RemoveConnection(will_remove);
-    }
+    forest[i].RemoveConnection(will_remove);
   }
   return forest;
 }

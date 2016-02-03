@@ -169,7 +169,7 @@ Builder::ConvertToNeuron() {
     // FIXME
     neurons.push_back(Neuron());
     Neuron &n = neurons.back();
-    n.root_ = findEdgeNode(node.get());
+    n.set_root(findEdgeNode(node.get()));
     n.AddNode(node);
     std::stack<NeuronNode *> stk;
     stk.push(node.get());
@@ -202,7 +202,7 @@ static void computeIdInner(NeuronNode *cur, NeuronNode *prev, int &id) {
 void Builder::ComputeIds(std::vector<Neuron> &neurons) {
   int id = 1;
   for (int i = 0; i < (int)neurons.size(); ++i) {
-    computeIdInner(neurons[i].root_, NULL, id);
+    computeIdInner(neurons[i].get_root(), NULL, id);
   }
 }
 
@@ -225,7 +225,7 @@ static void computeNodeTypesInner(NeuronNode *cur, NeuronNode *prev) {
 
 void Builder::ComputeNodeTypes(std::vector<Neuron> &neurons) {
   for (int i = 0; i < (int)neurons.size(); ++i) {
-    computeNodeTypesInner(neurons[i].root_, NULL);
+    computeNodeTypesInner(neurons[i].get_root(), NULL);
   }
 }
 
