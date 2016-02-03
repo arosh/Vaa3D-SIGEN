@@ -28,7 +28,7 @@ void Builder::ConnectNeighbors() {
             typedef std::multimap<IPoint, int>::iterator iter_type;
             std::pair<iter_type, iter_type> range = coord_to_index.equal_range(q);
             for (iter_type it = range.first; it != range.second; ++it) {
-              if (it->second != i) {
+              if (it->second != i && data_[i]->HasConnection(data_[it->second]) == false) {
                 data_[i]->AddConnection(data_[it->second]);
               }
             }
