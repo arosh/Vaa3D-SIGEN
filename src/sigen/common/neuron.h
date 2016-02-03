@@ -35,10 +35,6 @@ public:
   void AddConnection(NeuronNodePtr node) {
     this->AddConnection(node.get());
   }
-  void RemoveConnection(NeuronNode *node) {
-    assert(adjacent_.count(node));
-    adjacent_.erase(node);
-  }
 
   void RemoveConnection(const std::set<int> &nodes);
 

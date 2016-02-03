@@ -218,10 +218,8 @@ static int clippingDfs(
     }
     if (maxdepth > 0) {
       BOOST_FOREACH (NeuronNode *next, node->adjacent_) {
-        if (next != parent) {
-          if (next != longest_child) {
-            will_remove.insert(next->id_);
-          }
+        if (next != parent && next != longest_child) {
+          will_remove.insert(next->id_);
         }
       }
     }
