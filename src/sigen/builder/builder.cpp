@@ -96,34 +96,18 @@ static NeuronNode *findEdgeNode(NeuronNode *node) {
 
 void Builder::ComputeGravityPoints() {
   BOOST_FOREACH (ClusterPtr cls, data_) {
-    assert(!cls->points_.empty());
-    double sx = 0, sy = 0, sz = 0;
-    BOOST_FOREACH (const IPoint &p, cls->points_) {
-      sx += p.x_;
-      sy += p.y_;
-      sz += p.z_;
-    }
-    cls->gx_ = sx / cls->points_.size();
-    cls->gy_ = sy / cls->points_.size();
-    cls->gz_ = sz / cls->points_.size();
+    cls->UpdateGravityPoint();
   }
 }
 
 void Builder::ComputeRadius() {
   BOOST_FOREACH (ClusterPtr cls, data_) {
-    double mdx = 0, mdy = 0, mdz = 0;
-    BOOST_FOREACH (const IPoint &p, cls->points_) {
-      mdx = std::max(mdx, scale_xy_ * std::abs(p.x_ - cls->gx_));
-      mdy = std::max(mdy, scale_xy_ * std::abs(p.y_ - cls->gy_));
-      mdz = std::max(mdz, scale_z_ * std::abs(p.z_ - cls->gz_));
-    }
-    cls->radius_ = std::sqrt(mdx * mdx + mdy * mdy + mdz * mdz);
+    cls->UpdateRadius(scale_xy_, scale_z_);
   }
   is_radius_computed_ = true;
 }
 
-std::vector<NeuronNodePtr>
-Builder::ConvertToNeuronNodes() {
+std::vector<NeuronNodePtr> Builder::ConvertToNeuronNodes() {
   std::vector<NeuronNodePtr> neuron_nodes;
   std::vector<std::pair<int, int> > edges;
   BOOST_FOREACH (ClusterPtr p, data_) {
@@ -150,8 +134,7 @@ Builder::ConvertToNeuronNodes() {
   return neuron_nodes;
 }
 
-std::vector<Neuron>
-Builder::ConvertToNeuron() {
+std::vector<Neuron> Builder::ConvertToNeuron() {
   std::vector<NeuronNodePtr> neuron_nodes = ConvertToNeuronNodes();
   // split into some neurons
   std::set<NeuronNode *> used;
@@ -207,15 +190,7 @@ void Builder::ComputeIds(std::vector<Neuron> &neurons) {
 }
 
 static void computeNodeTypesInner(NeuronNode *cur, NeuronNode *prev) {
-  NeuronType::enum_t type;
-  if (cur->adjacent_.size() >= 3) {
-    type = NeuronType::BRANCH;
-  } else if (cur->adjacent_.size() == 2) {
-    type = NeuronType::CONNECT;
-  } else {
-    type = NeuronType::EDGE;
-  }
-  cur->type_ = type;
+  cur->UpdateNodeType();
   BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {
       computeNodeTypesInner(next, cur);

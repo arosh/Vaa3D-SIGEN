@@ -70,9 +70,20 @@ public:
     }
     return count;
   }
+  void UpdateNodeType() {
+    if (adjacent_.size() >= 3) {
+      type_ = NeuronType::BRANCH;
+    } else if (adjacent_.size() == 2) {
+      type_ = NeuronType::CONNECT;
+    } else {
+      // If cur->adjacent_.size() == 1 or 0
+      type_ = NeuronType::EDGE;
+    }
+  }
 };
 class Neuron /* : noncopyable */ {
   NeuronNode *root_;
+
 public:
   std::vector<NeuronNodePtr> storage_;
 

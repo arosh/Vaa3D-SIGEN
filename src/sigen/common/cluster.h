@@ -2,20 +2,29 @@
 #include <cassert>
 #include <vector>
 #include <set>
+#include <algorithm>
+#include <cmath>
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/foreach.hpp>
 #include "sigen/common/voxel.h"
 #include "sigen/common/point.h"
+#include "sigen/common/math.h"
 namespace sigen {
 class Cluster;
 typedef boost::shared_ptr<Cluster> ClusterPtr;
 class Cluster : boost::noncopyable {
+  bool is_gravity_point_computed_;
+
 public:
   double gx_, gy_, gz_;
   double radius_;
   std::vector<IPoint> points_;
   std::set<Cluster *> adjacent_;
-  explicit Cluster(const std::vector<IPoint> &points) : gx_(0.0), gy_(0.0), gz_(0.0), radius_(0.0), points_(points) {}
+  explicit Cluster(const std::vector<IPoint> &points)
+      : is_gravity_point_computed_(false),
+        gx_(0.0), gy_(0.0), gz_(0.0),
+        radius_(0.0), points_(points) {}
 
   // http://stackoverflow.com/questions/5727264
   bool HasConnection(const Cluster *p) const {
@@ -34,6 +43,29 @@ public:
   }
   void AddConnection(ClusterPtr p) {
     this->AddConnection(p.get());
+  }
+  void UpdateGravityPoint() {
+    assert(!points_.empty());
+    std::vector<double> sx, sy, sz;
+    BOOST_FOREACH (const IPoint &p, points_) {
+      sx.push_back(p.x_);
+      sy.push_back(p.y_);
+      sz.push_back(p.z_);
+    }
+    gx_ = Mean(sx);
+    gy_ = Mean(sy);
+    gz_ = Mean(sz);
+    is_gravity_point_computed_ = true;
+  }
+  void UpdateRadius(const double scale_xy, const double scale_z) {
+    assert(is_gravity_point_computed_);
+    double mdx = 0, mdy = 0, mdz = 0;
+    BOOST_FOREACH (const IPoint &p, points_) {
+      mdx = std::max(mdx, scale_xy * std::abs(p.x_ - gx_));
+      mdy = std::max(mdy, scale_xy * std::abs(p.y_ - gy_));
+      mdz = std::max(mdz, scale_z * std::abs(p.z_ - gz_));
+    }
+    radius_ = std::sqrt(mdx * mdx + mdy * mdy + mdz * mdz);
   }
 };
 } // namespace sigen
