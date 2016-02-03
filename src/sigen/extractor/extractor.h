@@ -11,7 +11,7 @@ class Extractor : boost::noncopyable {
 public:
   BinaryCube cube_;
   std::vector<std::vector<VoxelPtr> > components_;
-  explicit Extractor(const BinaryCube &cube);
+  explicit Extractor(const BinaryCube &cube) : cube_(cube) {}
   std::vector<ClusterPtr> Extract();
 };
 } // namespace sigen

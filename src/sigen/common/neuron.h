@@ -10,7 +10,9 @@
 // #include "common/variant.h"
 namespace sigen {
 namespace NeuronType {
-  enum enum_t { EDGE, BRANCH, CONNECT };
+enum enum_t { EDGE,
+              BRANCH,
+              CONNECT };
 }
 class NeuronNode;
 typedef boost::shared_ptr<NeuronNode> NeuronNodePtr;

@@ -56,8 +56,9 @@ void Builder::CutLoops() {
     BOOST_FOREACH (Cluster *adj, cls->adjacent_) {
       double strength = (cls->radius_ + adj->radius_) / 2.0;
       Cluster *a = cls.get(), *b = adj;
-      if (a < b)
+      if (a < b) {
         E.push_back(std::make_pair(strength, std::make_pair(cls.get(), adj)));
+      }
     }
   }
   U.SetUp();
@@ -87,8 +88,9 @@ static NeuronNode *findEdgeNode(NeuronNode *node) {
       que.pop();
       last = cur;
       BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
-        if (used.count(next))
+        if (used.count(next)) {
           continue;
+        }
         que.push(next);
         used.insert(next);
       }
@@ -163,12 +165,15 @@ Builder::ConvertToNeuron(std::vector<ClusterPtr> &data,
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
   std::map<NeuronNode *, NeuronNodePtr> ptr2smartptr;
-  BOOST_FOREACH (NeuronNodePtr p, neuron_nodes)
+
+  BOOST_FOREACH (NeuronNodePtr p, neuron_nodes) {
     ptr2smartptr[p.get()] = p;
+  }
 
   BOOST_FOREACH (NeuronNodePtr node, neuron_nodes) {
-    if (used.count(node.get()))
+    if (used.count(node.get())) {
       continue;
+    }
     // FIXME
     neurons.push_back(Neuron());
     Neuron &n = neurons.back();
@@ -211,12 +216,15 @@ void Builder::ComputeIds(std::vector<Neuron> &neurons) {
 
 static void computeNodeTypesInner(NeuronNode *cur, NeuronNode *prev) {
   NeuronType::enum_t type;
-  if (cur->adjacent_.size() >= 3)
+  if (cur->adjacent_.size() >= 3) {
     type = NeuronType::BRANCH;
-  else if (cur->adjacent_.size() == 2)
+  }
+  else if (cur->adjacent_.size() == 2) {
     type = NeuronType::CONNECT;
-  else
+  }
+  else {
     type = NeuronType::EDGE;
+  }
   cur->type_ = type;
   BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {

@@ -4,13 +4,12 @@
 #include <iterator>
 #include <queue>
 #include <vector>
+#include <utility>
 #include <boost/foreach.hpp>
 #include <boost/make_shared.hpp>
 #include "sigen/extractor/extractor.h"
 #include "sigen/common/point.h"
 namespace sigen {
-
-Extractor::Extractor(const BinaryCube &cube) : cube_(cube) {}
 
 static void clearFrame(BinaryCube &c) {
   for (int i = 0; i < c.x_; ++i) {
