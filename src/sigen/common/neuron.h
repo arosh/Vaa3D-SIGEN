@@ -36,7 +36,7 @@ public:
     this->AddConnection(node.get());
   }
 
-  void RemoveConnection(const std::set<int> &nodes);
+  void RemoveConnections(const std::set<int> &nodes);
 
   bool HasConnection(NeuronNode *node) const {
     return adjacent_.count(node) > 0;
@@ -104,9 +104,9 @@ public:
     assert(0 <= nth && nth < (int)storage_.size());
     root_ = storage_[nth].get();
   }
-  void RemoveConnection(const std::set<int> &nodes) {
+  void RemoveConnections(const std::set<int> &nodes) {
     BOOST_FOREACH (NeuronNodePtr p, storage_) {
-      p->RemoveConnection(nodes);
+      p->RemoveConnections(nodes);
     }
   }
 };

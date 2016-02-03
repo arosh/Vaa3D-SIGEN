@@ -236,7 +236,7 @@ std::vector<Neuron> Clipping(const std::vector<Neuron> &input, const int level) 
     clippingDfs(forest[i].get_root(), NULL, level, will_remove, memo);
   }
   for (int i = 0; i < (int)forest.size(); ++i) {
-    forest[i].RemoveConnection(will_remove);
+    forest[i].RemoveConnections(will_remove);
   }
   return forest;
 }

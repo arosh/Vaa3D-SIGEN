@@ -11,7 +11,6 @@ void add(Neuron &n, int id) {
   n.storage_.push_back(node);
 }
 
-/* l, r : storage_ のインデックス */
 void connect(Neuron &n, int l, int r) {
   n.storage_[l]->AddConnection(n.storage_[r].get());
   n.storage_[r]->AddConnection(n.storage_[l].get());
@@ -19,7 +18,6 @@ void connect(Neuron &n, int l, int r) {
 
 TEST(Clipping, Clipping) {
   Neuron n;
-
   for (int i = 0; i < 10; ++i) {
     add(n, i);
   }
@@ -40,9 +38,8 @@ TEST(Clipping, Clipping) {
   EXPECT_EQ(2, (int)ret[0].storage_[1]->adjacent_.size());
 }
 
-TEST(Clipping, clipping2) {
+TEST(Clipping, Clipping2) {
   Neuron n;
-
   for (int i = 0; i < 10; ++i) {
     add(n, i);
   }

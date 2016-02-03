@@ -6,7 +6,7 @@
 #include "sigen/common/neuron.h"
 namespace sigen {
 
-void NeuronNode::RemoveConnection(const std::set<int> &nodes) {
+void NeuronNode::RemoveConnections(const std::set<int> &nodes) {
   // `std::set.erase` invalidates iterator. Be careful.
   // http://qiita.com/satoruhiga/items/fa6eae09c9d89bd48b5d
   std::set<NeuronNode *>::iterator it = adjacent_.begin();
