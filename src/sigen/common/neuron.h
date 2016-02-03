@@ -100,6 +100,9 @@ public:
   void Extend(const Neuron &other) {
     this->storage_.insert(this->storage_.end(), other.storage_.begin(), other.storage_.end());
   }
+  void ConnectToOtherNeuron(const int node_index, const Neuron &other, const int other_index) {
+    storage_[node_index]->AddConnection(other.storage_[other_index]);
+  }
   void UpdateRoot(const int nth) {
     assert(0 <= nth && nth < (int)storage_.size());
     root_ = storage_[nth].get();
@@ -108,6 +111,9 @@ public:
     BOOST_FOREACH (NeuronNodePtr p, storage_) {
       p->RemoveConnections(nodes);
     }
+  }
+  int NumNodes() const {
+    return (int)storage_.size();
   }
 };
 } // namespace sigen

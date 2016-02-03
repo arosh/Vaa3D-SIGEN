@@ -57,7 +57,7 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
   DisjointSet<int> set;
   std::vector<bool> is_not_small(forest.size(), false);
   for (int i = 0; i < N; ++i) {
-    if ((int)forest[i].storage_.size() >= vt) {
+    if (forest[i].NumNodes() >= vt) {
       set.Add(i);
       is_not_small[i] = true;
     }
@@ -95,8 +95,8 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
     // if(forest[l].storage_.size() < forest[r].storage_.size()) std::swap(l, r);
     std::pair<double, std::pair<int, int> > dist = normNeuron(forest[l], forest[r]);
     set.Merge(l, r);
-    forest[l].storage_[dist.second.first]->AddConnection(forest[r].storage_[dist.second.second]);
-    forest[r].storage_[dist.second.second]->AddConnection(forest[l].storage_[dist.second.first]);
+    forest[l].ConnectToOtherNeuron(dist.second.first, forest[r], dist.second.second);
+    forest[r].ConnectToOtherNeuron(dist.second.second, forest[l], dist.second.first);
     forest[l].Extend(forest[r]);
     forest[r].Clear();
 
