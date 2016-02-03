@@ -28,12 +28,12 @@ TEST(Extractor, labeling) {
   BinaryCube cube = vectorStringToBinaryCube(vs);
 
   Extractor ext(cube);
-  auto ret = ext.Extract();
+  std::vector<ClusterPtr> ret = ext.Extract();
   EXPECT_EQ(2, (int)ext.components_.size());
   EXPECT_EQ(3, (int)ext.components_[0].size());
   EXPECT_EQ(2, (int)ext.components_[1].size());
   EXPECT_EQ(5, (int)ret.size());
-  for (auto c : ret) {
+  for (ClusterPtr c : ret) {
     EXPECT_EQ(1, (int)c->points_.size());
     // point(1,3,1)
     // point(2,3,1)
@@ -50,7 +50,7 @@ TEST(Extractor, labeling2) {
   vs.push_back("##.");
   BinaryCube cube = vectorStringToBinaryCube(vs);
   Extractor ext(cube);
-  auto ret = ext.Extract();
+  std::vector<ClusterPtr> ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(5, (int)ext.components_[0].size());
   EXPECT_EQ(5, (int)ret.size());
@@ -62,15 +62,15 @@ TEST(Extractor, labeling_with_loops) {
   vs.push_back(".#.");
   BinaryCube cube = vectorStringToBinaryCube(vs);
   Extractor ext(cube);
-  auto ret = ext.Extract();
+  std::vector<ClusterPtr> ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(4, (int)ext.components_[0].size());
-  for (auto c : ret) {
+  for (ClusterPtr c : ret) {
     // point(1,2,1)
     // point(2,1,1)
     // point(2,3,1)
     // point(3,2,1)
-    for (auto p : c->points_) {
+    for (IPoint p : c->points_) {
       //   cout << "point(" << p.x_ << ',' << p.y_ << "," << p.z_ << ")" << endl;
     }
   }
@@ -81,18 +81,18 @@ TEST(Extractor, same_distance) {
   vs.push_back("##");
   BinaryCube cube = vectorStringToBinaryCube(vs);
   Extractor ext(cube);
-  auto ret = ext.Extract();
+  std::vector<ClusterPtr> ret = ext.Extract();
   EXPECT_EQ(1, (int)ext.components_.size());
   EXPECT_EQ(4, (int)ext.components_[0].size());
   EXPECT_EQ(2, (int)ret.size());
   EXPECT_EQ(3, (int)ret[0]->points_.size());
   EXPECT_EQ(1, (int)ret[1]->points_.size());
-  for (auto c : ret) {
+  for (ClusterPtr c : ret) {
     // point(1,1,1)
     // point(1,2,1)
     // point(2,2,1)
     // point(2,1,1)
-    for (auto p : c->points_) {
+    for (IPoint p : c->points_) {
       //   cout << "point(" << p.x_ << ',' << p.y_ << "," << p.z_ << ")" << endl;
     }
   }

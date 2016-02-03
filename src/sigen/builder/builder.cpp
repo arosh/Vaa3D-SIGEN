@@ -30,8 +30,9 @@ void Builder::ConnectNeighbors() {
         for (int dy = -1; dy <= 1; ++dy) {
           for (int dz = -1; dz <= 1; ++dz) {
             const IPoint q(p.x_ + dx, p.y_ + dy, p.z_ + dz);
-            auto range = coord_to_index.equal_range(q);
-            for (auto it = range.first; it != range.second; ++it) {
+            typedef std::multimap<IPoint, int>::iterator iter_type;
+            std::pair<iter_type, iter_type> range = coord_to_index.equal_range(q);
+            for (iter_type it = range.first; it != range.second; ++it) {
               if (it->second != i) {
                 data_[i]->AddConnection(data_[it->second]);
               }
