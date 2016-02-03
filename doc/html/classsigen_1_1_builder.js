@@ -5,8 +5,8 @@ var classsigen_1_1_builder =
     [ "ComputeGravityPoints", "classsigen_1_1_builder.html#a975da037083ac36551ae125ee243ebb2", null ],
     [ "ComputeRadius", "classsigen_1_1_builder.html#acfa0a161d4a4852a71784960ce90ba46", null ],
     [ "ConnectNeighbors", "classsigen_1_1_builder.html#a19cdf51f04cf0c1fcf979ada3ed54141", null ],
+    [ "ConvertToNeuron", "classsigen_1_1_builder.html#aa3a649e588e02600a6b1c23ef59681d3", null ],
+    [ "ConvertToNeuronNodes", "classsigen_1_1_builder.html#a9da069d1e08a7bc0b2e993ee06759352", null ],
     [ "CutLoops", "classsigen_1_1_builder.html#abd46126849dc99425de697b5f923fbb2", null ],
-    [ "data_", "classsigen_1_1_builder.html#a91200c3590a095979ca36f120be8c2dc", null ],
-    [ "scale_xy_", "classsigen_1_1_builder.html#aad083d8324a7b3feac6aacec570f94dd", null ],
-    [ "scale_z_", "classsigen_1_1_builder.html#a83748ff4baf36992153f3cb39bb30110", null ]
+    [ "data_", "classsigen_1_1_builder.html#a91200c3590a095979ca36f120be8c2dc", null ]
 ];

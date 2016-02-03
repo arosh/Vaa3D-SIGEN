@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['noncopyable',['noncopyable',['../structsigen_1_1noncopyable.html#a60a0eb520cf30078c399069cb03f8a35',1,'sigen::noncopyable::noncopyable()=default'],['../structsigen_1_1noncopyable.html#a86dd5dd999c3875d13f5034c8b9474a4',1,'sigen::noncopyable::noncopyable(const noncopyable &amp;)=delete']]]
+  ['main',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main.cpp']]],
+  ['mean',['Mean',['../namespacesigen.html#ab5aa59202cd058d7d5928ec6d2f14c91',1,'sigen']]],
+  ['merge',['Merge',['../classsigen_1_1_disjoint_set_internal.html#a4b3992173ada50ef4f5a29c97c648345',1,'sigen::DisjointSetInternal::Merge()'],['../classsigen_1_1_disjoint_set.html#a31f1d34e1b65a189403330bb58c78bfd',1,'sigen::DisjointSet::Merge()']]]
 ];

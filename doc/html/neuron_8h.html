@@ -119,6 +119,7 @@ $(document).ready(function(){initNavTree('neuron_8h.html','');});
 <code>#include &lt;boost/utility.hpp&gt;</code><br />
 <code>#include &lt;boost/shared_ptr.hpp&gt;</code><br />
 <code>#include &lt;boost/make_shared.hpp&gt;</code><br />
+<code>#include &lt;boost/foreach.hpp&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for neuron.h:</div>
 <div class="dyncontent">
@@ -131,15 +132,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="neuron_8h__dep__incl.png" border="0" usemap="#src_2sigen_2common_2neuron_8hdep" alt=""/></div>
 <map name="src_2sigen_2common_2neuron_8hdep" id="src_2sigen_2common_2neuron_8hdep">
-<area shape="rect" id="node2" href="builder_8h.html" title="src/sigen/builder/builder.h" alt="" coords="202,85,374,111"/>
-<area shape="rect" id="node6" href="neuron_8cpp.html" title="src/sigen/common/neuron.cpp" alt="" coords="751,85,951,111"/>
-<area shape="rect" id="node7" href="neuronprocess_8h.html" title="src/sigen/neuronprocess\l/neuronprocess.h" alt="" coords="398,79,565,117"/>
-<area shape="rect" id="node9" href="swc__writer_8h.html" title="src/sigen/writer/swc\l_writer.h" alt="" coords="588,79,726,117"/>
+<area shape="rect" id="node2" href="builder_8h.html" title="src/sigen/builder/builder.h" alt="" coords="207,85,380,111"/>
+<area shape="rect" id="node6" href="neuron_8cpp.html" title="src/sigen/common/neuron.cpp" alt="" coords="771,85,971,111"/>
+<area shape="rect" id="node7" href="toolbox_8h.html" title="src/sigen/toolbox/toolbox.h" alt="" coords="404,85,583,111"/>
+<area shape="rect" id="node9" href="swc__writer_8h.html" title="src/sigen/writer/swc\l_writer.h" alt="" coords="608,79,746,117"/>
 <area shape="rect" id="node3" href="builder_8cpp.html" title="src/sigen/builder/builder.cpp" alt="" coords="5,172,192,197"/>
 <area shape="rect" id="node4" href="interface_8cpp.html" title="src/sigen/interface.cpp" alt="" coords="216,172,371,197"/>
-<area shape="rect" id="node5" href="main_8cpp.html" title="src/sigen/main.cpp" alt="" coords="584,172,717,197"/>
-<area shape="rect" id="node8" href="neuronprocess_8cpp.html" title="src/sigen/neuronprocess\l/neuronprocess.cpp" alt="" coords="394,165,561,204"/>
-<area shape="rect" id="node10" href="swc__writer_8cpp.html" title="src/sigen/writer/swc\l_writer.cpp" alt="" coords="740,165,878,204"/>
+<area shape="rect" id="node5" href="main_8cpp.html" title="src/sigen/main.cpp" alt="" coords="612,172,745,197"/>
+<area shape="rect" id="node8" href="toolbox_8cpp.html" title="src/sigen/toolbox/toolbox.cpp" alt="" coords="395,172,589,197"/>
+<area shape="rect" id="node10" href="swc__writer_8cpp.html" title="src/sigen/writer/swc\l_writer.cpp" alt="" coords="768,165,906,204"/>
 </map>
 </div>
 </div>
@@ -156,6 +157,8 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacesigen"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesigen.html">sigen</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacesigen_1_1_neuron_type"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesigen_1_1_neuron_type.html">sigen::NeuronType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -164,11 +167,11 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a2d31c4760751487d24bfcc73acc969ff"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesigen.html#a2d31c4760751487d24bfcc73acc969ff">sigen::neuron_type</a> { <a class="el" href="namespacesigen.html#a2d31c4760751487d24bfcc73acc969ffad5579040fecf8c9d3fd4e3c97c512919">sigen::EDGE</a>, 
-<a class="el" href="namespacesigen.html#a2d31c4760751487d24bfcc73acc969ffa6c4290ee5375cef7a4e6b8892d261c04">sigen::BRANCH</a>, 
-<a class="el" href="namespacesigen.html#a2d31c4760751487d24bfcc73acc969ffa91142c18a066be86ceefe6939f9c45ff">sigen::CONNECT</a>
+<tr class="memitem:a8198fbad050be3cfe21259c768c00bb2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesigen_1_1_neuron_type.html#a8198fbad050be3cfe21259c768c00bb2">sigen::NeuronType::enum_t</a> { <a class="el" href="namespacesigen_1_1_neuron_type.html#a8198fbad050be3cfe21259c768c00bb2a9c811207756f4dc7eb73ce1912a00f2f">sigen::NeuronType::EDGE</a>, 
+<a class="el" href="namespacesigen_1_1_neuron_type.html#a8198fbad050be3cfe21259c768c00bb2a569dfe3f6ba961ab93d7be80e5f5c80b">sigen::NeuronType::BRANCH</a>, 
+<a class="el" href="namespacesigen_1_1_neuron_type.html#a8198fbad050be3cfe21259c768c00bb2a1437154d8f6faae9c7cb76ffede442cf">sigen::NeuronType::CONNECT</a>
  }</td></tr>
-<tr class="separator:a2d31c4760751487d24bfcc73acc969ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a8198fbad050be3cfe21259c768c00bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -5,6 +5,7 @@ var namespacesigen =
     [ "BinaryCube", "classsigen_1_1_binary_cube.html", "classsigen_1_1_binary_cube" ],
     [ "Builder", "classsigen_1_1_builder.html", "classsigen_1_1_builder" ],
     [ "Cluster", "classsigen_1_1_cluster.html", "classsigen_1_1_cluster" ],
+    [ "compareSize", "classsigen_1_1compare_size.html", "classsigen_1_1compare_size" ],
     [ "DisjointSet", "classsigen_1_1_disjoint_set.html", "classsigen_1_1_disjoint_set" ],
     [ "DisjointSetInternal", "classsigen_1_1_disjoint_set_internal.html", "classsigen_1_1_disjoint_set_internal" ],
     [ "Extractor", "classsigen_1_1_extractor.html", "classsigen_1_1_extractor" ],

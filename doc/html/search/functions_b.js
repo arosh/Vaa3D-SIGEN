@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['removeconnection',['RemoveConnection',['../classsigen_1_1_cluster.html#a3615d1143f89ae4245e3523620d80852',1,'sigen::Cluster::RemoveConnection()'],['../classsigen_1_1_neuron_node.html#a2a4f8d30a494941ab71a6baaffa35492',1,'sigen::NeuronNode::RemoveConnection(NeuronNode *node)'],['../classsigen_1_1_neuron_node.html#ac3cf4ef87dc56a5ba181940d3bf39793',1,'sigen::NeuronNode::RemoveConnection(const std::set&lt; int &gt; &amp;nodes)']]]
+  ['operator_28_29',['operator()',['../classsigen_1_1compare_size.html#a86079a63b72eda3d6effb6e863dd1dff',1,'sigen::compareSize']]],
+  ['operator_3c',['operator&lt;',['../classsigen_1_1_i_point.html#afc93d93ec354c14c815e9f0586d44100',1,'sigen::IPoint']]],
+  ['operator_3d',['operator=',['../structsigen_1_1noncopyable.html#a055fec99da6f6d8cffb5078e30fadfd0',1,'sigen::noncopyable']]],
+  ['operator_5b_5d',['operator[]',['../classsigen_1_1_binary_cube.html#a7ddee108e296e986e50839594b94a120',1,'sigen::BinaryCube::operator[](int index)'],['../classsigen_1_1_binary_cube.html#a2995b99d422d723b5570bac373f11e28',1,'sigen::BinaryCube::operator[](int index) const ']]]
 ];

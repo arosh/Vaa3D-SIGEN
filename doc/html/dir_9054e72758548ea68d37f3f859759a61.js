@@ -1,6 +1,5 @@
 var dir_9054e72758548ea68d37f3f859759a61 =
 [
-    [ "binary_cube.cpp", "binary__cube_8cpp.html", null ],
     [ "binary_cube.h", "binary__cube_8h.html", [
       [ "BinaryCube", "classsigen_1_1_binary_cube.html", "classsigen_1_1_binary_cube" ]
     ] ],
@@ -21,6 +20,5 @@ var dir_9054e72758548ea68d37f3f859759a61 =
       [ "IPoint", "classsigen_1_1_i_point.html", "classsigen_1_1_i_point" ]
     ] ],
     [ "variant.h", "variant_8h.html", "variant_8h" ],
-    [ "voxel.cpp", "voxel_8cpp.html", null ],
     [ "voxel.h", "voxel_8h.html", "voxel_8h" ]
 ];

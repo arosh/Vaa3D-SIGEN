@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "sigen::Binarizer", "classsigen_1_1_binarizer.html", null ],
     [ "sigen::BinaryCube", "classsigen_1_1_binary_cube.html", null ],
+    [ "sigen::compareSize< T >", "classsigen_1_1compare_size.html", null ],
     [ "sigen::DisjointSetInternal", "classsigen_1_1_disjoint_set_internal.html", null ],
     [ "sigen::FileLoader", "classsigen_1_1_file_loader.html", null ],
     [ "sigen::FileUtils", "classsigen_1_1_file_utils.html", null ],

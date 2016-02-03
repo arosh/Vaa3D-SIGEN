@@ -120,6 +120,10 @@ $(document).ready(function(){initNavTree('classsigen_1_1_neuron.html','');});
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7528e8b1ba44f9b9459ace294a3966e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsigen_1_1_neuron.html">Neuron</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#ae7528e8b1ba44f9b9459ace294a3966e">Clone</a> () const </td></tr>
 <tr class="separator:ae7528e8b1ba44f9b9459ace294a3966e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e68740fa8292b22f1149b5c654780c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsigen_1_1_neuron_node.html">NeuronNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#ae5e68740fa8292b22f1149b5c654780c">get_root</a> () const </td></tr>
+<tr class="separator:ae5e68740fa8292b22f1149b5c654780c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e511930b6cfa7646e1c902f353df65d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#a0e511930b6cfa7646e1c902f353df65d">set_root</a> (<a class="el" href="classsigen_1_1_neuron_node.html">NeuronNode</a> *value)</td></tr>
+<tr class="separator:a0e511930b6cfa7646e1c902f353df65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a53e4c347087a6472f81faf5360133"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#a86a53e4c347087a6472f81faf5360133">AddNode</a> (<a class="el" href="namespacesigen.html#ae278e74f60eb47ef2b5436d54e03e342">NeuronNodePtr</a> node)</td></tr>
 <tr class="separator:a86a53e4c347087a6472f81faf5360133"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac724d9d7a7e5938cfc497be7a4017894"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#ac724d9d7a7e5938cfc497be7a4017894">IsEmpty</a> () const </td></tr>
@@ -130,17 +134,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abcba524b798f4398c43ae8077b707e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd419c36c090f6029ed3d8f7f0bba22a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#acd419c36c090f6029ed3d8f7f0bba22a">UpdateRoot</a> (const int nth)</td></tr>
 <tr class="separator:acd419c36c090f6029ed3d8f7f0bba22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af31ca6fc2e73aaec70023d4ba05542f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#af31ca6fc2e73aaec70023d4ba05542f8">RemoveConnection</a> (const std::set&lt; int &gt; &amp;nodes)</td></tr>
+<tr class="separator:af31ca6fc2e73aaec70023d4ba05542f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:acb19f62d87968cb072b567c82cd0377d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespacesigen.html#ae278e74f60eb47ef2b5436d54e03e342">NeuronNodePtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#acb19f62d87968cb072b567c82cd0377d">storage_</a></td></tr>
 <tr class="separator:acb19f62d87968cb072b567c82cd0377d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58af503e69f0140c213b604ce311f8f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsigen_1_1_neuron_node.html">NeuronNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#a58af503e69f0140c213b604ce311f8f9">root_</a></td></tr>
-<tr class="separator:a58af503e69f0140c213b604ce311f8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00061">61</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00080">80</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a86a53e4c347087a6472f81faf5360133"></a>
 <div class="memitem">
@@ -164,17 +168,18 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00066">66</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00090">90</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsigen_1_1_neuron_a86a53e4c347087a6472f81faf5360133_icgraph.png" border="0" usemap="#classsigen_1_1_neuron_a86a53e4c347087a6472f81faf5360133_icgraph" alt=""/></div>
 <map name="classsigen_1_1_neuron_a86a53e4c347087a6472f81faf5360133_icgraph" id="classsigen_1_1_neuron_a86a53e4c347087a6472f81faf5360133_icgraph">
-<area shape="rect" id="node2" href="classsigen_1_1_builder.html#a3cd4005ce496f6735f1b2dfdf7757f7d" title="sigen::Builder::ConvertTo\lNeuron" alt="" coords="221,24,391,63"/>
-<area shape="rect" id="node3" href="classsigen_1_1_builder.html#a8b816cefbd7d81f1bcb3c9c7eed027a5" title="sigen::Builder::Build" alt="" coords="439,31,578,56"/>
-<area shape="rect" id="node4" href="namespacesigen_1_1interface.html#ae422b4b6127d885198ead14690ae8ccc" title="sigen::interface::Extract" alt="" coords="626,5,787,31"/>
-<area shape="rect" id="node5" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="681,55,732,80"/>
+<area shape="rect" id="node2" href="classsigen_1_1_builder.html#aa3a649e588e02600a6b1c23ef59681d3" title="sigen::Builder::ConvertTo\lNeuron" alt="" coords="221,24,391,63"/>
+<area shape="rect" id="node3" href="classsigen_1_1_builder.html#a8b816cefbd7d81f1bcb3c9c7eed027a5" title="sigen::Builder::Build" alt="" coords="439,56,578,81"/>
+<area shape="rect" id="node4" href="classsigen_1_1_builder.html#a4cf4a697c13e378de0a2109430970de3" title="sigen::Builder::Builder" alt="" coords="631,5,782,31"/>
+<area shape="rect" id="node5" href="namespacesigen_1_1interface.html#ae422b4b6127d885198ead14690ae8ccc" title="sigen::interface::Extract" alt="" coords="626,55,787,80"/>
+<area shape="rect" id="node6" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="681,104,732,129"/>
 </map>
 </div>
 </p>
@@ -202,7 +207,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00072">72</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00096">96</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +224,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00032">32</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00022">22</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -255,7 +260,43 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00076">76</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00100">100</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5e68740fa8292b22f1149b5c654780c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsigen_1_1_neuron_node.html">NeuronNode</a>* sigen::Neuron::get_root </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00088">88</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsigen_1_1_neuron_ae5e68740fa8292b22f1149b5c654780c_icgraph.png" border="0" usemap="#classsigen_1_1_neuron_ae5e68740fa8292b22f1149b5c654780c_icgraph" alt=""/></div>
+<map name="classsigen_1_1_neuron_ae5e68740fa8292b22f1149b5c654780c_icgraph" id="classsigen_1_1_neuron_ae5e68740fa8292b22f1149b5c654780c_icgraph">
+<area shape="rect" id="node2" href="classsigen_1_1_swc_writer.html#a26c821317b23af8d2f71490abdd1376b" title="sigen::SwcWriter::Write" alt="" coords="214,5,373,31"/>
+<area shape="rect" id="node3" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="421,5,472,31"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -280,7 +321,73 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00069">69</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00093">93</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af31ca6fc2e73aaec70023d4ba05542f8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sigen::Neuron::RemoveConnection </td>
+          <td>(</td>
+          <td class="paramtype">const std::set&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>nodes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00107">107</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0e511930b6cfa7646e1c902f353df65d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sigen::Neuron::set_root </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsigen_1_1_neuron_node.html">NeuronNode</a> *&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00089">89</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsigen_1_1_neuron_a0e511930b6cfa7646e1c902f353df65d_icgraph.png" border="0" usemap="#classsigen_1_1_neuron_a0e511930b6cfa7646e1c902f353df65d_icgraph" alt=""/></div>
+<map name="classsigen_1_1_neuron_a0e511930b6cfa7646e1c902f353df65d_icgraph" id="classsigen_1_1_neuron_a0e511930b6cfa7646e1c902f353df65d_icgraph">
+<area shape="rect" id="node2" href="classsigen_1_1_builder.html#aa3a649e588e02600a6b1c23ef59681d3" title="sigen::Builder::ConvertTo\lNeuron" alt="" coords="213,24,384,63"/>
+<area shape="rect" id="node3" href="classsigen_1_1_builder.html#a8b816cefbd7d81f1bcb3c9c7eed027a5" title="sigen::Builder::Build" alt="" coords="432,56,571,81"/>
+<area shape="rect" id="node4" href="classsigen_1_1_builder.html#a4cf4a697c13e378de0a2109430970de3" title="sigen::Builder::Builder" alt="" coords="624,5,775,31"/>
+<area shape="rect" id="node5" href="namespacesigen_1_1interface.html#ae422b4b6127d885198ead14690ae8ccc" title="sigen::interface::Extract" alt="" coords="619,55,779,80"/>
+<area shape="rect" id="node6" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="674,104,724,129"/>
+</map>
+</div>
+</p>
 
 </div>
 </div>
@@ -306,7 +413,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00079">79</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00103">103</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -321,20 +428,6 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a58af503e69f0140c213b604ce311f8f9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classsigen_1_1_neuron_node.html">NeuronNode</a>* sigen::Neuron::root_</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00064">64</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="acb19f62d87968cb072b567c82cd0377d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -345,7 +438,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00063">63</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00084">84</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 
 </div>
 </div>

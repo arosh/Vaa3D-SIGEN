@@ -1,11 +1,11 @@
 var searchData=
 [
   ['interface',['interface',['../namespacesigen_1_1interface.html',1,'sigen']]],
+  ['neurontype',['NeuronType',['../namespacesigen_1_1_neuron_type.html',1,'sigen']]],
   ['same',['Same',['../classsigen_1_1_disjoint_set_internal.html#a4afbb411df8d182443463d481baf5a9b',1,'sigen::DisjointSetInternal']]],
   ['scale_5fxy',['scale_xy',['../structsigen_1_1interface_1_1_options.html#aaca2956acb0fda27c02df761cca7ab91',1,'sigen::interface::Options']]],
-  ['scale_5fxy_5f',['scale_xy_',['../classsigen_1_1_builder.html#aad083d8324a7b3feac6aacec570f94dd',1,'sigen::Builder']]],
   ['scale_5fz',['scale_z',['../structsigen_1_1interface_1_1_options.html#a8409340d5f38ba74acce7cd1e3e6e61e',1,'sigen::interface::Options']]],
-  ['scale_5fz_5f',['scale_z_',['../classsigen_1_1_builder.html#a83748ff4baf36992153f3cb39bb30110',1,'sigen::Builder']]],
+  ['set_5froot',['set_root',['../classsigen_1_1_neuron.html#a0e511930b6cfa7646e1c902f353df65d',1,'sigen::Neuron']]],
   ['setcoord',['setCoord',['../classsigen_1_1_neuron_node.html#acde38a8308be664c0189ee58cdcc93fe',1,'sigen::NeuronNode::setCoord()'],['../structsigen_1_1_point_and_radius.html#abbf0474047bb55470eda1354edab7e57',1,'sigen::PointAndRadius::setCoord()']]],
   ['setup',['SetUp',['../classsigen_1_1_disjoint_set.html#a2f5f7cbcfca0817795cdefdc932ff768',1,'sigen::DisjointSet']]],
   ['sigen',['sigen',['../namespacesigen.html',1,'']]],
