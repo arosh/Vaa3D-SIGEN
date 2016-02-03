@@ -3,7 +3,7 @@
 #include <boost/make_shared.hpp>
 #include <set>
 #include "sigen/common/neuron.h"
-#include "sigen/neuronprocess/neuronprocess.h"
+#include "sigen/toolbox/toolbox.h"
 using namespace sigen;
 void add(Neuron &n, int id) {
   NeuronNodePtr node = boost::make_shared<NeuronNode>();

@@ -8,7 +8,7 @@
 #include "sigen/builder/builder.h"
 #include "sigen/writer/swc_writer.h"
 #include "sigen/writer/fileutils.h"
-#include "sigen/neuronprocess/neuronprocess.h"
+#include "sigen/toolbox/toolbox.h"
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas

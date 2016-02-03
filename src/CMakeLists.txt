@@ -21,8 +21,8 @@ add_library(sigen STATIC
   sigen/extractor/extractor.h
   sigen/interface.cpp
   sigen/interface.h
-  sigen/neuronprocess/neuronprocess.cpp
-  sigen/neuronprocess/neuronprocess.h
+  sigen/toolbox/toolbox.cpp
+  sigen/toolbox/toolbox.h
 )
 
 if(BUILD_MAIN)

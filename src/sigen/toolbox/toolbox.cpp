@@ -9,7 +9,7 @@
 #include <iostream>
 #include <functional>
 #include <boost/foreach.hpp>
-#include "sigen/neuronprocess/neuronprocess.h"
+#include "sigen/toolbox/toolbox.h"
 #include "sigen/common/disjoint_set.h"
 #include "sigen/common/math.h"
 namespace sigen {

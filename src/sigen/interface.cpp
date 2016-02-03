@@ -6,7 +6,7 @@
 #include "sigen/common/binary_cube.h"
 #include "sigen/extractor/extractor.h"
 #include "sigen/builder/builder.h"
-#include "sigen/neuronprocess/neuronprocess.h"
+#include "sigen/toolbox/toolbox.h"
 
 #define DEBUG(x) std::cerr << #x << " = " << x << std::endl
 

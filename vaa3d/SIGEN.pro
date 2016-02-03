@@ -26,4 +26,4 @@ SOURCES += ../src/sigen/builder/builder.cpp
 SOURCES += ../src/sigen/common/disjoint_set.cpp
 SOURCES += ../src/sigen/common/neuron.cpp
 SOURCES += ../src/sigen/extractor/extractor.cpp
-SOURCES += ../src/sigen/neuronprocess/neuronprocess.cpp
+SOURCES += ../src/sigen/toolbox/toolbox.cpp
