@@ -6,21 +6,19 @@
 namespace sigen {
 class Builder : boost::noncopyable {
   bool is_radius_computed_;
+  const double scale_xy_, scale_z_;
 
 public:
   std::vector<ClusterPtr> data_;
-  double scale_xy_, scale_z_;
   explicit Builder(const std::vector<ClusterPtr> &data,
-                   const double scale_xy, const double scale_z);
+                   const double scale_xy,
+                   const double scale_z)
+      : is_radius_computed_(false), scale_xy_(scale_xy), scale_z_(scale_z), data_(data) {}
   std::vector<Neuron> Build();
-  static std::vector<Neuron>
-  ConvertToNeuron(std::vector<ClusterPtr> &data,
-                  const double scale_xy, const double scale_z);
-  static std::vector<NeuronNodePtr>
-  ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
-                       const double scale_xy, const double scale_z);
-  static void ComputeNodeTypes(std::vector<Neuron> &neu);
-  static void ComputeIds(std::vector<Neuron> &neu);
+  std::vector<Neuron> ConvertToNeuron();
+  std::vector<NeuronNodePtr> ConvertToNeuronNodes();
+  static void ComputeNodeTypes(std::vector<Neuron> &neurons);
+  static void ComputeIds(std::vector<Neuron> &neurons);
   void ConnectNeighbors();
   void CutLoops();
   void ComputeGravityPoints();

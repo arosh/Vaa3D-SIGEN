@@ -64,7 +64,7 @@ TEST_F(BuilderTestAlpha, ConvertToNeuronNodes) {
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
   bld->CutLoops();
-  std::vector<NeuronNodePtr> nn = bld->ConvertToNeuronNodes(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<NeuronNodePtr> nn = bld->ConvertToNeuronNodes();
   ASSERT_EQ(5, (int)nn.size());
   EXPECT_DOUBLE_EQ(1.0, nn[0]->gx_);
   EXPECT_DOUBLE_EQ(3.0, nn[0]->gy_);
@@ -89,7 +89,7 @@ TEST_F(BuilderTestAlpha, ConvertToNeuron) {
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
   bld->CutLoops();
-  std::vector<Neuron> ns = bld->ConvertToNeuron(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<Neuron> ns = bld->ConvertToNeuron();
   ASSERT_EQ(2, (int)ns.size());
   EXPECT_EQ(3, (int)ns[0].storage_.size());
   EXPECT_EQ(2, (int)ns[1].storage_.size());
@@ -99,7 +99,7 @@ TEST_F(BuilderTestAlpha, ComputeIds) {
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
   bld->CutLoops();
-  std::vector<Neuron> ns = bld->ConvertToNeuron(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<Neuron> ns = bld->ConvertToNeuron();
   bld->ComputeIds(ns);
   EXPECT_EQ(1, ns[0].storage_[0]->id_);
   EXPECT_EQ(2, ns[0].storage_[1]->id_);
@@ -129,7 +129,7 @@ TEST_F(BuilderTestBeta, DISABLED_convertToNeuronNodesWithLoops) {
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
   bld->CutLoops();
-  std::vector<NeuronNodePtr> nn = bld->ConvertToNeuronNodes(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<NeuronNodePtr> nn = bld->ConvertToNeuronNodes();
   ASSERT_EQ(4, (int)nn.size());
   EXPECT_DOUBLE_EQ(1.0, nn[0]->gx_);
   EXPECT_DOUBLE_EQ(2.0, nn[0]->gy_);
@@ -158,7 +158,7 @@ TEST_F(BuilderTestBeta, ConvertToNeuronWithLoops) {
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
   bld->CutLoops();
-  std::vector<Neuron> ns = bld->ConvertToNeuron(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<Neuron> ns = bld->ConvertToNeuron();
   EXPECT_EQ(1, (int)ns.size());
   EXPECT_EQ(4, (int)ns[0].storage_.size());
 }
@@ -167,7 +167,7 @@ TEST_F(BuilderTestBeta, ComputeIdsWithLoops) {
   bld->ComputeGravityPoints();
   bld->ComputeRadius();
   bld->CutLoops();
-  std::vector<Neuron> ns = bld->ConvertToNeuron(bld->data_, bld->scale_xy_, bld->scale_z_);
+  std::vector<Neuron> ns = bld->ConvertToNeuron();
   bld->ComputeIds(ns);
 }
 TEST(Builder, DISABLED_ComputeNodeTypes) {
