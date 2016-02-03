@@ -6,4 +6,4 @@ class Binarizer {
 public:
   BinaryCube Binarize(const ImageSequence &is);
 };
-};
+}

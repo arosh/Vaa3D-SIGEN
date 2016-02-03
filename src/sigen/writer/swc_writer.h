@@ -8,4 +8,4 @@ public:
   void Write(std::ostream &os, const Neuron &neuron);
   void Write(const char *fname, const Neuron &neuron);
 };
-};
+} // sigen

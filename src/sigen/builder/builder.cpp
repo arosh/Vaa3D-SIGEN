@@ -49,7 +49,8 @@ void Builder::CutLoops() {
   // use kruskal like algorithm
   // see https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
   DisjointSet<Cluster *> U;
-  std::vector<std::pair<double, std::pair<Cluster *, Cluster *> > > E;
+  typedef std::pair<double, std::pair<Cluster *, Cluster *> > item_type;
+  std::vector<item_type> E;
   BOOST_FOREACH (ClusterPtr cls, data_) {
     U.Add(cls.get());
     BOOST_FOREACH (Cluster *adj, cls->adjacent_) {
@@ -62,7 +63,7 @@ void Builder::CutLoops() {
   U.SetUp();
   std::sort(E.begin(), E.end());
   std::reverse(E.begin(), E.end());
-  for (const std::pair<double, std::pair<Cluster *, Cluster *> > &it : E) {
+  BOOST_FOREACH (const item_type &it, E) {
     Cluster *a = it.second.first;
     Cluster *b = it.second.second;
     if (U.IsSame(a, b)) {
@@ -142,7 +143,7 @@ Builder::ConvertToNeuronNodes(std::vector<ClusterPtr> &data,
     ptr2index[data[i].get()] = i;
   }
   for (int i = 0; i < (int)data.size(); ++i) {
-    for (Cluster *p : data[i]->adjacent_) {
+    BOOST_FOREACH (Cluster *p, data[i]->adjacent_) {
       int j = ptr2index[p];
       if (i < j) {
         neuron_nodes[i]->AddConnection(neuron_nodes[j]);
@@ -162,7 +163,7 @@ Builder::ConvertToNeuron(std::vector<ClusterPtr> &data,
   std::set<NeuronNode *> used;
   std::vector<Neuron> neurons;
   std::map<NeuronNode *, NeuronNodePtr> ptr2smartptr;
-  for (NeuronNodePtr p : neuron_nodes)
+  BOOST_FOREACH (NeuronNodePtr p, neuron_nodes)
     ptr2smartptr[p.get()] = p;
 
   BOOST_FOREACH (NeuronNodePtr node, neuron_nodes) {
@@ -209,13 +210,13 @@ void Builder::ComputeIds(std::vector<Neuron> &neurons) {
 }
 
 static void computeNodeTypesInner(NeuronNode *cur, NeuronNode *prev) {
-  neuron_type type;
+  NeuronType::enum_t type;
   if (cur->adjacent_.size() >= 3)
-    type = neuron_type::BRANCH;
+    type = NeuronType::BRANCH;
   else if (cur->adjacent_.size() == 2)
-    type = neuron_type::CONNECT;
+    type = NeuronType::CONNECT;
   else
-    type = neuron_type::EDGE;
+    type = NeuronType::EDGE;
   cur->type_ = type;
   BOOST_FOREACH (NeuronNode *next, cur->adjacent_) {
     if (next != prev) {

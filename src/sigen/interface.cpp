@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 #include <vector>
+#include <boost/foreach.hpp>
 #include "sigen/interface.h"
 #include "sigen/common/binary_cube.h"
 #include "sigen/extractor/extractor.h"
@@ -18,13 +19,13 @@ static void write(
     std::vector<double> &out_r, std::vector<int> &out_pn) {
   int type_id = -1;
   switch (cur->type_) {
-  case neuron_type::EDGE:
+  case NeuronType::EDGE:
     type_id = 6;
     break;
-  case neuron_type::BRANCH:
+  case NeuronType::BRANCH:
     type_id = 5;
     break;
-  case neuron_type::CONNECT:
+  case NeuronType::CONNECT:
     type_id = 3;
     break;
   }
@@ -39,7 +40,7 @@ static void write(
   out_r.push_back(cur->radius_);
   out_pn.push_back(parent_id);
 
-  for (const NeuronNode *next : cur->adjacent_) {
+  BOOST_FOREACH (const NeuronNode *next, cur->adjacent_) {
     if (next->id_ != parent_id) {
       write(next, cur->id_, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
     }
@@ -77,9 +78,5 @@ void Extract(
     write(neurons[i].root_, -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);
   }
 }
-void ExtractAndWrite(const BinaryCube &cube, const char *filename, const Options &options) {
-  // not implemented
-  assert(false);
-}
-}; // namespace interface
-}; // namespace sigen
+} // namespace interface
+} // namespace sigen

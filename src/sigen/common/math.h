@@ -10,4 +10,4 @@ inline double Mean(const std::vector<double> &xs) {
   }
   return sum / xs.size();
 }
-}; // namespace sigen
+} // namespace sigen

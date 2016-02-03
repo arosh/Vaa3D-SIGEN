@@ -65,7 +65,7 @@ static void beforeFilter(BinaryCube &c) {
 static void setLabel(Voxel *p, const int label) {
   p->flag_ = true;
   p->label_ = label;
-  for (Voxel *next : p->adjacent_) {
+  BOOST_FOREACH (Voxel *next, p->adjacent_) {
     if (next->flag_ == false) {
       setLabel(next, label);
     }
@@ -94,7 +94,8 @@ void Extractor::Labeling() {
       }
     }
   }
-  for (std::pair<IPoint, VoxelPtr> p : voxels) {
+  typedef std::pair<IPoint, VoxelPtr> iter_type;
+  BOOST_FOREACH (iter_type p, voxels) {
     // enumerate 26 neighbors
     for (int dx = -1; dx <= 1; ++dx) {
       for (int dy = -1; dy <= 1; ++dy) {
@@ -113,17 +114,17 @@ void Extractor::Labeling() {
     }
   }
   // reset flags
-  for (std::pair<IPoint, VoxelPtr> p : voxels)
+  BOOST_FOREACH (iter_type p, voxels)
     p.second->flag_ = false;
   // set flags
   int label = 0;
-  for (std::pair<IPoint, VoxelPtr> p : voxels) {
+  BOOST_FOREACH (iter_type p, voxels) {
     if (p.second->flag_ == false) {
       setLabel(p.second.get(), label++);
     }
   }
   components_.assign(label, std::vector<VoxelPtr>());
-  for (std::pair<IPoint, VoxelPtr> p : voxels) {
+  BOOST_FOREACH (iter_type p, voxels) {
     components_[p.second->label_].push_back(p.second);
   }
   std::sort(components_.begin(), components_.end(), compareSize<std::vector<VoxelPtr> >());
@@ -131,7 +132,7 @@ void Extractor::Labeling() {
 }
 
 static void resetFlag(std::vector<VoxelPtr> &voxels) {
-  for (VoxelPtr p : voxels)
+  BOOST_FOREACH (VoxelPtr p, voxels)
     p->flag_ = false;
 }
 
@@ -146,7 +147,7 @@ static Voxel *findSingleSeed(std::vector<VoxelPtr> &group) {
     while (!que.empty()) {
       last = que.front();
       que.pop();
-      for (Voxel *next : last->adjacent_) {
+      BOOST_FOREACH (Voxel *next, last->adjacent_) {
         if (!next->flag_) {
           next->flag_ = true;
           que.push(next);
@@ -166,7 +167,7 @@ static void setDistance(std::vector<VoxelPtr> &group, Voxel *seed) {
   while (!que.empty()) {
     Voxel *p = que.front();
     que.pop();
-    for (Voxel *next : p->adjacent_) {
+    BOOST_FOREACH (Voxel *next, p->adjacent_) {
       if (!next->flag_) {
         next->flag_ = true;
         next->label_ = p->label_ + 1;
@@ -185,7 +186,7 @@ static std::vector<Voxel *> extractSameDistance(Voxel *seed) {
   while (!que.empty()) {
     Voxel *p = que.front();
     que.pop();
-    for (Voxel *next : p->adjacent_) {
+    BOOST_FOREACH (Voxel *next, p->adjacent_) {
       if (!next->flag_ && next->label_ == seed->label_) {
         next->flag_ = true;
         ret.push_back(next);
@@ -198,7 +199,7 @@ static std::vector<Voxel *> extractSameDistance(Voxel *seed) {
 
 static std::vector<IPoint> voxelsToPoints(const std::vector<Voxel *> &vs) {
   std::vector<IPoint> ps;
-  for (Voxel *v : vs) {
+  BOOST_FOREACH (Voxel *v, vs) {
     ps.push_back(IPoint(v->x_, v->y_, v->z_));
   }
   return ps;
@@ -208,11 +209,11 @@ std::vector<ClusterPtr> Extractor::Extract() {
   Labeling();
   std::vector<ClusterPtr> ret;
   // NOT const
-  for (std::vector<VoxelPtr> &group : components_) {
-    auto seed = findSingleSeed(group);
+  BOOST_FOREACH (std::vector<VoxelPtr> &group, components_) {
+    Voxel *seed = findSingleSeed(group);
     setDistance(group, seed);
     resetFlag(group);
-    for (auto p : group) {
+    BOOST_FOREACH (VoxelPtr p, group) {
       if (p->flag_ == false) {
         std::vector<Voxel *> vs = extractSameDistance(p.get());
         std::vector<IPoint> ps = voxelsToPoints(vs);

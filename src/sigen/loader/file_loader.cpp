@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <boost/filesystem.hpp>
+#include <boost/foreach.hpp>
 #include <glog/logging.h>
 #include "sigen/loader/file_loader.h"
 
@@ -23,7 +24,7 @@ ImageSequence FileLoader::Load(const std::string &dir_path) {
   // sort by file name in ascending order
   std::sort(fnames.begin(), fnames.end());
   ImageSequence ret;
-  for (const std::string &entry : fnames) {
+  BOOST_FOREACH (const std::string &entry, fnames) {
     // LOG(INFO) << entry;
     cv::Mat im = cv::imread(entry, 0 /* grayscale */);
     // ignore file if opencv cannot read it

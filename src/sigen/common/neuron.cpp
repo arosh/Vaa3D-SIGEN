@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <map>
 #include <set>
+#include <boost/foreach.hpp>
 #include "sigen/common/neuron.h"
 namespace sigen {
 
@@ -29,7 +30,7 @@ Neuron Neuron::Clone() const {
   }
 
   for (int i = 0; i < (int)this->storage_.size(); ++i) {
-    for (NeuronNode *adj : this->storage_[i].get()->adjacent_) {
+    BOOST_FOREACH (NeuronNode *adj, this->storage_[i].get()->adjacent_) {
       NeuronNode *p = ret.storage_[ptr_to_index[adj]].get();
       ret.storage_[i]->AddConnection(p);
     }
@@ -38,4 +39,4 @@ Neuron Neuron::Clone() const {
   ret.UpdateRoot(ptr_to_index[this->root_]);
   return ret;
 }
-}; // namespace sigen
+} // namespace sigen

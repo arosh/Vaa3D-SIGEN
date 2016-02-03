@@ -11,4 +11,4 @@ public:
   static std::string AddExtension(const std::string &fname,
                                   const std::string &extention);
 }; // class FileUtils
-}; // namespace sigen
+} // namespace sigen

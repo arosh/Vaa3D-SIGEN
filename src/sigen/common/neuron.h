@@ -6,13 +6,12 @@
 #include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/foreach.hpp>
 // #include "common/variant.h"
 namespace sigen {
-enum neuron_type {
-  EDGE,
-  BRANCH,
-  CONNECT
-};
+namespace NeuronType {
+  enum enum_t { EDGE, BRANCH, CONNECT };
+}
 class NeuronNode;
 typedef boost::shared_ptr<NeuronNode> NeuronNodePtr;
 class NeuronNode : boost::noncopyable {
@@ -22,7 +21,7 @@ public:
   // gravity point
   double gx_, gy_, gz_;
   double radius_;
-  neuron_type type_;
+  NeuronType::enum_t type_;
   std::set<NeuronNode *> adjacent_;
   // Variant may contain `degree`, `real_distance`, `electrical_distance`
   // std::map<std::string, Variant> values_;
@@ -62,7 +61,7 @@ public:
   }
   int CountNumChild(const NeuronNode *parent) const {
     int count = 0;
-    for (const NeuronNode *next : this->adjacent_) {
+    BOOST_FOREACH (const NeuronNode *next, this->adjacent_) {
       if (next != parent) {
         count++;
       }
