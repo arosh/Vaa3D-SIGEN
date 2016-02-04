@@ -13,9 +13,6 @@
 #include "sigen/common/binary_cube.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
-// v3d_main/basic_c_fun/v3d_interface.h
-// typedef QList<V3DPluginArgItem> V3DPluginArgList;
-
 struct input_PARA {
   QString inimg_file;
   V3DLONG channel;
@@ -98,7 +95,7 @@ bool SigenPlugin::dofunc(
   return true;
 }
 
-sigen::BinaryCube cvt_to_binary_cube(
+static sigen::BinaryCube convertToBinaryCube(
     const unsigned char *p,
     const int unit_byte,
     const int xdim,
@@ -125,25 +122,7 @@ sigen::BinaryCube cvt_to_binary_cube(
   return cube;
 }
 
-// dump cube object to csv files.
-// csv file can be visualized using tools/image_csv.py
-void dump(const sigen::BinaryCube &cube) {
-  for (int z = 0; z < cube.z_; ++z) {
-    char file_name[1024];
-    snprintf(file_name, sizeof(file_name), "/tmp/SIGEN/%04d.csv", z);
-    std::ofstream ofs(file_name);
-    for (int y = 0; y < cube.y_; ++y) {
-      for (int x = 0; x < cube.x_; ++x) {
-        if (x > 0)
-          ofs << " ";
-        ofs << cube[x][y][z];
-      }
-      ofs << std::endl;
-    }
-  }
-}
-
-QLineEdit *addIntEdit(const QString &default_value, QWidget *parent) {
+static QLineEdit *addIntEdit(const QString &default_value, QWidget *parent) {
   QIntValidator *v = new QIntValidator(parent);
   v->setBottom(0);
   QLineEdit *e = new QLineEdit(default_value, parent);
@@ -151,7 +130,7 @@ QLineEdit *addIntEdit(const QString &default_value, QWidget *parent) {
   return e;
 }
 
-QLineEdit *addDoubleEdit(const QString &default_value, QWidget *parent) {
+static QLineEdit *addDoubleEdit(const QString &default_value, QWidget *parent) {
   QDoubleValidator *v = new QDoubleValidator(parent);
   v->setBottom(0.0);
   QLineEdit *e = new QLineEdit(default_value, parent);
@@ -159,13 +138,12 @@ QLineEdit *addDoubleEdit(const QString &default_value, QWidget *parent) {
   return e;
 }
 
-bool sigen_config(QWidget *parent, sigen::interface::Options *options) {
+static bool getConfig(QWidget *parent, sigen::interface::Options *options) {
   // http://vivi.dyndns.org/vivi/docs/Qt/layout.html
   QFormLayout *fLayout = new QFormLayout(parent);
   fLayout->setLabelAlignment(Qt::AlignRight);
 
   // http://doc.qt.io/qt-4.8/qlineedit.html
-
   QLineEdit *sxy_lineEdit = addDoubleEdit("1.0", parent);
   fLayout->addRow(QObject::tr("Scale XY"), sxy_lineEdit);
 
@@ -286,16 +264,16 @@ void reconstruction_func(
 
   // show configure GUI window
   sigen::interface::Options options;
-  bool retval = sigen_config(parent, &options);
+  bool retval = getConfig(parent, &options);
   if (!retval) {
     return;
   }
-  // to debug configure dialog
+  // check config
   // v3d_msg((retval ? QString("OK") : QString("Cancel")), via_gui);
   // v3d_msg(QString("VT = %1\nDT = %2\nSM = %3\nCL = %4").arg(options.volume_threshold).arg(options.distance_threshold).arg(options.smoothing_level).arg(options.clipping_level), via_gui);
   // return;
 
-  sigen::BinaryCube cube = cvt_to_binary_cube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
+  sigen::BinaryCube cube = convertToBinaryCube(data1d, /* unit_byte = */ 1, N, M, P, sc, c - 1);
   std::vector<int> out_n, out_type, out_pn;
   std::vector<double> out_x, out_y, out_z, out_r;
   sigen::interface::Extract(
