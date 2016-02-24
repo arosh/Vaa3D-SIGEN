@@ -150,17 +150,37 @@ static bool getConfig(QWidget *parent, sigen::interface::Options *options) {
   QLineEdit *sz_lineEdit = addDoubleEdit("1.0", parent);
   fLayout->addRow(QObject::tr("Scale Z"), sz_lineEdit);
 
+  QCheckBox *interp_checkbox = new QCheckBox("Interpolation", parent);
+  interp_checkbox->setCheckState(Qt::Checked);
+  fLayout->addRow("", interp_checkbox);
+
   QLineEdit *vt_lineEdit = addIntEdit("0", parent);
   fLayout->addRow(QObject::tr("Interpolation VT"), vt_lineEdit);
 
   QLineEdit *dt_lineEdit = addDoubleEdit("0.0", parent);
   fLayout->addRow(QObject::tr("Interpolation DT"), dt_lineEdit);
 
+  // http://www.qtforum.org/article/2430/qcheckbox.html
+  QObject::connect(interp_checkbox, SIGNAL(toggled(bool)), vt_lineEdit, SLOT(setEnabled(bool)));
+  QObject::connect(interp_checkbox, SIGNAL(toggled(bool)), dt_lineEdit, SLOT(setEnabled(bool)));
+
+  QCheckBox *smoothing_checkbox = new QCheckBox("Smoothing", parent);
+  smoothing_checkbox->setCheckState(Qt::Checked);
+  fLayout->addRow("", smoothing_checkbox);
+
   QLineEdit *sm_lineEdit = addIntEdit("0", parent);
   fLayout->addRow(QObject::tr("Smoothing Level"), sm_lineEdit);
 
+  QObject::connect(smoothing_checkbox, SIGNAL(toggled(bool)), sm_lineEdit, SLOT(setEnabled(bool)));
+
+  QCheckBox *clipping_checkbox = new QCheckBox("Clipping", parent);
+  clipping_checkbox->setCheckState(Qt::Checked);
+  fLayout->addRow("", clipping_checkbox);
+
   QLineEdit *cl_lineEdit = addIntEdit("0", parent);
   fLayout->addRow(QObject::tr("Clipping Level"), cl_lineEdit);
+
+  QObject::connect(clipping_checkbox, SIGNAL(toggled(bool)), cl_lineEdit, SLOT(setEnabled(bool)));
 
   QDialogButtonBox *buttonBox = new QDialogButtonBox(
       QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
@@ -172,7 +192,9 @@ static bool getConfig(QWidget *parent, sigen::interface::Options *options) {
   vLayout->addWidget(buttonBox);
 
   QDialog *dialog = new QDialog(parent);
+  dialog->setWindowTitle("SIGEN");
   dialog->setLayout(vLayout);
+  dialog->setFixedSize(dialog->sizeHint());
 
   QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
   QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
@@ -195,9 +217,15 @@ static bool getConfig(QWidget *parent, sigen::interface::Options *options) {
   if (retval) {
     options->scale_xy = sxy_lineEdit->text().toDouble();
     options->scale_z = sz_lineEdit->text().toDouble();
+
+    options->enable_interpolation = interp_checkbox->checkState() == Qt::Checked;
     options->volume_threshold = vt_lineEdit->text().toInt();
     options->distance_threshold = dt_lineEdit->text().toDouble();
+
+    options->enable_smoothing = smoothing_checkbox->checkState() == Qt::Checked;
     options->smoothing_level = sm_lineEdit->text().toInt();
+
+    options->enable_clipping = clipping_checkbox->checkState() == Qt::Checked;
     options->clipping_level = cl_lineEdit->text().toInt();
   }
 

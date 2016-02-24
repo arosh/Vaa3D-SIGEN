@@ -64,15 +64,24 @@ void Extract(
   std::vector<sigen::Neuron> neurons = bld.Build();
   if (print_progress)
     std::cerr << "build finished" << std::endl;
-  neurons = Interpolate(neurons, options.distance_threshold, options.volume_threshold);
-  if (print_progress)
-    std::cerr << "interpolate finished" << std::endl;
-  neurons = Smoothing(neurons, options.smoothing_level);
-  if (print_progress)
-    std::cerr << "smoothing finished" << std::endl;
-  neurons = Clipping(neurons, options.clipping_level);
-  if (print_progress)
-    std::cerr << "clipping finished" << std::endl;
+
+  if (options.enable_interpolation) {
+    neurons = Interpolate(neurons, options.distance_threshold, options.volume_threshold);
+    if (print_progress)
+      std::cerr << "interpolate finished" << std::endl;
+  }
+
+  if (options.enable_smoothing) {
+    neurons = Smoothing(neurons, options.smoothing_level);
+    if (print_progress)
+      std::cerr << "smoothing finished" << std::endl;
+  }
+
+  if (options.enable_clipping) {
+    neurons = Clipping(neurons, options.clipping_level);
+    if (print_progress)
+      std::cerr << "clipping finished" << std::endl;
+  }
 
   for (int i = 0; i < (int)neurons.size(); ++i) {
     write(neurons[i].get_root(), -1, out_n, out_type, out_x, out_y, out_z, out_r, out_pn);

@@ -5,12 +5,15 @@ namespace sigen {
 namespace interface {
 struct Options {
 public:
-  int volume_threshold;
-  double distance_threshold;
-  int smoothing_level;
-  int clipping_level;
   double scale_xy;
   double scale_z;
+  bool enable_interpolation;
+  int volume_threshold;
+  double distance_threshold;
+  bool enable_smoothing;
+  int smoothing_level;
+  bool enable_clipping;
+  int clipping_level;
 };
 void Extract(const BinaryCube &cube,
              std::vector<int> &out_n, std::vector<int> &out_type,
