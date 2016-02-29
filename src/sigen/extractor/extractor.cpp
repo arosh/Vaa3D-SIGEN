@@ -216,6 +216,7 @@ std::vector<ClusterPtr> Extractor::Extract() {
       if (p->flag_ == false) {
         std::vector<Voxel *> vs = extractSameDistance(p.get());
         std::vector<IPoint> ps = voxelsToPoints(vs);
+        assert(!ps.empty());
         ret.push_back(boost::make_shared<Cluster>(ps));
       }
     }

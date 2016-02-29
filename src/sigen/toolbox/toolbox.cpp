@@ -9,6 +9,9 @@
 #include <iostream>
 #include <functional>
 #include <boost/foreach.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <kdtree/kdtree.h>
 #include "sigen/toolbox/toolbox.h"
 #include "sigen/common/disjoint_set.h"
 #include "sigen/common/math.h"
@@ -23,28 +26,44 @@ static double normL2(
 }
 
 // This function is HOT SPOT.
-// This function spent too much time.
-// There is worth to fix. Randomized algorithms by [Golin 1995] provides O(N) time.
-//
-// Reference
-// ---------
-// Golin, M. J., et al.: Simple randomized algorithms for closest pair problems, Nordic Journal of Computing (1995).
+// Use https://github.com/jtsiomb/kdtree
 static std::pair<double, std::pair<int, int> > normNeuron(const Neuron &lhs, const Neuron &rhs) {
   assert(!lhs.IsEmpty());
   assert(!rhs.IsEmpty());
+
+  kdtree *tree = kd_create(3);
+
+  std::vector<boost::shared_ptr<int> > indexes;
+  for (int i = 0; i < (int)lhs.storage_.size(); ++i) {
+    indexes.push_back(boost::make_shared<int>(i));
+    kd_insert3(
+        tree,
+        lhs.storage_[i]->gx_,
+        lhs.storage_[i]->gy_,
+        lhs.storage_[i]->gz_,
+        indexes.back().get());
+  }
+
   int l = 0;
   int r = 0;
   double minimum = normL2(lhs.storage_[0], rhs.storage_[0]);
-  for (int i = 0; i < (int)lhs.storage_.size(); ++i) {
-    for (int j = 0; j < (int)rhs.storage_.size(); ++j) {
-      double d = normL2(lhs.storage_[i], rhs.storage_[j]);
-      if (minimum > d) {
-        minimum = d;
-        l = i;
-        r = j;
-      }
+  for (int j = 0; j < (int)rhs.storage_.size(); ++j) {
+    kdres *set = kd_nearest3(
+        tree,
+        rhs.storage_[j]->gx_,
+        rhs.storage_[j]->gy_,
+        rhs.storage_[j]->gz_);
+    int i = *(int *)kd_res_item_data(set);
+    kd_res_free(set);
+    double d = normL2(lhs.storage_[i], rhs.storage_[j]);
+    if (minimum > d) {
+      minimum = d;
+      l = i;
+      r = j;
     }
   }
+
+  kd_free(tree);
   return std::make_pair(minimum, std::make_pair(l, r));
 }
 

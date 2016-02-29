@@ -1,4 +1,4 @@
-include_directories(.)
+include_directories(. ../third_party)
 
 # http://stackoverflow.com/questions/1167154/listing-header-files-in-visual-studio-c-project-generated-by-cmake
 
@@ -23,10 +23,12 @@ add_library(sigen STATIC
   sigen/interface.h
   sigen/toolbox/toolbox.cpp
   sigen/toolbox/toolbox.h
+  ../third_party/kdtree/kdtree.c
+  ../third_party/kdtree/kdtree.h
 )
 
 if(BUILD_MAIN)
-  include_directories(../third_party ${OPENCV_INCLUDE_DIRS})
+  include_directories(${OPENCV_INCLUDE_DIRS})
 
   add_library(sigen_io STATIC
     sigen/binarizer/binarizer.cpp

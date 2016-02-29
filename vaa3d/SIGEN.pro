@@ -21,9 +21,11 @@ HEADERS += SIGEN_plugin.h
 SOURCES += SIGEN_plugin.cpp
 
 INCLUDEPATH += ../src
+INCLUDEPATH += ../third_party
 SOURCES += ../src/sigen/interface.cpp
 SOURCES += ../src/sigen/builder/builder.cpp
 SOURCES += ../src/sigen/common/disjoint_set.cpp
 SOURCES += ../src/sigen/common/neuron.cpp
 SOURCES += ../src/sigen/extractor/extractor.cpp
 SOURCES += ../src/sigen/toolbox/toolbox.cpp
+SOURCES += ../third_party/kdtree/kdtree.c
