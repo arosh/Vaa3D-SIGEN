@@ -62,14 +62,24 @@ int main(int argc, char *argv[]) {
   std::vector<sigen::Neuron> ns = builder.Build();
   LOG(INFO) << "build (done)";
 
-  ns = sigen::Interpolate(ns, args.get<double>("dt"), args.get<int>("vt"));
-  LOG(INFO) << "interpolate (done)";
+  const double dt = args.get<double>("dt");
+  const int vt = args.get<int>("vt");
+  if (vt > 0) {
+    ns = sigen::Interpolate(ns, dt, vt);
+    LOG(INFO) << "interpolate (done)";
+  }
 
-  ns = sigen::Smoothing(ns, args.get<int>("smoothing"));
-  LOG(INFO) << "smoothing (done)";
+  const int smoothing_level = args.get<int>("smoothing");
+  if (smoothing_level > 0) {
+    ns = sigen::Smoothing(ns, smoothing_level);
+    LOG(INFO) << "smoothing (done)";
+  }
 
-  ns = sigen::Clipping(ns, args.get<int>("clipping"));
-  LOG(INFO) << "clipping (done)";
+  const int clipping_level = args.get<int>("clipping");
+  if (clipping_level > 0) {
+    ns = sigen::Clipping(ns, clipping_level);
+    LOG(INFO) << "clipping (done)";
+  }
 
   sigen::SwcWriter writer;
   for (int i = 0; i < (int)ns.size(); ++i) {

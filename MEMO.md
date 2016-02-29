@@ -89,8 +89,4 @@ cppcheck --enable=all src/**/*.cpp
 
 ## TODO
 
-* sample of configure window? `vaa3d_tools/released_plugins/v3d_plugins/neurontracing_vn2/vn_app1.h`
 * https://code.google.com/p/vaa3d/wiki/PluginDesignGuide
-* [picogc](https://github.com/kazuho/picogc)
-* 設定メニューのタイトル
-* GUI button
