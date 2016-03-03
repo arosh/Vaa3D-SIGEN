@@ -109,11 +109,15 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
     }
   }
   set.SetUp();
-  typedef std::pair<double, std::pair<int, int> > priority_queue_node;
+
+  typedef std::pair<double, std::pair<int, int> > priorityQueueNode;
   std::priority_queue<
-      priority_queue_node,
-      std::vector<priority_queue_node>,
-      std::greater<priority_queue_node> > pq;
+      priorityQueueNode,
+      std::vector<priorityQueueNode>,
+      std::greater<priorityQueueNode> > pq;
+
+  std::vector<std::map<int, double> > distance(N);
+
   for (int i = 0; i < N; ++i) {
     if (is_not_small[i]) {
       for (int j = i + 1; j < N; ++j) {
@@ -122,13 +126,15 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
           double d = normNeuron(forest[i], forest[j]).first;
           if (d <= dt) {
             pq.push(std::make_pair(d, std::make_pair(i, j)));
+            distance[i][j] = d;
+            distance[j][i] = d;
           }
         }
       }
     }
   }
   while (!pq.empty()) {
-    priority_queue_node node = pq.top();
+    priorityQueueNode node = pq.top();
     pq.pop();
     int l = node.second.first;
     int r = node.second.second;
@@ -138,7 +144,6 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
       continue;
     if (set.IsSame(l, r))
       continue;
-    // if(forest[l].storage_.size() < forest[r].storage_.size()) std::swap(l, r);
     std::pair<double, std::pair<int, int> > dist = normNeuron(forest[l], forest[r]);
     set.Merge(l, r);
     forest[l].ConnectToOtherNeuron(dist.second.first, forest[r], dist.second.second);
@@ -146,13 +151,26 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
     forest[l].Extend(forest[r]);
     forest[r].Clear();
 
-    for (int i = 0; i < N; ++i) {
-      if (i != l && is_not_small[i] && forest[i].IsEmpty() == false) {
-        assert(l != i);
-        double d = normNeuron(forest[l], forest[i]).first;
-        if (d <= dt) {
-          pq.push(std::make_pair(d, std::make_pair(l, i)));
+    for(std::map<int, double>::iterator it = distance[r].begin(); it != distance[r].end(); ++it) {
+      int i = it->first;
+      double d = it->second;
+      assert(is_not_small[i]);
+      if(set.IsSame(l, i) == false && forest[i].IsEmpty() == false) {
+        if(distance[l].count(i)) {
+          distance[l][i] = std::min(distance[l][i], d);
         }
+        else {
+          distance[l][i] = d;
+        }
+
+        if(distance[i].count(l)) {
+          distance[i][l] = std::min(distance[i][l], d);
+        }
+        else {
+          distance[i][l] = d;
+        }
+
+        pq.push(std::make_pair(d, std::make_pair(l, i)));
       }
     }
   }
