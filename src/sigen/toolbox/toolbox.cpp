@@ -9,53 +9,69 @@
 #include <iostream>
 #include <functional>
 #include <boost/foreach.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
+#include <boost/scoped_array.hpp>
 #include <kdtree/kdtree.h>
 #include "sigen/toolbox/toolbox.h"
 #include "sigen/common/disjoint_set.h"
 #include "sigen/common/math.h"
 namespace sigen {
-static double normL2(
-    const NeuronNodePtr &lhs,
-    const NeuronNodePtr &rhs) {
-  const double dx = std::abs(lhs->gx_ - rhs->gx_);
-  const double dy = std::abs(lhs->gy_ - rhs->gy_);
-  const double dz = std::abs(lhs->gz_ - rhs->gz_);
+static double norm2(
+    const NeuronNodePtr &a,
+    const NeuronNodePtr &b) {
+  const double dx = std::abs(a->gx_ - b->gx_);
+  const double dy = std::abs(a->gy_ - b->gy_);
+  const double dz = std::abs(a->gz_ - b->gz_);
   return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
-// This function is HOT SPOT.
-// Use https://github.com/jtsiomb/kdtree
-static std::pair<double, std::pair<int, int> > normNeuron(const Neuron &lhs, const Neuron &rhs) {
-  assert(!lhs.IsEmpty());
-  assert(!rhs.IsEmpty());
+// N = left.NumNodes()
+// M = right.NumNodes()
+// O(N*M)
+static std::pair<double, std::pair<int, int> > normNeuronFastPath(const Neuron &left, const Neuron &right) {
+  int l, r;
+  double minimum = std::numeric_limits<double>::max();
+  for (int i = 0; i < (int)left.NumNodes(); ++i) {
+    for (int j = 0; j < (int)right.NumNodes(); ++j) {
+      double d = norm2(left.storage_[i], right.storage_[j]);
+      if (minimum > d) {
+        minimum = d;
+        l = i;
+        r = j;
+      }
+    }
+  }
+  return std::make_pair(minimum, std::make_pair(l, r));
+}
 
+// N = left.NumNodes()
+// M = right.NumNodes()
+// O((N + M) log N)
+// Use https://github.com/jtsiomb/kdtree
+static std::pair<double, std::pair<int, int> > normNeuronSlowPath(const Neuron &left, const Neuron &right) {
   kdtree *tree = kd_create(3);
 
-  std::vector<boost::shared_ptr<int> > indexes;
-  for (int i = 0; i < (int)lhs.storage_.size(); ++i) {
-    indexes.push_back(boost::make_shared<int>(i));
+  boost::scoped_array<int> indexes(new int[left.NumNodes()]);
+  for (int i = 0; i < (int)left.NumNodes(); ++i) {
+    indexes[i] = i;
     kd_insert3(
         tree,
-        lhs.storage_[i]->gx_,
-        lhs.storage_[i]->gy_,
-        lhs.storage_[i]->gz_,
-        indexes.back().get());
+        left.storage_[i]->gx_,
+        left.storage_[i]->gy_,
+        left.storage_[i]->gz_,
+        &indexes[i]);
   }
 
-  int l = 0;
-  int r = 0;
-  double minimum = normL2(lhs.storage_[0], rhs.storage_[0]);
-  for (int j = 0; j < (int)rhs.storage_.size(); ++j) {
+  int l, r;
+  double minimum = std::numeric_limits<double>::max();
+  for (int j = 0; j < (int)right.NumNodes(); ++j) {
     kdres *set = kd_nearest3(
         tree,
-        rhs.storage_[j]->gx_,
-        rhs.storage_[j]->gy_,
-        rhs.storage_[j]->gz_);
+        right.storage_[j]->gx_,
+        right.storage_[j]->gy_,
+        right.storage_[j]->gz_);
     int i = *(int *)kd_res_item_data(set);
     kd_res_free(set);
-    double d = normL2(lhs.storage_[i], rhs.storage_[j]);
+    double d = norm2(left.storage_[i], right.storage_[j]);
     if (minimum > d) {
       minimum = d;
       l = i;
@@ -65,6 +81,17 @@ static std::pair<double, std::pair<int, int> > normNeuron(const Neuron &lhs, con
 
   kd_free(tree);
   return std::make_pair(minimum, std::make_pair(l, r));
+}
+
+static std::pair<double, std::pair<int, int> > normNeuron(const Neuron &left, const Neuron &right) {
+  assert(!left.IsEmpty());
+  assert(!right.IsEmpty());
+  if(std::min(left.NumNodes(), right.NumNodes()) >= 300) {
+    return normNeuronSlowPath(left, right);
+  }
+  else {
+    return normNeuronFastPath(left, right);
+  }
 }
 
 std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double dt, const int vt) {
