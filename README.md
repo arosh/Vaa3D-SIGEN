@@ -4,16 +4,18 @@
 
 TBD...
 
-## Requirements for Plugin
+## Requirements for Vaa3D Plugin
 
 * [CMake](https://cmake.org/) >= 2.8
+* [Boost](http://www.boost.org/)
+* [Vaa3D/v3d_external](https://github.com/Vaa3D/v3d_external)
 
 ## Requirements for Runner
 
 * [CMake](https://cmake.org/) >= 2.8
-* [google-glog](https://github.com/google/glog) >= ?.? ([documentation](http://google-glog.googlecode.com/svn/trunk/doc/glog.html))
-* [OpenCV](http://opencv.org/) >= ?.?
-* [Boost](http://www.boost.org/) >= ?.? (using boost::filesystem)
+* [google-glog](https://github.com/google/glog)
+* [OpenCV](http://opencv.org/)
+* [Boost](http://www.boost.org/)
 
 ## How to Build Plugin
 
@@ -24,7 +26,7 @@ $ qmake
 $ make
 ```
 
-`libSIGEN.*` will be located in `SIGEN_ROOT/vaa3d/build`.
+`libSIGEN.*` will be located in `SIGEN_ROOT/vaa3d/build`. Please put `libSIGEN.*` in `vaa3d/plugins/neuron_tracing/SIGEN` directory.
 
 ## How to Build Standalone Runner
 

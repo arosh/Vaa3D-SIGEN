@@ -86,10 +86,9 @@ static std::pair<double, std::pair<int, int> > normNeuronSlowPath(const Neuron &
 static std::pair<double, std::pair<int, int> > normNeuron(const Neuron &left, const Neuron &right) {
   assert(!left.IsEmpty());
   assert(!right.IsEmpty());
-  if(std::min(left.NumNodes(), right.NumNodes()) >= 300) {
+  if (std::min(left.NumNodes(), right.NumNodes()) >= 300) {
     return normNeuronSlowPath(left, right);
-  }
-  else {
+  } else {
     return normNeuronFastPath(left, right);
   }
 }
@@ -151,22 +150,20 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
     forest[l].Extend(forest[r]);
     forest[r].Clear();
 
-    for(std::map<int, double>::iterator it = distance[r].begin(); it != distance[r].end(); ++it) {
+    for (std::map<int, double>::iterator it = distance[r].begin(); it != distance[r].end(); ++it) {
       int i = it->first;
       double d = it->second;
       assert(is_not_small[i]);
-      if(set.IsSame(l, i) == false && forest[i].IsEmpty() == false) {
-        if(distance[l].count(i)) {
+      if (set.IsSame(l, i) == false && forest[i].IsEmpty() == false) {
+        if (distance[l].count(i)) {
           distance[l][i] = std::min(distance[l][i], d);
-        }
-        else {
+        } else {
           distance[l][i] = d;
         }
 
-        if(distance[i].count(l)) {
+        if (distance[i].count(l)) {
           distance[i][l] = std::min(distance[i][l], d);
-        }
-        else {
+        } else {
           distance[i][l] = d;
         }
 
