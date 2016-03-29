@@ -4,11 +4,13 @@ Before push, please run `./tools/cppformat.sh` and `./tools/lint.sh`.
 
 ## Architecture
 
-* loader :: (image\_files | vaa3d\_memory) -> image\_sequence
-* binarizer :: image\_sequence -> binary\_cube
-* extractor :: binary\_cube -> cluster
-* builder :: cluster -> neuron
-* writer :: neuron -> (swc\_file | vaa3d\_memory)
+* Loader :: (ImageFiles | Vaa3dMemory) -> ImageSequence
+* Binarizer :: ImageSequence -> BinaryCube
+* Extractor :: BinaryCube -> Cluster
+* Builder :: Cluster -> Neuron
+* Writer :: Neuron -> (SwcFile | Vaa3dMemory)
+
+![Class Diagram](doc/class.png)
 
 ## How to use `NeuronTree`
 

@@ -1,68 +1,72 @@
 @startuml class.png
-class image_sequence {
+class ImageSequence {
   value: vector<Mat>
 }
-class file_loader {
-  +load(dir_path: string): image_sequence
+class FileLoader {
+  +Load(dir_path: string): ImageSequence
 }
-class binary_cube {
+class BinaryCube {
   value: bool[,,]
 }
-class binarizer {
-  +binarize(image_sequence): binary_cube
+class Binarizer {
+  +constructor(ImageSequence): BinaryCube
 }
-class extractor {
-  cube_: binary_cube
-  components_: vector<vector<shared_ptr<voxel>>>
-  +constructor(binary_cube)
-  +extract(): vector<shared_ptr<cluster>>
+class Extractor {
+  cube_: BinaryCube
+  components_: vector<vector<shared_ptr<Voxel>>>
+  +constructor(BinaryCube)
+  +Extract(): vector<shared_ptr<Cluster>>
 }
-class voxel {
+class Voxel {
   x_, y_, z_: int
   flag_: bool
   label_: int
-  adjacent_: vector<voxel *>
+  adjacent_: vector<Voxel *>
   +constructor(x: int, y: int, z: int)
-  +add_connection(voxel *): void
+  +AddConnection(Voxel *): void
 }
-class cluster {
+class Cluster {
   gx_, gy_, gz_: double
   radius_: double
-  points_: vector<point>
-  adjacent_: vector<cluster *>
-  +constructor(vector<point<int>>)
-  +check_neighbor(cluster *): bool
-  +add_connection(cluster *): void
+  points_: vector<IPoint>
+  adjacent_: set<cluster *>
+  +constructor(vector<IPoint>)
+  +AddConnection(Cluster *): void
+  +RemoveConnection(Cluster *): void
+  +HasConnection(Cluster *): void
+  +UpdateGravityPoint(): void
+  +UpdateRadius(): void
 }
-class builder {
-  +constructor(data: vector<shared_ptr<cluster>>, scale_xy: double, scale_z: double)
-  +build(): vector<neuron>
+class Builder {
+  +constructor(data: vector<shared_ptr<Cluster *>>, scale_xy: double, scale_z: double)
+  +Build(): vector<Neuron>
 }
-class neuron_node {
+class NeuronNode {
   id_: int
   gx_, gy_, gz_: double
   radius_: double
-  type_: neuron_type
-  adjacent_: vector<neuron_node *>
-  values_: map<string, variant>
-  + add_connection(neuron_node *): void
+  type_: NeuronType
+  adjacent_: set<neuron_node *>
+  +AddConnection(neuron_node *): void
+  +RemoveConnection(neuron_node *): void
+  +HasConnection(neuron_node *): bool
 }
-class neuron {
+class Neuron {
   is_finalized_: bool
-  root_: neuron_node *
-  data_: vector<shared_ptr<neuron_node>>
+  root_: NeuronNode *
+  data_: vector<shared_ptr<NeuronNode>>
 }
-class "point<T>" {
-  x_, y_, z_: T
+class IPoint {
+  x_, y_, z_: int
 }
-image_sequence <-- file_loader
-image_sequence <-- binarizer
-binary_cube <-- binarizer
-binary_cube <-- extractor
-voxel <-- extractor
-cluster <-- extractor
-neuron_node <-- neuron
-neuron <-- builder
-cluster <-- builder
-"point<T>" <-- cluster
+ImageSequence <-- FileLoader
+ImageSequence <-- Binarizer
+BinaryCube <-- Binarizer
+BinaryCube <-- Extractor
+Voxel <-- Extractor
+Cluster <-- Extractor
+NeuronNode <-- Neuron
+Neuron <-- Builder
+Cluster <-- Builder
+IPoint <-- Cluster
 @enduml
