@@ -1,9 +1,5 @@
 # Vaa3D-SIGEN
 
-## About
-
-TBD...
-
 ## Requirements for Vaa3D Plugin
 
 * [CMake](https://cmake.org/) >= 2.8
@@ -56,6 +52,12 @@ If you run `cmake .` in project top directory, `CMakeFiles`, `CMakeCache.txt`, `
 * Interpolation (VT, DT)
 * Clipping (level)
 * Smoothing (level)
+
+## License
+
+This software is released under the MIT License.
+
+Copyright (c) 2016 Sho Iizuka
 
 ## References
 
