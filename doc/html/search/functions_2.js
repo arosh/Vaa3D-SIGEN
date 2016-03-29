@@ -9,6 +9,7 @@ var searchData=
   ['computenodetypes',['ComputeNodeTypes',['../classsigen_1_1_builder.html#a68637cd57a1460bcac192ebd70050b7d',1,'sigen::Builder']]],
   ['computeradius',['ComputeRadius',['../classsigen_1_1_builder.html#acfa0a161d4a4852a71784960ce90ba46',1,'sigen::Builder']]],
   ['connectneighbors',['ConnectNeighbors',['../classsigen_1_1_builder.html#a19cdf51f04cf0c1fcf979ada3ed54141',1,'sigen::Builder']]],
+  ['connecttootherneuron',['ConnectToOtherNeuron',['../classsigen_1_1_neuron.html#a8777524ef5971ad4dd6bcb58631c43c4',1,'sigen::Neuron']]],
   ['converttoneuron',['ConvertToNeuron',['../classsigen_1_1_builder.html#aa3a649e588e02600a6b1c23ef59681d3',1,'sigen::Builder']]],
   ['converttoneuronnodes',['ConvertToNeuronNodes',['../classsigen_1_1_builder.html#a9da069d1e08a7bc0b2e993ee06759352',1,'sigen::Builder']]],
   ['countnumchild',['CountNumChild',['../classsigen_1_1_neuron_node.html#a1b9ff7f91168044591578f33ff0a250c',1,'sigen::NeuronNode']]],

@@ -132,10 +132,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7bb9f1e409df61939901de3f82a167b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcba524b798f4398c43ae8077b707e74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#abcba524b798f4398c43ae8077b707e74">Extend</a> (const <a class="el" href="classsigen_1_1_neuron.html">Neuron</a> &amp;other)</td></tr>
 <tr class="separator:abcba524b798f4398c43ae8077b707e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8777524ef5971ad4dd6bcb58631c43c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#a8777524ef5971ad4dd6bcb58631c43c4">ConnectToOtherNeuron</a> (const int node_index, const <a class="el" href="classsigen_1_1_neuron.html">Neuron</a> &amp;other, const int other_index)</td></tr>
+<tr class="separator:a8777524ef5971ad4dd6bcb58631c43c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd419c36c090f6029ed3d8f7f0bba22a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#acd419c36c090f6029ed3d8f7f0bba22a">UpdateRoot</a> (const int nth)</td></tr>
 <tr class="separator:acd419c36c090f6029ed3d8f7f0bba22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af31ca6fc2e73aaec70023d4ba05542f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#af31ca6fc2e73aaec70023d4ba05542f8">RemoveConnection</a> (const std::set&lt; int &gt; &amp;nodes)</td></tr>
-<tr class="separator:af31ca6fc2e73aaec70023d4ba05542f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af602c8484caf97a1baf7ae66c1f74445"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#af602c8484caf97a1baf7ae66c1f74445">RemoveConnections</a> (const std::set&lt; int &gt; &amp;nodes)</td></tr>
+<tr class="separator:af602c8484caf97a1baf7ae66c1f74445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca03c878550d21be555425970edd566e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsigen_1_1_neuron.html#aca03c878550d21be555425970edd566e">NumNodes</a> () const </td></tr>
+<tr class="separator:aca03c878550d21be555425970edd566e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -238,6 +242,48 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a8777524ef5971ad4dd6bcb58631c43c4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sigen::Neuron::ConnectToOtherNeuron </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>node_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classsigen_1_1_neuron.html">Neuron</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>other_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00103">103</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="abcba524b798f4398c43ae8077b707e74"></a>
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +371,7 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="af31ca6fc2e73aaec70023d4ba05542f8"></a>
+<a class="anchor" id="aca03c878550d21be555425970edd566e"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -333,7 +379,32 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void sigen::Neuron::RemoveConnection </td>
+          <td class="memname">int sigen::Neuron::NumNodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00115">115</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af602c8484caf97a1baf7ae66c1f74445"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sigen::Neuron::RemoveConnections </td>
           <td>(</td>
           <td class="paramtype">const std::set&lt; int &gt; &amp;&#160;</td>
           <td class="paramname"><em>nodes</em></td><td>)</td>
@@ -347,7 +418,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00107">107</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00110">110</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 
 </div>
 </div>
@@ -413,7 +484,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00103">103</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
+<p>Definition at line <a class="el" href="neuron_8h_source.html#l00106">106</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>

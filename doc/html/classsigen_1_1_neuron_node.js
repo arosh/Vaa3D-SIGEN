@@ -6,7 +6,7 @@ var classsigen_1_1_neuron_node =
     [ "CountNumChild", "classsigen_1_1_neuron_node.html#a1b9ff7f91168044591578f33ff0a250c", null ],
     [ "HasConnection", "classsigen_1_1_neuron_node.html#afabf408a7ab74ce9a781dc06cc54d4c0", null ],
     [ "HasConnection", "classsigen_1_1_neuron_node.html#a41431f4b5741f2b0fa4afda0718e9a57", null ],
-    [ "RemoveConnection", "classsigen_1_1_neuron_node.html#ac3cf4ef87dc56a5ba181940d3bf39793", null ],
+    [ "RemoveConnections", "classsigen_1_1_neuron_node.html#a586cf8e6c280d6d9cb101684d4340e21", null ],
     [ "setCoord", "classsigen_1_1_neuron_node.html#acde38a8308be664c0189ee58cdcc93fe", null ],
     [ "UpdateNodeType", "classsigen_1_1_neuron_node.html#a39c7b11e24a65e1bc286ecd00723b0bb", null ],
     [ "adjacent_", "classsigen_1_1_neuron_node.html#a67ab3f67dcb665799596b62faf88ae9e", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['points_5f',['points_',['../classsigen_1_1_cluster.html#a0ba0c06cd3ecf9d8983f27357b36c853',1,'sigen::Cluster']]]
+  ['label_5f',['label_',['../classsigen_1_1_voxel.html#aabde79b86fbc956997e3ba2cc5fee33f',1,'sigen::Voxel']]]
 ];
