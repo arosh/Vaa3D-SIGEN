@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
   sigen::SwcWriter writer;
   for (int i = 0; i < (int)ns.size(); ++i) {
     std::string filename =
-        "sample_output/" + std::to_string(i) + ".swc";
+        args.get<std::string>("output") + "/" + std::to_string(i) + ".swc";
     filename = sigen::FileUtils::AddExtension(filename, ".swc");
     writer.Write(filename.c_str(), ns[i]);
   }

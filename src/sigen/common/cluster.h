@@ -59,13 +59,14 @@ public:
   }
   void UpdateRadius(const double scale_xy, const double scale_z) {
     assert(is_gravity_point_computed_);
-    double mdx = 0, mdy = 0, mdz = 0;
+    double mx = 0.0;
     BOOST_FOREACH (const IPoint &p, points_) {
-      mdx = std::max(mdx, scale_xy * std::abs(p.x_ - gx_));
-      mdy = std::max(mdy, scale_xy * std::abs(p.y_ - gy_));
-      mdz = std::max(mdz, scale_z * std::abs(p.z_ - gz_));
+      double dx = scale_xy * (p.x_ - gx_);
+      double dy = scale_xy * (p.y_ - gy_);
+      double dz = scale_z * (p.z_ - gz_);
+      mx = std::max(mx, std::sqrt(dx * dx + dy * dy + dz * dz));
     }
-    radius_ = std::sqrt(mdx * mdx + mdy * mdy + mdz * mdz);
+    radius_ = mx;
   }
 };
 } // namespace sigen
