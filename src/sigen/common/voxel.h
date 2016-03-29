@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
-#include <boost/utility.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/utility.hpp>
+#include <vector>
 namespace sigen {
 class Voxel;
 typedef boost::shared_ptr<Voxel> VoxelPtr;

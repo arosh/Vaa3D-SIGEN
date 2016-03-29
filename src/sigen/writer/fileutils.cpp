@@ -1,7 +1,7 @@
 #include "sigen/writer/fileutils.h"
-#include <string>
 #include <boost/filesystem.hpp>
 #include <glog/logging.h>
+#include <string>
 namespace sigen {
 std::string FileUtils::AddExtension(const std::string &fname,
                                     const std::string &extension) {

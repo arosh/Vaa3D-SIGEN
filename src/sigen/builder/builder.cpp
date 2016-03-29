@@ -1,16 +1,16 @@
 #include "sigen/builder/builder.h"
 #include "sigen/common/disjoint_set.h"
+#include <algorithm>
+#include <boost/foreach.hpp>
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <algorithm>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
 #include <utility>
 #include <vector>
-#include <queue>
-#include <stack>
-#include <set>
-#include <map>
-#include <boost/foreach.hpp>
 namespace sigen {
 void Builder::ConnectNeighbors() {
   std::multimap<IPoint, int> coord_to_index;

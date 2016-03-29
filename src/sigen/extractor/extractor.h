@@ -2,8 +2,8 @@
 #include "sigen/common/binary_cube.h"
 #include "sigen/common/cluster.h"
 #include "sigen/common/voxel.h"
-#include <vector>
 #include <boost/utility.hpp>
+#include <vector>
 namespace sigen {
 class Extractor : boost::noncopyable {
   void Labeling();

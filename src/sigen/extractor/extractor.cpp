@@ -1,14 +1,14 @@
-#include <cassert>
-#include <map>
-#include <algorithm>
-#include <iterator>
-#include <queue>
-#include <vector>
-#include <utility>
-#include <boost/foreach.hpp>
-#include <boost/make_shared.hpp>
 #include "sigen/extractor/extractor.h"
 #include "sigen/common/point.h"
+#include <algorithm>
+#include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
+#include <cassert>
+#include <iterator>
+#include <map>
+#include <queue>
+#include <utility>
+#include <vector>
 namespace sigen {
 
 static void clearFrame(BinaryCube &c) {

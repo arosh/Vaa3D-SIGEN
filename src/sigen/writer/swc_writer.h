@@ -1,7 +1,7 @@
 #pragma once
 #include "sigen/common/neuron.h"
-#include <string>
 #include <fstream>
+#include <string>
 namespace sigen {
 class SwcWriter {
 public:

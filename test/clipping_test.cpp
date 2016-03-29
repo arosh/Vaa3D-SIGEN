@@ -1,9 +1,9 @@
-#include <gtest/gtest.h>
-#include <vector>
-#include <boost/make_shared.hpp>
-#include <set>
 #include "sigen/common/neuron.h"
 #include "sigen/toolbox/toolbox.h"
+#include <boost/make_shared.hpp>
+#include <gtest/gtest.h>
+#include <set>
+#include <vector>
 using namespace sigen;
 void add(Neuron &n, int id) {
   NeuronNodePtr node = boost::make_shared<NeuronNode>();

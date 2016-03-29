@@ -1,5 +1,5 @@
-#include <algorithm>
 #include "sigen/common/disjoint_set.h"
+#include <algorithm>
 
 namespace sigen {
 

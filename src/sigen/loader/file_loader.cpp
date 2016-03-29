@@ -1,10 +1,10 @@
+#include "sigen/loader/file_loader.h"
 #include <algorithm>
-#include <vector>
-#include <string>
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
 #include <glog/logging.h>
-#include "sigen/loader/file_loader.h"
+#include <string>
+#include <vector>
 
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas
 #pragma GCC diagnostic push

@@ -1,15 +1,15 @@
 #pragma once
-#include <cassert>
-#include <vector>
-#include <set>
-#include <algorithm>
-#include <cmath>
-#include <boost/utility.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/foreach.hpp>
-#include "sigen/common/voxel.h"
-#include "sigen/common/point.h"
 #include "sigen/common/math.h"
+#include "sigen/common/point.h"
+#include "sigen/common/voxel.h"
+#include <algorithm>
+#include <boost/foreach.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/utility.hpp>
+#include <cassert>
+#include <cmath>
+#include <set>
+#include <vector>
 namespace sigen {
 class Cluster;
 typedef boost::shared_ptr<Cluster> ClusterPtr;

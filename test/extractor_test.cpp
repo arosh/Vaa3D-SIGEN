@@ -1,7 +1,7 @@
-#include <iostream>
-#include <gtest/gtest.h>
-#include <boost/foreach.hpp>
 #include "sigen/extractor/extractor.h"
+#include <boost/foreach.hpp>
+#include <gtest/gtest.h>
+#include <iostream>
 using namespace std;
 using namespace sigen;
 

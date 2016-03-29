@@ -1,12 +1,12 @@
 #pragma once
-#include <string>
-#include <vector>
+#include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/utility.hpp>
 #include <map>
 #include <set>
-#include <boost/utility.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/foreach.hpp>
+#include <string>
+#include <vector>
 // #include "common/variant.h"
 namespace sigen {
 namespace NeuronType {

@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "sigen/common/variant.h"
+#include <gtest/gtest.h>
 #include <iostream>
 TEST(variant, bool) {
   sigen::Variant v;

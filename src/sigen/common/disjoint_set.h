@@ -1,11 +1,11 @@
 // https://www.topcoder.com/community/data-science/data-science-tutorials/disjoint-set-data-structures/
 #pragma once
-#include <cassert>
-#include <vector>
-#include <map>
-#include <boost/utility.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/utility.hpp>
+#include <cassert>
+#include <map>
+#include <vector>
 
 namespace sigen {
 

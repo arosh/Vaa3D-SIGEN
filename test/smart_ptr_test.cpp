@@ -1,9 +1,9 @@
+#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include <gtest/gtest.h>
 #include <utility>
 #include <vector>
-#include <boost/weak_ptr.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
 TEST(boost_shared_ptr, null) {
   boost::shared_ptr<int> p;
   EXPECT_EQ(p, nullptr);

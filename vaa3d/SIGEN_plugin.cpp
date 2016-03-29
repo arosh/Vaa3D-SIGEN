@@ -1,16 +1,16 @@
-#include <cstdio>
 #include <cassert>
+#include <cstdio>
 #include <fstream>
-#include <vector>
 #include <string>
+#include <vector>
 
-#include <v3d_message.h>
 #include <basic_surf_objs.h>
+#include <v3d_message.h>
 
 #include "SIGEN_plugin.h"
 
-#include "sigen/interface.h"
 #include "sigen/common/binary_cube.h"
+#include "sigen/interface.h"
 Q_EXPORT_PLUGIN2(SIGEN, SigenPlugin);
 
 struct input_PARA {

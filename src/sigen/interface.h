@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
 #include "sigen/common/binary_cube.h"
+#include <vector>
 namespace sigen {
 namespace interface {
 struct Options {

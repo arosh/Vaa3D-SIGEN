@@ -1,19 +1,19 @@
-#include <cmath>
-#include <queue>
-#include <utility>
-#include <set>
-#include <map>
-#include <limits>
-#include <algorithm>
-#include <vector>
-#include <iostream>
-#include <functional>
-#include <boost/foreach.hpp>
-#include <boost/scoped_array.hpp>
-#include <kdtree/kdtree.h>
 #include "sigen/toolbox/toolbox.h"
 #include "sigen/common/disjoint_set.h"
 #include "sigen/common/math.h"
+#include <algorithm>
+#include <boost/foreach.hpp>
+#include <boost/scoped_array.hpp>
+#include <cmath>
+#include <functional>
+#include <iostream>
+#include <kdtree/kdtree.h>
+#include <limits>
+#include <map>
+#include <queue>
+#include <set>
+#include <utility>
+#include <vector>
 namespace sigen {
 static double norm2(
     const NeuronNodePtr &a,
@@ -113,7 +113,8 @@ std::vector<Neuron> Interpolate(const std::vector<Neuron> &input, const double d
   std::priority_queue<
       priorityQueueNode,
       std::vector<priorityQueueNode>,
-      std::greater<priorityQueueNode> > pq;
+      std::greater<priorityQueueNode> >
+      pq;
 
   std::vector<std::map<int, double> > distance(N);
 

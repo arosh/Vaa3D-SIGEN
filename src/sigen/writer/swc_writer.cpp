@@ -1,8 +1,8 @@
-#include <string>
-#include <glog/logging.h>
-#include <boost/foreach.hpp>
 #include "sigen/writer/swc_writer.h"
 #include "sigen/writer/fileutils.h"
+#include <boost/foreach.hpp>
+#include <glog/logging.h>
+#include <string>
 namespace sigen {
 static void writeRec(std::ostream &os, const NeuronNode *node,
                      const int parent_id) {

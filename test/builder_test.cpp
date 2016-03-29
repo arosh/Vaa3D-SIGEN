@@ -1,11 +1,11 @@
-#include <cassert>
-#include <vector>
-#include <string>
-#include <gtest/gtest.h>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
 #include "sigen/builder/builder.h"
 #include "sigen/extractor/extractor.h"
+#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
+#include <cassert>
+#include <gtest/gtest.h>
+#include <string>
+#include <vector>
 using namespace sigen;
 
 static BinaryCube vectorStringToBinaryCube(const std::vector<std::string> &vs) {

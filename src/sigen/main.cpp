@@ -1,14 +1,14 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <glog/logging.h>
-#include "sigen/loader/file_loader.h"
 #include "sigen/binarizer/binarizer.h"
-#include "sigen/extractor/extractor.h"
 #include "sigen/builder/builder.h"
-#include "sigen/writer/swc_writer.h"
-#include "sigen/writer/fileutils.h"
+#include "sigen/extractor/extractor.h"
+#include "sigen/loader/file_loader.h"
 #include "sigen/toolbox/toolbox.h"
+#include "sigen/writer/fileutils.h"
+#include "sigen/writer/swc_writer.h"
+#include <glog/logging.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
 // disable specified warning options
 // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html#Diagnostic-Pragmas

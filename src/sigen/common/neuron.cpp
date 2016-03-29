@@ -1,9 +1,9 @@
-#include <cassert>
+#include "sigen/common/neuron.h"
 #include <algorithm>
+#include <boost/foreach.hpp>
+#include <cassert>
 #include <map>
 #include <set>
-#include <boost/foreach.hpp>
-#include "sigen/common/neuron.h"
 namespace sigen {
 
 void NeuronNode::RemoveConnections(const std::set<int> &nodes) {

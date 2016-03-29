@@ -1,12 +1,12 @@
+#include "sigen/interface.h"
+#include "sigen/builder/builder.h"
+#include "sigen/common/binary_cube.h"
+#include "sigen/extractor/extractor.h"
+#include "sigen/toolbox/toolbox.h"
+#include <boost/foreach.hpp>
 #include <cassert>
 #include <iostream>
 #include <vector>
-#include <boost/foreach.hpp>
-#include "sigen/interface.h"
-#include "sigen/common/binary_cube.h"
-#include "sigen/extractor/extractor.h"
-#include "sigen/builder/builder.h"
-#include "sigen/toolbox/toolbox.h"
 
 #define DEBUG(x) std::cerr << #x << " = " << x << std::endl
 

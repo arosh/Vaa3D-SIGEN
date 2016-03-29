@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "sigen/writer/fileutils.h"
+#include <gtest/gtest.h>
 std::string add(const std::string &a, const std::string &b) {
   return sigen::FileUtils::AddExtension(a, b);
 }

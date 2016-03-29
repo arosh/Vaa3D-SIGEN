@@ -1,9 +1,9 @@
+#include "sigen/writer/swc_writer.h"
+#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
 #include <gtest/gtest.h>
 #include <sstream>
 #include <string>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
-#include "sigen/writer/swc_writer.h"
 void connect(boost::shared_ptr<sigen::NeuronNode> a, boost::shared_ptr<sigen::NeuronNode> b) {
   a->AddConnection(b.get());
   b->AddConnection(a.get());

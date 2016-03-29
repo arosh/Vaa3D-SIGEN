@@ -1,7 +1,7 @@
+#include "sigen/binarizer/binarizer.h"
 #include <cstdint>
 #include <glog/logging.h>
 #include <opencv2/imgproc/imgproc.hpp>
-#include "sigen/binarizer/binarizer.h"
 namespace sigen {
 BinaryCube Binarizer::Binarize(const ImageSequence &is) {
   CHECK(!is.empty());
