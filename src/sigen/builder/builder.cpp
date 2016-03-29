@@ -109,7 +109,6 @@ void Builder::ComputeRadius() {
 
 std::vector<NeuronNodePtr> Builder::ConvertToNeuronNodes() {
   std::vector<NeuronNodePtr> neuron_nodes;
-  std::vector<std::pair<int, int> > edges;
   BOOST_FOREACH (ClusterPtr p, data_) {
     NeuronNodePtr n = boost::make_shared<NeuronNode>();
     n->setCoord(p->gx_ * scale_xy_,

@@ -59,15 +59,17 @@ references
 
 * `Image4DProxy#at` at `v3d_main/basic_c_fun/basic_4dimage.h`
 
-## CMake options
+## How to configure CMake in debug mode
 
 ```
--DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON
+cd path/to/vaa3d_sigen/build
+cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_MAIN=ON ..
 ```
 
-## Coverage
+## How to Calculate Coverage
 
 ```
+cd path/to/vaa3d_sigen/build
 gcovr --html --html-detail -r .. -o coverage.html
 ```
 
